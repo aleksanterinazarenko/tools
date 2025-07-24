@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Панжадо эрзянь валкс</title>
+  
+  <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f4;
+    padding: 30px;
+    color: #333;
+  }
+
+  .container {
+    max-width: 850px;
+    margin: auto;
+    background: #fff;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background: #fafafa;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+    background: #fff;
+  }
+
+  .definition, .examples {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  #source {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+  button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 12px 18px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    align-self: flex-start;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .meaning-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+
+  li {
+    border: 1px solid #ddd;
+    padding: 24px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background: #fff;
+  }
+
+  .entry-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .part-of-speech {
+    font-style: italic;
+    text-transform: lowercase;
+    color: #28a745;
+    font-size: 1em;
+  }
+
+  .entries-list > li > div:first-child {
+    margin-top: 16px;
+  }
+
+  .entry-definition {
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+
+  .entry-examples {
+    margin-top: 10px;
+    padding-left: 10px;
+    color: #555;
+  }
+
+  .entry-sources {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .entry-sources li {
+    border: none;
+    padding: 4px 0;
+  }
+
+  #searchInput {
+    margin-bottom: 30px;
+    width: 100%;
+  }
+
+  #toggleFormBtn {
+    margin-top: 10px;
+  }
+
+  select {
+    width: 100%;
+  }
+</style>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Панжадо эрзянь валкс</h1>
+    <div style="margin-top: 50px; margin-bottom: 50px;">
+      <button id="toggleFormBtn">Тейть артикля</button>
+      <button id="transliterateBtn">Алфавит</button>
+    </div>
+
+    <form id="entryForm" class="hidden">
+      <input type="text" id="word" placeholder="Валось" required />
+      <select id="partOfSpeech" required>
+        <option value="">Валонь пельксэнь кочкамо</option>
+        <option value="Noun">Лемвал</option>
+        <option value="Verb">Теввал</option>
+        <option value="Adjective">Лемтюс</option>
+        <option value="Adverb">Малавал</option>
+      </select>
+
+      <div id="meaningsContainer"></div>
+      <button type="button" id="addMeaningBtn">Лия смустень поладома</button>
+      <textarea id="source" placeholder="Лисьмапрятне: вейке кикс - вейке лисьмапря" required></textarea>
+      <button type="submit">Таштамо</button>
+    </form>
+
+    <div id="entriesSection">
+      <input type="text" id="searchInput" placeholder="Валонь вешнема" />
+      <ul id="entriesList"></ul>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import {
+      getDatabase, ref, push, onValue, remove, update
+    } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrOLGVfadcM0a-uRNiRwjuH1l6ekAXnUg",
+      authDomain: "dict-49fa4.firebaseapp.com",
+      databaseURL: "https://dict-49fa4-default-rtdb.firebaseio.com",
+      projectId: "dict-49fa4",
+      storageBucket: "dict-49fa4.appspot.com",
+      messagingSenderId: "151088930905",
+      appId: "1:151088930905:web:59548718202126b07ad148"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const form = document.getElementById('entryForm');
+    const toggleFormBtn = document.getElementById('toggleFormBtn');
+    const addMeaningBtn = document.getElementById('addMeaningBtn');
+    const meaningsContainer = document.getElementById('meaningsContainer');
+    const entriesList = document.getElementById('entriesList');
+
+    let editingKey = null;
+
+    toggleFormBtn.addEventListener('click', () => {
+  const isFormVisible = !form.classList.contains('hidden');
+  toggleForm(!isFormVisible);
+  toggleFormBtn.textContent = isFormVisible ? 'Тейть артикля' : 'Мекев';
+});
+
+    addMeaningBtn.addEventListener('click', () => addMeaningField());
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const word = document.getElementById('word').value;
+      const partOfSpeech = document.getElementById('partOfSpeech').value;
+      const sources = document.getElementById('source').value
+        .split('\n')
+        .map(s => s.trim())
+        .filter(s => s);
+
+      const definitions = {};
+      document.querySelectorAll('.meaning-group').forEach((group, index) => {
+        const def = group.querySelector('.definition').value;
+        const examples = group.querySelector('.examples').value
+          .split('\n')
+          .map(e => e.trim())
+          .filter(e => e);
+
+        definitions[`def_${index + 1}`] = {
+          definition: def,
+          examples,
+          sources
+        };
+      });
+
+      const entryData = {
+        word,
+        partOfSpeech,
+        definitions,
+        sources
+      };
+
+      console.log('Saving entry:', entryData);
+
+      try {
+        if (editingKey) {
+          await update(ref(db, `dictionary/${editingKey}`), entryData);
+        } else {
+          await push(ref(db, 'dictionary'), entryData);
+        }
+
+        form.reset();
+        meaningsContainer.innerHTML = '';
+        addMeaningField();
+        toggleForm(false);
+      } catch (err) {
+        alert('Error saving entry: ' + err.message);
+      }
+    });
+
+    function addMeaningField(def = '', ex = []) {
+      const div = document.createElement('div');
+      div.className = 'meaning-group';
+
+      const defInput = document.createElement('textarea');
+      defInput.className = 'definition';
+      defInput.placeholder = 'Валонь смусть';
+      defInput.required = true;
+      defInput.value = def;
+
+      const exInput = document.createElement('textarea');
+      exInput.className = 'examples';
+      exInput.placeholder = 'Невтевкст';
+      exInput.required = true;
+      exInput.value = ex.join(', ');
+
+      div.appendChild(defInput);
+      div.appendChild(exInput);
+      meaningsContainer.appendChild(div);
+    }
+
+    function renderEntries() {
+      const dictionaryRef = ref(db, 'dictionary');
+      onValue(dictionaryRef, (snapshot) => {
+        const entries = [];
+        snapshot.forEach((child) => {
+          const entry = child.val();
+          entries.push({ key: child.key, ...entry });
+        });
+
+        entries.sort((a, b) => a.word.localeCompare(b.word));
+
+        displayEntries(entries);
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+          const searchValue = e.target.value.toLowerCase();
+          const filtered = entries.filter(ent => ent.word.toLowerCase().includes(searchValue));
+          displayEntries(filtered);
+        });
+      });
+    }
+
+    function displayEntries(entries) {
+      entriesList.innerHTML = '';
+
+      entries.forEach(entry => {
+        const li = document.createElement('li');
+
+        const articleId = `article-${entry.key}`;
+        li.innerHTML = `
+          <div style="cursor: pointer; font-weight: bold; display: flex; gap: 10px; align-items: baseline;" onclick="toggleArticle('${articleId}')">
+            <span>${entry.word}</span>
+            <span class="part-of-speech">${entry.partOfSpeech}</span>
+          </div>
+          <div id="${articleId}" class="hidden" style="margin-top: 10px;">
+            ${Object.values(entry.definitions).map(d => `
+              <div class="entry-definition">
+                ${d.definition}
+                <div class="entry-examples">
+                  ${d.examples.map(ex => `<em>${ex}</em>`).join('<br>')}
+                </div>
+              </div>
+            `).join('<hr>')}
+
+            <hr>
+            <div style="margin-top: 20px;">
+              Лисьмапрят:
+              <ul class="entry-sources">
+                ${(Array.isArray(entry.sources) ? entry.sources : [entry.source || '']).map(src => `<li>${src}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div style="margin-top:10px;">
+              <button onclick="editEntry('${entry.key}')">Витема</button>
+              <button onclick="deleteEntry('${entry.key}')">Нардамо</button>
+            </div>
+          </div>
+        `;
+
+        entriesList.appendChild(li);
+      });
+    }
+
+    window.toggleArticle = function (id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('hidden');
+    };
+
+    function toggleForm(show) {
+      form.classList.toggle('hidden', !show);
+      document.getElementById('entriesSection').classList.toggle('hidden', show);
+
+      if (!show) {
+        form.reset();
+        meaningsContainer.innerHTML = '';
+        addMeaningField();
+        editingKey = null;
+      } else if (meaningsContainer.children.length === 0) {
+        addMeaningField();
+      }
+    }
+
+    window.deleteEntry = function (key) {
+  const confirmDelete = confirm('Кеместэ ули мелеть нардамс те артиклянть?');
+  if (confirmDelete) {
+    remove(ref(db, `dictionary/${key}`));
+  }
+};
+
+    window.editEntry = function (key) {
+      const entryRef = ref(db, `dictionary/${key}`);
+      onValue(entryRef, (snapshot) => {
+        const entry = snapshot.val();
+        document.getElementById('word').value = entry.word;
+        document.getElementById('partOfSpeech').value = entry.partOfSpeech;
+        document.getElementById('source').value = (entry.sources || []).join('\n');
+        meaningsContainer.innerHTML = '';
+        Object.values(entry.definitions).forEach(d => {
+          addMeaningField(d.definition, d.examples || []);
+        });
+        toggleForm(true);
+        editingKey = key;
+      }, {
+        onlyOnce: true
+      });
+    };
+
+    renderEntries();
+    addMeaningField();
+  </script>
+
+  <script>
+const letters = {
+    "А": "A", "Б": "B", "В": "V", "Г": "G", "Д": "D", "Е": "E", "Ё": "O", "Ж": "Ž", "З": "Z", "И": "I", "Й": "J",
+    "К": "K", "Л": "L", "М": "M", "Н": "N", "О": "O", "П": "P", "Р": "R", "С": "S", "Т": "T", "У": "U", "Ф": "F",
+    "Х": "H", "Ц": "C", "Ч": "Č", "Ш": "Š", "Щ": "Šč", "Ъ": "", "Ы": "Ï", "Ь": "", "Э": "Ë", "Ю": "U", "Я": "A",
+    "Ԙ": "Ä", "Ӕ": "Ä", "Ӓ": "Ä", "Ѣ": "E", "Ҥ": "N", "І": "I", "Ѳ": "F",
+    "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "o", "ж": "ž", "з": "z", "и": "i", "й": "j",
+    "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f",
+    "х": "h", "ц": "c", "ч": "č", "ш": "š", "щ": "šč", "ь": "", "ъ": "", "ы": "ï", "э": "ë", "ю": "u", "я": "a",
+    "ԙ": "ä", "ӕ": "ä", "ӓ": "ä", "ѣ": "e", "ҥ": "n", "і": "i", "ѳ": "f"
+};
+
+const palatals = {
+    "Д": "Ď", "З": "Ź", "Л": "Ľ", "Н": "Ń", "Р": "Ŕ", "С": "Ś", "Т": "Ť", "Ц": "Ć",
+    "д": "ď", "з": "ź", "л": "ľ", "н": "ń", "р": "ŕ", "с": "ś", "т": "ť", "ц": "ć"
+};
+
+const vowels = "АОУЫЭЯЁЮИЕЪЬаоуыэяёюиеъь";
+const front = "ЕЁИЮЯеёиюя";
+const nondentals = "БВГЖКПМШбвгжкпмш";
+
+function transliterate(text) {
+    text = " " + text + " ";
+
+    text = text.replace(/([дзлнрстцДЗЛНРСТЦ])ь(?=[дзлнрстхц]+[еёияіьѣ])/g, '$1');
+    text = text.replace(/([аоуыэяёюиеъіӕѣАОУЫЭЯЁЮИЕЪІӔѢ])([иі])/g, '$1j$2');
+    text = text.replace(/([дзлнрстцДЗЛНРСТЦ])ь(?=[дзлнрстхц]+[эы])/g, '$1');
+    text = text.replace(/([дзлнрстцДЗЛНРСТЦ])ь(?=[еёиюяіь])/g, '$1j');
+    text = text.replace(/([лЛ])ь(?=[тТ])/g, '$1');
+    text = text.replace(/([нН])ь(?=[жЖчЧшШ])/g, '$1');
+
+    text = text.replace(/([\u0301])/g, '');
+    text = text.replace(/(ю[\u0302])/g, 'ё');
+
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])([ИІ])([и])/g, '$1J$3');
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])([иі])([и])/g, '$1j$3');
+
+    text = text.replace(/([е])([и])([я])([і])/g, '$1j$2j$3');
+    text = text.replace(/([аоуыэяёюиеъьіӕԙӓѣАОУЫЭЯЁЮИЕЪЬІӔԘӒѢ])([еёюя])/g, '$1j$2');
+    text = text.replace(/([аоуыэяёюиеъіӕԙӓѣАОУЫЭЯЁЮИЕЪІӔԘӒѢ])([иі])/g, '$1j$2');
+    text = text.replace(/([АОУЫЭЯЁЮИЕЪЬІӔԘӒѢ])([ЕЁЮЯ])/g, '$1J$2');
+    text = text.replace(/([АОУЫЭЯЁЮИЕЪІӔԘӒѢ])([ИІ])/g, '$1J$2');
+
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"„“”«»\-])([иі])([аоуыэяёюиеъьіӕ])/g, '$1j$3');
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"„“”«»\-])([ИІ])([аоуыэяёюиеъьіӕ])/g, '$1J$3');
+
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])([ёюя])/g, '$1j$2');
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])([ЁЮЯ])/g, '$1J$2');
+    text = text.replace(/-([ёюя])/g, '-j$1');
+    text = text.replace(/-([ЁЮЯ])/g, '-J$1');
+
+    text = text.replace(/([аеёийоуыэюяАЕЁИЙОУЫЭЮЯ])э/g, '$1e')
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])э/g, '$1e');
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])Э/g, '$1E');
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])і/g, '$1i');
+    text = text.replace(/(^|\s|[.,!?;:()\[\]{}"“”«»„“\-])І/g, '$1I');
+
+    text = text.replace(/([бвгжкмпфхчшБВГЖКМПФХЧШ])я/g, '$1ä');
+    text = text.replace(/([бвгжкмпфхчшБВГЖКМПФХЧШ])ё/g, '$1ö');
+    text = text.replace(/([дзлнрстцДЗЛНРСТЦ])е/g, '$1e');
+    text = text.replace(/([дзлнрстцДЗЛНРСТЦ])и/g, '$1i');
+
+    text = text.replace(/([чшЧШ])ы/g, '$1i');
+
+    text = text.replace(/([БВГЖКМПФХЧШЩбвгжкмпфхчшщ])ь/g, '$1');
+    text = text.replace(/ъ/g, '');
+    text = text.replace(/(\s|^)і/g, '$1j');
+    
+    text = text.replace(/И/g, 'I');
+    text = text.replace(/Е/g, 'E');
+    text = text.replace(/([ИЕЁЮЯ])([^А-Я])/g, function(match, p1, p2) {
+        return p1.toLowerCase() + p2;
+    });
+
+    text = text.replace(/«/g, '„').replace(/»/g, '“');
+
+    for (const [key, value] of Object.entries(palatals)) {
+    const regexVowel = new RegExp(key + 'ь([аеёиоуыэюяАЕЁИОУЫЭЮЯ])', 'g');
+    text = text.replace(regexVowel, value + '$1');
+
+    const regexNoVowel = new RegExp(key + '[Ьь]', 'g');
+text = text.replace(regexNoVowel, value);
+
+    text = text.replace(new RegExp(key + `([${front}])`, 'g'), value + '$1');
+}
+
+for (const [key, value] of Object.entries(palatals)) {
+    const regexVowel = new RegExp(key + 'і([аиоуыэАИОУЫЭ])', 'g');
+    text = text.replace(regexVowel, value + '$1');
+}
+
+    return text.trim().split('').map(char => letters[char] || char).join('');
+  }
+
+let isTransliterated = false;
+  const transliterateBtn = document.getElementById('transliterateBtn');
+  
+  transliterateBtn.addEventListener('click', () => {
+    toggleTransliterateEntries();
+    isTransliterated = !isTransliterated;
+  });
+
+  function toggleTransliterateEntries() {
+    const entries = document.querySelectorAll('#entriesList');
+
+    entries.forEach(entry => {
+      ['.entry-header', '.entry-definition', '.entry-examples em', '.entry-sources li'].forEach(selector => {
+        const elements = entry.querySelectorAll(selector);
+        elements.forEach(el => {
+          if (isTransliterated) {
+            el.innerText = el.getAttribute('data-original-text') || el.innerText;
+          } else {
+            if (!el.hasAttribute('data-original-text')) {
+              el.setAttribute('data-original-text', el.innerText);
+            }
+            el.innerText = transliterate(el.innerText);
+          }
+        });
+      });
+    });
+  }
+</script>
+</body>
+</html>
