@@ -20,6 +20,11 @@ body {
     text-align: center;
   }
 
+  h1 a {
+    text-decoration: none;
+    color: #333;
+  }
+
   form {
     display: flex;
     flex-direction: column;
