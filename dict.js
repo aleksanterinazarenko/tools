@@ -36,6 +36,7 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const word = document.getElementById('word').value;
+  const pronunciation = document.getElementById('pronunciation').value.trim();
   const partOfSpeech = document.getElementById('partOfSpeech').value;
   const etymology = document.getElementById('etymology').value;
   const sources = document.getElementById('source').value
@@ -71,6 +72,7 @@ form.addEventListener('submit', async (e) => {
   const entryData = {
     word,
     partOfSpeech,
+    pronunciation,
     etymology,
     definitions,
     sources,
@@ -176,6 +178,12 @@ function displayEntries(entries) {
     li.innerHTML = `
       <div class="entry-header" onclick="toggleArticle('${articleId}')">
         <span>${entry.word}</span>
+${entry.pronunciation
+  ? `<span class="pronunciation">${entry.pronunciation
+      .split(',')
+      .map(p => `/${p.trim()}/`)
+      .join(', ')}</span>`
+  : ''}
         <span class="part-of-speech">${entry.partOfSpeech}</span>
       </div>
       <div id="${articleId}" class="hidden entry-article">
@@ -264,6 +272,7 @@ window.editEntry = function (key) {
   onValue(entryRef, (snapshot) => {
     const entry = snapshot.val();
     document.getElementById('word').value = entry.word;
+    document.getElementById('pronunciation').value = entry.pronunciation || '';
     document.getElementById('partOfSpeech').value = entry.partOfSpeech;
     document.getElementById('etymology').value = entry.etymology.trim() !== '?' ? entry.etymology : '';
     document.getElementById('source').value = (entry.sources || []).join('\n');
