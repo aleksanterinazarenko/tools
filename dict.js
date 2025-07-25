@@ -178,15 +178,16 @@ function displayEntries(entries) {
     li.innerHTML = `
       <div class="entry-header" onclick="toggleArticle('${articleId}')">
         <span>${entry.word}</span>
+        <span class="part-of-speech">${entry.partOfSpeech}</span>
+      </div>
+      <div id="${articleId}" class="hidden entry-article">
+
 ${entry.pronunciation
   ? `<span class="pronunciation">${entry.pronunciation
       .split(',')
       .map(p => `/${p.trim()}/`)
       .join(', ')}</span>`
   : ''}
-        <span class="part-of-speech">${entry.partOfSpeech}</span>
-      </div>
-      <div id="${articleId}" class="hidden entry-article">
       
         ${Object.values(entry.definitions).map((d, index, arr) => {
   const hasExamples = d.examples && d.examples[0] !== '?';
