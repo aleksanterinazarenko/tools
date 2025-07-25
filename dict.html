@@ -10,17 +10,21 @@
   <div class="container">
     <h1>Панжадо эрзянь валкс</h1>
     <div style="margin-top: 50px; margin-bottom: 50px;">
-      <button id="toggleFormBtn">Тейть артикул</button>
+      <button id="toggleFormBtn">Од сёрмадовкс</button>
     </div>
 
     <form id="entryForm" class="hidden">
       <input type="text" id="word" placeholder="Валось" required />
       <select id="partOfSpeech" required>
-        <option value="">Валонь пельксэнь кочкамо</option>
+        <option value="">Кортамо пельксэнь кочкамо</option>
         <option value="Noun">Лемвал</option>
         <option value="Verb">Теввал</option>
         <option value="Adjective">Лемтюс</option>
         <option value="Adverb">Малавал</option>
+        <option value="Conjunction">Сюлмавкс</option>
+        <option value="Particle">Пелькске</option>
+        <option value="Interjection">Ютковал</option>
+        <option value="Other">Лия</option>
       </select>
 
       <div id="meaningsContainer"></div>
@@ -28,7 +32,7 @@
       <button type="button" id="addMeaningBtn">Лия смустень поладома</button>
       <button type="button" id="deleteMeaningBtn" class="hidden">Смустень нардамо</button>
 
-      <textarea id="etymology" placeholder="Валонть чачома тарказо"></textarea>
+      <textarea id="etymology" placeholder="Валонть этимологиязо"></textarea>
       <textarea id="source" placeholder="Лисьмапрятне" required></textarea>
 
       <button type="submit">Таштамо</button>
@@ -39,6 +43,10 @@
       <ul id="entriesList"></ul>
     </div>
   </div>
+
+  <footer>
+      <a href="mailto:aleksanterinazarenko@outlook.com">&copy; 2024 Aleksanteri Nazarenko</a>
+  </footer>
 
 <script type="module" src="dict.js"></script>
 </body>

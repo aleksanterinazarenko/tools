@@ -27,7 +27,7 @@ let editingKey = null;
 toggleFormBtn.addEventListener('click', () => {
   const isFormVisible = !form.classList.contains('hidden');
   toggleForm(!isFormVisible);
-  toggleFormBtn.textContent = isFormVisible ? 'Тейть артикул' : 'Мекев';
+  toggleFormBtn.textContent = isFormVisible ? 'Од сёрмадовкс' : 'Мекев';
 });
 
 addMeaningBtn.addEventListener('click', () => addMeaningField());
@@ -91,7 +91,7 @@ form.addEventListener('submit', async (e) => {
     meaningsContainer.innerHTML = '';
     addMeaningField();
     toggleForm(false);
-    toggleFormBtn.textContent = 'Тейть артикул';
+    toggleFormBtn.textContent = 'Од сёрмадовкс';
   } catch (err) {
     alert('Error saving entry: ' + err.message);
   }
@@ -175,32 +175,32 @@ function displayEntries(entries) {
         <span class="part-of-speech">${entry.partOfSpeech}</span>
       </div>
       <div id="${articleId}" class="hidden entry-article">
-        ${Object.values(entry.definitions).map((d, index) => `
-          <div class="entry-definition">
-            ${index + 1}. ${d.definition}
-            <div class="entry-examples">
-              ${d.examples[0] === '?' 
-                ? '' 
-                : d.examples.map(ex => `<em>${ex}</em>`).join('<br>')}
-            </div>
-            ${d.synonyms[0] === '?' 
-              ? `<div class="entry-margin-top"><strong></strong></div>` 
-              : `<div class="entry-margin-top"><strong>= </strong> ${d.synonyms.join(', ')}</div>`}
-            ${d.antonyms[0] === '?' 
-              ? `<div><strong></strong></div>` 
-              : `<div><strong>≠ </strong> ${d.antonyms.join(', ')}</div>`}
-          </div>
-        `).join('')}
+        ${Object.values(entry.definitions).map((d, index, arr) => `
+  <div class="entry-definition">
+    ${arr.length > 1 ? `${index + 1}. ` : ''}${d.definition}
+    <div class="entry-examples">
+      ${d.examples[0] === '?' 
+        ? '' 
+        : d.examples.map(ex => `<em>${ex}</em>`).join('<br>')}
+    </div>
+    ${d.synonyms[0] === '?' 
+      ? `<div class="entry-margin-top"><strong></strong></div>` 
+      : `<div class="entry-margin-top"><strong>= </strong> ${d.synonyms.join(', ')}</div>`}
+    ${d.antonyms[0] === '?' 
+      ? `<div><strong></strong></div>` 
+      : `<div><strong>≠ </strong> ${d.antonyms.join(', ')}</div>`}
+  </div>
+`).join('')}
         
         <hr>
     ${entry.etymology && entry.etymology.trim() !== '' ? `
       <div class="entry-etymology">
-        Валонть чачома тарказо:
-        <span>${entry.etymology}</span>
+        Валонть этимологиязо:
+        <span class="etymology-text">${entry.etymology}</span>
       </div>
     ` : `
       <div class="entry-etymology">
-        Валонть чачома тарказо: <span>?</span>
+        Валонть этимологиязо: <span class="etymology-text">?</span>
       </div>
     `}
 
@@ -243,7 +243,7 @@ function toggleForm(show) {
 }
 
 window.deleteEntry = function (key) {
-  const confirmDelete = confirm('Кеместэ ули мелеть нардамс те артикулонть?');
+  const confirmDelete = confirm('Кеместэ ули мелеть нардамс те сёрмадовксонть?');
   if (confirmDelete) {
     remove(ref(db, `dictionary/${key}`));
   }
@@ -255,13 +255,18 @@ window.editEntry = function (key) {
     const entry = snapshot.val();
     document.getElementById('word').value = entry.word;
     document.getElementById('partOfSpeech').value = entry.partOfSpeech;
-    document.getElementById('etymology').value = entry.etymology.trim() !== '' ? entry.etymology : '?';
+    document.getElementById('etymology').value = entry.etymology.trim() !== '?' ? entry.etymology : '';
     document.getElementById('source').value = (entry.sources || []).join('\n');
     meaningsContainer.innerHTML = '';
 
     Object.entries(entry.definitions).forEach(([key, def]) => {
-      addMeaningField(def.definition, def.examples || [], def.synonyms || '', def.antonyms || '');
-    });
+  addMeaningField(
+    def.definition || '',
+    def.examples && def.examples[0] !== '?' ? def.examples : [],
+    def.synonyms && def.synonyms[0] !== '?' ? def.synonyms.join(', ') : '',
+    def.antonyms && def.antonyms[0] !== '?' ? def.antonyms.join(', ') : ''
+  );
+});
 
     toggleForm(true);
     editingKey = key;

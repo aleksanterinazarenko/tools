@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400..700;1,400..700&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f4f4;
+    font-family: "Brygada 1918", serif;
+    background: #fff;
     padding: 30px;
     color: #333;
   }
@@ -8,10 +10,7 @@ body {
   .container {
     max-width: 850px;
     margin: auto;
-    background: #fff;
     padding: 60px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   }
 
   h1 {
@@ -29,12 +28,12 @@ body {
 
   input, select, textarea {
     width: 100%;
-    padding: 14px 16px;
-    font-size: 16px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border: 2px solid #ccc;
+    padding: 10px 15px;
+    font-size: 17px;
+    font-family: "Brygada 1918", serif;
+    border: 1px solid #333;
     border-radius: 6px;
-    background: #fafafa;
+    background: #fff;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -55,29 +54,21 @@ body {
     resize: none;
   }
 
-  #etymology {
-  margin-top: 20px;
-}
-
   #source {
   margin-bottom: 20px;
 }
 
   button {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 12px 18px;
-    background: #007bff;
-    color: white;
-    font-size: 16px;
-    border: none;
+    font-family: "Brygada 1918", serif;
+    font-size: 17px;
+    padding: 10px 15px;
+    background: none;
+    color: #333;
+    border: 1px solid #333;
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.3s ease;
     align-self: flex-start;
-  }
-
-  button:hover {
-    background: #0056b3;
   }
 
   .hidden {
@@ -88,12 +79,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    background: #f9f9f9;
+    background: #fff;
     padding: 20px;
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     box-sizing: border-box;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   ul {
@@ -103,7 +94,7 @@ body {
   }
 
   li {
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     padding: 24px;
     border-radius: 6px;
     margin-bottom: 20px;
@@ -117,43 +108,48 @@ body {
     align-items: baseline;
     gap: 10px;
     margin-bottom: 10px;
+    font-size: 17px;
   }
 
   .part-of-speech {
     font-style: italic;
+    font-weight: normal;
     text-transform: lowercase;
     color: #28a745;
-    font-size: 1em;
-  }
-
-  .entries-list > li > div:first-child {
-    margin-top: 16px;
+    font-size: 17px;
   }
 
   .entry-article {
   margin-top: 10px;
+  font-size: 17px;
 }
 
   .entry-definition {
     margin: 20px 0;
     line-height: 1.6;
+    font-size: 17px;
   }
 
   .entry-examples {
-    margin-top: 10px;
-    padding-left: 20px;
-    color: #555;
+    margin: 10px;
+    font-size: 17px;
+    color: grey;
   }
 
     .entry-etymology {
         margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 17px;
   }
+
+  .etymology-text {
+  color: gray;
+}
 
   .entry-sources {
     margin-top: 10px;
-    font-size: 14px;
-    color: #555;
+    font-size: 17px;
+    color: gray;
   }
 
   .entry-margin-top {
@@ -179,25 +175,47 @@ body {
   #searchInput {
     margin-bottom: 30px;
     width: 100%;
+    font-size: 17px;
   }
 
   #toggleFormBtn {
     margin-top: 10px;
   }
 
+  #addMeaningBtn {
+    margin-top: -20px;
+  }
+
   select {
     width: 100%;
+    font-size: 17px;
   }
+
+  footer {
+    text-align: center;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: 30px;
+    font-size: 17px;
+}
+
+footer a {
+  color: #333;
+  text-decoration: none;
+}
 
 @media (max-width: 768px) {
   
   body {
     padding: 20px;
-    font-size: 16px;
+    font-size: 17px;
+    background: white;
   }
 
   .container {
     padding: 0;
+    background: none;
   }
 
   h1 {
@@ -211,31 +229,35 @@ body {
 
   input, select, textarea {
     padding: 12px 14px;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   button {
     padding: 10px 16px;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .entry-header {
-    font-size: 16px;
+    font-size: 17px;
     gap: 8px;
   }
 
   .entry-definition {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.4;
     margin-bottom: 16px;
   }
 
   .entry-sources {
-    font-size: 14px;
+    font-size: 17px;
+  }
+
+  .entry-etymology {
+    font-size: 17px;
   }
 
   .entry-examples em {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .entry-sources li {
@@ -243,7 +265,7 @@ body {
   }
 
   .meaning-group {
-    padding: 15px;
+    padding: 16px;
   }
 
   hr {
@@ -274,7 +296,7 @@ body {
 
   ul li {
     padding: 12px;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   #searchInput {
@@ -290,7 +312,7 @@ body {
   }
 
   .part-of-speech {
-    font-size: 0.9em;
+    font-size: 17px;
   }
 
   .hidden {
