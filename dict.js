@@ -175,22 +175,28 @@ function displayEntries(entries) {
         <span class="part-of-speech">${entry.partOfSpeech}</span>
       </div>
       <div id="${articleId}" class="hidden entry-article">
-        ${Object.values(entry.definitions).map((d, index, arr) => `
-  <div class="entry-definition">
-    ${arr.length > 1 ? `${index + 1}. ` : ''}${d.definition}
-    <div class="entry-examples">
-      ${d.examples[0] === '?' 
+      
+        ${Object.values(entry.definitions).map((d, index, arr) => {
+  const hasExamples = d.examples && d.examples[0] !== '?';
+  const definitionClass = hasExamples ? 'entry-definition' : 'entry-definition compact';
+  return `
+  
+    <div class="${definitionClass}">
+      ${arr.length > 1 ? `<strong>${index + 1}.</strong> ` : ''}${d.definition}
+      <div class="entry-examples">
+        ${hasExamples 
+          ? d.examples.map(ex => `<em>${ex}</em>`).join('<br>') 
+          : ''}
+      </div>
+      ${d.synonyms[0] === '?' 
         ? '' 
-        : d.examples.map(ex => `<em>${ex}</em>`).join('<br>')}
+        : `<div class="entry-margin-top"><strong>= </strong> ${d.synonyms.join(', ')}</div>`}
+      ${d.antonyms[0] === '?' 
+        ? '' 
+        : `<div><strong>≠ </strong> ${d.antonyms.join(', ')}</div>`}
     </div>
-    ${d.synonyms[0] === '?' 
-      ? `<div class="entry-margin-top"><strong></strong></div>` 
-      : `<div class="entry-margin-top"><strong>= </strong> ${d.synonyms.join(', ')}</div>`}
-    ${d.antonyms[0] === '?' 
-      ? `<div><strong></strong></div>` 
-      : `<div><strong>≠ </strong> ${d.antonyms.join(', ')}</div>`}
-  </div>
-`).join('')}
+  `;
+}).join('')}
         
         <hr>
     ${entry.etymology && entry.etymology.trim() !== '' ? `
