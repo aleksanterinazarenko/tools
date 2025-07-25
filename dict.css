@@ -193,7 +193,7 @@ body {
   
   body {
     padding: 20px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .container {
@@ -211,31 +211,31 @@ body {
 
   input, select, textarea {
     padding: 12px 14px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   button {
     padding: 10px 16px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .entry-header {
-    font-size: 14px;
+    font-size: 16px;
     gap: 8px;
   }
 
   .entry-definition {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.4;
     margin-bottom: 16px;
   }
 
   .entry-sources {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .entry-examples em {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .entry-sources li {
@@ -274,7 +274,7 @@ body {
 
   ul li {
     padding: 12px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   #searchInput {
@@ -286,7 +286,7 @@ body {
   }
 
   .entry-translations li {
-    margin-top: 16px;
+    margin-top: 18px;
   }
 
   .part-of-speech {
@@ -305,36 +305,36 @@ body {
 @media (max-width: 480px) {
 
   body {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   input, select, textarea {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   button {
     padding: 8px 12px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .entry-header {
-    font-size: 12px;
+    font-size: 14px;
     gap: 5px;
   }
 
   .entry-definition {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .entry-etymology {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 12px;
     margin-bottom: 12px;
   }
 
   li {
     padding: 12px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .container {
@@ -347,7 +347,7 @@ body {
 
   input, select, textarea {
     width: 100%;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .part-of-speech {
