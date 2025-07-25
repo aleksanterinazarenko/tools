@@ -220,7 +220,7 @@ function displayEntries(entries) {
 
         <div class="entry-margin-top">
           <button onclick="editEntry('${entry.key}')">Витема</button>
-          <button onclick="deleteEntry('${entry.key}')">Нардамо</button>
+          <!-- <button onclick="deleteEntry('${entry.key}')">Нардамо</button> -->
         </div>
       </div>
     `;
