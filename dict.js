@@ -170,11 +170,11 @@ function displayEntries(entries) {
     const li = document.createElement('li');
     const articleId = `article-${entry.key}`;
     li.innerHTML = `
-      <div style="cursor: pointer; font-weight: bold; display: flex; gap: 10px; align-items: baseline;" onclick="toggleArticle('${articleId}')">
+      <div class="entry-header" onclick="toggleArticle('${articleId}')">
         <span>${entry.word}</span>
         <span class="part-of-speech">${entry.partOfSpeech}</span>
       </div>
-      <div id="${articleId}" class="hidden" style="margin-top: 10px;">
+      <div id="${articleId}" class="hidden entry-article">
         ${Object.values(entry.definitions).map((d, index) => `
           <div class="entry-definition">
             ${index + 1}. ${d.definition}
@@ -184,8 +184,8 @@ function displayEntries(entries) {
                 : d.examples.map(ex => `<em>${ex}</em>`).join('<br>')}
             </div>
             ${d.synonyms[0] === '?' 
-              ? `<div style="margin-top: 10px;"><strong></strong></div>` 
-              : `<div style="margin-top: 10px;"><strong>= </strong> ${d.synonyms.join(', ')}</div>`}
+              ? `<div class="entry-margin-top"><strong></strong></div>` 
+              : `<div class="entry-margin-top"><strong>= </strong> ${d.synonyms.join(', ')}</div>`}
             ${d.antonyms[0] === '?' 
               ? `<div><strong></strong></div>` 
               : `<div><strong>≠ </strong> ${d.antonyms.join(', ')}</div>`}
@@ -193,26 +193,26 @@ function displayEntries(entries) {
         `).join('')}
         
         <hr>
-        ${entry.etymology && entry.etymology.trim() !== '' ? `
-          <div style="margin-top: 20px; margin-bottom: 20px;">
-            Валонть чачома тарказо:
-            <span>${entry.etymology}</span>
-          </div>
-        ` : `
-          <div style="margin-top: 20px; margin-bottom: 20px;">
-            Валонть чачома тарказо: <span>?</span>
-          </div>
-        `}
+    ${entry.etymology && entry.etymology.trim() !== '' ? `
+      <div class="entry-etymology">
+        Валонть чачома тарказо:
+        <span>${entry.etymology}</span>
+      </div>
+    ` : `
+      <div class="entry-etymology">
+        Валонть чачома тарказо: <span>?</span>
+      </div>
+    `}
 
         <hr>
-        <div style="margin-top: 20px;">
+        <div class="entry-margin-top">
           Лисьмапрят:
           <ul class="entry-sources">
             ${(Array.isArray(entry.sources) ? entry.sources : [entry.source || '']).map(src => `<li>${src}</li>`).join('')}
           </ul>
         </div>
 
-        <div style="margin-top:10px;">
+        <div class="entry-margin-top">
           <button onclick="editEntry('${entry.key}')">Витема</button>
           <button onclick="deleteEntry('${entry.key}')">Нардамо</button>
         </div>

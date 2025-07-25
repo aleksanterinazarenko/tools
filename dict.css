@@ -111,10 +111,11 @@ body {
   }
 
   .entry-header {
+    cursor: pointer;
+    font-weight: bold;
     display: flex;
     align-items: baseline;
-    gap: 12px;
-    font-size: 20px;
+    gap: 10px;
     margin-bottom: 10px;
   }
 
@@ -129,6 +130,10 @@ body {
     margin-top: 16px;
   }
 
+  .entry-article {
+  margin-top: 10px;
+}
+
   .entry-definition {
     margin: 20px 0;
     line-height: 1.6;
@@ -140,11 +145,20 @@ body {
     color: #555;
   }
 
+    .entry-etymology {
+        margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
   .entry-sources {
     margin-top: 10px;
     font-size: 14px;
     color: #555;
   }
+
+  .entry-margin-top {
+  margin-top: 20px;
+}
 
   .entry-sources li {
     border: none;
@@ -174,3 +188,169 @@ body {
   select {
     width: 100%;
   }
+
+@media (max-width: 768px) {
+  
+  body {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  form {
+    gap: 16px;
+  }
+
+  input, select, textarea {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .entry-header {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .entry-definition {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .entry-sources {
+    font-size: 12px;
+  }
+
+  .entry-examples em {
+    font-size: 13px;
+  }
+
+  .entry-sources li {
+    padding: 2px 0;
+  }
+
+  .meaning-group {
+    padding: 15px;
+  }
+
+  hr {
+    margin: 16px 0;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+  }
+
+  li {
+    padding: 16px;
+  }
+
+  .entry-article {
+    margin-top: 8px;
+  }
+
+  .entry-margin-top {
+    margin-top: 16px;
+  }
+
+  .entry-etymology {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  ul li {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  #searchInput {
+    margin-bottom: 20px;
+  }
+
+  #toggleFormBtn {
+    margin-top: 8px;
+  }
+
+  .entry-translations li {
+    margin-top: 16px;
+  }
+
+  .part-of-speech {
+    font-size: 0.9em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  form {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  body {
+    font-size: 12px;
+  }
+
+  input, select, textarea {
+    font-size: 12px;
+  }
+
+  button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .entry-header {
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .entry-definition {
+    font-size: 12px;
+  }
+
+  .entry-etymology {
+    font-size: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  li {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  #searchInput {
+    margin-bottom: 15px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .part-of-speech {
+    font-size: 0.8em;
+  }
+}
