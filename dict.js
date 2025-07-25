@@ -137,7 +137,11 @@ function addMeaningField(def = '', ex = [], syn = '', ant = '') {
 }
 
 function deleteMeaningField(meaningGroup) {
-  meaningGroup.remove();
+  if (meaningsContainer.children.length > 1) {
+    meaningGroup.remove();
+  } else {
+    alert('Ялатеке вейке смустентень лиядома сёрмадовксос.');
+  }
 }
 
 function renderEntries() {
