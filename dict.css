@@ -197,7 +197,7 @@ body {
   }
 
   .container {
-    padding: 30px;
+    padding: none;
   }
 
   h1 {
