@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'CMU Sans Serif';
-    src: url('/CMU Sans Serif.otf') format('opentype');
+    src: url('CMU Sans Serif.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
