@@ -65,7 +65,6 @@ form.addEventListener('submit', async (e) => {
       examples: examples.length > 0 ? examples : ['?'],
       synonyms: synonyms.length > 0 ? synonyms : ['?'],
       antonyms: antonyms.length > 0 ? antonyms : ['?'],
-      sources
     };
   });
 
@@ -148,6 +147,11 @@ function deleteMeaningField(meaningGroup) {
 
 function renderEntries() {
   const dictionaryRef = ref(db, 'dictionary');
+
+entriesList.innerHTML = `
+  <span class="loading-message">Тарган сёрмадовкст...</span>
+`;
+
   onValue(dictionaryRef, (snapshot) => {
     const entries = [];
     snapshot.forEach((child) => {
@@ -178,11 +182,12 @@ function displayEntries(entries) {
     li.innerHTML = `
       <div class="entry-header" onclick="toggleArticle('${articleId}')">
         <span>${entry.word}</span>
+
         <span class="part-of-speech">${entry.partOfSpeech}</span>
       </div>
       <div id="${articleId}" class="hidden entry-article">
 
-${entry.pronunciation
+      ${entry.pronunciation
   ? `<span class="pronunciation">${entry.pronunciation
       .split(',')
       .map(p => `/${p.trim()}/`)
