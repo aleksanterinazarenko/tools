@@ -98,6 +98,7 @@ function updateResult() {
   const conjugation = data.subjects?.[subj]?.verb_forms?.[verb]?.objects?.[obj];
 
   function formatRedStars(text) {
+  if (typeof text !== "string") return text ?? "";
   return text.replace(/\*(.*?)\*/g, '<span style="color:red">$1</span>');
 }
 
