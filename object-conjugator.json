@@ -1,0 +1,988 @@
+{
+  "subjects": {
+    "I": {
+      "verb_forms": {
+        "see": {
+          "objects": {
+            "me": "–",
+            "you_sg": "кунда*тан*",
+            "him_her_it": 102,
+            "us": 103,
+            "you_pl": 104,
+            "them": 105
+          }
+        },
+        "see_neg": {
+          "objects": {
+            "me": 110,
+            "you_sg": 111,
+            "him_her_it": 112,
+            "us": 113,
+            "you_pl": 114,
+            "them": 115
+          }
+        },
+        "saw": {
+          "objects": {
+            "me": 120,
+            "you_sg": 121,
+            "him_her_it": 122,
+            "us": 123,
+            "you_pl": 124,
+            "them": 125
+          }
+        },
+        "saw_neg": {
+          "objects": {
+            "me": 130,
+            "you_sg": 131,
+            "him_her_it": 132,
+            "us": 133,
+            "you_pl": 134,
+            "them": 135
+          }
+        },
+        "saw_long": {
+          "objects": {
+            "me": 140,
+            "you_sg": 141,
+            "him_her_it": 142,
+            "us": 143,
+            "you_pl": 144,
+            "them": 145
+          }
+        },
+        "saw_long_neg": {
+          "objects": {
+            "me": 150,
+            "you_sg": 151,
+            "him_her_it": 152,
+            "us": 153,
+            "you_pl": 154,
+            "them": 155
+          }
+        },
+        "will_see": {
+          "objects": {
+            "me": 160,
+            "you_sg": 161,
+            "him_her_it": 162,
+            "us": 163,
+            "you_pl": 164,
+            "them": 165
+          }
+        },
+        "will_see_neg": {
+          "objects": {
+            "me": 170,
+            "you_sg": 171,
+            "him_her_it": 172,
+            "us": 173,
+            "you_pl": 174,
+            "them": 175
+          }
+        },
+        "would_see": {
+          "objects": {
+            "me": 180,
+            "you_sg": 181,
+            "him_her_it": 182,
+            "us": 183,
+            "you_pl": 184,
+            "them": 185
+          }
+        },
+        "would_see_neg": {
+          "objects": {
+            "me": 190,
+            "you_sg": 191,
+            "him_her_it": 192,
+            "us": 193,
+            "you_pl": 194,
+            "them": 195
+          }
+        },
+        "wanted_see": {
+          "objects": {
+            "me": 200,
+            "you_sg": 201,
+            "him_her_it": 202,
+            "us": 203,
+            "you_pl": 204,
+            "them": 205
+          }
+        },
+        "wanted_see_neg": {
+          "objects": {
+            "me": 210,
+            "you_sg": 211,
+            "him_her_it": 212,
+            "us": 213,
+            "you_pl": 214,
+            "them": 215
+          }
+        },
+        "optativus": {
+          "objects": {
+            "me": 220,
+            "you_sg": 221,
+            "him_her_it": 222,
+            "us": 223,
+            "you_pl": 224,
+            "them": 225
+          }
+        },
+        "optativus_neg": {
+          "objects": {
+            "me": 230,
+            "you_sg": 231,
+            "him_her_it": 232,
+            "us": 233,
+            "you_pl": 234,
+            "them": 235
+          }
+        },
+        "conditionatis": {
+          "objects": {
+            "me": 240,
+            "you_sg": 241,
+            "him_her_it": 242,
+            "us": 243,
+            "you_pl": 244,
+            "them": 245
+          }
+        },
+        "conditionatis_neg": {
+          "objects": {
+            "me": 250,
+            "you_sg": 251,
+            "him_her_it": 252,
+            "us": 253,
+            "you_pl": 254,
+            "them": 255
+          }
+        }
+      }
+    },
+        "you_sg": {
+      "verb_forms": {
+        "see": {
+          "objects": {
+            "me": "test",
+            "you_sg": "test",
+            "him_her_it": "test",
+            "us": 103,
+            "you_pl": 104,
+            "them": 105
+          }
+        },
+        "see_neg": {
+          "objects": {
+            "me": 110,
+            "you_sg": 111,
+            "him_her_it": 112,
+            "us": 113,
+            "you_pl": 114,
+            "them": 115
+          }
+        },
+        "saw": {
+          "objects": {
+            "me": 120,
+            "you_sg": 121,
+            "him_her_it": 122,
+            "us": 123,
+            "you_pl": 124,
+            "them": 125
+          }
+        },
+        "saw_neg": {
+          "objects": {
+            "me": 130,
+            "you_sg": 131,
+            "him_her_it": 132,
+            "us": 133,
+            "you_pl": 134,
+            "them": 135
+          }
+        },
+        "saw_long": {
+          "objects": {
+            "me": 140,
+            "you_sg": 141,
+            "him_her_it": 142,
+            "us": 143,
+            "you_pl": 144,
+            "them": 145
+          }
+        },
+        "saw_long_neg": {
+          "objects": {
+            "me": 150,
+            "you_sg": 151,
+            "him_her_it": 152,
+            "us": 153,
+            "you_pl": 154,
+            "them": 155
+          }
+        },
+        "will_see": {
+          "objects": {
+            "me": 160,
+            "you_sg": 161,
+            "him_her_it": 162,
+            "us": 163,
+            "you_pl": 164,
+            "them": 165
+          }
+        },
+        "will_see_neg": {
+          "objects": {
+            "me": 170,
+            "you_sg": 171,
+            "him_her_it": 172,
+            "us": 173,
+            "you_pl": 174,
+            "them": 175
+          }
+        },
+        "would_see": {
+          "objects": {
+            "me": 180,
+            "you_sg": 181,
+            "him_her_it": 182,
+            "us": 183,
+            "you_pl": 184,
+            "them": 185
+          }
+        },
+        "would_see_neg": {
+          "objects": {
+            "me": 190,
+            "you_sg": 191,
+            "him_her_it": 192,
+            "us": 193,
+            "you_pl": 194,
+            "them": 195
+          }
+        },
+        "wanted_see": {
+          "objects": {
+            "me": 200,
+            "you_sg": 201,
+            "him_her_it": 202,
+            "us": 203,
+            "you_pl": 204,
+            "them": 205
+          }
+        },
+        "wanted_see_neg": {
+          "objects": {
+            "me": 210,
+            "you_sg": 211,
+            "him_her_it": 212,
+            "us": 213,
+            "you_pl": 214,
+            "them": 215
+          }
+        },
+        "optativus": {
+          "objects": {
+            "me": 220,
+            "you_sg": 221,
+            "him_her_it": 222,
+            "us": 223,
+            "you_pl": 224,
+            "them": 225
+          }
+        },
+        "optativus_neg": {
+          "objects": {
+            "me": 230,
+            "you_sg": 231,
+            "him_her_it": 232,
+            "us": 233,
+            "you_pl": 234,
+            "them": 235
+          }
+        },
+        "conditionatis": {
+          "objects": {
+            "me": 240,
+            "you_sg": 241,
+            "him_her_it": 242,
+            "us": 243,
+            "you_pl": 244,
+            "them": 245
+          }
+        },
+        "conditionatis_neg": {
+          "objects": {
+            "me": 250,
+            "you_sg": 251,
+            "him_her_it": 252,
+            "us": 253,
+            "you_pl": 254,
+            "them": 255
+          }
+        }
+      }
+    },
+        "him_her_it": {
+      "verb_forms": {
+        "see": {
+          "objects": {
+            "me": "test",
+            "you_sg": "test",
+            "him_her_it": "test",
+            "us": 103,
+            "you_pl": 104,
+            "them": 105
+          }
+        },
+        "see_neg": {
+          "objects": {
+            "me": 110,
+            "you_sg": 111,
+            "him_her_it": 112,
+            "us": 113,
+            "you_pl": 114,
+            "them": 115
+          }
+        },
+        "saw": {
+          "objects": {
+            "me": 120,
+            "you_sg": 121,
+            "him_her_it": 122,
+            "us": 123,
+            "you_pl": 124,
+            "them": 125
+          }
+        },
+        "saw_neg": {
+          "objects": {
+            "me": 130,
+            "you_sg": 131,
+            "him_her_it": 132,
+            "us": 133,
+            "you_pl": 134,
+            "them": 135
+          }
+        },
+        "saw_long": {
+          "objects": {
+            "me": 140,
+            "you_sg": 141,
+            "him_her_it": 142,
+            "us": 143,
+            "you_pl": 144,
+            "them": 145
+          }
+        },
+        "saw_long_neg": {
+          "objects": {
+            "me": 150,
+            "you_sg": 151,
+            "him_her_it": 152,
+            "us": 153,
+            "you_pl": 154,
+            "them": 155
+          }
+        },
+        "will_see": {
+          "objects": {
+            "me": 160,
+            "you_sg": 161,
+            "him_her_it": 162,
+            "us": 163,
+            "you_pl": 164,
+            "them": 165
+          }
+        },
+        "will_see_neg": {
+          "objects": {
+            "me": 170,
+            "you_sg": 171,
+            "him_her_it": 172,
+            "us": 173,
+            "you_pl": 174,
+            "them": 175
+          }
+        },
+        "would_see": {
+          "objects": {
+            "me": 180,
+            "you_sg": 181,
+            "him_her_it": 182,
+            "us": 183,
+            "you_pl": 184,
+            "them": 185
+          }
+        },
+        "would_see_neg": {
+          "objects": {
+            "me": 190,
+            "you_sg": 191,
+            "him_her_it": 192,
+            "us": 193,
+            "you_pl": 194,
+            "them": 195
+          }
+        },
+        "wanted_see": {
+          "objects": {
+            "me": 200,
+            "you_sg": 201,
+            "him_her_it": 202,
+            "us": 203,
+            "you_pl": 204,
+            "them": 205
+          }
+        },
+        "wanted_see_neg": {
+          "objects": {
+            "me": 210,
+            "you_sg": 211,
+            "him_her_it": 212,
+            "us": 213,
+            "you_pl": 214,
+            "them": 215
+          }
+        },
+        "optativus": {
+          "objects": {
+            "me": 220,
+            "you_sg": 221,
+            "him_her_it": 222,
+            "us": 223,
+            "you_pl": 224,
+            "them": 225
+          }
+        },
+        "optativus_neg": {
+          "objects": {
+            "me": 230,
+            "you_sg": 231,
+            "him_her_it": 232,
+            "us": 233,
+            "you_pl": 234,
+            "them": 235
+          }
+        },
+        "conditionatis": {
+          "objects": {
+            "me": 240,
+            "you_sg": 241,
+            "him_her_it": 242,
+            "us": 243,
+            "you_pl": 244,
+            "them": 245
+          }
+        },
+        "conditionatis_neg": {
+          "objects": {
+            "me": 250,
+            "you_sg": 251,
+            "him_her_it": 252,
+            "us": 253,
+            "you_pl": 254,
+            "them": 255
+          }
+        }
+      }
+    },
+        "we": {
+      "verb_forms": {
+        "see": {
+          "objects": {
+            "me": "test",
+            "you_sg": "test",
+            "him_her_it": "test",
+            "us": 103,
+            "you_pl": 104,
+            "them": 105
+          }
+        },
+        "see_neg": {
+          "objects": {
+            "me": 110,
+            "you_sg": 111,
+            "him_her_it": 112,
+            "us": 113,
+            "you_pl": 114,
+            "them": 115
+          }
+        },
+        "saw": {
+          "objects": {
+            "me": 120,
+            "you_sg": 121,
+            "him_her_it": 122,
+            "us": 123,
+            "you_pl": 124,
+            "them": 125
+          }
+        },
+        "saw_neg": {
+          "objects": {
+            "me": 130,
+            "you_sg": 131,
+            "him_her_it": 132,
+            "us": 133,
+            "you_pl": 134,
+            "them": 135
+          }
+        },
+        "saw_long": {
+          "objects": {
+            "me": 140,
+            "you_sg": 141,
+            "him_her_it": 142,
+            "us": 143,
+            "you_pl": 144,
+            "them": 145
+          }
+        },
+        "saw_long_neg": {
+          "objects": {
+            "me": 150,
+            "you_sg": 151,
+            "him_her_it": 152,
+            "us": 153,
+            "you_pl": 154,
+            "them": 155
+          }
+        },
+        "will_see": {
+          "objects": {
+            "me": 160,
+            "you_sg": 161,
+            "him_her_it": 162,
+            "us": 163,
+            "you_pl": 164,
+            "them": 165
+          }
+        },
+        "will_see_neg": {
+          "objects": {
+            "me": 170,
+            "you_sg": 171,
+            "him_her_it": 172,
+            "us": 173,
+            "you_pl": 174,
+            "them": 175
+          }
+        },
+        "would_see": {
+          "objects": {
+            "me": 180,
+            "you_sg": 181,
+            "him_her_it": 182,
+            "us": 183,
+            "you_pl": 184,
+            "them": 185
+          }
+        },
+        "would_see_neg": {
+          "objects": {
+            "me": 190,
+            "you_sg": 191,
+            "him_her_it": 192,
+            "us": 193,
+            "you_pl": 194,
+            "them": 195
+          }
+        },
+        "wanted_see": {
+          "objects": {
+            "me": 200,
+            "you_sg": 201,
+            "him_her_it": 202,
+            "us": 203,
+            "you_pl": 204,
+            "them": 205
+          }
+        },
+        "wanted_see_neg": {
+          "objects": {
+            "me": 210,
+            "you_sg": 211,
+            "him_her_it": 212,
+            "us": 213,
+            "you_pl": 214,
+            "them": 215
+          }
+        },
+        "optativus": {
+          "objects": {
+            "me": 220,
+            "you_sg": 221,
+            "him_her_it": 222,
+            "us": 223,
+            "you_pl": 224,
+            "them": 225
+          }
+        },
+        "optativus_neg": {
+          "objects": {
+            "me": 230,
+            "you_sg": 231,
+            "him_her_it": 232,
+            "us": 233,
+            "you_pl": 234,
+            "them": 235
+          }
+        },
+        "conditionatis": {
+          "objects": {
+            "me": 240,
+            "you_sg": 241,
+            "him_her_it": 242,
+            "us": 243,
+            "you_pl": 244,
+            "them": 245
+          }
+        },
+        "conditionatis_neg": {
+          "objects": {
+            "me": 250,
+            "you_sg": 251,
+            "him_her_it": 252,
+            "us": 253,
+            "you_pl": 254,
+            "them": 255
+          }
+        }
+      }
+    },
+            "you_pl": {
+      "verb_forms": {
+        "see": {
+          "objects": {
+            "me": "test",
+            "you_sg": "test",
+            "him_her_it": "test",
+            "us": 103,
+            "you_pl": 104,
+            "them": 105
+          }
+        },
+        "see_neg": {
+          "objects": {
+            "me": 110,
+            "you_sg": 111,
+            "him_her_it": 112,
+            "us": 113,
+            "you_pl": 114,
+            "them": 115
+          }
+        },
+        "saw": {
+          "objects": {
+            "me": 120,
+            "you_sg": 121,
+            "him_her_it": 122,
+            "us": 123,
+            "you_pl": 124,
+            "them": 125
+          }
+        },
+        "saw_neg": {
+          "objects": {
+            "me": 130,
+            "you_sg": 131,
+            "him_her_it": 132,
+            "us": 133,
+            "you_pl": 134,
+            "them": 135
+          }
+        },
+        "saw_long": {
+          "objects": {
+            "me": 140,
+            "you_sg": 141,
+            "him_her_it": 142,
+            "us": 143,
+            "you_pl": 144,
+            "them": 145
+          }
+        },
+        "saw_long_neg": {
+          "objects": {
+            "me": 150,
+            "you_sg": 151,
+            "him_her_it": 152,
+            "us": 153,
+            "you_pl": 154,
+            "them": 155
+          }
+        },
+        "will_see": {
+          "objects": {
+            "me": 160,
+            "you_sg": 161,
+            "him_her_it": 162,
+            "us": 163,
+            "you_pl": 164,
+            "them": 165
+          }
+        },
+        "will_see_neg": {
+          "objects": {
+            "me": 170,
+            "you_sg": 171,
+            "him_her_it": 172,
+            "us": 173,
+            "you_pl": 174,
+            "them": 175
+          }
+        },
+        "would_see": {
+          "objects": {
+            "me": 180,
+            "you_sg": 181,
+            "him_her_it": 182,
+            "us": 183,
+            "you_pl": 184,
+            "them": 185
+          }
+        },
+        "would_see_neg": {
+          "objects": {
+            "me": 190,
+            "you_sg": 191,
+            "him_her_it": 192,
+            "us": 193,
+            "you_pl": 194,
+            "them": 195
+          }
+        },
+        "wanted_see": {
+          "objects": {
+            "me": 200,
+            "you_sg": 201,
+            "him_her_it": 202,
+            "us": 203,
+            "you_pl": 204,
+            "them": 205
+          }
+        },
+        "wanted_see_neg": {
+          "objects": {
+            "me": 210,
+            "you_sg": 211,
+            "him_her_it": 212,
+            "us": 213,
+            "you_pl": 214,
+            "them": 215
+          }
+        },
+        "optativus": {
+          "objects": {
+            "me": 220,
+            "you_sg": 221,
+            "him_her_it": 222,
+            "us": 223,
+            "you_pl": 224,
+            "them": 225
+          }
+        },
+        "optativus_neg": {
+          "objects": {
+            "me": 230,
+            "you_sg": 231,
+            "him_her_it": 232,
+            "us": 233,
+            "you_pl": 234,
+            "them": 235
+          }
+        },
+        "conditionatis": {
+          "objects": {
+            "me": 240,
+            "you_sg": 241,
+            "him_her_it": 242,
+            "us": 243,
+            "you_pl": 244,
+            "them": 245
+          }
+        },
+        "conditionatis_neg": {
+          "objects": {
+            "me": 250,
+            "you_sg": 251,
+            "him_her_it": 252,
+            "us": 253,
+            "you_pl": 254,
+            "them": 255
+          }
+        }
+      }
+    },
+            "they": {
+      "verb_forms": {
+        "see": {
+          "objects": {
+            "me": "test",
+            "you_sg": "test",
+            "him_her_it": "test",
+            "us": 103,
+            "you_pl": 104,
+            "them": 105
+          }
+        },
+        "see_neg": {
+          "objects": {
+            "me": 110,
+            "you_sg": 111,
+            "him_her_it": 112,
+            "us": 113,
+            "you_pl": 114,
+            "them": 115
+          }
+        },
+        "saw": {
+          "objects": {
+            "me": 120,
+            "you_sg": 121,
+            "him_her_it": 122,
+            "us": 123,
+            "you_pl": 124,
+            "them": 125
+          }
+        },
+        "saw_neg": {
+          "objects": {
+            "me": 130,
+            "you_sg": 131,
+            "him_her_it": 132,
+            "us": 133,
+            "you_pl": 134,
+            "them": 135
+          }
+        },
+        "saw_long": {
+          "objects": {
+            "me": 140,
+            "you_sg": 141,
+            "him_her_it": 142,
+            "us": 143,
+            "you_pl": 144,
+            "them": 145
+          }
+        },
+        "saw_long_neg": {
+          "objects": {
+            "me": 150,
+            "you_sg": 151,
+            "him_her_it": 152,
+            "us": 153,
+            "you_pl": 154,
+            "them": 155
+          }
+        },
+        "will_see": {
+          "objects": {
+            "me": 160,
+            "you_sg": 161,
+            "him_her_it": 162,
+            "us": 163,
+            "you_pl": 164,
+            "them": 165
+          }
+        },
+        "will_see_neg": {
+          "objects": {
+            "me": 170,
+            "you_sg": 171,
+            "him_her_it": 172,
+            "us": 173,
+            "you_pl": 174,
+            "them": 175
+          }
+        },
+        "would_see": {
+          "objects": {
+            "me": 180,
+            "you_sg": 181,
+            "him_her_it": 182,
+            "us": 183,
+            "you_pl": 184,
+            "them": 185
+          }
+        },
+        "would_see_neg": {
+          "objects": {
+            "me": 190,
+            "you_sg": 191,
+            "him_her_it": 192,
+            "us": 193,
+            "you_pl": 194,
+            "them": 195
+          }
+        },
+        "wanted_see": {
+          "objects": {
+            "me": 200,
+            "you_sg": 201,
+            "him_her_it": 202,
+            "us": 203,
+            "you_pl": 204,
+            "them": 205
+          }
+        },
+        "wanted_see_neg": {
+          "objects": {
+            "me": 210,
+            "you_sg": 211,
+            "him_her_it": 212,
+            "us": 213,
+            "you_pl": 214,
+            "them": 215
+          }
+        },
+        "optativus": {
+          "objects": {
+            "me": 220,
+            "you_sg": 221,
+            "him_her_it": 222,
+            "us": 223,
+            "you_pl": 224,
+            "them": 225
+          }
+        },
+        "optativus_neg": {
+          "objects": {
+            "me": 230,
+            "you_sg": 231,
+            "him_her_it": 232,
+            "us": 233,
+            "you_pl": 234,
+            "them": 235
+          }
+        },
+        "conditionatis": {
+          "objects": {
+            "me": 240,
+            "you_sg": 241,
+            "him_her_it": 242,
+            "us": 243,
+            "you_pl": 244,
+            "them": 245
+          }
+        },
+        "conditionatis_neg": {
+          "objects": {
+            "me": 250,
+            "you_sg": 251,
+            "him_her_it": 252,
+            "us": 253,
+            "you_pl": 254,
+            "them": 255
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Erzya Object Conjugation Tool</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+    background: #f9f9f9;
+  }
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  select {
+    padding: 0.3rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+  #result {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #e0f7fa;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-height: 40px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Erzya Object Conjugation Tool</h1>
+
+<label for="subjectMenu">Subject Pronoun</label>
+<select id="subjectMenu">
+  <option value="I">I</option>
+  <option value="you_sg">you (see.)</option>
+  <option value="he_she_it">he, she, it</option>
+  <option value="we">we</option>
+  <option value="you_pl">you (pl.)</option>
+  <option value="they">they</option>
+</select>
+
+<label for="verbMenu">Verb Form</label>
+<select id="verbMenu">
+  <option value="see">see(s)</option>
+  <option value="see_neg">do(es)n't see</option>
+  <option value="saw">saw</option>
+  <option value="saw_neg">didn't see</option>
+  <option value="saw_long">saw (a long time ago)</option>
+  <option value="saw_long_neg">didn't see (a long time ago)</option>
+  <option value="will_see">will see</option>
+  <option value="will_see_neg">won't see</option>
+  <option value="would_see">would see</option>
+  <option value="would_see_neg">wouldn't see</option>
+  <option value="wanted_see">wanted to see</option>
+  <option value="wanted_see_neg">didn't want to see</option>
+  <option value="optativus">optativus (let XY)</option>
+  <option value="optativus_neg">optativus (negative)</option>
+  <option value="conditionatis">conditionatis (if XY)</option>
+  <option value="conditionatis_neg">conditionatis (negative)</option>
+</select>
+
+<label for="objectMenu">Object Pronoun</label>
+<select id="objectMenu">
+  <option value="me">me</option>
+  <option value="you_sg">you (see.)</option>
+  <option value="him_her_it">him, her, it</option>
+  <option value="us">us</option>
+  <option value="you_pl">you (pl.)</option>
+  <option value="them">them</option>
+</select>
+
+<div id="result">Select options to see conjugation.</div>
+
+<script>
+const subjectMenu = document.getElementById('subjectMenu');
+const verbMenu = document.getElementById('verbMenu');
+const objectMenu = document.getElementById('objectMenu');
+const result = document.getElementById('result');
+
+let data;
+
+function updateResult() {
+  if (!data) {
+    result.textContent = "Loading data...";
+    return;
+  }
+  const subj = subjectMenu.value;
+  const verb = verbMenu.value;
+  const obj = objectMenu.value;
+
+  const conjugation = data.subjects?.[subj]?.verb_forms?.[verb]?.objects?.[obj];
+
+  function formatRedStars(text) {
+  return text.replace(/\*(.*?)\*/g, '<span style="color:red">$1</span>');
+}
+
+  if (conjugation !== undefined) {
+    result.innerHTML = formatRedStars(conjugation);
+  } else {
+    result.textContent = "No conjugation found for this combination.";
+  }
+}
+
+fetch('object-conjugator.json')
+  .then(response => response.json())
+  .then(jsonData => {
+    data = jsonData;
+    updateResult();
+  })
+  .catch(err => {
+    result.textContent = "Failed to load conjugation data.";
+    console.error("Error loading JSON:", err);
+  });
+
+subjectMenu.addEventListener('change', updateResult);
+verbMenu.addEventListener('change', updateResult);
+objectMenu.addEventListener('change', updateResult);
+
+  updateResult();
+</script>
+</body>
+</html>
