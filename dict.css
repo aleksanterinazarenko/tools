@@ -84,6 +84,13 @@ body {
     align-self: flex-start;
   }
 
+  .entry-margin-top button {
+    margin-right: 10px;
+  }
+  .entry-margin-top button:last-child {
+    margin-right: 0;
+  }
+
   .hidden {
     display: none;
   }

@@ -45,28 +45,30 @@ form.addEventListener('submit', async (e) => {
     .filter(s => s);
 
   const definitions = {};
-  document.querySelectorAll('.meaning-group').forEach((group, index) => {
-    const def = group.querySelector('.definition').value;
-    const examples = group.querySelector('.examples').value
-      .split('\n')
-      .map(e => e.trim())
-      .filter(e => e);
-    const synonyms = group.querySelector('.synonyms').value
-      .split(',')
-      .map(s => s.trim())
-      .filter(s => s);
-    const antonyms = group.querySelector('.antonyms').value
-      .split(',')
-      .map(a => a.trim())
-      .filter(a => a);
+document.querySelectorAll('.meaning-group').forEach((group, index) => {
+  const def = group.querySelector('.definition').value.trim();
+  if (!def) return;
 
-    definitions[`def_${index + 1}`] = {
-      definition: def,
-      examples: examples.length > 0 ? examples : ['?'],
-      synonyms: synonyms.length > 0 ? synonyms : ['?'],
-      antonyms: antonyms.length > 0 ? antonyms : ['?'],
-    };
-  });
+  const examples = group.querySelector('.examples').value
+    .split('\n')
+    .map(e => e.trim())
+    .filter(e => e);
+  const synonyms = group.querySelector('.synonyms').value
+    .split(',')
+    .map(s => s.trim())
+    .filter(s => s);
+  const antonyms = group.querySelector('.antonyms').value
+    .split(',')
+    .map(a => a.trim())
+    .filter(a => a);
+
+  definitions[`def_${index + 1}`] = {
+    definition: def,
+    examples: examples.length > 0 ? examples : ['?'],
+    synonyms: synonyms.length > 0 ? synonyms : ['?'],
+    antonyms: antonyms.length > 0 ? antonyms : ['?'],
+  };
+});
 
   const entryData = {
     word,
@@ -237,8 +239,10 @@ function displayEntries(entries) {
         </div>
 
         <div class="entry-margin-top">
-          <button onclick="editEntry('${entry.key}')">Витема</button>
+          <!-- <button onclick="editEntry('${entry.key}')">Витема</button> -->
+          <button onclick="alert('Функциясь таго-зярс лоткавтозь.')" style="cursor: pointer;">Витема</button>
           <!-- <button onclick="deleteEntry('${entry.key}')">Нардамо</button> -->
+          <button onclick="alert('Функциясь таго-зярс лоткавтозь.')" style="cursor: pointer;">Нардамо</button>
         </div>
       </div>
     `;
