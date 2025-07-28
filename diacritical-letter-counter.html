@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diacritical Letter Counter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      color: #333;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 1em;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 150px;
+      font-size: 18px;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1.5px solid #ccc;
+      resize: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+      transition: border-color 0.3s;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    textarea:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 20px;
+      color: #34495e;
+      max-width: 600px;
+      width: 100%;
+      background: #ecf0f1;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #totalChars {
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 20px;
+      color: #34495e;
+      max-width: 600px;
+      width: 100%;
+      background: #ecf0f1;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #breakdown {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #555;
+      max-width: 600px;
+      width: 100%;
+      background: #fff;
+      border-radius: 6px;
+      padding: 12px 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      max-height: 150px;
+      overflow-y: auto;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Diacritical Letter Counter</h1>
+  <textarea id="inputText" placeholder="Type or paste your text here..."></textarea>
+
+  <div id="totalChars">Total characters: 0</div>
+  <div id="result">Diacritical letters count: 0</div>
+  <pre id="breakdown"></pre>
+
+  <script>
+    const textarea = document.getElementById('inputText');
+    const result = document.getElementById('result');
+    const breakdown = document.getElementById('breakdown');
+
+    function countDiacritical(text) {
+      const counts = {};
+      let total = 0;
+
+      for (const char of text) {
+        const code = char.charCodeAt(0);
+
+        if (code > 127 && /[A-Za-zÀ-ÿĀ-ž]/.test(char)) {
+          counts[char] = (counts[char] || 0) + 1;
+          total++;
+        }
+      }
+
+      return { total, counts };
+    }
+
+    function updateCounts() {
+  const text = textarea.value;
+  const { total, counts } = countDiacritical(text);
+
+  result.textContent = `Diacritical letters count: ${total}`;
+  document.getElementById('totalChars').textContent = `Total characters: ${text.length}`;
+
+  if (total === 0) {
+    breakdown.textContent = '';
+    return;
+  }
+
+      const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+
+      let breakdownText = 'Letter : Count\n-----------------\n';
+      for (const [char, count] of sorted) {
+        breakdownText += `   ${char}   :   ${count}\n`;
+      }
+
+      breakdown.textContent = breakdownText;
+    }
+
+    textarea.addEventListener('input', updateCounts);
+
+    updateCounts();
+  </script>
+
+</body>
+</html>
