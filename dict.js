@@ -165,11 +165,13 @@ entriesList.innerHTML = `
 
     displayEntries(entries);
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const searchValue = e.target.value.toLowerCase();
-      const filtered = entries.filter(ent => ent.word.toLowerCase().includes(searchValue));
-      displayEntries(filtered);
-    });
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  const filtered = entries
+    .filter(ent => ent.word.toLowerCase().includes(searchValue))
+    .sort((a, b) => a.word.localeCompare(b.word));
+  displayEntries(filtered);
+});
   });
 }
 
@@ -239,8 +241,7 @@ function displayEntries(entries) {
         </div>
 
         <div class="entry-margin-top">
-          <!-- <button onclick="editEntry('${entry.key}')">Витема</button> -->
-          <button onclick="alert('Функциясь таго-зярс лоткавтозь.')" style="cursor: pointer;">Витема</button>
+          <button onclick="editEntry('${entry.key}')">Витема</button>
           <!-- <button onclick="deleteEntry('${entry.key}')">Нардамо</button> -->
           <button onclick="alert('Функциясь таго-зярс лоткавтозь.')" style="cursor: pointer;">Нардамо</button>
         </div>

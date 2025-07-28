@@ -5,981 +5,981 @@
         "see": {
           "objects": {
             "me": "[Мон неян монь.]",
-            "you_sg": "Мон [тонь] не*тян*.",
+            "you_sg": "Мон [тонь] ней*тян*.",
             "him_her_it": "Мон [сонзэ] ней*са*.",
             "us": "[Мон неян минек.]",
-            "you_pl": "[Мон [тынк] не*тядызь*.]",
-            "them": "Мон [сынст] не*сынь*."
+            "you_pl": "Мон [тынк] ней*тядызь*.",
+            "them": "Мон [сынст] ней*сынь*."
           }
         },
         "see_neg": {
           "objects": {
-            "me": 110,
-            "you_sg": 111,
-            "him_her_it": 112,
-            "us": 113,
-            "you_pl": 114,
-            "them": 115
+            "me": "[Мон а неян монь.]",
+            "you_sg": "Мон [тонь] а ней*тян*.",
+            "him_her_it": "Мон [сонзэ] а ней*са*.",
+            "us": "[Мон а неян минек.]",
+            "you_pl": "Мон [тынк] а ней*тядызь*.",
+            "them": "Мон [сынст] а ней*сынь*."
           }
         },
         "saw": {
           "objects": {
-            "me": 120,
-            "you_sg": 121,
-            "him_her_it": 122,
-            "us": 123,
-            "you_pl": 124,
-            "them": 125
+            "me": "[Мон неинь монь.]",
+            "you_sg": "Мон [тонь] неи*тинь*.",
+            "him_her_it": "Мон [сонзэ] неи*я*.",
+            "us": "[Мон неинь минек.]",
+            "you_pl": "Мон [тынк] неи*дизь*.",
+            "them": "Мон [сынст] неи*я*."
           }
         },
         "saw_neg": {
           "objects": {
-            "me": 130,
-            "you_sg": 131,
-            "him_her_it": 132,
-            "us": 133,
-            "you_pl": 134,
-            "them": 135
+            "me": "[Мон эзинь нее монь.]",
+            "you_sg": "Мон [тонь] эзи*тинь* нее.",
+            "him_her_it": "Мон [сонзэ] эзи*я* нее.",
+            "us": "[Мон эзинь нее минек.]",
+            "you_pl": "Мон [тынк] эзи*дизь* нее.",
+            "them": "Мон [сынст] эзи*я* нее."
           }
         },
         "saw_long": {
           "objects": {
-            "me": 140,
-            "you_sg": 141,
-            "him_her_it": 142,
-            "us": 143,
-            "you_pl": 144,
-            "them": 145
+            "me": "[Мон неилинь монь.]",
+            "you_sg": "Мон [тонь] неили*тинь*.",
+            "him_her_it": "Мон [сонзэ] неили*я*.",
+            "us": "[Мон неилинь минек.]",
+            "you_pl": "Мон [тынк] неили*дизь*.",
+            "them": "Мон сынст неилинь."
           }
         },
         "saw_long_neg": {
           "objects": {
-            "me": 150,
-            "you_sg": 151,
-            "him_her_it": 152,
-            "us": 153,
-            "you_pl": 154,
-            "them": 155
+            "me": "[Мон а неилинь монь.]",
+            "you_sg": "Мон [тонь] а неили*тинь*.",
+            "him_her_it": "Мон [сонзэ] а неили*я*.",
+            "us": "[Мон а неилинь минек.]",
+            "you_pl": "Мон [тынк] а неили*дизь*.",
+            "them": "Мон сынст а неилинь."
           }
         },
         "will_see": {
           "objects": {
-            "me": 160,
-            "you_sg": 161,
-            "him_her_it": 162,
-            "us": 163,
-            "you_pl": 164,
-            "them": 165
+            "me": "[Мон неян монь. Мон карман нееме монь.]",
+            "you_sg": "Мон [тонь] ней*тян*. Мон карман нееме тонь.",
+            "him_her_it": "Мон [сонзэ] ней*са*. Мон карман нееме сонзэ.",
+            "us": "[Мон неян минек. Мон карман нееме минек.]",
+            "you_pl": "Мон [тынк] ней*тядызь*. Мон карман нееме тынк.",
+            "them": "Мон [сынст] ней*сынь*. Мон карман нееме сынст."
           }
         },
         "will_see_neg": {
           "objects": {
-            "me": 170,
-            "you_sg": 171,
-            "him_her_it": 172,
-            "us": 173,
-            "you_pl": 174,
-            "them": 175
+            "me": "[Мон а неян монь. Мон а карман нееме монь.]",
+            "you_sg": "Мон [тонь] а ней*тян*. Мон а карман нееме тонь.",
+            "him_her_it": "Мон [сонзэ] а ней*са*. Мон а карман нееме сонзэ.",
+            "us": "[Мон а неян минек. Мон а карман нееме минек.]",
+            "you_pl": "Мон [тынк] а ней*тядызь*. Мон а карман нееме тынк.",
+            "them": "Мон [сынст] а ней*сынь*. Мон а карман нееме сынст."
           }
         },
         "would_see": {
           "objects": {
-            "me": 180,
-            "you_sg": 181,
-            "him_her_it": 182,
-            "us": 183,
-            "you_pl": 184,
-            "them": 185
+            "me": "[Мон неевлинь монь.]",
+            "you_sg": "Мон [тонь] неевли*тинь*.",
+            "him_her_it": "Мон [сонзэ] неевли*я*.",
+            "us": "[Мон неевлинь минек.]",
+            "you_pl": "Мон [тынк] неевли*дизь*.",
+            "them": "Мон [сынст] неевли*я*."
           }
         },
         "would_see_neg": {
           "objects": {
-            "me": 190,
-            "you_sg": 191,
-            "him_her_it": 192,
-            "us": 193,
-            "you_pl": 194,
-            "them": 195
+            "me": "[Мон а неевлинь монь.]",
+            "you_sg": "Мон [тонь] а неевли*тинь*.",
+            "him_her_it": "Мон [сонзэ] а неевли*я*.",
+            "us": "[Мон а неевлинь минек.]",
+            "you_pl": "Мон [тынк] а неевли*дизь*.",
+            "them": "Мон [сынст] а неевли*я*."
           }
         },
         "wanted_see": {
           "objects": {
-            "me": 200,
-            "you_sg": 201,
-            "him_her_it": 202,
-            "us": 203,
-            "you_pl": 204,
-            "them": 205
+            "me": "[Мон неиксэлинь монь.]",
+            "you_sg": "Мон [тонь] неиксэли*тинь*.",
+            "him_her_it": "Мон [сонзэ] неиксэли*я*.",
+            "us": "[Мон неиксэлинь минек.]",
+            "you_pl": "Мон [тынк] неиксэли*дизь*.",
+            "them": "Мон [сынст] неиксэлинь."
           }
         },
         "wanted_see_neg": {
           "objects": {
-            "me": 210,
-            "you_sg": 211,
-            "him_her_it": 212,
-            "us": 213,
-            "you_pl": 214,
-            "them": 215
+            "me": "[Мон а неиксэлинь монь.]",
+            "you_sg": "Мон [тонь] а неиксэли*тинь*.",
+            "him_her_it": "Мон [сонзэ] а неиксэли*я*.",
+            "us": "[Мон а неиксэлинь минек.]",
+            "you_pl": "Мон [тынк] а неиксэли*дизь*.",
+            "them": "Мон [сынст] а неиксэлинь."
           }
         },
         "optativus": {
           "objects": {
-            "me": 220,
-            "you_sg": 221,
-            "him_her_it": 222,
-            "us": 223,
-            "you_pl": 224,
-            "them": 225
+            "me": "[Мон неезан монь.]",
+            "you_sg": "Мон [тонь] нее*здан*.",
+            "him_her_it": "Мон [сонзэ] нее*сса*.",
+            "us": "[Мон неезан минек.]",
+            "you_pl": "Мон неезан тынк.",
+            "them": "Мон неезан сынст."
           }
         },
         "optativus_neg": {
           "objects": {
-            "me": 230,
-            "you_sg": 231,
-            "him_her_it": 232,
-            "us": 233,
-            "you_pl": 234,
-            "them": 235
+            "me": "[Мон илязан нее монь.]",
+            "you_sg": "Мон [тонь] иля*здан* нее.",
+            "him_her_it": "Мон [сонзэ] иля*сса* нее.",
+            "us": "[Мон а неезан минек.]",
+            "you_pl": "Мон а неезан тынк.",
+            "them": "Мон а неезан сынст."
           }
         },
         "conditionatis": {
           "objects": {
-            "me": 240,
-            "you_sg": 241,
-            "him_her_it": 242,
-            "us": 243,
-            "you_pl": 244,
-            "them": 245
+            "me": "[Мон неиньдерян монь.]",
+            "you_sg": "Мон [тонь] неиньдеря*тан*.",
+            "him_her_it": "Мон [сонзэ] неиньдеря*са*.",
+            "us": "[Мон неиньдерян минек.]",
+            "you_pl": "Мон [тынк] неиньдеря*тадызь*.",
+            "them": "Мон [сынст] неиньдеря*сынь*."
           }
         },
         "conditionatis_neg": {
           "objects": {
-            "me": 250,
-            "you_sg": 251,
-            "him_her_it": 252,
-            "us": 253,
-            "you_pl": 254,
-            "them": 255
+            "me": "[Мон а неиньдерян монь.]",
+            "you_sg": "Мон [тонь] а неиньдеря*тан*.",
+            "him_her_it": "Мон [сонзэ] а неиньдеря*са*.",
+            "us": "[Мон а неиньдерян минек.]",
+            "you_pl": "Мон [тынк] а неиньдеря*тадызь*.",
+            "them": "Мон [сынст] а неиньдеря*сынь*."
           }
         }
       }
     },
-        "you_sg": {
+    "you_sg": {
       "verb_forms": {
         "see": {
           "objects": {
-            "me": "test",
-            "you_sg": "test",
-            "him_her_it": "test",
-            "us": 103,
-            "you_pl": 104,
-            "them": 105
+            "me": "Тон [монь] ней*самак*.",
+            "you_sg": "[Тон неят тонь.]",
+            "him_her_it": "Тон [сонзэ] ней*сак*.",
+            "us": "Тон [минек] ней*самизь*.",
+            "you_pl": "[Тон неят тынк.]",
+            "them": "Тон [сынст] ней*сыть*."
           }
         },
         "see_neg": {
           "objects": {
-            "me": 110,
-            "you_sg": 111,
-            "him_her_it": 112,
-            "us": 113,
-            "you_pl": 114,
-            "them": 115
+            "me": "Тон [монь] а ней*самак*.",
+            "you_sg": "[Тон а неят тонь.]",
+            "him_her_it": "Тон [сонзэ] а ней*сак*.",
+            "us": "Тон [минек] а ней*самизь*.",
+            "you_pl": "[Тон а неят тынк.]",
+            "them": "Тон [сынст] а ней*сыть*."
           }
         },
         "saw": {
           "objects": {
-            "me": 120,
-            "you_sg": 121,
-            "him_her_it": 122,
-            "us": 123,
-            "you_pl": 124,
-            "them": 125
+            "me": "Тон [монь] неи*мик*.",
+            "you_sg": "[Тон неить тонь.]",
+            "him_her_it": "Тон [сонзэ] неи*к*.",
+            "us": "Тон [минек] неи*мизь*.",
+            "you_pl": "[Тон неить тынк.]",
+            "them": "Тон неить сынст."
           }
         },
         "saw_neg": {
           "objects": {
-            "me": 130,
-            "you_sg": 131,
-            "him_her_it": 132,
-            "us": 133,
-            "you_pl": 134,
-            "them": 135
+            "me": "Тон [монь] эзи*мик* нее.",
+            "you_sg": "[Тон эзить нее тонь.]",
+            "him_her_it": "Тон [сонзэ] эзи*к* нее.",
+            "us": "Тон [минек] эзи*мизь* нее.",
+            "you_pl": "[Тон эзить нее тынк.]",
+            "them": "Тон сынст эзить нее."
           }
         },
         "saw_long": {
           "objects": {
-            "me": 140,
-            "you_sg": 141,
-            "him_her_it": 142,
-            "us": 143,
-            "you_pl": 144,
-            "them": 145
+            "me": "Тон [монь] неили*мик*.",
+            "you_sg": "[Тон неилить тонь.]",
+            "him_her_it": "Тон [сонзэ] неили*к*.",
+            "us": "Тон [минек] неили*мизь*.",
+            "you_pl": "[Тон неилить тынк.]",
+            "them": "Тон неилить сынст."
           }
         },
         "saw_long_neg": {
           "objects": {
-            "me": 150,
-            "you_sg": 151,
-            "him_her_it": 152,
-            "us": 153,
-            "you_pl": 154,
-            "them": 155
+            "me": "Тон [монь] а неили*мик*.",
+            "you_sg": "[Тон а неилить тонь.]",
+            "him_her_it": "Тон [сонзэ] а неили*к*.",
+            "us": "Тон [минек] а неили*мизь*.",
+            "you_pl": "[Тон а неилить тынк.]",
+            "them": "Тон а неилить сынст."
           }
         },
         "will_see": {
           "objects": {
-            "me": 160,
-            "you_sg": 161,
-            "him_her_it": 162,
-            "us": 163,
-            "you_pl": 164,
-            "them": 165
+            "me": "Тон [монь] ней*самак*. Тон кармат нееме монь.",
+            "you_sg": "[Тон неят тонь. Тон кармат нееме тонь.]",
+            "him_her_it": "Тон [сонзэ] ней*сак*. Тон кармат нееме сонзэ.",
+            "us": "Тон [минек] ней*самизь*. Тон кармат нееме минек.",
+            "you_pl": "[Тон неят тынк. Тон кармат нееме тынк.]",
+            "them": "Тон [сынст] ней*сыть*. Тон кармат нееме сынст."
           }
         },
         "will_see_neg": {
           "objects": {
-            "me": 170,
-            "you_sg": 171,
-            "him_her_it": 172,
-            "us": 173,
-            "you_pl": 174,
-            "them": 175
+            "me": "Тон [монь] а ней*самак*. Тон а кармат нееме монь.",
+            "you_sg": "[Тон а неят тонь. Тон а кармат нееме тонь.]",
+            "him_her_it": "Тон [сонзэ] а ней*сак*. Тон а кармат нееме сонзэ.",
+            "us": "Тон [минек] а ней*самизь*. Тон а кармат нееме минек.",
+            "you_pl": "[Тон а неят тынк. Тон а кармат нееме тынк.]",
+            "them": "Тон [сынст] а ней*сыть*. Тон а кармат нееме сынст."
           }
         },
         "would_see": {
           "objects": {
-            "me": 180,
-            "you_sg": 181,
-            "him_her_it": 182,
-            "us": 183,
-            "you_pl": 184,
-            "them": 185
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see_neg": {
           "objects": {
-            "me": 190,
-            "you_sg": 191,
-            "him_her_it": 192,
-            "us": 193,
-            "you_pl": 194,
-            "them": 195
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see": {
           "objects": {
-            "me": 200,
-            "you_sg": 201,
-            "him_her_it": 202,
-            "us": 203,
-            "you_pl": 204,
-            "them": 205
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see_neg": {
           "objects": {
-            "me": 210,
-            "you_sg": 211,
-            "him_her_it": 212,
-            "us": 213,
-            "you_pl": 214,
-            "them": 215
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus": {
           "objects": {
-            "me": 220,
-            "you_sg": 221,
-            "him_her_it": 222,
-            "us": 223,
-            "you_pl": 224,
-            "them": 225
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus_neg": {
           "objects": {
-            "me": 230,
-            "you_sg": 231,
-            "him_her_it": 232,
-            "us": 233,
-            "you_pl": 234,
-            "them": 235
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis": {
           "objects": {
-            "me": 240,
-            "you_sg": 241,
-            "him_her_it": 242,
-            "us": 243,
-            "you_pl": 244,
-            "them": 245
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis_neg": {
           "objects": {
-            "me": 250,
-            "you_sg": 251,
-            "him_her_it": 252,
-            "us": 253,
-            "you_pl": 254,
-            "them": 255
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         }
       }
     },
-        "he_she_it": {
+    "he_she_it": {
       "verb_forms": {
         "see": {
           "objects": {
-            "me": "test",
-            "you_sg": "test",
-            "him_her_it": "test",
-            "us": 103,
-            "you_pl": 104,
-            "them": 105
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "see_neg": {
           "objects": {
-            "me": 110,
-            "you_sg": 111,
-            "him_her_it": 112,
-            "us": 113,
-            "you_pl": 114,
-            "them": 115
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw": {
           "objects": {
-            "me": 120,
-            "you_sg": 121,
-            "him_her_it": 122,
-            "us": 123,
-            "you_pl": 124,
-            "them": 125
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_neg": {
           "objects": {
-            "me": 130,
-            "you_sg": 131,
-            "him_her_it": 132,
-            "us": 133,
-            "you_pl": 134,
-            "them": 135
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long": {
           "objects": {
-            "me": 140,
-            "you_sg": 141,
-            "him_her_it": 142,
-            "us": 143,
-            "you_pl": 144,
-            "them": 145
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long_neg": {
           "objects": {
-            "me": 150,
-            "you_sg": 151,
-            "him_her_it": 152,
-            "us": 153,
-            "you_pl": 154,
-            "them": 155
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see": {
           "objects": {
-            "me": 160,
-            "you_sg": 161,
-            "him_her_it": 162,
-            "us": 163,
-            "you_pl": 164,
-            "them": 165
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see_neg": {
           "objects": {
-            "me": 170,
-            "you_sg": 171,
-            "him_her_it": 172,
-            "us": 173,
-            "you_pl": 174,
-            "them": 175
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see": {
           "objects": {
-            "me": 180,
-            "you_sg": 181,
-            "him_her_it": 182,
-            "us": 183,
-            "you_pl": 184,
-            "them": 185
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see_neg": {
           "objects": {
-            "me": 190,
-            "you_sg": 191,
-            "him_her_it": 192,
-            "us": 193,
-            "you_pl": 194,
-            "them": 195
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see": {
           "objects": {
-            "me": 200,
-            "you_sg": 201,
-            "him_her_it": 202,
-            "us": 203,
-            "you_pl": 204,
-            "them": 205
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see_neg": {
           "objects": {
-            "me": 210,
-            "you_sg": 211,
-            "him_her_it": 212,
-            "us": 213,
-            "you_pl": 214,
-            "them": 215
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus": {
           "objects": {
-            "me": 220,
-            "you_sg": 221,
-            "him_her_it": 222,
-            "us": 223,
-            "you_pl": 224,
-            "them": 225
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus_neg": {
           "objects": {
-            "me": 230,
-            "you_sg": 231,
-            "him_her_it": 232,
-            "us": 233,
-            "you_pl": 234,
-            "them": 235
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis": {
           "objects": {
-            "me": 240,
-            "you_sg": 241,
-            "him_her_it": 242,
-            "us": 243,
-            "you_pl": 244,
-            "them": 245
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis_neg": {
           "objects": {
-            "me": 250,
-            "you_sg": 251,
-            "him_her_it": 252,
-            "us": 253,
-            "you_pl": 254,
-            "them": 255
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         }
       }
     },
-        "we": {
+    "we": {
       "verb_forms": {
         "see": {
           "objects": {
-            "me": "test",
-            "you_sg": "test",
-            "him_her_it": "test",
-            "us": 103,
-            "you_pl": 104,
-            "them": 105
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "see_neg": {
           "objects": {
-            "me": 110,
-            "you_sg": 111,
-            "him_her_it": 112,
-            "us": 113,
-            "you_pl": 114,
-            "them": 115
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw": {
           "objects": {
-            "me": 120,
-            "you_sg": 121,
-            "him_her_it": 122,
-            "us": 123,
-            "you_pl": 124,
-            "them": 125
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_neg": {
           "objects": {
-            "me": 130,
-            "you_sg": 131,
-            "him_her_it": 132,
-            "us": 133,
-            "you_pl": 134,
-            "them": 135
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long": {
           "objects": {
-            "me": 140,
-            "you_sg": 141,
-            "him_her_it": 142,
-            "us": 143,
-            "you_pl": 144,
-            "them": 145
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long_neg": {
           "objects": {
-            "me": 150,
-            "you_sg": 151,
-            "him_her_it": 152,
-            "us": 153,
-            "you_pl": 154,
-            "them": 155
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see": {
           "objects": {
-            "me": 160,
-            "you_sg": 161,
-            "him_her_it": 162,
-            "us": 163,
-            "you_pl": 164,
-            "them": 165
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see_neg": {
           "objects": {
-            "me": 170,
-            "you_sg": 171,
-            "him_her_it": 172,
-            "us": 173,
-            "you_pl": 174,
-            "them": 175
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see": {
           "objects": {
-            "me": 180,
-            "you_sg": 181,
-            "him_her_it": 182,
-            "us": 183,
-            "you_pl": 184,
-            "them": 185
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see_neg": {
           "objects": {
-            "me": 190,
-            "you_sg": 191,
-            "him_her_it": 192,
-            "us": 193,
-            "you_pl": 194,
-            "them": 195
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see": {
           "objects": {
-            "me": 200,
-            "you_sg": 201,
-            "him_her_it": 202,
-            "us": 203,
-            "you_pl": 204,
-            "them": 205
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see_neg": {
           "objects": {
-            "me": 210,
-            "you_sg": 211,
-            "him_her_it": 212,
-            "us": 213,
-            "you_pl": 214,
-            "them": 215
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus": {
           "objects": {
-            "me": 220,
-            "you_sg": 221,
-            "him_her_it": 222,
-            "us": 223,
-            "you_pl": 224,
-            "them": 225
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus_neg": {
           "objects": {
-            "me": 230,
-            "you_sg": 231,
-            "him_her_it": 232,
-            "us": 233,
-            "you_pl": 234,
-            "them": 235
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis": {
           "objects": {
-            "me": 240,
-            "you_sg": 241,
-            "him_her_it": 242,
-            "us": 243,
-            "you_pl": 244,
-            "them": 245
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis_neg": {
           "objects": {
-            "me": 250,
-            "you_sg": 251,
-            "him_her_it": 252,
-            "us": 253,
-            "you_pl": 254,
-            "them": 255
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         }
       }
     },
-            "you_pl": {
+    "you_pl": {
       "verb_forms": {
         "see": {
           "objects": {
-            "me": "test",
-            "you_sg": "test",
-            "him_her_it": "test",
-            "us": 103,
-            "you_pl": 104,
-            "them": 105
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "see_neg": {
           "objects": {
-            "me": 110,
-            "you_sg": 111,
-            "him_her_it": 112,
-            "us": 113,
-            "you_pl": 114,
-            "them": 115
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw": {
           "objects": {
-            "me": 120,
-            "you_sg": 121,
-            "him_her_it": 122,
-            "us": 123,
-            "you_pl": 124,
-            "them": 125
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_neg": {
           "objects": {
-            "me": 130,
-            "you_sg": 131,
-            "him_her_it": 132,
-            "us": 133,
-            "you_pl": 134,
-            "them": 135
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long": {
           "objects": {
-            "me": 140,
-            "you_sg": 141,
-            "him_her_it": 142,
-            "us": 143,
-            "you_pl": 144,
-            "them": 145
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long_neg": {
           "objects": {
-            "me": 150,
-            "you_sg": 151,
-            "him_her_it": 152,
-            "us": 153,
-            "you_pl": 154,
-            "them": 155
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see": {
           "objects": {
-            "me": 160,
-            "you_sg": 161,
-            "him_her_it": 162,
-            "us": 163,
-            "you_pl": 164,
-            "them": 165
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see_neg": {
           "objects": {
-            "me": 170,
-            "you_sg": 171,
-            "him_her_it": 172,
-            "us": 173,
-            "you_pl": 174,
-            "them": 175
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see": {
           "objects": {
-            "me": 180,
-            "you_sg": 181,
-            "him_her_it": 182,
-            "us": 183,
-            "you_pl": 184,
-            "them": 185
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see_neg": {
           "objects": {
-            "me": 190,
-            "you_sg": 191,
-            "him_her_it": 192,
-            "us": 193,
-            "you_pl": 194,
-            "them": 195
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see": {
           "objects": {
-            "me": 200,
-            "you_sg": 201,
-            "him_her_it": 202,
-            "us": 203,
-            "you_pl": 204,
-            "them": 205
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see_neg": {
           "objects": {
-            "me": 210,
-            "you_sg": 211,
-            "him_her_it": 212,
-            "us": 213,
-            "you_pl": 214,
-            "them": 215
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus": {
           "objects": {
-            "me": 220,
-            "you_sg": 221,
-            "him_her_it": 222,
-            "us": 223,
-            "you_pl": 224,
-            "them": 225
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus_neg": {
           "objects": {
-            "me": 230,
-            "you_sg": 231,
-            "him_her_it": 232,
-            "us": 233,
-            "you_pl": 234,
-            "them": 235
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis": {
           "objects": {
-            "me": 240,
-            "you_sg": 241,
-            "him_her_it": 242,
-            "us": 243,
-            "you_pl": 244,
-            "them": 245
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis_neg": {
           "objects": {
-            "me": 250,
-            "you_sg": 251,
-            "him_her_it": 252,
-            "us": 253,
-            "you_pl": 254,
-            "them": 255
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         }
       }
     },
-            "they": {
+    "they": {
       "verb_forms": {
         "see": {
           "objects": {
-            "me": "test",
-            "you_sg": "test",
-            "him_her_it": "test",
-            "us": 103,
-            "you_pl": 104,
-            "them": 105
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "see_neg": {
           "objects": {
-            "me": 110,
-            "you_sg": 111,
-            "him_her_it": 112,
-            "us": 113,
-            "you_pl": 114,
-            "them": 115
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw": {
           "objects": {
-            "me": 120,
-            "you_sg": 121,
-            "him_her_it": 122,
-            "us": 123,
-            "you_pl": 124,
-            "them": 125
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_neg": {
           "objects": {
-            "me": 130,
-            "you_sg": 131,
-            "him_her_it": 132,
-            "us": 133,
-            "you_pl": 134,
-            "them": 135
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long": {
           "objects": {
-            "me": 140,
-            "you_sg": 141,
-            "him_her_it": 142,
-            "us": 143,
-            "you_pl": 144,
-            "them": 145
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "saw_long_neg": {
           "objects": {
-            "me": 150,
-            "you_sg": 151,
-            "him_her_it": 152,
-            "us": 153,
-            "you_pl": 154,
-            "them": 155
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see": {
           "objects": {
-            "me": 160,
-            "you_sg": 161,
-            "him_her_it": 162,
-            "us": 163,
-            "you_pl": 164,
-            "them": 165
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "will_see_neg": {
           "objects": {
-            "me": 170,
-            "you_sg": 171,
-            "him_her_it": 172,
-            "us": 173,
-            "you_pl": 174,
-            "them": 175
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see": {
           "objects": {
-            "me": 180,
-            "you_sg": 181,
-            "him_her_it": 182,
-            "us": 183,
-            "you_pl": 184,
-            "them": 185
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "would_see_neg": {
           "objects": {
-            "me": 190,
-            "you_sg": 191,
-            "him_her_it": 192,
-            "us": 193,
-            "you_pl": 194,
-            "them": 195
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see": {
           "objects": {
-            "me": 200,
-            "you_sg": 201,
-            "him_her_it": 202,
-            "us": 203,
-            "you_pl": 204,
-            "them": 205
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "wanted_see_neg": {
           "objects": {
-            "me": 210,
-            "you_sg": 211,
-            "him_her_it": 212,
-            "us": 213,
-            "you_pl": 214,
-            "them": 215
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus": {
           "objects": {
-            "me": 220,
-            "you_sg": 221,
-            "him_her_it": 222,
-            "us": 223,
-            "you_pl": 224,
-            "them": 225
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "optativus_neg": {
           "objects": {
-            "me": 230,
-            "you_sg": 231,
-            "him_her_it": 232,
-            "us": 233,
-            "you_pl": 234,
-            "them": 235
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis": {
           "objects": {
-            "me": 240,
-            "you_sg": 241,
-            "him_her_it": 242,
-            "us": 243,
-            "you_pl": 244,
-            "them": 245
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         },
         "conditionatis_neg": {
           "objects": {
-            "me": 250,
-            "you_sg": 251,
-            "him_her_it": 252,
-            "us": 253,
-            "you_pl": 254,
-            "them": 255
+            "me": "",
+            "you_sg": "",
+            "him_her_it": "",
+            "us": "",
+            "you_pl": "",
+            "them": ""
           }
         }
       }

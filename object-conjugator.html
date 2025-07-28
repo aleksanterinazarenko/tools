@@ -5,19 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Erzya Object Conjugation Tool</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
   body {
-    font-family: Arial, sans-serif;
+    font-family: "Open Sans", sans-serif;
     margin: 2rem;
     background: #f9f9f9;
   }
+  #title {
+    font-size: 1.9rem;
+  }
   label {
+    font-family: "Open Sans", sans-serif;
     display: block;
     margin-top: 1rem;
     font-weight: bold;
+    font-size: 1rem;
   }
   select {
+    font-family: "Open Sans", sans-serif;
     padding: 0.3rem;
     font-size: 1rem;
+    margin-top: 5px;
     width: 100%;
     max-width: 300px;
   }
@@ -26,7 +35,7 @@
     padding: 1rem;
     background: #e0f7fa;
     border-radius: 6px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     min-height: 40px;
   }
@@ -34,9 +43,16 @@
 </head>
 <body>
 
-<h1>Erzya Object Conjugation Tool</h1>
+<h1 id="title">Erzya Object Conjugation Tool</h1>
 
-<label for="subjectMenu">Subject Pronoun</label>
+<label for="langMenu" id="langLabel">Language</label>
+<select id="langMenu">
+  <option value="en">english</option>
+  <option value="fi">suomi</option>
+  <option value="ru">русский</option>
+</select>
+
+<label for="subjectMenu" id="subjectLabel">Subject Pronoun</label>
 <select id="subjectMenu">
   <option value="I">I</option>
   <option value="you_sg">you (see.)</option>
@@ -46,7 +62,7 @@
   <option value="they">they</option>
 </select>
 
-<label for="verbMenu">Verb Form</label>
+<label for="verbMenu" id="verbLabel">Verb Form</label>
 <select id="verbMenu">
   <option value="see">see(s)</option>
   <option value="see_neg">do(es)n't see</option>
@@ -66,7 +82,7 @@
   <option value="conditionatis_neg">conditionatis (negative)</option>
 </select>
 
-<label for="objectMenu">Object Pronoun</label>
+<label for="objectMenu" id="objectLabel">Object Pronoun</label>
 <select id="objectMenu">
   <option value="me">me</option>
   <option value="you_sg">you (see.)</option>
@@ -79,10 +95,377 @@
 <div id="result">Select options to see conjugation.</div>
 
 <script>
+const translations = {
+  en: {
+    title: "Erzya Object Conjugation Tool",
+    langLabel: "Language",
+    subjectLabel: "Subject Pronoun",
+    verbLabel: "Verb Form",
+    objectLabel: "Object Pronoun",
+    resultDefault: "Select options to see conjugation.",
+  },
+  fi: {
+    title: "Ersä-verbin objektitaivutin",
+    langLabel: "Kieli",
+    subjectLabel: "Subjekti pronomini",
+    verbLabel: "Verbimuoto",
+    objectLabel: "Objekti pronomini",
+    resultDefault: "Valitse vaihtoehdot nähdäksesi taivutuksen.",   
+  },
+  ru: {
+    title: "Инструмент для эрзянского спряжения по объекту",
+    langLabel: "Язык",
+    subjectLabel: "Местоимение субъекта",
+    verbLabel: "Форма глагола",
+    objectLabel: "Местоимение объекта",
+    resultDefault: "Выберите параметры для отображения спряжения.",
+  }
+};
+
+const optionLabels = {
+    langMenu: {
+    en:       { en: "english",        fi: "englanti",      ru: "английский" },
+    fi:  { en: "finnish", fi: "suomi",     ru: "финский" },
+    ru: { en: "russian", fi: "venäjä", ru: "русский" }
+  },
+  subjectMenu: {
+    I:       { en: "I",        fi: "minä",      ru: "я" },
+    you_sg:  { en: "you (sg.)", fi: "sinä",     ru: "ты" },
+    he_she_it: { en: "he, she, it", fi: "hän, se", ru: "он, она, оно" },
+    we:      { en: "we",        fi: "me",        ru: "мы" },
+    you_pl:  { en: "you (pl.)", fi: "te",        ru: "вы" },
+    they:    { en: "they",      fi: "he, ne",    ru: "они" }
+  },
+  verbMenu: {
+    see:               { en: "see(s)",              fi: "näkee",                   ru: "видит" },
+    see_neg:           { en: "doesn't see",         fi: "ei näe",                  ru: "не видит" },
+    saw:               { en: "saw",                 fi: "näki",                    ru: "видел" },
+    saw_neg:           { en: "didn't see",          fi: "ei nähnyt",               ru: "не видел" },
+    saw_long:          { en: "saw (long ago)",      fi: "näki (kauan sitten)",     ru: "видел (давно)" },
+    saw_long_neg:      { en: "didn't see (long ago)", fi: "ei nähnyt (kauan sitten)", ru: "не видел (давно)" },
+    will_see:          { en: "will see",            fi: "tulee näkemään",   ru: "увидит" },
+    will_see_neg:      { en: "won't see",           fi: "ei tule näkemään",        ru: "не увидит" },
+    would_see:         { en: "would see",           fi: "näkisi",                  ru: "увидел бы" },
+    would_see_neg:     { en: "wouldn't see",        fi: "ei näkisi",               ru: "не увидел бы" },
+    wanted_see:        { en: "wanted to see",       fi: "halusi nähdä",            ru: "хотел увидеть" },
+    wanted_see_neg:    { en: "didn't want to see",  fi: "ei halunnut nähdä",       ru: "не хотел увидеть" },
+    optativus:         { en: "optativus (let XY)",  fi: "optatiivi (nähköön)",  ru: "оптатив (пусть увидит)" },
+    optativus_neg:     { en: "optativus (negative)", fi: "optatiivi (älköön nähkö)", ru: "оптатив (пусть не увидит)" },
+    conditionatis:     { en: "conditionatis (if XY)", fi: "konditionaali (jos näkisi)", ru: "условное (если бы увидел)" },
+    conditionatis_neg: { en: "conditionatis (negative)", fi: "konditionaali (jos ei näkisi)", ru: "условное (если бы не увидел)" }
+  },
+  objectMenu: {
+    me:        { en: "me",         fi: "minut",         ru: "меня" },
+    you_sg:    { en: "you (sg.)",  fi: "sinut",         ru: "тебя" },
+    him_her_it:{ en: "him, her, it", fi: "hänet, sen", ru: "его, её, это" },
+    us:        { en: "us",         fi: "meidät",        ru: "нас" },
+    you_pl:    { en: "you (pl.)",  fi: "teidät",        ru: "вас" },
+    them:      { en: "them",       fi: "heidät, ne",    ru: "их" }
+  }
+};
+
+const conjugations = {
+  fi: {
+    see: {
+      I: "näen",
+      you_sg: "näet",
+      he_she_it: "näkee",
+      we: "näemme",
+      you_pl: "näette",
+      they: "näkevät"
+    },
+    see_neg: {
+      I: "en näe",
+      you_sg: "et näe",
+      he_she_it: "ei näe",
+      we: "emme näe",
+      you_pl: "ette näe",
+      they: "eivät näe"
+    },
+    saw: {
+      I: "näin",
+      you_sg: "nait",
+      he_she_it: "näki",
+      we: "näimme",
+      you_pl: "näitte",
+      they: "näkivät"
+    },
+    saw_neg: {
+  I: "en nähnyt",
+  you_sg: "et nähnyt",
+  he_she_it: "ei nähnyt",
+  we: "emme nähneet",
+  you_pl: "ette nähneet",
+  they: "eivät nähneet"
+},
+will_see: {
+  I: "tulen näkemään",
+  you_sg: "tulet näkemään",
+  he_she_it: "tulee näkemään",
+  we: "tulemme näkemään",
+  you_pl: "tulette näkemään",
+  they: "tulevat näkemään"
+},
+will_see_neg: {
+  I: "en tule näkemään",
+  you_sg: "et tule näkemään",
+  he_she_it: "ei tule näkemään",
+  we: "emme tule näkemään",
+  you_pl: "ette tule näkemään",
+  they: "eivät tule näkemään"
+},
+    would_see: {
+      I: "näkisin",
+      you_sg: "näkisit",
+      he_she_it: "näkisi",
+      we: "näkisimme",
+      you_pl: "näkisitte",
+      they: "näkisivät"
+    },
+    would_see_neg: {
+  I: "en näkisi",
+  you_sg: "et näkisi",
+  he_she_it: "ei näkisi",
+  we: "emme näkisi",
+  you_pl: "ette näkisi",
+  they: "eivät näkisi"
+},
+wanted_see: {
+  I: "halusin nähdä",
+  you_sg: "halusit nähdä",
+  he_she_it: "halusi nähdä",
+  we: "halusimme nähdä",
+  you_pl: "halusitte nähdä",
+  they: "halusivat nähdä"
+},
+wanted_see_neg: {
+  I: "en halunnut nähdä",
+  you_sg: "et halunnut nähdä",
+  he_she_it: "ei halunnut nähdä",
+  we: "emme halunneet nähdä",
+  you_pl: "ette halunneet nähdä",
+  they: "eivät halunneet nähdä"
+},
+optativus: {
+  I: "nähköön",
+  you_sg: "nähköön",
+  he_she_it: "nähköön",
+  we: "nähköön",
+  you_pl: "nähköön",
+  they: "nähkööt"
+},
+optativus_neg: {
+  I: "älköön nähkö",
+  you_sg: "älköön nähkö",
+  he_she_it: "älköön nähkö",
+  we: "älköön nähkö",
+  you_pl: "älköön nähkö",
+  they: "älkööt nähkö"
+},
+conditionatis: {
+  I: "jos näkisin",
+  you_sg: "jos näkisit",
+  he_she_it: "jos näkisi",
+  we: "jos näkisimme",
+  you_pl: "jos näkisitte",
+  they: "jos näkisivät"
+},
+conditionatis_neg: {
+  I: "jos en näkisi",
+  you_sg: "jos et näkisi",
+  he_she_it: "jos ei näkisi",
+  we: "jos emme näkisi",
+  you_pl: "jos ette näkisi",
+  they: "jos eivät näkisi"
+}
+  },
+  ru: {
+    see: {
+      I: "вижу",
+      you_sg: "видишь",
+      he_she_it: "видит",
+      we: "видим",
+      you_pl: "видите",
+      they: "видят"
+    },
+    see_neg: {
+  I: "не вижу",
+  you_sg: "не видишь",
+  he_she_it: "не видит",
+  we: "не видим",
+  you_pl: "не видите",
+  they: "не видят"
+},
+    saw: {
+      I: "видел(а)",
+      you_sg: "видел(а)",
+      he_she_it: "видел(а)",
+      we: "видели",
+      you_pl: "видели",
+      they: "видели"
+    },
+    saw_neg: {
+  I: "не видел(а)",
+  you_sg: "не видел(а)",
+  he_she_it: "не видел(а)",
+  we: "не видели",
+  you_pl: "не видели",
+  they: "не видели"
+},
+  will_see: {
+  I: "увижу",
+  you_sg: "увидишь",
+  he_she_it: "увидит",
+  we: "увидим",
+  you_pl: "увидите",
+  they: "увидят"
+},
+will_see_neg: {
+  I: "не увижу",
+  you_sg: "не увидишь",
+  he_she_it: "не увидит",
+  we: "не увидим",
+  you_pl: "не увидите",
+  they: "не увидят"
+},
+would_see: {
+  I: "увидел(а) бы",
+  you_sg: "увидел(а) бы",
+  he_she_it: "увидел(а) бы",
+  we: "увидели бы",
+  you_pl: "увидели бы",
+  they: "увидели бы"
+},
+would_see_neg: {
+  I: "не увидел(а) бы",
+  you_sg: "не увидел(а) бы",
+  he_she_it: "не увидел(а) бы",
+  we: "не увидели бы",
+  you_pl: "не увидели бы",
+  they: "не увидели бы"
+},
+wanted_see: {
+  I: "хотел(а) увидеть",
+  you_sg: "хотел(а) увидеть",
+  he_she_it: "хотел(а) увидеть",
+  we: "хотели увидеть",
+  you_pl: "хотели увидеть",
+  they: "хотели увидеть"
+},
+wanted_see_neg: {
+  I: "не хотел(а) увидеть",
+  you_sg: "не хотел(а) увидеть",
+  he_she_it: "не хотел(а) увидеть",
+  we: "не хотели увидеть",
+  you_pl: "не хотели увидеть",
+  they: "не хотели увидеть"
+},
+optativus: {
+  I: "пусть увижу",
+  you_sg: "пусть увидишь",
+  he_she_it: "пусть увидит",
+  we: "пусть увидим",
+  you_pl: "пусть увидите",
+  they: "пусть увидят"
+},
+optativus_neg: {
+  I: "пусть не увижу",
+  you_sg: "пусть не увидишь",
+  he_she_it: "пусть не увидит",
+  we: "пусть не увидим",
+  you_pl: "пусть не увидите",
+  they: "пусть не увидят"
+},
+conditionatis: {
+  I: "если бы увидел(а)",
+  you_sg: "если бы увидел(а)",
+  he_she_it: "если бы увидел(а)",
+  we: "если бы увидели",
+  you_pl: "если бы увидели",
+  they: "если бы увидели"
+},
+conditionatis_neg: {
+  I: "если бы не увидел(а)",
+  you_sg: "если бы не увидел(а)",
+  he_she_it: "если бы не увидел(а)",
+  we: "если бы не увидели",
+  you_pl: "если бы не увидели",
+  they: "если бы не увидели"
+}
+    }
+};
+
+function updateDropdownLabels(lang) {
+  for (const menuId in optionLabels) {
+    const select = document.getElementById(menuId);
+    for (const option of select.options) {
+      const val = option.value;
+      const label = optionLabels[menuId][val]?.[lang];
+      if (label) {
+        option.textContent = label;
+      }
+    }
+  }
+}
+
+const langMenu = document.getElementById('langMenu');
+const title = document.getElementById('title');
+const langLabel = document.getElementById('langLabel');
+const subjectLabel = document.getElementById('subjectLabel');
+const verbLabel = document.getElementById('verbLabel');
+const objectLabel = document.getElementById('objectLabel');
+const result = document.getElementById('result');
+
+function setLanguage(lang) {
+  const t = translations[lang] || translations.en;
+  title.textContent = t.title;
+  langLabel.textContent = t.langLabel;
+  subjectLabel.textContent = t.subjectLabel;
+  verbLabel.textContent = t.verbLabel;
+  objectLabel.textContent = t.objectLabel;
+
+  if (result.innerText === translations.en.resultDefault ||
+      result.innerText === translations.fi?.resultDefault ||
+      result.innerText === translations.ru?.resultDefault) {
+    result.textContent = t.resultDefault;
+  }
+}
+
+langMenu.addEventListener('change', () => {
+  const lang = langMenu.value;
+  setLanguage(lang);
+  updateDropdownLabels(lang);
+});
+
+function updateDropdownLabels(lang) {
+  const subject = subjectMenu.value;
+
+  for (const menuId in optionLabels) {
+    const select = document.getElementById(menuId);
+    for (const option of select.options) {
+      const val = option.value;
+
+      if (menuId === "verbMenu") {
+        const labelBase = optionLabels[menuId][val]?.[lang] || val;
+
+        if (lang === "fi" && conjugations.fi?.[val]?.[subject]) {
+          option.textContent = conjugations.fi[val][subject];
+        } else if (lang === "ru" && conjugations.ru?.[val]?.[subject]) {
+          option.textContent = conjugations.ru[val][subject];
+        } else {
+          option.textContent = labelBase;
+        }
+      } else {
+        const label = optionLabels[menuId][val]?.[lang];
+        if (label) option.textContent = label;
+      }
+    }
+  }
+}
+
 const subjectMenu = document.getElementById('subjectMenu');
 const verbMenu = document.getElementById('verbMenu');
 const objectMenu = document.getElementById('objectMenu');
-const result = document.getElementById('result');
 
 let data;
 
@@ -91,6 +474,7 @@ function updateResult() {
     result.textContent = "Loading data...";
     return;
   }
+
   const subj = subjectMenu.value;
   const verb = verbMenu.value;
   const obj = objectMenu.value;
@@ -98,9 +482,9 @@ function updateResult() {
   const conjugation = data.subjects?.[subj]?.verb_forms?.[verb]?.objects?.[obj];
 
   function formatRedStars(text) {
-  if (typeof text !== "string") return text ?? "";
-  return text.replace(/\*(.*?)\*/g, '<span style="color:red">$1</span>');
-}
+    if (typeof text !== "string") return text ?? "";
+    return text.replace(/\*(.*?)\*/g, '<span style="color:red">$1</span>');
+  }
 
   if (conjugation !== undefined) {
     result.innerHTML = formatRedStars(conjugation);
@@ -120,11 +504,14 @@ fetch('object-conjugator.json')
     console.error("Error loading JSON:", err);
   });
 
-subjectMenu.addEventListener('change', updateResult);
+subjectMenu.addEventListener('change', () => {
+  updateDropdownLabels(langMenu.value);
+  updateResult();
+});
 verbMenu.addEventListener('change', updateResult);
 objectMenu.addEventListener('change', updateResult);
 
-  updateResult();
+setLanguage('en');
 </script>
 </body>
 </html>
