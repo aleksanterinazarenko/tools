@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Detection in Text</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #textInput {
+            width: 90%;
+            max-width: 800px;
+            height: 200px;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .output {
+            width: 90%;
+            max-width: 800px;
+            height: 200px;
+            font-size: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            min-height: 40px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .latin {
+            background-color: yellow;
+            padding: 2px;
+            margin: 1px;
+        }
+
+        .cyrillic {
+            background-color: turquoise;
+            padding: 2px;
+            margin: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Detecting Latin and Cyrillic Alphabets in Text</h2>
+
+    <label for="textInput">Enter text:</label>
+    <textarea id="textInput" oninput="detectAlphabet()"></textarea>
+
+    <div id="output" class="output"></div>
+</div>
+
+<script>
+    function detectAlphabet() {
+        const input = document.getElementById('textInput').value;
+        const output = document.getElementById('output');
+        output.innerHTML = '';
+
+        for (let char of input) {
+            const span = document.createElement('span');
+            span.textContent = char;
+
+            if (/[A-Za-z]/.test(char)) {
+                span.classList.add('latin');
+            } else if (/[\u0400-\u04FF]/.test(char)) {
+                span.classList.add('cyrillic');
+            }
+
+            output.appendChild(span);
+        }
+    }
+</script>
+
+</body>
+</html>
