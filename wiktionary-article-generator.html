@@ -625,8 +625,8 @@ const derivedTermsRaw = document.getElementById('derived_terms').value.trim();
 if (derivedTermsRaw) {
   const terms = derivedTermsRaw.split(',').map(t => t.trim()).filter(Boolean);
   if (terms.length > 0) {
-    const derivedList = terms.map(t => `{{l|myv|${t}}}`).join(', ');
-    output += `\n\n====Derived terms====\n* ${derivedList}`;
+    const derivedList = terms.map(t => `|${t}\n`).join('');
+    output += `\n\n====Derived terms====\n{{col|myv|\n${derivedList}}}`;
   }
 }
 
