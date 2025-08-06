@@ -61,7 +61,7 @@ select:focus {
 }
 
 button {
-  padding: 10px 18px;
+  padding: 8px 12px;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   cursor: pointer;
@@ -390,7 +390,9 @@ history.replaceState(null, '', `tickets.html?supervisor=${supName}`);
       div.classList.add('answered');
     } else {
       div.classList.add('no-response');
-      data.status = "ODOTTAA TARKASTUSTA";
+      if (data.status !== "LUETTU") {
+  data.status = "ODOTTAA TARKASTUSTA";
+}
     }
 
     const questionsHtml = `
