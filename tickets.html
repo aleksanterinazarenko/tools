@@ -407,7 +407,7 @@ history.replaceState(null, '', `tickets.html?supervisor=${supName}`);
         minute: '2-digit'
       });
       const deleteBtn = index > 0 
-        ? `<span style="cursor:pointer; color:#dc3545; margin-left:8px;" title="Poista vastaus" onclick="deleteAnswer('${id}', ${index})">❌</span>`
+        ? `<span style="cursor:pointer; margin-left:8px;" title="Poista vastaus" onclick="deleteAnswer('${id}', ${index})">🗑</span>`
         : '';
       return `<p><strong>${formattedDate}:</strong> ${q.text}${deleteBtn}</p>`;
     }).join('')}
