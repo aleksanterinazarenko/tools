@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarkastusjärjestelmä</title>
+  <title>Tikettijärjestelmä</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 
@@ -219,7 +219,7 @@ textarea {
 
 <div id="appDiv" style="display:none;">
 
-<h2>Tarkastusjärjestelmä</h2>
+<h2>Tikettijärjestelmä</h2>
 
 <div>
   <select id="supervisor">
@@ -257,7 +257,7 @@ textarea {
   <option value="Sari Makkonen">Sari Makkonen</option>
   <option value="Tarja Penttinen">Tarja Penttinen</option>
 </select>
-<button onclick="loadTickets()" style="margin-top: 6px;">Lataa</button>
+<button onclick="window.loadTicketsTriggeredByUser = true; loadTickets();">Lataa</button>
 
 <div id="ticketContainer"></div>
 
