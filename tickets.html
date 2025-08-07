@@ -111,6 +111,10 @@ button:hover {
   margin-top: 24px;
 }
 
+#filterSupervisor {
+  margin-bottom: 16px;
+}
+
 .ticket p { 
   margin-bottom: 16px;
 }
@@ -221,19 +225,23 @@ textarea {
 
 <h2>Tikettijärjestelmä</h2>
 
-<div>
+<div style="margin-bottom: 12px;">
+  <h3>Uusi tarkastuspyyntö</h3> <span id="toggleLink" style="color:#007bff; cursor:pointer;">[Näytä]</span>
+</div>
+
+<div id="formContainer" style="display: none;">
   <select id="supervisor">
-  <option value="">Valitse vastuuhenkilö</option>
-  <option value="Jari Ruokonen">Jari Ruokonen</option>
-  <option value="Juuso Aimonen">Juuso Aimonen</option>
-  <option value="Harri Kauppinen">Harri Kauppinen</option>
-  <option value="Harri Pyöriä">Harri Pyöriä</option>
-  <option value="Mika Kekkonen">Mika Kekkonen</option>
-  <option value="Nico Westermark">Nico Westermark</option>
-  <option value="Paula Salo">Paula Salo</option>
-  <option value="Samuli Järvinen">Samuli Järvinen</option>
-  <option value="Sari Makkonen">Sari Makkonen</option>
-  <option value="Tarja Penttinen">Tarja Penttinen</option>
+    <option value="">Valitse vastuuhenkilö</option>
+    <option value="Jari Ruokonen">Jari Ruokonen</option>
+    <option value="Juuso Aimonen">Juuso Aimonen</option>
+    <option value="Harri Kauppinen">Harri Kauppinen</option>
+    <option value="Harri Pyöriä">Harri Pyöriä</option>
+    <option value="Mika Kekkonen">Mika Kekkonen</option>
+    <option value="Nico Westermark">Nico Westermark</option>
+    <option value="Paula Salo">Paula Salo</option>
+    <option value="Samuli Järvinen">Samuli Järvinen</option>
+    <option value="Sari Makkonen">Sari Makkonen</option>
+    <option value="Tarja Penttinen">Tarja Penttinen</option>
   </select><br>
   <input type="text" id="invoiceNumber" placeholder="Laskun tunnus"><br>
   <textarea id="questionText" placeholder="Pyynnön teksti..."></textarea><br>
@@ -521,6 +529,15 @@ window.onload = () => {
     alert("Pyyntö poistettu.");
     loadTickets();
   };
+
+  const toggleLink = document.getElementById("toggleLink");
+const formContainer = document.getElementById("formContainer");
+
+toggleLink.addEventListener("click", () => {
+  const isVisible = formContainer.style.display === "block";
+  formContainer.style.display = isVisible ? "none" : "block";
+  toggleLink.textContent = isVisible ? "[Näytä]" : "[Piilota]";
+});
 </script>
 
 </div>
