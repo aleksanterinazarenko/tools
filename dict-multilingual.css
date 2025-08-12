@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+                font-family: "Libertinus Serif", serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding-top: 10%;
+                background-color: #f5f5f5;
+                color: #333;
+                line-height: 1.6;
+            }
+            h1 {
+                text-align: center;
+                font-size: 28px;
+                margin-bottom: 30px;
+                color: #444;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 10px;
+            }
+            h1 a {
+    text-decoration: none;
+    color: #444;
+  }
+            .controls {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            select,
+            input,
+            button {
+                font-family: "Open Sans", sans-serif;
+                padding: 8px 12px;
+                font-size: 15px;
+                border: 1px solid #aaa;
+                border-radius: 4px;
+                background-color: white;
+            }
+            select {
+                min-width: 120px;
+            }
+            input {
+                flex-grow: 1;
+                min-width: 200px;
+            }
+            button {
+                cursor: pointer;
+                background-color: #e7e7e7;
+            }
+            button:hover {
+                background-color: #ddd;
+            }
+            .suggestions {
+                border: 1px solid #ddd;
+                max-height: 300px;
+                overflow-y: auto;
+                margin-bottom: 20px;
+                background-color: white;
+                display: none;
+            }
+            .suggestion-item {
+                padding: 8px 12px;
+                cursor: pointer;
+                border-bottom: 1px solid #eee;
+            }
+            .suggestion-item:hover {
+                background-color: #f0f0f0;
+            }
+            .entry {
+                font-size: 17px;
+                background-color: white;
+                padding: 30px;
+                margin-top: 30px;
+                border: 1px solid #ddd;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .entry:empty {
+                display: none;
+            }
+            .entry-word {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                margin-right: 5px;
+                color: #222;
+            }
+            .entry-pos {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 5px;
+}
+            .entry-transcription {
+                font-style: italic;
+                margin-bottom: 15px;
+                color: #555;
+            }
+            .slash {
+    font-style: normal;
+}
+            .entry button {
+                margin-top: 15px;
+            }
+            .translations {
+                margin-left: 20px;
+            }
+            .translation {
+                margin-bottom: 15px;
+            }
+            .translation-meaning {
+                flex: 1;
+                margin-bottom: 0;
+                min-width: 300px;
+            }
+            .translation-meaning-container {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 15px;
+            }
+            .examples {
+                margin-left: 20px;
+                margin-top: 20px;
+            }
+            .examples:empty {
+                display: none;
+            }
+            .example {
+                margin-bottom: 5px;
+            }
+            .edit-form {
+                display: none;
+                background-color: white;
+                padding: 20px;
+                border: 1px solid #ddd;
+                margin-top: 20px;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            .translation-group {
+                border: 1px solid #eee;
+                padding: 20px;
+                margin-bottom: 10px;
+                position: relative;
+            }
+
+            .example-group input {
+                flex: 1;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .example-group {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .add-btn,
+            .remove-btn {
+                margin-top: 5px;
+            }
+            .add-example-btn {
+                margin-right: 8px;
+                margin-left: 10px;
+            }
+            .add-example-btn-container {
+                margin-top: 10px;
+            }
+
+            .remove-btn {
+                background: none;
+                border: none;
+                color: #999;
+                font-size: 16px;
+                padding: 0;
+                margin: 0;
+                cursor: pointer;
+            }
+
+            .remove-btn:hover {
+                color: #666;
+                background: none;
+            }
+            .form-actions {
+                display: flex;
+                justify-content: right;
+                gap: 10px;
+                margin-top: 20px;
+                text-align: right;
+            }
+            .nothing-found {
+                text-align: center;
+                padding: 20px;
+                font-style: italic;
+                color: #777;
+            }
+            .suggestions {
+                border: 1px solid #ddd;
+                border-radius: 0 0 4px 4px;
+                max-height: 300px;
+                overflow-y: auto;
+                margin-top: -1px;
+                background-color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                display: none;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                z-index: 100;
+            }
+
+            .suggestion-item {
+                padding: 10px 15px;
+                cursor: pointer;
+                border-bottom: 1px solid #eee;
+                transition: background-color 0.2s;
+            }
+
+            .suggestion-item:hover,
+            .suggestion-item.highlighted {
+                background-color: #f5f5f5;
+            }
+
+            .suggestion-item:last-child {
+                border-bottom: none;
+            }
+
+            .search-container {
+                position: relative;
+                flex-grow: 1;
+            }
+
+            #searchInput {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .sources {
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px solid #eee;
+            }
+
+            .source-group {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 15px;
+                padding: 10px;
+                border: 1px solid #eee;
+                border-radius: 4px;
+                background-color: #f9f9f9;
+            }
+
+            .sources h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+                color: #444;
+            }
+
+            .sources ul {
+                margin-left: 20px;
+                list-style-type: square;
+            }
+
+            .sources li {
+                margin-bottom: 5px;
+            }
+
+            footer {
+    margin: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+}
+
+footer a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 5% 3%;
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    select, input, button {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+
+    .entry {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .entry-word {
+        font-size: 20px;
+    }
+
+    .translation-group {
+        padding: 15px;
+    }
+
+    .translation-meaning {
+        min-width: 100%;
+    }
+
+    .example-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .example-group input {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .edit-form {
+        padding: 15px;
+    }
+
+    .form-actions {
+        justify-content: center;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .suggestions {
+        width: calc(100% - 2px);
+        left: 0;
+    }
+
+    .translation-meaning-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .add-example-btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    footer {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+}
