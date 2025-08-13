@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-family: "Libertinus Serif", serif;
   max-width: 800px;
   margin: 0 auto;
-  padding-top: 5%;
+  padding-top: 10%;
   background-color: #f5f5f5;
   color: #333;
   line-height: 1.6;
@@ -308,16 +312,12 @@ footer {
   border-top: 1px solid #eee;
   text-align: center;
   font-size: 1rem;
-  color: #666;
+  color: #333;
 }
 
 footer a {
   color: #0066cc;
   text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
 }
 
 .footer-content {
@@ -465,5 +465,4 @@ footer a:hover {
   footer {
     font-size: 0.9rem;
   }
-
 }
