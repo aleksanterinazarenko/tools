@@ -423,11 +423,11 @@ footer a:hover {
     align-items: flex-start;
   }
 
-  .remove-translation-btn {
-    position: absolute !important;
-    top: 27px;
-  right: 30px;
-  }
+.remove-translation-btn {
+  position: absolute !important;
+  top: 1.7rem;
+  right: 2rem;
+}
 
   .add-example-btn {
     margin-left: 0;
@@ -439,3 +439,4 @@ footer a:hover {
     padding: 0.5rem;
   }
 }
+
