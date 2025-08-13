@@ -380,7 +380,7 @@ footer a:hover {
     flex-grow: 1;
     min-width: 0;
     margin-top: 5px;
-  margin-bottom: 5px;
+    margin-bottom: 5px;
   }
 
   .remove-btn {
@@ -394,6 +394,10 @@ footer a:hover {
     flex-grow: 1;
     min-width: 0;
     width: 100%;
+  }
+
+  .sources ul {
+    margin-left: 0;
   }
 
   .examples {
@@ -423,11 +427,11 @@ footer a:hover {
     align-items: flex-start;
   }
 
-.remove-translation-btn {
-  position: absolute !important;
-  top: 1.7rem;
-  right: 2rem;
-}
+  .remove-translation-btn {
+    position: absolute !important;
+    top: 1.7rem;
+    right: 2rem;
+  }
 
   .add-example-btn {
     margin-left: 0;
@@ -439,4 +443,3 @@ footer a:hover {
     padding: 0.5rem;
   }
 }
-
