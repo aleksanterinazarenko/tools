@@ -142,7 +142,7 @@ button:hover {
 
 .examples {
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .examples:empty {
@@ -328,7 +328,7 @@ footer a:hover {
 
 @media (max-width: 768px) {
   body {
-    padding: 5% 3%;
+    padding: 0% 5%;
     font-size: 16px;
   }
 
@@ -338,10 +338,33 @@ footer a:hover {
     padding-bottom: 8px;
   }
 
-  .controls {
-    flex-direction: column;
-    gap: 8px;
-  }
+#fromLang, #toLang {
+  display: inline-block;
+  width: calc(50% - 4px);
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+#fromLang {
+  margin-right: 5px;
+}
+
+#toLang {
+  margin-right: 0;
+  float: right;
+}
+
+.search-container,
+#searchBtn,
+#addNewBtn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.controls {
+  display: block;
+}
 
   select,
   input,
@@ -440,6 +463,5 @@ footer a:hover {
 
   footer {
     font-size: 0.9rem;
-    padding: 0.5rem;
   }
 }
