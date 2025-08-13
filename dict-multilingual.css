@@ -91,7 +91,6 @@ body {
     margin-bottom: 5px;
 }
             .entry-transcription {
-                font-style: italic;
                 margin-bottom: 15px;
                 color: #555;
             }
@@ -385,3 +384,4 @@ footer a:hover {
     }
 
 }
+
