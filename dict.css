@@ -1,361 +1,441 @@
-@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400..700;1,400..700&display=swap');
-
-@font-face {
-    font-family: 'CMU Sans Serif';
-    src: url('CMU Sans Serif.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 body {
-    font-family: "Brygada 1918", serif;
-    background: #fff;
-    padding: 30px;
-    color: #333;
-  }
-
-  .container {
-    max-width: 850px;
-    margin: auto;
-    padding: 60px;
-  }
-
-  h1 {
-    font-size: 32px;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-
-  h1 a {
-    text-decoration: none;
-    color: #333;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 20px;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 17px;
-    font-family: "Brygada 1918", serif;
-    border: 1px solid #333;
-    border-radius: 6px;
-    background: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  textarea {
-  resize: none;
+  font-family: "Libertinus Serif", serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 10%;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
 }
 
-  input:focus, textarea:focus, select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
-    background: #fff;
-  }
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #444;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
 
-  .definition, .examples {
-    min-height: 100px;
-    resize: none;
-  }
+h1 a {
+  text-decoration: none;
+  color: #444;
+}
 
-  #source {
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 20px;
-  min-height: 100px;
 }
 
-  button {
-    font-family: "Brygada 1918", serif;
-    font-size: 17px;
-    padding: 10px 15px;
-    background: none;
-    color: #333;
-    border: 1px solid #333;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    align-self: flex-start;
-  }
+select,
+input,
+button {
+  font-family: "Open Sans", sans-serif;
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background-color: white;
+}
 
-  .entry-margin-top button {
-    margin-right: 10px;
-  }
-  .entry-margin-top button:last-child {
-    margin-right: 0;
-  }
+select {
+  min-width: 120px;
+}
 
-  .hidden {
-    display: none;
-  }
+input {
+  flex-grow: 1;
+  min-width: 200px;
+}
 
-  .meaning-group {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 6px;
-    border: 1px solid #333;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
+button {
+  cursor: pointer;
+  background-color: #e7e7e7;
+}
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 30px;
-  }
+button:hover {
+  background-color: #ddd;
+}
 
-  li {
-    border: 1px solid #333;
-    padding: 24px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    background: #fff;
-  }
+.suggestions {
+  border: 1px solid #ddd;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  background-color: white;
+  display: none;
+}
 
-  .entry-header {
-    cursor: pointer;
-    font-weight: 700;
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    font-size: 17px;
-  }
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
 
-  .part-of-speech {
-    font-style: italic;
-    font-weight: normal;
-    text-transform: lowercase;
-    color: #28a745;
-    font-size: 17px;
-  }
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
 
-  .entry-article {
-  margin-top: 10px;
+.entry {
   font-size: 17px;
+  background-color: white;
+  padding: 30px;
+  margin-top: 30px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.pronunciation {
-  font-family: "CMU Sans Serif", sans-serif;
-  font-weight: normal;
+.entry:empty {
+  display: none;
+}
+
+.entry-word {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #222;
+}
+
+.entry-pos {
+  font-style: italic;
   color: #666;
-  font-size: 17px;
+  margin-bottom: 5px;
 }
 
-  .entry-definition {
-    margin: 20px 0;
-    line-height: 1.6;
-    font-size: 17px;
-  }
-
-  .entry-examples {
-    margin: 10px;
-    font-size: 17px;
-    color: grey;
-  }
-  
-    .entry-etymology {
-        margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 17px;
-  }
-
-  .etymology-text {
-  color: gray;
+.entry-transcription {
+  margin-bottom: 15px;
+  color: #555;
 }
 
-  .entry-sources {
-    margin-top: 10px;
-    font-size: 17px;
-    color: gray;
-  }
+.slash {
+  font-style: normal;
+}
 
-  .entry-margin-top {
+.entry button {
+  margin-top: 15px;
+}
+
+.translations {
+  margin-left: 20px;
+}
+
+.translation {
+  margin-bottom: 15px;
+}
+
+.translation-meaning {
+  flex: 1;
+  margin-bottom: 0;
+  min-width: 300px;
+}
+
+.translation-meaning-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.examples {
+  margin-left: 20px;
   margin-top: 20px;
 }
 
-  .entry-sources li {
-    border: none;
-    padding: 4px 0;
-  }
+.examples:empty {
+  display: none;
+}
 
-  .entry-translations {
-    margin-top: 10px;
-  }
+.example {
+  margin-bottom: 5px;
+}
 
-  .entry-translations li {
-    border: none;
-    margin-top: 20px;
-    margin-left: 20px;
-    padding: 0;
-  }
+.edit-form {
+  display: none;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
 
-  #searchInput {
-    margin-bottom: 24px;
-    width: 100%;
-    font-size: 17px;
-  }
+.form-group {
+  margin-bottom: 15px;
+}
 
-  #toggleFormBtn {
-    margin-top: 10px;
-  }
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-  #addMeaningBtn {
-    margin-top: -20px;
-  }
+.translation-group {
+  border: 1px solid #eee;
+  padding: 20px;
+  margin-bottom: 10px;
+  position: relative;
+}
 
-  select {
-    width: 100%;
-    font-size: 17px;
-  }
+.example-group input {
+  flex: 1;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-  footer {
-    text-align: center;
-    align-items: center;
-    padding: 10px 0;
-    width: 100%;
-    margin-top: 30px;
-    font-size: 17px;
+.example-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.add-btn,
+.remove-btn {
+  margin-top: 5px;
+}
+
+.add-example-btn {
+  margin-right: 8px;
+  margin-left: 10px;
+}
+
+.add-example-btn-container {
+  margin-top: 10px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  color: #666;
+  background: none;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  margin-top: 20px;
+  text-align: right;
+}
+
+.suggestions {
+  border: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: -1px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 100;
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.suggestion-item:hover,
+.suggestion-item.highlighted {
+  background-color: #f5f5f5;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.search-container {
+  position: relative;
+  flex-grow: 1;
+}
+
+#searchInput {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sources {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.source-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.sources h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.sources ul {
+  margin-left: 20px;
+  list-style-type: square;
+}
+
+.sources li {
+  margin-bottom: 5px;
+}
+
+footer {
+  margin: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
 }
 
 footer a {
-  color: #333;
+  color: #0066cc;
   text-decoration: none;
 }
 
-.loading-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-style: italic;
-  font-size: 18px;
-  text-align: center;
+footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 @media (max-width: 768px) {
-  
   body {
-    padding: 20px;
-    font-size: 17px;
-    background: white;
-  }
-
-  .container {
-    padding: 0;
-    background: none;
+    padding: 5% 3%;
+    font-size: 16px;
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 20px;
+    padding-bottom: 8px;
   }
 
-  form {
-    gap: 16px;
-  }
-
-  input, select, textarea {
-    padding: 12px 14px;
-    font-size: 17px;
-  }
-
-  button {
-    padding: 10px 16px;
-    font-size: 17px;
-  }
-
-  .entry-header {
-    font-size: 17px;
+  .controls {
+    flex-direction: column;
     gap: 8px;
   }
 
-  .entry-definition {
-    font-size: 17px;
-    line-height: 1.4;
-    margin-bottom: 16px;
+  select,
+  input,
+  button {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 10px 12px;
   }
 
-  .entry-sources {
-    font-size: 17px;
+  .entry {
+    padding: 20px;
+    font-size: 16px;
   }
 
-  .entry-etymology {
-    font-size: 17px;
+  .entry-word {
+    font-size: 20px;
   }
 
-  .entry-examples em {
-    font-size: 17px;
+  .translation-group {
+    padding: 15px;
   }
 
-  .entry-sources li {
-    padding: 2px 0;
+  .translation-meaning {
+    min-width: 100%;
   }
 
-  .meaning-group {
-    padding: 16px;
+  .example-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
-  hr {
-    margin: 16px 0;
+  .example-group input {
+    flex-grow: 1;
+    min-width: 0;
+    margin: 0;
   }
 
-  input:focus, textarea:focus, select:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+  .remove-btn {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+    margin-top: 0;
   }
 
-  li {
-    padding: 16px;
+  .source-group input {
+    flex-grow: 1;
+    min-width: 0;
+    width: 100%;
   }
 
-  .entry-article {
-    margin-top: 8px;
+  .examples {
+    margin-left: 0 !important;
+    margin-top: 20px;
   }
 
-  .entry-margin-top {
-    margin-top: 16px;
+  .edit-form {
+    padding: 15px;
   }
 
-  .entry-etymology {
-    margin-top: 16px;
-    margin-bottom: 16px;
+  .form-actions {
+    justify-content: center;
   }
 
-  ul li {
-    padding: 12px;
-    font-size: 17px;
+  .search-container {
+    width: 100%;
   }
 
-  #searchInput {
-    margin-bottom: 20px;
+  .suggestions {
+    width: calc(100% - 2px);
+    left: 0;
   }
 
-  #toggleFormBtn {
-    margin-top: 8px;
+  .translation-meaning-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .entry-translations li {
-    margin-top: 18px;
+  .remove-translation-btn {
+    position: absolute;
+    top: 20%;
+    right: 30px;
+    transform: translateY(-50%);
   }
 
-  .part-of-speech {
-    font-size: 17px;
+  .add-example-btn {
+    margin-left: 0;
+    margin-top: 10px;
   }
 
-  .hidden {
-    display: none !important;
-  }
-
-  form {
-    gap: 12px;
+  footer {
+    font-size: 0.9rem;
+    padding: 0.5rem;
   }
 }
