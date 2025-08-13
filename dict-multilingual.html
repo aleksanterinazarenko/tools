@@ -1,86 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Open Dictionary of Uralic languages</title>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-        <link rel="stylesheet" href="dict-multilingual.css">
 
-    </head>
-    <body>
-        <h1><a href="dict-multilingual.html">Open Dictionary of Uralic languages</a></h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Dictionary of Uralic languages</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <link rel="stylesheet" href="dict-multilingual.css">
 
-        <div class="controls">
-            <select id="fromLang">
-    <option value="">From...</option>
-    <option value="erzya">Erzya</option>
-    <option value="estonian">Estonian</option>
-    <option value="finnish">Finnish</option>
-    <option value="hungarian">Hungarian</option>
-    <option value="ingrian">Ingrian</option>
-    <option value="karelian">Karelian</option>
-    <option value="komi">Komi</option>
-    <option value="livonian">Livonian</option>
-    <option value="mari">Mari</option>
-    <option value="moksha">Moksha</option>
-    <option value="sami">Northern Sami</option>
-    <option value="udmurt">Udmurt</option>
-    <option value="veps">Veps</option>
-    <option value="votic">Votic</option>
-    <option value="english">English</option>
-    <option value="german">German</option>
-    <option value="russian">Russian</option>
-</select>
+</head>
 
-<select id="toLang">
-    <option value="">To...</option>
-    <option value="erzya">Erzya</option>
-    <option value="estonian">Estonian</option>
-    <option value="finnish">Finnish</option>
-    <option value="hungarian">Hungarian</option>
-    <option value="ingrian">Ingrian</option>
-    <option value="karelian">Karelian</option>
-    <option value="komi">Komi</option>
-    <option value="livonian">Livonian</option>
-    <option value="mari">Mari</option>
-    <option value="moksha">Moksha</option>
-    <option value="sami">Northern Sami</option>
-    <option value="udmurt">Udmurt</option>
-    <option value="veps">Veps</option>
-    <option value="votic">Votic</option>
-    <option value="english">English</option>
-    <option value="german">German</option>
-    <option value="russian">Russian</option>
-</select>
-            <div class="search-container">
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search..."
-                    autocomplete="off"
-                />
-                <div class="suggestions" id="suggestions"></div>
-            </div>
-            <button id="searchBtn">Search</button>
-            <button id="addNewBtn">Add New</button>
-        </div>
+<body>
+  <h1><a href="dict-multilingual.html">Open Dictionary of Uralic languages</a></h1>
 
-        <div class="entry" id="entry"></div>
+  <div class="controls">
+    <select id="fromLang">
+      <option value="">From...</option>
+      <option value="erzya">Erzya</option>
+      <option value="estonian">Estonian</option>
+      <option value="finnish">Finnish</option>
+      <option value="hungarian">Hungarian</option>
+      <option value="ingrian">Ingrian</option>
+      <option value="karelian">Karelian</option>
+      <option value="komi">Komi</option>
+      <option value="livonian">Livonian</option>
+      <option value="mari">Mari</option>
+      <option value="moksha">Moksha</option>
+      <option value="sami">Northern Sami</option>
+      <option value="udmurt">Udmurt</option>
+      <option value="veps">Veps</option>
+      <option value="votic">Votic</option>
+      <option value="english">English</option>
+      <option value="german">German</option>
+      <option value="russian">Russian</option>
+    </select>
 
-        <div class="edit-form" id="editForm">
-            <div class="form-group">
-                <label for="editWord">Word</label>
-                <input type="text" id="editWord" required />
-            </div>
-            <div class="form-group">
-                <label for="editTranscription">Transcription</label>
-                <input type="text" id="editTranscription" />
-            </div>
-            <div class="form-group">
-    <label for="editPos">Part of Speech:</label>
-    <select id="editPos">
+    <select id="toLang">
+      <option value="">To...</option>
+      <option value="erzya">Erzya</option>
+      <option value="estonian">Estonian</option>
+      <option value="finnish">Finnish</option>
+      <option value="hungarian">Hungarian</option>
+      <option value="ingrian">Ingrian</option>
+      <option value="karelian">Karelian</option>
+      <option value="komi">Komi</option>
+      <option value="livonian">Livonian</option>
+      <option value="mari">Mari</option>
+      <option value="moksha">Moksha</option>
+      <option value="sami">Northern Sami</option>
+      <option value="udmurt">Udmurt</option>
+      <option value="veps">Veps</option>
+      <option value="votic">Votic</option>
+      <option value="english">English</option>
+      <option value="german">German</option>
+      <option value="russian">Russian</option>
+    </select>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+    <button id="searchBtn">Search</button>
+    <button id="addNewBtn">Add New</button>
+  </div>
+
+  <div class="entry" id="entry"></div>
+
+  <div class="edit-form" id="editForm">
+    <div class="form-group">
+      <label for="editWord">Word</label>
+      <input type="text" id="editWord" required />
+    </div>
+    <div class="form-group">
+      <label for="editTranscription">Transcription</label>
+      <input type="text" id="editTranscription" />
+    </div>
+    <div class="form-group">
+      <label for="editPos">Part of Speech:</label>
+      <select id="editPos">
         <option value="">Select...</option>
         <option value="noun">Noun</option>
         <option value="verb">Verb</option>
@@ -93,72 +90,57 @@
         <option value="numeral">Numeral</option>
         <option value="particle">Particle</option>
         <option value="determiner">Determiner</option>
-    </select>
-</div>
-            <div class="form-group">
-                <label>Translations</label>
-                <div id="translationGroups">
-                    <div class="translation-group">
-                        <input
-                            type="text"
-                            class="translation-meaning"
-                            placeholder="Translation"
-                        />
-                        <button class="add-example-btn">Add Example</button>
-                        <button class="remove-translation-btn remove-btn">
-                            Remove
-                        </button>
-                        <div class="examples">
-                            <div class="example-group">
-                                <input
-                                    type="text"
-                                    class="example-source"
-                                    placeholder="Source language example"
-                                />
-                                <input
-                                    type="text"
-                                    class="example-target"
-                                    placeholder="Target language example"
-                                />
-                                <button class="remove-example-btn remove-btn">
-                                    Remove
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="add-btn" id="addTranslationBtn">
-                    Add Translation
-                </button>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Translations</label>
+      <div id="translationGroups">
+        <div class="translation-group">
+          <input type="text" class="translation-meaning" placeholder="Translation" />
+          <button class="add-example-btn">Add Example</button>
+          <button class="remove-translation-btn remove-btn">
+            Remove
+          </button>
+          <div class="examples">
+            <div class="example-group">
+              <input type="text" class="example-source" placeholder="Source language example" />
+              <input type="text" class="example-target" placeholder="Target language example" />
+              <button class="remove-example-btn remove-btn">
+                Remove
+              </button>
             </div>
-            <div class="form-group">
-                <label>Sources</label>
-                <div id="sourceGroups">
-                    <div class="source-group">
-                        <input
-                            type="text"
-                            class="source-input"
-                            placeholder="Source reference"
-                        />
-                        <button class="remove-source-btn remove-btn">✖</button>
-                    </div>
-                </div>
-                <button class="add-btn" id="addSourceBtn">Add Source</button>
-            </div>
-            <div class="form-actions">
-                <button id="cancelEditBtn">Cancel</button>
-                <button id="saveEditBtn">Save</button>
-            </div>
+          </div>
         </div>
+      </div>
+      <button class="add-btn" id="addTranslationBtn">
+        Add Translation
+      </button>
+    </div>
+    <div class="form-group">
+      <label>Sources</label>
+      <div id="sourceGroups">
+        <div class="source-group">
+          <input type="text" class="source-input" placeholder="Source reference" />
+          <button class="remove-source-btn remove-btn">✖</button>
+        </div>
+      </div>
+      <button class="add-btn" id="addSourceBtn">Add Source</button>
+    </div>
+    <div class="form-actions">
+      <button id="cancelEditBtn">Cancel</button>
+      <button id="saveEditBtn">Save</button>
+    </div>
+  </div>
 
-        <footer>
-            <div class="footer-content">
-                <p>© 2025 Open Dictionary of Uralic languages</p>
-                <p>Contact: <a href="aleksanterinazarenko@outlook.com">aleksanterinazarenko@outlook.com</p>
-                <p><a href="about.html">About this project</a> | <a href="contribute.html">How to contribute</a></p>
-            </div>
-        </footer>
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Open Dictionary of Uralic languages</p>
+      <p>Contact: <a href="aleksanterinazarenko@outlook.com">aleksanterinazarenko@outlook.com</p>
+      <p><a href="about.html">About this project</a> | <a href="contribute.html">How to contribute</a></p>
+    </div>
+  </footer>
 
-        <script type="module" src="dict-multilingual.js"></script>
-    </body>
+  <script type="module" src="dict-multilingual.js"></script>
+</body>
+
 </html>
