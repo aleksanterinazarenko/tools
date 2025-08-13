@@ -80,11 +80,30 @@ function updateToLangOptions() {
         "german",
         "russian"
     ];
+    const languageLabels = {
+    erzya: "Erzya",
+    estonian: "Estonian",
+    finnish: "Finnish",
+    hungarian: "Hungarian",
+    ingrian: "Ingrian",
+    karelian: "Karelian",
+    komi: "Komi",
+    livonian: "Livonian",
+    mari: "Mari",
+    moksha: "Moksha",
+    sami: "Northern Sami",
+    udmurt: "Udmurt",
+    veps: "Veps",
+    votic: "Votic",
+    english: "English",
+    german: "German",
+    russian: "Russian"
+};
     languages.forEach((lang) => {
         if (lang !== fromLang) {
             const option = document.createElement("option");
             option.value = lang;
-            option.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+            option.textContent = languageLabels[lang];
             toLangSelect.appendChild(option);
         }
     });
@@ -168,7 +187,10 @@ function performSearch() {
         return;
     }
     
-    if (!query) return;
+    if (!query) {
+    alert("Please enter a word to search.");
+    return;
+}
 
     suggestionsDiv.style.display = "none";
 
@@ -480,7 +502,7 @@ function cancelEdit() {
 function saveEntry() {
     const word = editWord.value.trim();
     if (!word) {
-        alert("Word is required");
+        alert("Please enter a word.");
         return;
     }
 
