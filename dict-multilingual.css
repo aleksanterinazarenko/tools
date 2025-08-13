@@ -96,7 +96,7 @@ button:hover {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  margin-right: 5px;
+  margin-right: 8px;
   color: #222;
 }
 
@@ -130,7 +130,7 @@ button:hover {
 .translation-meaning {
   flex: 1;
   margin-bottom: 0;
-  min-width: 300px;
+  min-width: 200px;
 }
 
 .translation-meaning-container {
@@ -141,8 +141,7 @@ button:hover {
 }
 
 .examples {
-  margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .examples:empty {
@@ -173,9 +172,13 @@ button:hover {
 
 .translation-group {
   border: 1px solid #eee;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 10px;
   position: relative;
+}
+
+.translation-group:has(.examples .example-group) {
+  padding: 10px 10px 5px 10px;
 }
 
 .example-group input {
@@ -282,8 +285,6 @@ button:hover {
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #eee;
-  border-radius: 4px;
-  background-color: #f9f9f9;
 }
 
 .sources h3 {
@@ -384,7 +385,7 @@ footer a:hover {
   }
 
   .translation-group {
-    padding: 15px;
+    padding: 10px;
   }
 
   .translation-meaning {
@@ -424,7 +425,7 @@ footer a:hover {
 
   .examples {
     margin-left: 0 !important;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   .edit-form {
@@ -451,8 +452,8 @@ footer a:hover {
 
   .remove-translation-btn {
     position: absolute !important;
-    top: 1.7rem;
-    right: 2rem;
+    top: 1.3rem;
+    right: 1.6rem;
   }
 
   .add-example-btn {
