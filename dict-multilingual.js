@@ -120,10 +120,12 @@ function handleSearchInput() {
 
   const direction = `${currentFromLang}_${currentToLang}`;
   const ref = database.ref(`dictionary/${direction}`);
+  const SUGGESTION_LIMIT = 7;
 
   ref.orderByChild("word")
     .startAt(query)
     .endAt(query + "\uf8ff")
+    .limitToFirst(SUGGESTION_LIMIT)
     .once("value", (snapshot) => {
       currentSuggestions = [];
       snapshot.forEach((childSnapshot) => {
@@ -206,11 +208,11 @@ function performSearch() {
           const key = Object.keys(snapshot.val())[0];
           loadEntry(key);
         } else {
-          alert("No results found for that word.");
+          alert("No entries match your search.");
         }
       },
       (error) => {
-        alert("No results found for that word.");
+        alert("No entries match your search.");
       }
     );
 }
@@ -292,7 +294,7 @@ function displayEntry(entry) {
 
   let wordAndPos = `<span class="entry-word">${entry.word}</span>`;
   if (entry.pos) {
-    wordAndPos += ` <span class="entry-pos">${entry.pos}</span>`;
+    wordAndPos += `<span class="entry-pos">${entry.pos}</span>`;
   }
 
   let html = `

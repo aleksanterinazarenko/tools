@@ -130,7 +130,7 @@ button:hover {
 .translation-meaning {
   flex: 1;
   margin-bottom: 0;
-  min-width: 200px;
+  min-width: 250px;
 }
 
 .translation-meaning-container {
@@ -138,18 +138,6 @@ button:hover {
   align-items: center;
   gap: 8px;
   margin-bottom: 15px;
-}
-
-.examples {
-  margin-top: 20px;
-}
-
-.examples:empty {
-  display: none;
-}
-
-.example {
-  margin-bottom: 5px;
 }
 
 .edit-form {
@@ -172,19 +160,31 @@ button:hover {
 
 .translation-group {
   border: 1px solid #eee;
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 10px;
   position: relative;
 }
 
 .translation-group:has(.examples .example-group) {
-  padding: 10px 10px 5px 10px;
+  padding: 15px 15px 10px 15px;
+}
+
+.examples {
+  margin-top: 7.5px;
+}
+
+.examples:empty {
+  display: none;
+}
+
+.example {
+  margin-bottom: 5px;
 }
 
 .example-group input {
   flex: 1;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 7.5px;
+  margin-bottom: 7.5px;
 }
 
 .example-group {
@@ -283,7 +283,7 @@ button:hover {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #eee;
 }
 
@@ -338,33 +338,34 @@ footer a:hover {
     padding-bottom: 8px;
   }
 
-#fromLang, #toLang {
-  display: inline-block;
-  width: calc(50% - 4px);
-  box-sizing: border-box;
-  vertical-align: top;
-}
+  #fromLang,
+  #toLang {
+    display: inline-block;
+    width: calc(50% - 4px);
+    box-sizing: border-box;
+    vertical-align: top;
+  }
 
-#fromLang {
-  margin-right: 5px;
-}
+  #fromLang {
+    margin-right: 5px;
+  }
 
-#toLang {
-  margin-right: 0;
-  float: right;
-}
+  #toLang {
+    margin-right: 0;
+    float: right;
+  }
 
-.search-container,
-#searchBtn,
-#addNewBtn {
-  display: block;
-  width: 100%;
-  margin-top: 8px;
-}
+  .search-container,
+  #searchBtn,
+  #addNewBtn {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+  }
 
-.controls {
-  display: block;
-}
+  .controls {
+    display: block;
+  }
 
   select,
   input,
@@ -385,7 +386,7 @@ footer a:hover {
   }
 
   .translation-group {
-    padding: 10px;
+    padding: 15px;
   }
 
   .translation-meaning {
@@ -403,7 +404,7 @@ footer a:hover {
     flex-grow: 1;
     min-width: 0;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   .remove-btn {
@@ -425,7 +426,7 @@ footer a:hover {
 
   .examples {
     margin-left: 0 !important;
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
   .edit-form {
@@ -452,13 +453,13 @@ footer a:hover {
 
   .remove-translation-btn {
     position: absolute !important;
-    top: 1.3rem;
-    right: 1.6rem;
+    top: 1.6rem;
+    right: 1.9rem;
   }
 
   .add-example-btn {
     margin-left: 0;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   footer {
