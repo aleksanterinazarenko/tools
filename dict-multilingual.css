@@ -167,7 +167,7 @@ button:hover {
 .translation-group {
   border: 1px solid #eee;
   padding: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   position: relative;
 }
 
@@ -199,11 +199,6 @@ button:hover {
   gap: 10px;
   margin-bottom: 0;
   padding-bottom: 0;
-}
-
-.add-btn,
-.remove-btn {
-  margin-top: 5px;
 }
 
 .add-example-btn {
@@ -455,8 +450,12 @@ footer a {
 
   .remove-translation-btn {
     position: absolute !important;
-    top: 1.6rem;
-    right: 1.9rem;
+    top: 25px;
+    right: 30px;
+  }
+  
+  .remove-example-btn, .remove-source-btn {
+    margin-bottom: 0.2rem;
   }
 
   .add-example-btn {
