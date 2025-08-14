@@ -16,46 +16,54 @@
 
   <div class="controls">
     <select id="fromLang">
-      <option value="">From...</option>
-      <option value="erzya">Erzya</option>
-      <option value="estonian">Estonian</option>
-      <option value="finnish">Finnish</option>
-      <option value="hungarian">Hungarian</option>
-      <option value="ingrian">Ingrian</option>
-      <option value="karelian">Karelian</option>
-      <option value="komi">Komi</option>
-      <option value="livonian">Livonian</option>
-      <option value="mari">Mari</option>
-      <option value="moksha">Moksha</option>
-      <option value="sami">Northern Sami</option>
-      <option value="udmurt">Udmurt</option>
-      <option value="veps">Veps</option>
-      <option value="votic">Votic</option>
-      <option value="english">English</option>
-      <option value="german">German</option>
-      <option value="russian">Russian</option>
-    </select>
+  <option value="">From...</option>
+  <optgroup label="Uralic">
+    <option value="erzya">Erzya</option>
+    <option value="estonian">Estonian</option>
+    <option value="finnish">Finnish</option>
+    <option value="hungarian">Hungarian</option>
+    <option value="ingrian">Ingrian</option>
+    <option value="karelian">Karelian</option>
+    <option value="komi">Komi</option>
+    <option value="livonian">Livonian</option>
+    <option value="mari">Mari</option>
+    <option value="moksha">Moksha</option>
+    <option value="sami">Northern Sami</option>
+    <option value="udmurt">Udmurt</option>
+    <option value="veps">Veps</option>
+    <option value="votic">Votic</option>
+  </optgroup>
+  <optgroup label="Non-Uralic">
+    <option value="english">English</option>
+    <option value="german">German</option>
+    <option value="russian">Russian</option>
+  </optgroup>
+</select>
 
-    <select id="toLang">
-      <option value="">To...</option>
-      <option value="erzya">Erzya</option>
-      <option value="estonian">Estonian</option>
-      <option value="finnish">Finnish</option>
-      <option value="hungarian">Hungarian</option>
-      <option value="ingrian">Ingrian</option>
-      <option value="karelian">Karelian</option>
-      <option value="komi">Komi</option>
-      <option value="livonian">Livonian</option>
-      <option value="mari">Mari</option>
-      <option value="moksha">Moksha</option>
-      <option value="sami">Northern Sami</option>
-      <option value="udmurt">Udmurt</option>
-      <option value="veps">Veps</option>
-      <option value="votic">Votic</option>
-      <option value="english">English</option>
-      <option value="german">German</option>
-      <option value="russian">Russian</option>
-    </select>
+<select id="toLang">
+  <option value="">To...</option>
+  <optgroup label="Uralic">
+    <option value="erzya">Erzya</option>
+    <option value="estonian">Estonian</option>
+    <option value="finnish">Finnish</option>
+    <option value="hungarian">Hungarian</option>
+    <option value="ingrian">Ingrian</option>
+    <option value="karelian">Karelian</option>
+    <option value="komi">Komi</option>
+    <option value="livonian">Livonian</option>
+    <option value="mari">Mari</option>
+    <option value="moksha">Moksha</option>
+    <option value="sami">Northern Sami</option>
+    <option value="udmurt">Udmurt</option>
+    <option value="veps">Veps</option>
+    <option value="votic">Votic</option>
+  </optgroup>
+  <optgroup label="Non-Uralic">
+    <option value="english">English</option>
+    <option value="german">German</option>
+    <option value="russian">Russian</option>
+  </optgroup>
+</select>
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
       <div class="suggestions" id="suggestions"></div>
