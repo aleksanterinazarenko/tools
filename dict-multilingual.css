@@ -21,7 +21,7 @@ h1 {
   margin-bottom: 30px;
   color: #444;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 h1 a {
@@ -334,20 +334,16 @@ footer a {
 
   h1 {
     font-size: 24px;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
   }
 
   #fromLang,
   #toLang {
     display: inline-block;
-    width: calc(50% - 4px);
+    width: calc(50% - 0.4rem);
     box-sizing: border-box;
     vertical-align: top;
-  }
-
-  #fromLang {
-    margin-right: 5px;
   }
 
   #toLang {
@@ -360,7 +356,7 @@ footer a {
   #addNewBtn {
     display: block;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 1rem;
   }
 
   .controls {
@@ -461,6 +457,10 @@ footer a {
     margin-left: 0;
     margin-top: 15px;
   }
+
+  .form-actions {
+  margin-top: 10px;
+}
 
   footer {
     margin: 1rem !important;
