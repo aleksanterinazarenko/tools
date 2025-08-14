@@ -28,6 +28,7 @@ const saveEditBtn = document.getElementById("saveEditBtn");
 const sourceGroups = document.getElementById("sourceGroups");
 const addSourceBtn = document.getElementById("addSourceBtn");
 const editPos = document.getElementById("editPos");
+const swapBtn = document.getElementById("swapLangs");
 
 let currentFromLang = "";
 let currentToLang = "";
@@ -36,10 +37,14 @@ let isEditing = false;
 let currentSuggestions = [];
 let highlightedIndex = -1;
 
-fromLangSelect.addEventListener("change", updateToLangOptions);
-toLangSelect.addEventListener("change", () => {
+fromLangSelect.addEventListener("change", () => {
   currentFromLang = fromLangSelect.value;
+  updateOtherLangOptions(fromLangSelect, toLangSelect);
+});
+
+toLangSelect.addEventListener("change", () => {
   currentToLang = toLangSelect.value;
+  updateOtherLangOptions(toLangSelect, fromLangSelect);
 });
 
 searchInput.addEventListener("input", handleSearchInput);
@@ -55,111 +60,149 @@ searchInput.addEventListener("keydown", handleSuggestionNavigation);
 document.addEventListener("click", closeSuggestionsOnClickOutside);
 addSourceBtn.addEventListener("click", addSourceGroup);
 
-function updateToLangOptions() {
-  const fromLang = fromLangSelect.value;
-  toLangSelect.innerHTML = '<option value="">To...</option>';
+function updateOtherLangOptions(changedSelect, targetSelect) {
+  const selectedLang = changedSelect.value;
+  const currentValue = targetSelect.value;
+
+  targetSelect.innerHTML = `<option value="" disabled selected>${targetSelect.id === "toLang" ? "To..." : "From..."}</option>`;
 
   if (!fromLang) return;
 
-const languages = [
-  "nganasan",
-  "forest_nenets",
-  "tundra_nenets",
-  "enets",
-  "selkup",
+  const languageGroups = [
+    {
+      label: "Samoyedic",
+      languages: [
+        { value: "nganasan", label: "Nganasan" },
+        { value: "forest_nenets", label: "Forest Nenets" },
+        { value: "tundra_nenets", label: "Tundra Nenets" },
+        { value: "enets", label: "Enets" },
+        { value: "selkup", label: "Selkup" }
+      ]
+    },
+    {
+      label: "Ob-Ugric",
+      languages: [
+        { value: "southern_mansi", label: "Southern Mansi" },
+        { value: "western_mansi", label: "Western Mansi" },
+        { value: "eastern_mansi", label: "Eastern Mansi" },
+        { value: "northern_mansi", label: "Northern Mansi" },
+        { value: "northern_khanty", label: "Northern Khanty" },
+        { value: "atlym_nizyam_khanty", label: "Atlym-Nizyam Khanty" },
+        { value: "salym_khanty", label: "Salym Khanty" },
+        { value: "eastern_khanty", label: "Eastern Khanty" }
+      ]
+    },
+    {
+      label: "Magyar",
+      languages: [
+        { value: "hungarian", label: "Hungarian" }
+      ]
+    },
+    {
+      label: "Permic",
+      languages: [
+        { value: "udmurt", label: "Udmurt" },
+        { value: "komi_permyak", label: "Komi-Permyak" },
+        { value: "komi_yodzyak", label: "Komi-Yodzyak" },
+        { value: "komi_zyryan", label: "Komi-Zyryan" }
+      ]
+    },
+    {
+      label: "Mari",
+      languages: [
+        { value: "eastern_meadow_mari", label: "Eastern-Meadow Mari" },
+        { value: "northwestern_mari", label: "Northwestern Mari" },
+        { value: "hill_mari", label: "Hill (Western) Mari" }
+      ]
+    },
+    {
+      label: "Mordvinic",
+      languages: [
+        { value: "erzya", label: "Erzya" },
+        { value: "moksha", label: "Moksha" }
+      ]
+    },
+    {
+      label: "Finnic",
+      languages: [
+        { value: "south_estonian", label: "South Estonian" },
+        { value: "livonian", label: "Livonian" },
+        { value: "estonian", label: "Estonian" },
+        { value: "votic", label: "Votic" },
+        { value: "finnish", label: "Finnish" },
+        { value: "ingrian", label: "Ingrian" },
+        { value: "karelian", label: "Karelian" },
+        { value: "ludic", label: "Ludic" },
+        { value: "veps", label: "Veps" }
+      ]
+    },
+    {
+      label: "Non-Uralic",
+      languages: [
+        { value: "english", label: "English" },
+        { value: "german", label: "German" },
+        { value: "russian", label: "Russian" }
+      ]
+    }
+  ];
 
-  "southern_mansi",
-  "western_mansi",
-  "eastern_mansi",
-  "northern_mansi",
-  "northern_khanty",
-  "atlym_nizyam_khanty",
-  "salym_khanty",
-  "eastern_khanty",
+  languageGroups.forEach(group => {
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = group.label;
 
-  "hungarian",
+    group.languages.forEach(lang => {
+      if (lang.value !== selectedLang) {
+        const option = document.createElement("option");
+        option.value = lang.value;
+        option.textContent = lang.label;
 
-  "udmurt",
-  "komi_permyak",
-  "komi_yodzyak",
-  "komi_zyryan",
+        if (lang.value === currentValue) {
+          option.selected = true;
+        }
 
-  "eastern_meadow_mari",
-  "northwestern_mari",
-  "hill_mari",
+        optgroup.appendChild(option);
+      }
+    });
 
-  "erzya",
-  "moksha",
-
-  "south_estonian",
-  "livonian",
-  "estonian",
-  "votic",
-  "finnish",
-  "ingrian",
-  "karelian",
-  "ludic",
-  "veps",
-
-  "english",
-  "german",
-  "russian"
-];
-
-const languageLabels = {
-  nganasan: "Nganasan",
-  forest_nenets: "Forest Nenets",
-  tundra_nenets: "Tundra Nenets",
-  enets: "Enets",
-  selkup: "Selkup",
-
-  southern_mansi: "Southern Mansi",
-  western_mansi: "Western Mansi",
-  eastern_mansi: "Eastern Mansi",
-  northern_mansi: "Northern Mansi",
-  northern_khanty: "Northern Khanty",
-  atlym_nizyam_khanty: "Atlym-Nizyam Khanty",
-  salym_khanty: "Salym Khanty",
-  eastern_khanty: "Eastern Khanty",
-
-  hungarian: "Hungarian",
-
-  udmurt: "Udmurt",
-  komi_permyak: "Komi-Permyak",
-  komi_yodzyak: "Komi-Yodzyak",
-  komi_zyryan: "Komi-Zyryan",
-
-  eastern_meadow_mari: "Eastern-Meadow Mari",
-  northwestern_mari: "Northwestern Mari",
-  hill_mari: "Hill (Western) Mari",
-
-  erzya: "Erzya",
-  moksha: "Moksha",
-
-  south_estonian: "South Estonian",
-  livonian: "Livonian",
-  estonian: "Estonian",
-  votic: "Votic",
-  finnish: "Finnish",
-  ingrian: "Ingrian",
-  karelian: "Karelian",
-  ludic: "Ludic",
-  veps: "Veps",
-
-  english: "English",
-  german: "German",
-  russian: "Russian"
-};
-
-  languages.forEach((lang) => {
-    if (lang !== fromLang) {
-      const option = document.createElement("option");
-      option.value = lang;
-      option.textContent = languageLabels[lang];
-      toLangSelect.appendChild(option);
+    if (optgroup.children.length > 0) {
+      targetSelect.appendChild(optgroup);
     }
   });
 }
+
+swapBtn.addEventListener("click", () => {
+  if (!fromLangSelect.value || !toLangSelect.value) return;
+
+  const oldFromValue = fromLangSelect.value;
+  const oldToValue = toLangSelect.value;
+  const oldFromText = fromLangSelect.options[fromLangSelect.selectedIndex].text;
+  const oldToText = toLangSelect.options[toLangSelect.selectedIndex].text;
+
+  fromLangSelect.value = oldToValue;
+  toLangSelect.value = oldFromValue;
+
+  if (!fromLangSelect.options[fromLangSelect.selectedIndex]) {
+    const newOption = new Option(oldToText, oldToValue);
+    fromLangSelect.add(newOption);
+    fromLangSelect.value = oldToValue;
+  }
+
+  if (!toLangSelect.options[toLangSelect.selectedIndex]) {
+    const newOption = new Option(oldFromText, oldFromValue);
+    toLangSelect.add(newOption);
+    toLangSelect.value = oldFromValue;
+  }
+
+  currentFromLang = oldToValue;
+  currentToLang = oldFromValue;
+
+  fromLangSelect.dispatchEvent(new Event('change'));
+  toLangSelect.dispatchEvent(new Event('change'));
+
+  if (searchInput.value.trim()) {
+    performSearch();
+  }
+});
 
 function handleSearchInput() {
   const query = searchInput.value.trim().toLowerCase();

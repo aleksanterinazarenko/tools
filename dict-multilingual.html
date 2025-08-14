@@ -14,132 +14,134 @@
 <body>
   <h1><a href="dict-multilingual.html">✸&ensp;Open Dictionary of Uralic languages</a></h1>
 
-<div class="controls">
-  <select id="fromLang">
-    <option value="">From...</option>
+  <div class="controls">
+    <select id="fromLang">
+      <option value="" disabled selected>From...</option>
 
-    <optgroup label="Samoyedic">
-      <option value="nganasan">Nganasan</option>
-      <option value="forest_nenets">Forest Nenets</option>
-      <option value="tundra_nenets">Tundra Nenets</option>
-      <option value="enets">Enets</option>
-      <option value="selkup">Selkup</option>
-    </optgroup>
+      <optgroup label="Samoyedic">
+        <option value="nganasan">Nganasan</option>
+        <option value="forest_nenets">Forest Nenets</option>
+        <option value="tundra_nenets">Tundra Nenets</option>
+        <option value="enets">Enets</option>
+        <option value="selkup">Selkup</option>
+      </optgroup>
 
-    <optgroup label="Ob-Ugric">
-      <option value="southern_mansi">Southern Mansi</option>
-      <option value="western_mansi">Western Mansi</option>
-      <option value="eastern_mansi">Eastern Mansi</option>
-      <option value="northern_mansi">Northern Mansi</option>
-      <option value="northern_khanty">Northern Khanty</option>
-      <option value="atlym_nizyam_khanty">Atlym-Nizyam Khanty</option>
-      <option value="salym_khanty">Salym Khanty</option>
-      <option value="eastern_khanty">Eastern Khanty</option>
-    </optgroup>
+      <optgroup label="Ob-Ugric">
+        <option value="southern_mansi">Southern Mansi</option>
+        <option value="western_mansi">Western Mansi</option>
+        <option value="eastern_mansi">Eastern Mansi</option>
+        <option value="northern_mansi">Northern Mansi</option>
+        <option value="northern_khanty">Northern Khanty</option>
+        <option value="atlym_nizyam_khanty">Atlym-Nizyam Khanty</option>
+        <option value="salym_khanty">Salym Khanty</option>
+        <option value="eastern_khanty">Eastern Khanty</option>
+      </optgroup>
 
-    <optgroup label="Magyar">
-      <option value="hungarian">Hungarian</option>
-    </optgroup>
+      <optgroup label="Magyar">
+        <option value="hungarian">Hungarian</option>
+      </optgroup>
 
-    <optgroup label="Permic">
-      <option value="udmurt">Udmurt</option>
-      <option value="komi_permyak">Komi-Permyak</option>
-      <option value="komi_yodzyak">Komi-Yodzyak</option>
-      <option value="komi_zyryan">Komi-Zyryan</option>
-    </optgroup>
+      <optgroup label="Permic">
+        <option value="udmurt">Udmurt</option>
+        <option value="komi_permyak">Komi-Permyak</option>
+        <option value="komi_yodzyak">Komi-Yodzyak</option>
+        <option value="komi_zyryan">Komi-Zyryan</option>
+      </optgroup>
 
-    <optgroup label="Mari">
-      <option value="eastern_meadow_mari">Eastern-Meadow Mari</option>
-      <option value="northwestern_mari">Northwestern Mari</option>
-      <option value="hill_mari">Hill (Western) Mari</option>
-    </optgroup>
+      <optgroup label="Mari">
+        <option value="eastern_meadow_mari">Eastern-Meadow Mari</option>
+        <option value="northwestern_mari">Northwestern Mari</option>
+        <option value="hill_mari">Hill (Western) Mari</option>
+      </optgroup>
 
-    <optgroup label="Mordvinic">
-      <option value="erzya">Erzya</option>
-      <option value="moksha">Moksha</option>
-    </optgroup>
+      <optgroup label="Mordvinic">
+        <option value="erzya">Erzya</option>
+        <option value="moksha">Moksha</option>
+      </optgroup>
 
-    <optgroup label="Finnic">
-      <option value="south_estonian">South Estonian</option>
-      <option value="livonian">Livonian</option>
-      <option value="estonian">Estonian</option>
-      <option value="votic">Votic</option>
-      <option value="finnish">Finnish</option>
-      <option value="ingrian">Ingrian</option>
-      <option value="karelian">Karelian</option>
-      <option value="ludic">Ludic</option>
-      <option value="veps">Veps</option>
-    </optgroup>
+      <optgroup label="Finnic">
+        <option value="south_estonian">South Estonian</option>
+        <option value="livonian">Livonian</option>
+        <option value="estonian">Estonian</option>
+        <option value="votic">Votic</option>
+        <option value="finnish">Finnish</option>
+        <option value="ingrian">Ingrian</option>
+        <option value="karelian">Karelian</option>
+        <option value="ludic">Ludic</option>
+        <option value="veps">Veps</option>
+      </optgroup>
 
-    <optgroup label="Non-Uralic">
-      <option value="english">English</option>
-      <option value="german">German</option>
-      <option value="russian">Russian</option>
-    </optgroup>
-  </select>
+      <optgroup label="Non-Uralic">
+        <option value="english">English</option>
+        <option value="german">German</option>
+        <option value="russian">Russian</option>
+      </optgroup>
+    </select>
 
-  <select id="toLang">
-    <option value="">To...</option>
+  <button id="swapLangs" title="Swap languages">↔</button>
 
-    <optgroup label="Samoyedic">
-      <option value="nganasan">Nganasan</option>
-      <option value="forest_nenets">Forest Nenets</option>
-      <option value="tundra_nenets">Tundra Nenets</option>
-      <option value="enets">Enets</option>
-      <option value="selkup">Selkup</option>
-    </optgroup>
+    <select id="toLang">
+      <option value="" disabled selected>To...</option>
 
-    <optgroup label="Ob-Ugric">
-      <option value="southern_mansi">Southern Mansi</option>
-      <option value="western_mansi">Western Mansi</option>
-      <option value="eastern_mansi">Eastern Mansi</option>
-      <option value="northern_mansi">Northern Mansi</option>
-      <option value="northern_khanty">Northern Khanty</option>
-      <option value="atlym_nizyam_khanty">Atlym-Nizyam Khanty</option>
-      <option value="salym_khanty">Salym Khanty</option>
-      <option value="eastern_khanty">Eastern Khanty</option>
-    </optgroup>
+      <optgroup label="Samoyedic">
+        <option value="nganasan">Nganasan</option>
+        <option value="forest_nenets">Forest Nenets</option>
+        <option value="tundra_nenets">Tundra Nenets</option>
+        <option value="enets">Enets</option>
+        <option value="selkup">Selkup</option>
+      </optgroup>
 
-    <optgroup label="Magyar">
-      <option value="hungarian">Hungarian</option>
-    </optgroup>
+      <optgroup label="Ob-Ugric">
+        <option value="southern_mansi">Southern Mansi</option>
+        <option value="western_mansi">Western Mansi</option>
+        <option value="eastern_mansi">Eastern Mansi</option>
+        <option value="northern_mansi">Northern Mansi</option>
+        <option value="northern_khanty">Northern Khanty</option>
+        <option value="atlym_nizyam_khanty">Atlym-Nizyam Khanty</option>
+        <option value="salym_khanty">Salym Khanty</option>
+        <option value="eastern_khanty">Eastern Khanty</option>
+      </optgroup>
 
-    <optgroup label="Permic">
-      <option value="udmurt">Udmurt</option>
-      <option value="komi_permyak">Komi-Permyak</option>
-      <option value="komi_yodzyak">Komi-Yodzyak</option>
-      <option value="komi_zyryan">Komi-Zyryan</option>
-    </optgroup>
+      <optgroup label="Magyar">
+        <option value="hungarian">Hungarian</option>
+      </optgroup>
 
-    <optgroup label="Mari">
-      <option value="eastern_meadow_mari">Eastern-Meadow Mari</option>
-      <option value="northwestern_mari">Northwestern Mari</option>
-      <option value="hill_mari">Hill (Western) Mari</option>
-    </optgroup>
+      <optgroup label="Permic">
+        <option value="udmurt">Udmurt</option>
+        <option value="komi_permyak">Komi-Permyak</option>
+        <option value="komi_yodzyak">Komi-Yodzyak</option>
+        <option value="komi_zyryan">Komi-Zyryan</option>
+      </optgroup>
 
-    <optgroup label="Mordvinic">
-      <option value="erzya">Erzya</option>
-      <option value="moksha">Moksha</option>
-    </optgroup>
+      <optgroup label="Mari">
+        <option value="eastern_meadow_mari">Eastern-Meadow Mari</option>
+        <option value="northwestern_mari">Northwestern Mari</option>
+        <option value="hill_mari">Hill (Western) Mari</option>
+      </optgroup>
 
-    <optgroup label="Finnic">
-      <option value="south_estonian">South Estonian</option>
-      <option value="livonian">Livonian</option>
-      <option value="estonian">Estonian</option>
-      <option value="votic">Votic</option>
-      <option value="finnish">Finnish</option>
-      <option value="ingrian">Ingrian</option>
-      <option value="karelian">Karelian</option>
-      <option value="ludic">Ludic</option>
-      <option value="veps">Veps</option>
-    </optgroup>
+      <optgroup label="Mordvinic">
+        <option value="erzya">Erzya</option>
+        <option value="moksha">Moksha</option>
+      </optgroup>
 
-    <optgroup label="Non-Uralic">
-      <option value="english">English</option>
-      <option value="german">German</option>
-      <option value="russian">Russian</option>
-    </optgroup>
-  </select>
+      <optgroup label="Finnic">
+        <option value="south_estonian">South Estonian</option>
+        <option value="livonian">Livonian</option>
+        <option value="estonian">Estonian</option>
+        <option value="votic">Votic</option>
+        <option value="finnish">Finnish</option>
+        <option value="ingrian">Ingrian</option>
+        <option value="karelian">Karelian</option>
+        <option value="ludic">Ludic</option>
+        <option value="veps">Veps</option>
+      </optgroup>
+
+      <optgroup label="Non-Uralic">
+        <option value="english">English</option>
+        <option value="german">German</option>
+        <option value="russian">Russian</option>
+      </optgroup>
+    </select>
 
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
@@ -154,14 +156,14 @@
   <div class="edit-form" id="editForm">
     <div class="form-group">
       <label for="editWord">Word</label>
-      <input type="text" id="editWord" required />
+      <input type="text" id="editWord" placeholder="Word" required />
     </div>
     <div class="form-group">
       <label for="editTranscription">Transcription</label>
-      <input type="text" id="editTranscription" />
+      <input type="text" id="editTranscription" placeholder="Transcription" />
     </div>
     <div class="form-group">
-      <label for="editPos">Part of Speech:</label>
+      <label for="editPos">Part of Speech</label>
       <select id="editPos">
         <option value="">Select...</option>
         <option value="noun">Noun</option>

@@ -34,6 +34,7 @@ h1 a {
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 select,
@@ -322,6 +323,14 @@ footer a {
   padding: 0 1rem;
 }
 
+#swapLangs {
+  background: #f5f5f5;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+}
+
 @media (max-width: 768px) {
   body {
     padding: 10% 5%;
@@ -337,7 +346,7 @@ footer a {
   #fromLang,
   #toLang {
     display: inline-block;
-    width: calc(50% - 5px);
+    width: calc(50% - 20px);
     box-sizing: border-box;
     vertical-align: top;
   }
@@ -347,10 +356,21 @@ footer a {
     float: right;
   }
 
-  select {
-  min-width: 120px;
-  max-width: none;
+#swapLangs {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 10px 5px;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 16px;
+  vertical-align: middle;
 }
+
+  select {
+    min-width: 120px;
+    max-width: none;
+  }
 
   .search-container,
   #searchBtn,
@@ -389,7 +409,7 @@ footer a {
   .translation-meaning {
     min-width: 100%;
   }
-  
+
   .examples {
     margin-left: 0 !important;
     margin-top: 8px;
@@ -453,8 +473,9 @@ footer a {
     top: 25px;
     right: 30px;
   }
-  
-  .remove-example-btn, .remove-source-btn {
+
+  .remove-example-btn,
+  .remove-source-btn {
     margin-bottom: 0.2rem;
   }
 
@@ -464,8 +485,8 @@ footer a {
   }
 
   .form-actions {
-  margin-top: 10px;
-}
+    margin-top: 10px;
+  }
 
   footer {
     margin: 1rem !important;
