@@ -324,7 +324,7 @@ footer a {
 }
 
 #swapLangs {
-  background: #f5f5f5;
+  background: none;
   padding: 0;
   cursor: pointer;
   font-size: 16px;
