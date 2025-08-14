@@ -61,44 +61,96 @@ function updateToLangOptions() {
 
   if (!fromLang) return;
 
-  const languages = [
-    "erzya",
-    "estonian",
-    "finnish",
-    "hungarian",
-    "ingrian",
-    "karelian",
-    "komi",
-    "livonian",
-    "mari",
-    "moksha",
-    "sami",
-    "udmurt",
-    "veps",
-    "votic",
-    "english",
-    "german",
-    "russian"
-  ];
-  const languageLabels = {
-    erzya: "Erzya",
-    estonian: "Estonian",
-    finnish: "Finnish",
-    hungarian: "Hungarian",
-    ingrian: "Ingrian",
-    karelian: "Karelian",
-    komi: "Komi",
-    livonian: "Livonian",
-    mari: "Mari",
-    moksha: "Moksha",
-    sami: "Northern Sami",
-    udmurt: "Udmurt",
-    veps: "Veps",
-    votic: "Votic",
-    english: "English",
-    german: "German",
-    russian: "Russian"
-  };
+const languages = [
+  "nganasan",
+  "forest_nenets",
+  "tundra_nenets",
+  "enets",
+  "selkup",
+
+  "southern_mansi",
+  "western_mansi",
+  "eastern_mansi",
+  "northern_mansi",
+  "northern_khanty",
+  "atlym_nizyam_khanty",
+  "salym_khanty",
+  "eastern_khanty",
+
+  "hungarian",
+
+  "udmurt",
+  "komi_permyak",
+  "komi_yodzyak",
+  "komi_zyryan",
+
+  "eastern_meadow_mari",
+  "northwestern_mari",
+  "hill_mari",
+
+  "erzya",
+  "moksha",
+
+  "south_estonian",
+  "livonian",
+  "estonian",
+  "votic",
+  "finnish",
+  "ingrian",
+  "karelian",
+  "ludic",
+  "veps",
+
+  "english",
+  "german",
+  "russian"
+];
+
+const languageLabels = {
+  nganasan: "Nganasan",
+  forest_nenets: "Forest Nenets",
+  tundra_nenets: "Tundra Nenets",
+  enets: "Enets",
+  selkup: "Selkup",
+
+  southern_mansi: "Southern Mansi",
+  western_mansi: "Western Mansi",
+  eastern_mansi: "Eastern Mansi",
+  northern_mansi: "Northern Mansi",
+  northern_khanty: "Northern Khanty",
+  atlym_nizyam_khanty: "Atlym-Nizyam Khanty",
+  salym_khanty: "Salym Khanty",
+  eastern_khanty: "Eastern Khanty",
+
+  hungarian: "Hungarian",
+
+  udmurt: "Udmurt",
+  komi_permyak: "Komi-Permyak",
+  komi_yodzyak: "Komi-Yodzyak",
+  komi_zyryan: "Komi-Zyryan",
+
+  eastern_meadow_mari: "Eastern-Meadow Mari",
+  northwestern_mari: "Northwestern Mari",
+  hill_mari: "Hill (Western) Mari",
+
+  erzya: "Erzya",
+  moksha: "Moksha",
+
+  south_estonian: "South Estonian",
+  livonian: "Livonian",
+  estonian: "Estonian",
+  votic: "Votic",
+  finnish: "Finnish",
+  ingrian: "Ingrian",
+  karelian: "Karelian",
+  ludic: "Ludic",
+  veps: "Veps",
+
+  english: "English",
+  german: "German",
+  russian: "Russian"
+};
+
   languages.forEach((lang) => {
     if (lang !== fromLang) {
       const option = document.createElement("option");
