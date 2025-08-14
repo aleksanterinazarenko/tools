@@ -342,7 +342,7 @@ footer a {
   #fromLang,
   #toLang {
     display: inline-block;
-    width: calc(50% - 0.4rem);
+    width: calc(50% - 5px);
     box-sizing: border-box;
     vertical-align: top;
   }
@@ -351,7 +351,7 @@ footer a {
     margin-right: 0;
     float: right;
   }
-  
+
   select {
   min-width: 120px;
   max-width: none;
@@ -362,7 +362,7 @@ footer a {
   #addNewBtn {
     display: block;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 0.9rem;
   }
 
   .controls {
@@ -394,6 +394,11 @@ footer a {
   .translation-meaning {
     min-width: 100%;
   }
+  
+  .examples {
+    margin-left: 0 !important;
+    margin-top: 8px;
+  }
 
   .example-group {
     display: flex;
@@ -405,8 +410,8 @@ footer a {
   .example-group input {
     flex-grow: 1;
     min-width: 0;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
   }
 
   .remove-btn {
@@ -424,11 +429,6 @@ footer a {
 
   .sources ul {
     margin-left: 0;
-  }
-
-  .examples {
-    margin-left: 0 !important;
-    margin-top: 10px;
   }
 
   .edit-form {
