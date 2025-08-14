@@ -120,7 +120,7 @@ function handleSearchInput() {
 
   const direction = `${currentFromLang}_${currentToLang}`;
   const ref = database.ref(`dictionary/${direction}`);
-  const SUGGESTION_LIMIT = 7;
+  const SUGGESTION_LIMIT = 6;
 
   ref.orderByChild("word")
     .startAt(query)
