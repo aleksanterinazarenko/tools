@@ -60,6 +60,13 @@ searchInput.addEventListener("keydown", handleSuggestionNavigation);
 document.addEventListener("click", closeSuggestionsOnClickOutside);
 addSourceBtn.addEventListener("click", addSourceGroup);
 
+function updateUrlForEntry(direction, word) {
+  const url = new URL(window.location);
+  url.searchParams.set('direction', direction);
+  url.searchParams.set('word', word);
+  window.history.pushState({ direction, word }, '', url);
+}
+
 function updateOtherLangOptions(changedSelect, targetSelect) {
   const selectedLang = changedSelect.value;
   const currentValue = targetSelect.value;
@@ -375,6 +382,7 @@ function loadEntry(key) {
   ref.once("value", (snapshot) => {
     const entry = snapshot.val();
     displayEntry(entry);
+    updateUrlForEntry(direction, entry.word);
   });
 }
 
@@ -768,3 +776,46 @@ function addSourceGroup() {
 
   sourceGroups.appendChild(group);
 }
+
+function loadFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const direction = urlParams.get('direction');
+  const word = urlParams.get('word');
+
+  if (direction && word) {
+    const [fromLang, toLang] = direction.split('_');
+    
+    fromLangSelect.value = fromLang;
+    toLangSelect.value = toLang;
+    currentFromLang = fromLang;
+    currentToLang = toLang;
+    
+    fromLangSelect.dispatchEvent(new Event('change'));
+    toLangSelect.dispatchEvent(new Event('change'));
+    
+    searchInput.value = word;
+    performSearch();
+  }
+}
+
+window.addEventListener('popstate', (event) => {
+  if (event.state) {
+    const { direction, word } = event.state;
+    const [fromLang, toLang] = direction.split('_');
+    
+    fromLangSelect.value = fromLang;
+    toLangSelect.value = toLang;
+    currentFromLang = fromLang;
+    currentToLang = toLang;
+    
+    fromLangSelect.dispatchEvent(new Event('change'));
+    toLangSelect.dispatchEvent(new Event('change'));
+    
+    searchInput.value = word;
+    performSearch();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadFromUrl();
+});
