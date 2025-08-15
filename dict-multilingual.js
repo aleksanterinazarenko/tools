@@ -64,7 +64,10 @@ function updateUrlForEntry(direction, word) {
   const url = new URL(window.location);
   url.searchParams.set('direction', direction);
   url.searchParams.set('word', word);
-  window.history.pushState({ direction, word }, '', url);
+  window.history.pushState({
+    direction,
+    word
+  }, '', url);
 }
 
 function updateOtherLangOptions(changedSelect, targetSelect) {
@@ -75,83 +78,178 @@ function updateOtherLangOptions(changedSelect, targetSelect) {
 
   if (!selectedLang) return;
 
-  const languageGroups = [
-  {
-    label: "Finnic",
-    languages: [
-      { value: "estonian", label: "Estonian" },
-      { value: "finnish", label: "Finnish" },
-      { value: "ingrian", label: "Ingrian" },
-      { value: "karelian", label: "Karelian" },
-      { value: "livonian", label: "Livonian" },
-      { value: "ludic", label: "Ludic" },
-      { value: "south_estonian", label: "South Estonian" },
-      { value: "veps", label: "Veps" },
-      { value: "votic", label: "Votic" }
-    ]
-  },
-  {
-    label: "Mordvinic",
-    languages: [
-      { value: "erzya", label: "Erzya" },
-      { value: "moksha", label: "Moksha" }
-    ]
-  },
-  {
-    label: "Mari",
-    languages: [
-      { value: "eastern_meadow_mari", label: "Eastern-Meadow Mari" },
-      { value: "hill_mari", label: "Hill Mari" },
-      { value: "northwestern_mari", label: "Northwestern Mari" }
-    ]
-  },
-  {
-    label: "Permic",
-    languages: [
-      { value: "komi_permyak", label: "Komi-Permyak" },
-      { value: "komi_yodzyak", label: "Komi-Yodzyak" },
-      { value: "komi_zyryan", label: "Komi-Zyryan" },
-      { value: "udmurt", label: "Udmurt" }
-    ]
-  },
-  {
-    label: "Magyar",
-    languages: [
-      { value: "hungarian", label: "Hungarian" }
-    ]
-  },
-  {
-    label: "Ob-Ugric",
-    languages: [
-      { value: "atlym_nizyam_khanty", label: "Atlym-Nizyam Khanty" },
-      { value: "eastern_khanty", label: "Eastern Khanty" },
-      { value: "eastern_mansi", label: "Eastern Mansi" },
-      { value: "northern_khanty", label: "Northern Khanty" },
-      { value: "northern_mansi", label: "Northern Mansi" },
-      { value: "salym_khanty", label: "Salym Khanty" },
-      { value: "southern_mansi", label: "Southern Mansi" },
-      { value: "western_mansi", label: "Western Mansi" }
-    ]
-  },
-  {
-    label: "Samoyedic",
-    languages: [
-      { value: "enets", label: "Enets" },
-      { value: "forest_nenets", label: "Forest Nenets" },
-      { value: "nganasan", label: "Nganasan" },
-      { value: "selkup", label: "Selkup" },
-      { value: "tundra_nenets", label: "Tundra Nenets" }
-    ]
-  },
-  {
-    label: "Non-Uralic",
-    languages: [
-      { value: "english", label: "English" },
-      { value: "german", label: "German" },
-      { value: "russian", label: "Russian" }
-    ]
-  }
-];
+  const languageGroups = [{
+      label: "Finnic",
+      languages: [{
+          value: "estonian",
+          label: "Estonian"
+        },
+        {
+          value: "finnish",
+          label: "Finnish"
+        },
+        {
+          value: "ingrian",
+          label: "Ingrian"
+        },
+        {
+          value: "karelian",
+          label: "Karelian"
+        },
+        {
+          value: "livonian",
+          label: "Livonian"
+        },
+        {
+          value: "ludic",
+          label: "Ludic"
+        },
+        {
+          value: "south_estonian",
+          label: "South Estonian"
+        },
+        {
+          value: "veps",
+          label: "Veps"
+        },
+        {
+          value: "votic",
+          label: "Votic"
+        }
+      ]
+    },
+    {
+      label: "Mordvinic",
+      languages: [{
+          value: "erzya",
+          label: "Erzya"
+        },
+        {
+          value: "moksha",
+          label: "Moksha"
+        }
+      ]
+    },
+    {
+      label: "Mari",
+      languages: [{
+          value: "eastern_meadow_mari",
+          label: "Eastern-Meadow Mari"
+        },
+        {
+          value: "hill_mari",
+          label: "Hill Mari"
+        },
+        {
+          value: "northwestern_mari",
+          label: "Northwestern Mari"
+        }
+      ]
+    },
+    {
+      label: "Permic",
+      languages: [{
+          value: "komi_permyak",
+          label: "Komi-Permyak"
+        },
+        {
+          value: "komi_yodzyak",
+          label: "Komi-Yodzyak"
+        },
+        {
+          value: "komi_zyryan",
+          label: "Komi-Zyryan"
+        },
+        {
+          value: "udmurt",
+          label: "Udmurt"
+        }
+      ]
+    },
+    {
+      label: "Magyar",
+      languages: [{
+        value: "hungarian",
+        label: "Hungarian"
+      }]
+    },
+    {
+      label: "Ob-Ugric",
+      languages: [{
+          value: "atlym_nizyam_khanty",
+          label: "Atlym-Nizyam Khanty"
+        },
+        {
+          value: "eastern_khanty",
+          label: "Eastern Khanty"
+        },
+        {
+          value: "eastern_mansi",
+          label: "Eastern Mansi"
+        },
+        {
+          value: "northern_khanty",
+          label: "Northern Khanty"
+        },
+        {
+          value: "northern_mansi",
+          label: "Northern Mansi"
+        },
+        {
+          value: "salym_khanty",
+          label: "Salym Khanty"
+        },
+        {
+          value: "southern_mansi",
+          label: "Southern Mansi"
+        },
+        {
+          value: "western_mansi",
+          label: "Western Mansi"
+        }
+      ]
+    },
+    {
+      label: "Samoyedic",
+      languages: [{
+          value: "enets",
+          label: "Enets"
+        },
+        {
+          value: "forest_nenets",
+          label: "Forest Nenets"
+        },
+        {
+          value: "nganasan",
+          label: "Nganasan"
+        },
+        {
+          value: "selkup",
+          label: "Selkup"
+        },
+        {
+          value: "tundra_nenets",
+          label: "Tundra Nenets"
+        }
+      ]
+    },
+    {
+      label: "Non-Uralic",
+      languages: [{
+          value: "english",
+          label: "English"
+        },
+        {
+          value: "german",
+          label: "German"
+        },
+        {
+          value: "russian",
+          label: "Russian"
+        }
+      ]
+    }
+  ];
 
   languageGroups.forEach(group => {
     const optgroup = document.createElement("optgroup");
@@ -507,10 +605,10 @@ function showEditForm(entry) {
       transGroup.appendChild(meaningInput);
 
       const labelInput = document.createElement("input");
-labelInput.type = "text";
-labelInput.className = "translation-label";
-labelInput.value = trans.label || "";
-transGroup.appendChild(labelInput);
+      labelInput.type = "text";
+      labelInput.className = "translation-label";
+      labelInput.value = trans.label || "";
+      transGroup.appendChild(labelInput);
 
       const addExampleBtnContainer = document.createElement("div");
       addExampleBtnContainer.className = "add-example-btn-container";
@@ -665,11 +763,11 @@ function saveEntry() {
 
       const label = group.querySelector(".translation-label").value.trim();
 
-translations.push({
-  meaning,
-  label: label || null,
-  examples: examples.length ? examples : null,
-});
+      translations.push({
+        meaning,
+        label: label || null,
+        examples: examples.length ? examples : null,
+      });
     });
 
     if (translations.length === 0) {
@@ -713,7 +811,7 @@ function addTranslationGroup() {
   const labelInput = document.createElement("input");
   labelInput.type = "text";
   labelInput.className = "translation-label";
-  labelInput.placeholder = "Label (optional)";
+  labelInput.placeholder = "Label";
   group.appendChild(labelInput);
 
   const addExampleBtn = document.createElement("button");
@@ -779,14 +877,14 @@ function addSourceGroup() {
   const removeBtn = document.createElement("button");
   removeBtn.className = "remove-source-btn remove-btn";
   removeBtn.textContent = "✖";
-  
+
   removeBtn.addEventListener("click", () => {
     const currentSourceGroups = document.querySelectorAll('.source-group');
     if (currentSourceGroups.length > 1) {
       group.remove();
     }
   });
-  
+
   group.appendChild(removeBtn);
 
   sourceGroups.appendChild(group);
@@ -799,15 +897,15 @@ function loadFromUrl() {
 
   if (direction && word) {
     const [fromLang, toLang] = direction.split('_');
-    
+
     fromLangSelect.value = fromLang;
     toLangSelect.value = toLang;
     currentFromLang = fromLang;
     currentToLang = toLang;
-    
+
     fromLangSelect.dispatchEvent(new Event('change'));
     toLangSelect.dispatchEvent(new Event('change'));
-    
+
     searchInput.value = word;
     performSearch();
   }
@@ -815,17 +913,20 @@ function loadFromUrl() {
 
 window.addEventListener('popstate', (event) => {
   if (event.state) {
-    const { direction, word } = event.state;
+    const {
+      direction,
+      word
+    } = event.state;
     const [fromLang, toLang] = direction.split('_');
-    
+
     fromLangSelect.value = fromLang;
     toLangSelect.value = toLang;
     currentFromLang = fromLang;
     currentToLang = toLang;
-    
+
     fromLangSelect.dispatchEvent(new Event('change'));
     toLangSelect.dispatchEvent(new Event('change'));
-    
+
     searchInput.value = word;
     performSearch();
   }
