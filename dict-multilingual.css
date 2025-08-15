@@ -378,7 +378,9 @@ footer a {
 
   body::before {
     background-image: url('ML60238KY_2571.jpg') no-repeat right bottom;
+    background-size: cover;
     opacity: 0.2;
+    z-index: -1;
   }
 
   h1 {
