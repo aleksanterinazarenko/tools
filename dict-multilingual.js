@@ -607,7 +607,10 @@ function showEditForm(entry) {
       const labelInput = document.createElement("input");
       labelInput.type = "text";
       labelInput.className = "translation-label";
-      labelInput.value = trans.label || "";
+      if (trans.label) {
+        labelInput.value = trans.label;
+      }
+      labelInput.placeholder = "Label";
       transGroup.appendChild(labelInput);
 
       const addExampleBtnContainer = document.createElement("div");
@@ -936,17 +939,17 @@ document.addEventListener('DOMContentLoaded', () => {
   loadFromUrl();
 });
 
-  function createFixedBackground() {
-    const backgroundDiv = document.createElement("div");
-    backgroundDiv.style.position = "fixed";
-    backgroundDiv.style.top = "0";
-    backgroundDiv.style.left = "0";
-    backgroundDiv.style.backgroundImage = "url('ML60238KY_2571.jpg')";
-    backgroundDiv.style.backgroundRepeat = "no-repeat";
-    backgroundDiv.style.backgroundPosition = "right bottom";
-    backgroundDiv.style.backgroundSize = "auto 100%";
-    backgroundDiv.style.zIndex = "-1";
-    document.body.prepend(backgroundDiv);
+function createFixedBackground() {
+  const backgroundDiv = document.createElement("div");
+  backgroundDiv.style.position = "fixed";
+  backgroundDiv.style.top = "0";
+  backgroundDiv.style.left = "0";
+  backgroundDiv.style.backgroundImage = "url('ML60238KY_2571.jpg')";
+  backgroundDiv.style.backgroundRepeat = "no-repeat";
+  backgroundDiv.style.backgroundPosition = "right bottom";
+  backgroundDiv.style.backgroundSize = "auto 100%";
+  backgroundDiv.style.zIndex = "-1";
+  document.body.prepend(backgroundDiv);
 }
 
 createFixedBackground();
