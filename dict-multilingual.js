@@ -941,12 +941,12 @@ document.addEventListener('DOMContentLoaded', () => {
     backgroundDiv.style.position = "fixed";
     backgroundDiv.style.top = "0";
     backgroundDiv.style.left = "0";
-    backgroundDiv.style.width = "100vw";
-    backgroundDiv.style.height = "100vh";
-    backgroundDiv.style.backgroundImage = "url('background.png')";
+    backgroundDiv.style.backgroundImage = "url('ML60238KY_2571.jpg')";
     backgroundDiv.style.backgroundRepeat = "no-repeat";
     backgroundDiv.style.backgroundPosition = "right bottom";
     backgroundDiv.style.backgroundSize = "auto 100%";
     backgroundDiv.style.zIndex = "-1";
     document.body.prepend(backgroundDiv);
 }
+
+createFixedBackground();
