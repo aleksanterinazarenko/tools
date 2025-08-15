@@ -427,6 +427,7 @@ footer a {
 
   .entry {
     padding: 20px;
+    margin-top: 1.5rem;
     font-size: 16px;
   }
 
@@ -526,8 +527,8 @@ footer a {
   }
 
   footer {
-    margin: 1rem !important;
     padding: 0.1rem 0 !important;
+    margin-bottom: -3rem;
     font-size: 0.9rem;
   }
 }
