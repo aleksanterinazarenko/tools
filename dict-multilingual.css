@@ -24,7 +24,7 @@ body::before {
   bottom: 0;
   background-image: url('ML60238KY_2571.jpg');
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
   background-position: center;
   opacity: 0.2;
   z-index: -1;
@@ -54,7 +54,7 @@ h1 a {
 
 select,
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Bona Nova", serif;
   padding: 8px 12px;
   font-size: 15px;
   border: 1px solid #ccc;
@@ -75,7 +75,7 @@ input {
 }
 
 button {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Bona Nova", serif;
   font-size: 15px;
   padding: 8px 12px;
   cursor: pointer;
