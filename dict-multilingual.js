@@ -409,12 +409,12 @@ function displayEntry(entry) {
   if (entry.translations) {
     entry.translations.forEach((trans, index) => {
       html += `
-                <div class="translation">
-                    <div class="translation-meaning">${
-                        index + 1
-                    }. ${trans.meaning}</div>
-                    <div class="examples">
-            `;
+  <div class="translation">
+    <div class="translation-meaning">${
+      index + 1
+    }.${trans.label ? ` (<i>${trans.label}</i>)` : ''} ${trans.meaning}</div>
+    <div class="examples">
+`;
 
       if (trans.examples) {
         trans.examples.forEach((ex) => {
@@ -505,6 +505,12 @@ function showEditForm(entry) {
       meaningInput.className = "translation-meaning";
       meaningInput.value = trans.meaning;
       transGroup.appendChild(meaningInput);
+
+      const labelInput = document.createElement("input");
+labelInput.type = "text";
+labelInput.className = "translation-label";
+labelInput.value = trans.label || "";
+transGroup.appendChild(labelInput);
 
       const addExampleBtnContainer = document.createElement("div");
       addExampleBtnContainer.className = "add-example-btn-container";
@@ -657,10 +663,13 @@ function saveEntry() {
         }
       });
 
-      translations.push({
-        meaning,
-        examples: examples.length ? examples : null,
-      });
+      const label = group.querySelector(".translation-label").value.trim();
+
+translations.push({
+  meaning,
+  label: label || null,
+  examples: examples.length ? examples : null,
+});
     });
 
     if (translations.length === 0) {
@@ -700,6 +709,12 @@ function addTranslationGroup() {
   meaningInput.className = "translation-meaning";
   meaningInput.placeholder = "Translation";
   group.appendChild(meaningInput);
+
+  const labelInput = document.createElement("input");
+  labelInput.type = "text";
+  labelInput.className = "translation-label";
+  labelInput.placeholder = "Label (optional)";
+  group.appendChild(labelInput);
 
   const addExampleBtn = document.createElement("button");
   addExampleBtn.className = "add-example-btn";

@@ -184,9 +184,12 @@ button:hover {
   padding: 15px 15px 10px 15px;
 }
 
+.translation-label {
+  margin-left: 8px;
+}
+
 .examples {
   margin-top: 7.5px;
-  margin-left: 1rem;
 }
 
 .examples:empty {
@@ -195,6 +198,7 @@ button:hover {
 
 .example {
   margin-bottom: 5px;
+  margin-left: 1rem;
 }
 
 .example-group input {
@@ -436,6 +440,11 @@ footer a {
 
   .translation-meaning {
     min-width: 100%;
+  }
+
+  .translation-label {
+    margin-top: 0.9rem;
+    margin-left: 0;
   }
 
   .examples {
