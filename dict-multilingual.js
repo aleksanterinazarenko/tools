@@ -948,16 +948,16 @@ function createFixedBackground() {
   backgroundDiv.style.position = "fixed";
   backgroundDiv.style.top = "0";
   backgroundDiv.style.left = "0";
-  backgroundDiv.style.right = "0";
-  backgroundDiv.style.bottom = "0";
-
+  backgroundDiv.style.width = "100%";
+  backgroundDiv.style.height = "100%";
   backgroundDiv.style.backgroundImage = "url('ML60238KY_2571.jpg')";
   backgroundDiv.style.backgroundRepeat = "no-repeat";
   backgroundDiv.style.backgroundSize = "cover";
   backgroundDiv.style.backgroundPosition = "center";
-
   backgroundDiv.style.opacity = "0.2";
   backgroundDiv.style.zIndex = "-1";
+  backgroundDiv.style.transform = "translateZ(0)";
+  backgroundDiv.style.willChange = "transform";
 
   document.body.prepend(backgroundDiv);
 }
