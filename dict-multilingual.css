@@ -56,7 +56,7 @@ select,
 input {
   font-family: "Bona Nova", serif;
   padding: 8px 12px;
-  font-size: 15px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
@@ -76,7 +76,7 @@ input {
 
 button {
   font-family: "Bona Nova", serif;
-  font-size: 15px;
+  font-size: 16px;
   padding: 8px 12px;
   cursor: pointer;
   border: 1px solid #ccc;
@@ -110,7 +110,7 @@ button:hover {
 }
 
 .entry {
-  font-size: 1rem;
+  font-size: 17px;
   background-color: white;
   padding: 30px;
   margin-top: 30px;
