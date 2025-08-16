@@ -601,7 +601,10 @@ function showEditForm(entry) {
       const meaningInput = document.createElement("input");
       meaningInput.type = "text";
       meaningInput.className = "translation-meaning";
-      meaningInput.value = trans.meaning;
+      if (trans.meaning) {
+        meaningInput.value = trans.meaning;
+      }
+      meaningInput.placeholder = "Translation";
       transGroup.appendChild(meaningInput);
 
       const labelInput = document.createElement("input");
