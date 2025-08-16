@@ -359,17 +359,6 @@ footer a {
   border: none;
 }
 
-.lang-switcher {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  z-index: 1000;
-}
-
-.lang-switcher button {
-  padding: 8px;
-}
-
 @media (max-width: 768px) {
   body {
     padding: 20% 5%;
@@ -385,13 +374,6 @@ footer a {
     font-size: 24px;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-  }
-
-  .lang-switcher {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
   }
 
   #fromLang,
