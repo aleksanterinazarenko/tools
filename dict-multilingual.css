@@ -360,7 +360,7 @@ footer a {
 }
 
 .lang-switcher {
-  position: absolute;
+  position: fixed;
   top: 30px;
   right: 30px;
   z-index: 1000;
