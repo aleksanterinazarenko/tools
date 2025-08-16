@@ -943,24 +943,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function createFixedBackground() {
-  const backgroundDiv = document.createElement("div");
-
-  backgroundDiv.style.position = "fixed";
-  backgroundDiv.style.top = "0";
-  backgroundDiv.style.left = "0";
-  backgroundDiv.style.width = "100%";
-  backgroundDiv.style.height = "100%";
-  backgroundDiv.style.backgroundImage = "url('ML60238KY_2571.jpg')";
-  backgroundDiv.style.backgroundRepeat = "no-repeat";
-  backgroundDiv.style.backgroundSize = "cover";
-  backgroundDiv.style.backgroundPosition = "center";
-  backgroundDiv.style.opacity = "0.2";
-  backgroundDiv.style.zIndex = "-1";
-  backgroundDiv.style.transform = "translate3d(0,0,0)";
-  backgroundDiv.style.backfaceVisibility = "hidden";
-  backgroundDiv.style.willChange = "transform";
-
-  document.body.prepend(backgroundDiv);
+  const bgImg = document.createElement("img");
+  bgImg.src = 'ML60238KY_2571.jpg';
+  bgImg.style.position = "fixed";
+  bgImg.style.top = "0";
+  bgImg.style.left = "0";
+  bgImg.style.width = "100%";
+  bgImg.style.height = "100%";
+  bgImg.style.objectFit = "cover";
+  bgImg.style.opacity = "0.2";
+  bgImg.style.zIndex = "-1";
+  document.body.prepend(bgImg);
 }
 
 createFixedBackground();
