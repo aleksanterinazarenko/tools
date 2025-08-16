@@ -956,7 +956,8 @@ function createFixedBackground() {
   backgroundDiv.style.backgroundPosition = "center";
   backgroundDiv.style.opacity = "0.2";
   backgroundDiv.style.zIndex = "-1";
-  backgroundDiv.style.transform = "translateZ(0)";
+  backgroundDiv.style.transform = "translate3d(0,0,0)";
+  backgroundDiv.style.backfaceVisibility = "hidden";
   backgroundDiv.style.willChange = "transform";
 
   document.body.prepend(backgroundDiv);
