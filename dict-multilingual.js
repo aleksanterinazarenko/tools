@@ -944,14 +944,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function createFixedBackground() {
   const backgroundDiv = document.createElement("div");
+
   backgroundDiv.style.position = "fixed";
   backgroundDiv.style.top = "0";
   backgroundDiv.style.left = "0";
+  backgroundDiv.style.right = "0";
+  backgroundDiv.style.bottom = "0";
+
   backgroundDiv.style.backgroundImage = "url('ML60238KY_2571.jpg')";
   backgroundDiv.style.backgroundRepeat = "no-repeat";
-  backgroundDiv.style.backgroundPosition = "right bottom";
-  backgroundDiv.style.backgroundSize = "auto 100%";
+  backgroundDiv.style.backgroundSize = "cover";
+  backgroundDiv.style.backgroundPosition = "center";
+
+  backgroundDiv.style.opacity = "0.2";
   backgroundDiv.style.zIndex = "-1";
+
   document.body.prepend(backgroundDiv);
 }
 
