@@ -945,14 +945,23 @@ document.addEventListener('DOMContentLoaded', () => {
 function createFixedBackground() {
   const bgImg = document.createElement("img");
   bgImg.src = 'ML60238KY_2571.jpg';
-  bgImg.style.position = "fixed";
-  bgImg.style.top = "0";
-  bgImg.style.left = "0";
-  bgImg.style.width = "100%";
-  bgImg.style.height = "100%";
-  bgImg.style.objectFit = "cover";
-  bgImg.style.opacity = "0.2";
-  bgImg.style.zIndex = "-1";
+  
+  bgImg.style.position = 'fixed';
+  bgImg.style.top = '0';
+  bgImg.style.left = '0';
+  bgImg.style.width = '100vw';
+  bgImg.style.height = '100vh';
+  
+  bgImg.style.objectFit = 'cover';
+  bgImg.style.objectPosition = 'center';
+  
+  bgImg.style.opacity = '0.2';
+  bgImg.style.zIndex = '-1';
+  
+  bgImg.style.transform = 'translateZ(0)';
+  bgImg.style.backfaceVisibility = 'hidden';
+  bgImg.style.willChange = 'transform';
+  
   document.body.prepend(bgImg);
 }
 
