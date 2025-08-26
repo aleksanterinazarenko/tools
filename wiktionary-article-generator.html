@@ -140,7 +140,6 @@
         padding: 15px;
         width: 100%;
         box-sizing: border-box;
-        margin-top: 20px;
       }
 
       input, select, button {
@@ -311,10 +310,18 @@
 
     <label for="part_of_speech">Choose a part of speech:</label>
 <select id="part_of_speech">
-  <option value="noun">Noun</option>
   <option value="verb">Verb</option>
+  <option value="noun">Noun</option>
+  <option value="pronoun">Pronoun</option>
   <option value="adjective">Adjective</option>
   <option value="adverb">Adverb</option>
+  <option value="conjunction">Conjunction</option>
+  <option value="postposition">Postposition</option>
+  <option value="interjection">Interjection</option>
+  <option value="numeral">Numeral</option>
+  <option value="particle">Particle</option>
+  <option value="predicative">Predicative</option>
+  
 </select>
 
 <label>Meanings:</label>
@@ -378,6 +385,11 @@
     <button onclick="generateArticle()">Generate</button>
 
     <pre id="output" class="output"></pre>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+  <button onclick="copyArticle()">Copy Article</button>
+  <button onclick="clearForm()">Clear Form</button>
+</div>
   </div>
 
   <script>
@@ -685,6 +697,34 @@ document.getElementById('inh2_is_borrowed').addEventListener('change', function 
   inh2Label.textContent = isChecked ? 'Borrowed:' : 'Inherited 2:';
   inh1Label.textContent = isChecked ? 'Inherited:' : 'Inherited 1:';
 });
+
+function copyArticle() {
+  const outputText = document.getElementById('output').textContent;
+  if (!outputText) {
+    alert('No content to copy. Please generate an article first.');
+    return;
+  }
+  
+  navigator.clipboard.writeText(outputText)
+    .then(() => {
+      alert('Article copied to clipboard!');
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+      alert('Failed to copy article. Please try again.');
+    });
+}
+
+function clearForm() {
+  if (confirm('Are you sure you want to clear all form fields?')) {
+    document.querySelectorAll('input, textarea, select').forEach(element => {
+      if (element.id !== 'language') {
+        element.value = '';
+      }
+    });
+    document.getElementById('output').textContent = '';
+  }
+}
   </script>
 </body>
 </html>
