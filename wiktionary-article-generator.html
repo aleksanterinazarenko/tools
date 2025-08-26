@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
   <title>Wiktionary Article Generator</title>
   <style>
     body {
@@ -13,8 +15,8 @@
     }
 
     h2 {
-  text-align: center;
-}
+      text-align: center;
+    }
 
     .container {
       background: white;
@@ -22,11 +24,13 @@
       max-width: 700px;
       margin: 0 auto;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    input, select, button {
-        font-family: "Open Sans", sans-serif;
+    input,
+    select,
+    button {
+      font-family: "Open Sans", sans-serif;
       font-size: 16px;
       padding: 8px;
       margin-top: 10px;
@@ -34,7 +38,8 @@
       box-sizing: border-box;
     }
 
-    .etymology-group, .pronunciation-group {
+    .etymology-group,
+    .pronunciation-group {
       margin-top: 20px;
     }
 
@@ -54,52 +59,52 @@
     }
 
     .etymology-group label[for="include_unknown_etymology"] {
-  display: inline-flex;
-  font-weight: bold;
-  margin-top: 0;
-  align-items: center;
-  gap: 6px;
-}
+      display: inline-flex;
+      font-weight: bold;
+      margin-top: 0;
+      align-items: center;
+      gap: 6px;
+    }
 
-.checkbox-group label {
-  display: inline-flex;
-  align-items: center;
-  margin-right: 15px;
-  margin-bottom: 10px;
-}
+    .checkbox-group label {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 15px;
+      margin-bottom: 10px;
+    }
 
     .pronunciation-group label {
-  display: inline-flex;
-  font-weight: bold;
-  margin-top: 0;
-  align-items: center;
-  gap: 6px;
-}
+      display: inline-flex;
+      font-weight: bold;
+      margin-top: 0;
+      align-items: center;
+      gap: 6px;
+    }
 
-.inflection-group label {
-  display: inline-flex;
-  font-weight: bold;
-  margin-top: 0;
-  align-items: center;
-  gap: 6px;
-}
+    .inflection-group label {
+      display: inline-flex;
+      font-weight: bold;
+      margin-top: 0;
+      align-items: center;
+      gap: 6px;
+    }
 
-.references-group label {
-  font-weight: bold;
-  margin-top: 10px;
-  display: block;
-}
+    .references-group label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
 
-.references-group textarea {
-  font-family: monospace;
-  font-size: 16px;
-  padding: 8px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 10px;
-}
+    .references-group textarea {
+      font-family: monospace;
+      font-size: 16px;
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 10px;
+    }
 
-.manual-input {
+    .manual-input {
       width: 100%;
       box-sizing: border-box;
       font-size: 16px;
@@ -108,30 +113,30 @@
     }
 
     #ipa-symbols {
-  display: flex;
-  flex-wrap:wrap;
-  gap: 5px;
-}
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
 
-.ipa-symbol-btn {
-  max-width: 30px;
-  height: 30px;
-  padding: 5px 10px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  background-color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
-  text-align: center;
-}
+    .ipa-symbol-btn {
+      max-width: 30px;
+      height: 30px;
+      padding: 5px 10px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      text-align: center;
+    }
 
-.ipa-symbol-btn:hover {
-  background-color: #f9f9f9;
-}
+    .ipa-symbol-btn:hover {
+      background-color: #f9f9f9;
+    }
 
-@media (max-width: 600px) {
+    @media (max-width: 600px) {
       body {
         padding: 5px;
       }
@@ -142,7 +147,9 @@
         box-sizing: border-box;
       }
 
-      input, select, button {
+      input,
+      select,
+      button {
         font-size: 16px;
         padding: 10px;
       }
@@ -156,7 +163,8 @@
         white-space: pre-wrap;
       }
 
-      .meaning-group input, .cognate-group input {
+      .meaning-group input,
+      .cognate-group input {
         font-size: 16px;
       }
 
@@ -166,7 +174,10 @@
     }
 
     @media (max-width: 400px) {
-      input, select, button {
+
+      input,
+      select,
+      button {
         font-size: 16px;
         padding: 8px;
       }
@@ -185,6 +196,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h2>Wiktionary Article Generator</h2>
@@ -204,22 +216,22 @@
       <h3>Etymology</h3>
 
       <div class="checkbox-group">
-  <label for="include_unknown_etymology">
-    <input type="checkbox" id="include_unknown_etymology" /> Unknown
-  </label>
-  <label for="include_uncertain_etymology">
-    <input type="checkbox" id="include_uncertain_etymology" /> Uncertain
-  </label>
-  <label for="include_possible_etymology_inh1">
-    <input type="checkbox" id="include_possible_etymology_inh1" /> Possible 1
-  </label>
-  <label for="include_possible_etymology_inh2">
-    <input type="checkbox" id="include_possible_etymology_inh2" /> Possible 2
-  </label>
-  <label for="inh2_is_borrowed">
-  <input type="checkbox" id="inh2_is_borrowed" /> Borrowed
-</label>
-</div>
+        <label for="include_unknown_etymology">
+          <input type="checkbox" id="include_unknown_etymology" /> Unknown
+        </label>
+        <label for="include_uncertain_etymology">
+          <input type="checkbox" id="include_uncertain_etymology" /> Uncertain
+        </label>
+        <label for="include_possible_etymology_inh1">
+          <input type="checkbox" id="include_possible_etymology_inh1" /> Possible 1
+        </label>
+        <label for="include_possible_etymology_inh2">
+          <input type="checkbox" id="include_possible_etymology_inh2" /> Possible 2
+        </label>
+        <label for="inh2_is_borrowed">
+          <input type="checkbox" id="inh2_is_borrowed" /> Borrowed
+        </label>
+      </div>
 
       <label id="inh1_label">Inherited 1:</label>
       <input type="text" id="inh1_lang" placeholder="Language code" />
@@ -238,493 +250,498 @@
       <small>e.g., eye</small>
 
       <label>Cognates:</label>
-<div id="cognates-wrapper">
-  <div class="cognate-group">
-    <input type="text" class="cog_lang" placeholder="Language code" />
-    <small>e.g., fi</small>
-    <input type="text" class="cog_word" placeholder="Word" />
-    <small>e.g., silmä</small>
-    <input type="text" class="cog_meaning" placeholder="Meaning" />
-    <small>e.g., eye</small>
-    <hr>
-  </div>
-</div>
+      <div id="cognates-wrapper">
+        <div class="cognate-group">
+          <input type="text" class="cog_lang" placeholder="Language code" />
+          <small>e.g., fi</small>
+          <input type="text" class="cog_word" placeholder="Word" />
+          <small>e.g., silmä</small>
+          <input type="text" class="cog_meaning" placeholder="Meaning" />
+          <small>e.g., eye</small>
+          <hr>
+        </div>
+      </div>
 
-<template id="cognate-template">
-  <div class="cognate-group">
-    <input type="text" class="cog_lang" placeholder="Language code" />
-    <input type="text" class="cog_word" placeholder="Word" />
-    <input type="text" class="cog_meaning" placeholder="Meaning" />
-    <hr>
-  </div>
-</template>
+      <template id="cognate-template">
+        <div class="cognate-group">
+          <input type="text" class="cog_lang" placeholder="Language code" />
+          <input type="text" class="cog_word" placeholder="Word" />
+          <input type="text" class="cog_meaning" placeholder="Meaning" />
+          <hr>
+        </div>
+      </template>
 
-<button type="button" id="add-cognate-btn">+ Add cognate</button>
+      <button type="button" id="add-cognate-btn">+ Add cognate</button>
 
-<div class="manual-etymology">
-  <label for="manual">Manual Etymology:</label>
-  <textarea id="manual_etymology" class="manual-input" placeholder="Enter custom etymology text here..."></textarea>
-</div>
+      <div class="manual-etymology">
+        <label for="manual">Manual Etymology:</label>
+        <textarea id="manual_etymology" class="manual-input"
+          placeholder="Enter custom etymology text here..."></textarea>
+      </div>
     </div>
 
     <div class="pronunciation-group">
-  <h3>Pronunciation</h3>
-  <label><input type="checkbox" id="include_pronunciation" checked>Include pronunciation section</label>
-  <div style="margin-top: 10px;">
-    <label for="ipa_pronunciation">Pronunciation (IPA format):</label>
-    <input type="text" id="ipa_pronunciation" placeholder="Enter IPA pronunciation" />
-    <small>e.g., sʲelʲme</small>
+      <h3>Pronunciation</h3>
+      <label><input type="checkbox" id="include_pronunciation" checked>Include pronunciation section</label>
+      <div style="margin-top: 10px;">
+        <label for="ipa_pronunciation">Pronunciation (IPA format):</label>
+        <input type="text" id="ipa_pronunciation" placeholder="Enter IPA pronunciation" />
+        <small>e.g., sʲelʲme</small>
 
-<div id="ipa-symbols">
-    <button type="button" class="ipa-symbol-btn">ɲ</button>
-    <button type="button" class="ipa-symbol-btn">ŋ</button>
-    <button type="button" class="ipa-symbol-btn">c</button>
-    <button type="button" class="ipa-symbol-btn">ɟ</button>
-    <button type="button" class="ipa-symbol-btn">ɡ</button>
-    <button type="button" class="ipa-symbol-btn">t͡s</button>
-    <button type="button" class="ipa-symbol-btn">t͡ʃ</button>
-    <button type="button" class="ipa-symbol-btn">t͡ʂ</button>
-    <button type="button" class="ipa-symbol-btn">t͡ɕ</button>
-    <button type="button" class="ipa-symbol-btn">ʃ</button>
-    <button type="button" class="ipa-symbol-btn">ʂ</button>
-    <button type="button" class="ipa-symbol-btn">ɕ</button>
-    <button type="button" class="ipa-symbol-btn">d͡ʒ</button>
-    <button type="button" class="ipa-symbol-btn">d͡ʐ</button>
-    <button type="button" class="ipa-symbol-btn">d͡ʑ</button>
-    <button type="button" class="ipa-symbol-btn">ʒ</button>
-    <button type="button" class="ipa-symbol-btn">ʐ</button>
-    <button type="button" class="ipa-symbol-btn">ʑ</button>
-    <button type="button" class="ipa-symbol-btn">u̯</button>
-    <button type="button" class="ipa-symbol-btn">ʋ</button>
-    <button type="button" class="ipa-symbol-btn">ɛ</button>
-    <button type="button" class="ipa-symbol-btn">ɨ</button>
-    <button type="button" class="ipa-symbol-btn">æ</button>
-    <button type="button" class="ipa-symbol-btn">ɑ</button>
-    <button type="button" class="ipa-symbol-btn">ʲ</button>
-    <button type="button" class="ipa-symbol-btn">ˈ</button>
+        <div id="ipa-symbols">
+          <button type="button" class="ipa-symbol-btn">ɲ</button>
+          <button type="button" class="ipa-symbol-btn">ŋ</button>
+          <button type="button" class="ipa-symbol-btn">c</button>
+          <button type="button" class="ipa-symbol-btn">ɟ</button>
+          <button type="button" class="ipa-symbol-btn">ɡ</button>
+          <button type="button" class="ipa-symbol-btn">t͡s</button>
+          <button type="button" class="ipa-symbol-btn">t͡ʃ</button>
+          <button type="button" class="ipa-symbol-btn">t͡ʂ</button>
+          <button type="button" class="ipa-symbol-btn">t͡ɕ</button>
+          <button type="button" class="ipa-symbol-btn">ʃ</button>
+          <button type="button" class="ipa-symbol-btn">ʂ</button>
+          <button type="button" class="ipa-symbol-btn">ɕ</button>
+          <button type="button" class="ipa-symbol-btn">d͡ʒ</button>
+          <button type="button" class="ipa-symbol-btn">d͡ʐ</button>
+          <button type="button" class="ipa-symbol-btn">d͡ʑ</button>
+          <button type="button" class="ipa-symbol-btn">ʒ</button>
+          <button type="button" class="ipa-symbol-btn">ʐ</button>
+          <button type="button" class="ipa-symbol-btn">ʑ</button>
+          <button type="button" class="ipa-symbol-btn">u̯</button>
+          <button type="button" class="ipa-symbol-btn">ʋ</button>
+          <button type="button" class="ipa-symbol-btn">ɛ</button>
+          <button type="button" class="ipa-symbol-btn">ɨ</button>
+          <button type="button" class="ipa-symbol-btn">æ</button>
+          <button type="button" class="ipa-symbol-btn">ɑ</button>
+          <button type="button" class="ipa-symbol-btn">ʲ</button>
+          <button type="button" class="ipa-symbol-btn">ˈ</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <h3>Word</h3>
 
     <label for="part_of_speech">Choose a part of speech:</label>
-<select id="part_of_speech">
-  <option value="verb">Verb</option>
-  <option value="noun">Noun</option>
-  <option value="pronoun">Pronoun</option>
-  <option value="adjective">Adjective</option>
-  <option value="adverb">Adverb</option>
-  <option value="conjunction">Conjunction</option>
-  <option value="postposition">Postposition</option>
-  <option value="interjection">Interjection</option>
-  <option value="numeral">Numeral</option>
-  <option value="particle">Particle</option>
-  <option value="predicative">Predicative</option>
-  
-</select>
+    <select id="part_of_speech">
+      <option value="verb">Verb</option>
+      <option value="noun">Noun</option>
+      <option value="pronoun">Pronoun</option>
+      <option value="adjective">Adjective</option>
+      <option value="adverb">Adverb</option>
+      <option value="conjunction">Conjunction</option>
+      <option value="postposition">Postposition</option>
+      <option value="interjection">Interjection</option>
+      <option value="numeral">Numeral</option>
+      <option value="particle">Particle</option>
+      <option value="predicative">Predicative</option>
 
-<label>Meanings:</label>
+    </select>
 
-<div id="meanings-wrapper">
-  <div class="meaning-group">
-    <input type="text" class="meaning" placeholder="Meaning (required)" required />
-    <small>Use commas to separate multiple meanings.</small>
-    <input type="text" class="label" placeholder="Label (optional)" />
-    <small>Use commas to separate multiple labels, e.g., dated, dialectal</small>
-    <input type="text" class="synonyms" placeholder="Synonyms (optional)" />
-    <small>Use commas to separate multiple terms.</small>
-    <input type="text" class="example" placeholder="Example sentence (optional)" />
-    <small>e.g., сельме валдо</small>
-    <input type="text" class="translation" placeholder="English translation (optional)" />
-    <small>e.g., sight</small>
-    <hr>
-  </div>
-</div>
+    <label>Meanings:</label>
 
-<template id="meaning-template">
-  <div class="meaning-group">
-    <input type="text" class="meaning" placeholder="Meaning (required)" />
-    <input type="text" class="label" placeholder="Label (optional)" />
-    <input type="text" class="synonyms" placeholder="Synonyms (optional)" />
-    <input type="text" class="example" placeholder="Example sentence (optional)" />
-    <input type="text" class="translation" placeholder="English translation (optional)" />
-    <hr>
-  </div>
-</template>
+    <div id="meanings-wrapper">
+      <div class="meaning-group">
+        <input type="text" class="meaning" placeholder="Meaning (required)" required />
+        <small>Use commas to separate multiple meanings.</small>
+        <input type="text" class="label" placeholder="Label (optional)" />
+        <small>Use commas to separate multiple labels, e.g., dated, dialectal</small>
+        <input type="text" class="synonyms" placeholder="Synonyms (optional)" />
+        <small>Use commas to separate multiple terms.</small>
+        <input type="text" class="example" placeholder="Example sentence (optional)" />
+        <small>e.g., сельме валдо</small>
+        <input type="text" class="translation" placeholder="English translation (optional)" />
+        <small>e.g., sight</small>
+        <hr>
+      </div>
+    </div>
 
-<button type="button" id="add-meaning-btn">+ Add meaning</button>
+    <template id="meaning-template">
+      <div class="meaning-group">
+        <input type="text" class="meaning" placeholder="Meaning (required)" />
+        <input type="text" class="label" placeholder="Label (optional)" />
+        <input type="text" class="synonyms" placeholder="Synonyms (optional)" />
+        <input type="text" class="example" placeholder="Example sentence (optional)" />
+        <input type="text" class="translation" placeholder="English translation (optional)" />
+        <hr>
+      </div>
+    </template>
 
-<div class="inflection-group" style="margin-top: 20px;">
-  <h3>Inflection</h3>
-  <label><input type="checkbox" id="include_inflection" checked>Include inflection section</label>
-  <div style="margin-top: 10px;">
-    <label for="inflection">Inflection template:</label>
-    <input type="text" id="inflection" placeholder="Inflection template (optional)" />
-    <small>e.g., myv-noun-1</small>
-  </div>
-</div>
+    <button type="button" id="add-meaning-btn">+ Add meaning</button>
 
-<div style="margin-top: 20px;">
-  <label for="derived_terms">Derived terms:</label>
-  <input type="text" id="derived_terms" placeholder="Derived terms (optional)" />
-  <small>Use commas to separate multiple terms.</small>
-</div>
+    <div class="inflection-group" style="margin-top: 20px;">
+      <h3>Inflection</h3>
+      <label><input type="checkbox" id="include_inflection" checked>Include inflection section</label>
+      <div style="margin-top: 10px;">
+        <label for="inflection">Inflection template:</label>
+        <input type="text" id="inflection" placeholder="Inflection template (optional)" />
+        <small>e.g., myv-noun-1</small>
+      </div>
+    </div>
 
-<div class="references-group" style="margin-top: 20px;">
-  <label for="references">References:</label>
-  <textarea id="references" placeholder="myv:PMW&#10;myv:Serebrennikov:1993|+&#10;Uralonet|123" rows="4" style="width: 100%; font-family: monospace; font-size: 16px; padding: 8px; box-sizing: border-box;"></textarea>
-  <small>e.g., myv:PMW, myv:Serebrennikov:1993|+, Uralonet|123</small>
+    <div style="margin-top: 20px;">
+      <label for="derived_terms">Derived terms:</label>
+      <input type="text" id="derived_terms" placeholder="Derived terms (optional)" />
+      <small>Use commas to separate multiple terms.</small>
+    </div>
 
-  <div class="manual-references">
-  <label for="manual">Manual References:</label>
-  <textarea id="manual_references" class="manual-input" placeholder="Enter custom references here..."></textarea>
-</div>
-</div>
+    <div class="references-group" style="margin-top: 20px;">
+      <label for="references">References:</label>
+      <textarea id="references" placeholder="myv:PMW&#10;myv:Serebrennikov:1993|+&#10;Uralonet|123" rows="4"
+        style="width: 100%; font-family: monospace; font-size: 16px; padding: 8px; box-sizing: border-box;"></textarea>
+      <small>e.g., myv:PMW, myv:Serebrennikov:1993|+, Uralonet|123</small>
+
+      <div class="manual-references">
+        <label for="manual">Manual References:</label>
+        <textarea id="manual_references" class="manual-input" placeholder="Enter custom references here..."></textarea>
+      </div>
+    </div>
 
     <button onclick="generateArticle()">Generate</button>
 
     <pre id="output" class="output"></pre>
 
-        <div style="margin-top: 20px; display: flex; gap: 10px;">
-  <button onclick="copyArticle()">Copy Article</button>
-  <button onclick="clearForm()">Clear Form</button>
-</div>
+    <div style="display: flex; gap: 10px;">
+      <button onclick="copyArticle()">Copy Code</button>
+      <button onclick="clearForm()">Clear Form</button>
+    </div>
   </div>
 
   <script>
     function generateArticle() {
-  const language = document.getElementById('language').value;
-  const pos = document.getElementById('part_of_speech').value;
-  const posCapitalized = pos.charAt(0).toUpperCase() + pos.slice(1);
-  const posSection = `\n\n===${posCapitalized}===\n{{head|myv|${pos}}}`;
-  const allMeaningInputs = document.querySelectorAll('.meaning');
-  const hasAtLeastOneMeaning = Array.from(allMeaningInputs).some(input => input.value.trim() !== '');
+      const language = document.getElementById('language').value;
+      const pos = document.getElementById('part_of_speech').value;
+      const posCapitalized = pos.charAt(0).toUpperCase() + pos.slice(1);
+      const posSection = `\n\n===${posCapitalized}===\n{{head|myv|${pos}}}`;
+      const allMeaningInputs = document.querySelectorAll('.meaning');
+      const hasAtLeastOneMeaning = Array.from(allMeaningInputs).some(input => input.value.trim() !== '');
 
-  if (!hasAtLeastOneMeaning) {
-    alert('Please enter at least one meaning.');
-    return;
-  }
+      if (!hasAtLeastOneMeaning) {
+        alert('Please enter at least one meaning.');
+        return;
+      }
 
-  const alternativeFormsRaw = document.getElementById('alternative_forms').value.trim();
-  let alternativeFormsSection = '';
-  if (alternativeFormsRaw) {
-    const forms = alternativeFormsRaw.split(',').map(t => t.trim()).filter(Boolean);
-    if (forms.length > 0) {
-      const altFormsList = forms.map(t => `{{alt|myv|${t}}}`).join(', ');
-      alternativeFormsSection = `===Alternative forms===\n* ${altFormsList}\n\n`;
-    }
-  }
+      const alternativeFormsRaw = document.getElementById('alternative_forms').value.trim();
+      let alternativeFormsSection = '';
+      if (alternativeFormsRaw) {
+        const forms = alternativeFormsRaw.split(',').map(t => t.trim()).filter(Boolean);
+        if (forms.length > 0) {
+          const altFormsList = forms.map(t => `{{alt|myv|${t}}}`).join(', ');
+          alternativeFormsSection = `===Alternative forms===\n* ${altFormsList}\n\n`;
+        }
+      }
 
       function formatTemplate(template, lang, word, meaning, addStar = false, useMyv = true) {
-  if (!lang && !word) return '';
+        if (!lang && !word) return '';
 
-  const langPrefix = useMyv ? 'myv' : lang;
+        const langPrefix = useMyv ? 'myv' : lang;
 
-  const words = (word || '').split(',').map(w => w.trim()).filter(Boolean);
-  if (words.length > 1) {
-    const first = words[0];
-    const second = words[1];
+        const words = (word || '').split(',').map(w => w.trim()).filter(Boolean);
+        if (words.length > 1) {
+          const first = words[0];
+          const second = words[1];
 
-    const firstFormatted = addStar ? `*${first}` : first;
-    const secondFormatted = addStar ? `*${second}` : second;
+          const firstFormatted = addStar ? `*${first}` : first;
+          const secondFormatted = addStar ? `*${second}` : second;
 
-    const part1 = `{{${template}|${langPrefix}|${lang}|${firstFormatted}}}`;
-    const part2 = `{{m|${lang}|${secondFormatted}${meaning ? `||${meaning}` : ''}}}`;
-    return `${part1} ~ ${part2}`;
-  }
+          const part1 = `{{${template}|${langPrefix}|${lang}|${firstFormatted}}}`;
+          const part2 = `{{m|${lang}|${secondFormatted}${meaning ? `||${meaning}` : ''}}}`;
+          return `${part1} ~ ${part2}`;
+        }
 
-  let result = `{{${template}|${langPrefix}|${lang || ''}`;
-  if (word) {
-    const wordFormatted = addStar ? `*${word}` : word;
-    result += `|${wordFormatted}`;
-    if (meaning) result += `||${meaning}`;
-  }
-  result += '}}';
-  return result;
-}
+        let result = `{{${template}|${langPrefix}|${lang || ''}`;
+        if (word) {
+          const wordFormatted = addStar ? `*${word}` : word;
+          result += `|${wordFormatted}`;
+          if (meaning) result += `||${meaning}`;
+        }
+        result += '}}';
+        return result;
+      }
 
-function formatCognate(lang, word, meaning) {
-  if (!lang || !word) return '';
-  let result = `{{cog|${lang}|${word}`;
-  if (meaning) result += `||${meaning}`;
-  result += '}}';
-  return result;
-}
+      function formatCognate(lang, word, meaning) {
+        if (!lang || !word) return '';
+        let result = `{{cog|${lang}|${word}`;
+        if (meaning) result += `||${meaning}`;
+        result += '}}';
+        return result;
+      }
 
       const inh1 = formatTemplate('inh',
-  document.getElementById('inh1_lang').value,
-  document.getElementById('inh1_word').value,
-  document.getElementById('inh1_meaning').value,
-  true
-);
+        document.getElementById('inh1_lang').value,
+        document.getElementById('inh1_word').value,
+        document.getElementById('inh1_meaning').value,
+        true
+      );
 
-const inh2IsBorrowed = document.getElementById('inh2_is_borrowed').checked;
-const inh2Template = inh2IsBorrowed ? 'bor' : 'inh';
+      const inh2IsBorrowed = document.getElementById('inh2_is_borrowed').checked;
+      const inh2Template = inh2IsBorrowed ? 'bor' : 'inh';
 
-const inh2 = formatTemplate(inh2Template,
-  document.getElementById('inh2_lang').value,
-  document.getElementById('inh2_word').value,
-  document.getElementById('inh2_meaning').value,
-  !inh2IsBorrowed
-);
+      const inh2 = formatTemplate(inh2Template,
+        document.getElementById('inh2_lang').value,
+        document.getElementById('inh2_word').value,
+        document.getElementById('inh2_meaning').value,
+        !inh2IsBorrowed
+      );
 
-const cognateGroups = document.querySelectorAll('.cognate-group');
-const cognates = [];
+      const cognateGroups = document.querySelectorAll('.cognate-group');
+      const cognates = [];
 
-cognateGroups.forEach(group => {
-  const lang = group.querySelector('.cog_lang').value.trim();
-  const word = group.querySelector('.cog_word').value.trim();
-  const meaning = group.querySelector('.cog_meaning').value.trim();
+      cognateGroups.forEach(group => {
+        const lang = group.querySelector('.cog_lang').value.trim();
+        const word = group.querySelector('.cog_word').value.trim();
+        const meaning = group.querySelector('.cog_meaning').value.trim();
 
-  if (lang || word) {
-    const cog = formatCognate(lang, word, meaning);
-    if (cog) cognates.push(cog);
-  }
-});
+        if (lang || word) {
+          const cog = formatCognate(lang, word, meaning);
+          if (cog) cognates.push(cog);
+        }
+      });
 
-const includeUnknown = document.getElementById('include_unknown_etymology').checked;
-const includeUncertain = document.getElementById('include_uncertain_etymology').checked;
-const includePossible1 = document.getElementById('include_possible_etymology_inh1').checked;
-const includePossible2 = document.getElementById('include_possible_etymology_inh2').checked;
-let etymologyParts = [];
+      const includeUnknown = document.getElementById('include_unknown_etymology').checked;
+      const includeUncertain = document.getElementById('include_uncertain_etymology').checked;
+      const includePossible1 = document.getElementById('include_possible_etymology_inh1').checked;
+      const includePossible2 = document.getElementById('include_possible_etymology_inh2').checked;
+      let etymologyParts = [];
 
-if (includeUnknown) {
-  etymologyParts.push('{{unk|myv}}');
-}
-if (includeUncertain) {
-  etymologyParts.push('{{unc|myv}}');
-}
-if (inh1 && inh2) {
-  const der2 = inh2IsBorrowed ? 'borrowed' : 'inherited';
-  let part;
-  if (includePossible1 && includePossible2) {
-    part = `Possibly from ${inh1}, possibly ${der2} from ${inh2}`;
-  } else if (includePossible1) {
-    part = `Possibly from ${inh1}, ${der2} from ${inh2}`;
-  } else if (includePossible2) {
-    part = `From ${inh1}, possibly ${der2} from ${inh2}`;
-  } else {
-    part = `From ${inh1}, ${der2} from ${inh2}`;
-  }
-  etymologyParts.push(part);
-} else if (inh1) {
-  etymologyParts.push(includePossible1 ? `Possibly from ${inh1}` : `From ${inh1}`);
-} else if (inh2) {
-  const der = inh2IsBorrowed ? 'Borrowed' : 'Inherited';
-  const possiblePrefix = includePossible2 ? 'Possibly ' : '';
-  const derToUse = includePossible2 ? der.toLowerCase() : der;
-  etymologyParts.push(`${possiblePrefix}${derToUse} from ${inh2}`);
-}
+      if (includeUnknown) {
+        etymologyParts.push('{{unk|myv}}');
+      }
+      if (includeUncertain) {
+        etymologyParts.push('{{unc|myv}}');
+      }
+      if (inh1 && inh2) {
+        const der2 = inh2IsBorrowed ? 'borrowed' : 'inherited';
+        let part;
+        if (includePossible1 && includePossible2) {
+          part = `Possibly from ${inh1}, possibly ${der2} from ${inh2}`;
+        } else if (includePossible1) {
+          part = `Possibly from ${inh1}, ${der2} from ${inh2}`;
+        } else if (includePossible2) {
+          part = `From ${inh1}, possibly ${der2} from ${inh2}`;
+        } else {
+          part = `From ${inh1}, ${der2} from ${inh2}`;
+        }
+        etymologyParts.push(part);
+      } else if (inh1) {
+        etymologyParts.push(includePossible1 ? `Possibly from ${inh1}` : `From ${inh1}`);
+      } else if (inh2) {
+        const der = inh2IsBorrowed ? 'Borrowed' : 'Inherited';
+        const possiblePrefix = includePossible2 ? 'Possibly ' : '';
+        const derToUse = includePossible2 ? der.toLowerCase() : der;
+        etymologyParts.push(`${possiblePrefix}${derToUse} from ${inh2}`);
+      }
 
-if (cognates.length > 0) etymologyParts.push(`Cognates include ${cognates.join(', ')}`);
+      if (cognates.length > 0) etymologyParts.push(`Cognates include ${cognates.join(', ')}`);
 
-const manualEtymology = document.getElementById('manual_etymology').value.trim();
-    if (manualEtymology) {
-      etymologyParts.push(manualEtymology);
+      const manualEtymology = document.getElementById('manual_etymology').value.trim();
+      if (manualEtymology) {
+        etymologyParts.push(manualEtymology);
+      }
+
+      const etymology = etymologyParts.length > 0 ?
+        etymologyParts.join('. ') + (manualEtymology ? '' : '.') :
+        '{{rfe|myv}}';
+
+      const includePron = document.getElementById('include_pronunciation').checked;
+      const ipaPronunciation = document.getElementById('ipa_pronunciation').value.trim();
+
+      let pronunciationSection = '';
+      if (includePron) {
+        if (ipaPronunciation) {
+          const ipaList = ipaPronunciation
+            .split(',')
+            .map(p => p.trim())
+            .filter(Boolean)
+            .map(p => `/${p}/`);
+
+          pronunciationSection = `\n\n===Pronunciation===\n{{IPA|myv|${ipaList.join('|')}}}`;
+        } else {
+          pronunciationSection = `\n\n===Pronunciation===\n{{rfp|myv}}`;
+        }
+      }
+
+      const includeInflection = document.getElementById('include_inflection').checked;
+      const inflection = document.getElementById('inflection').value.trim();
+
+      let inflectionSection = '';
+      let partOfSpeech = document.getElementById('part_of_speech').value;
+      if (includeInflection && inflection) {
+        let sectionTitle = (partOfSpeech === 'verb') ? '====Conjugation====' : '====Declension====';
+        inflectionSection = `\n\n${sectionTitle}\n{{${inflection}}}`;
+      }
+
+      let output = `==${language}==\n\n`;
+
+      if (alternativeFormsSection) {
+        output += alternativeFormsSection;
+      }
+
+      output += `===Etymology===\n${etymology}`;
+
+      if (pronunciationSection) {
+        output += pronunciationSection;
+      }
+
+      output += `\n\n===${posCapitalized}===\n{{head|myv|${pos}}}`;
+
+      const meaningGroups = document.querySelectorAll('.meaning-group');
+      const prefix = pos === 'verb' ? 'to ' : '';
+      let meaningLines = [];
+
+      meaningGroups.forEach(group => {
+        const meaningInput = group.querySelector('.meaning');
+        const labelInput = group.querySelector('.label');
+        const exampleInput = group.querySelector('.example');
+        const translationInput = group.querySelector('.translation');
+        const synonymInput = group.querySelector('.synonyms');
+
+        const meaningText = meaningInput.value.trim();
+        if (!meaningText) return;
+
+        const meanings = meaningText.split(',').map(m => m.trim()).filter(Boolean);
+        const formattedMeanings = meanings.map(m => `[[${m}]]`);
+
+        const labelText = labelInput.value.trim();
+        if (labelText) {
+          const labels = labelText.split(',').map(l => l.trim()).filter(Boolean);
+          const labelFormatted = `{{lb|myv|${labels.join('|')}}}`;
+          formattedMeanings.forEach((meaning, index) => {
+            formattedMeanings[index] = `${labelFormatted} ${meaning}`;
+          });
+        }
+
+        meaningLines.push(`# ${prefix}${formattedMeanings.join(', ')}`);
+
+        const example = exampleInput.value.trim();
+        const translation = translationInput.value.trim();
+        if (example) {
+          const word = meanings[0];
+          const bolded = example.includes(word) ?
+            example.replace(word, `${word}`) :
+            `${example}`;
+          const uxi = translation ?
+            `{{uxi|myv|${bolded}|${translation}}}` :
+            `{{uxi|myv|${bolded}}}`;
+          meaningLines.push(`#: ${uxi}`);
+        }
+
+        const synonyms = synonymInput.value.trim();
+        if (synonyms) {
+          const synList = synonyms.split(',').map(s => s.trim()).filter(Boolean);
+          if (synList.length > 0) {
+            meaningLines.push(`#: {{syn|myv|${synList.join('|')}}}`);
+          }
+        }
+      });
+
+      if (meaningLines.length > 0) {
+        output += '\n\n' + meaningLines.join('\n');
+      }
+
+      if (includeInflection && !inflectionSection) {
+        let sectionTitle = (partOfSpeech === 'verb') ? '====Conjugation====' : '====Declension====';
+        output += `\n\n${sectionTitle}\n{{rfinfl|myv}}`;
+      }
+
+      if (inflectionSection) {
+        output += inflectionSection;
+      }
+
+      const derivedTermsRaw = document.getElementById('derived_terms').value.trim();
+      if (derivedTermsRaw) {
+        const terms = derivedTermsRaw.split(',').map(t => t.trim()).filter(Boolean);
+        if (terms.length > 0) {
+          const derivedList = terms.map(t => `|${t}\n`).join('');
+          output += `\n\n====Derived terms====\n{{col|myv|\n${derivedList}}}`;
+        }
+      }
+
+      const presetReferences = [
+        'rfref|myv',
+      ];
+
+      const manualReferencesRaw = document.getElementById('manual_references').value.trim();
+      const manualRefLines = manualReferencesRaw ? manualReferencesRaw.split('\n').map(line => line.trim()).filter(
+        Boolean) : [];
+
+      const referencesRaw = document.getElementById('references').value.trim();
+      const refLines = referencesRaw ? referencesRaw.split('\n').map(line => line.trim()).filter(Boolean) : [];
+
+      const allReferences = manualRefLines.length > 0 ? manualRefLines : (refLines.length > 0 ? refLines :
+        presetReferences);
+
+      if (allReferences.length > 0) {
+        output += `\n\n===References===`;
+        allReferences.forEach(ref => {
+          if (manualRefLines.includes(ref)) {
+            output += `\n* ${ref}`;
+          } else {
+            output += `\n* {{R:${ref}}}`;
+          }
+        });
+      }
+
+      document.getElementById('output').textContent = output;
     }
 
-const etymology = etymologyParts.length > 0 
-  ? etymologyParts.join('. ') + (manualEtymology ? '' : '.')
-  : '{{rfe|myv}}';
-
-const includePron = document.getElementById('include_pronunciation').checked;
-const ipaPronunciation = document.getElementById('ipa_pronunciation').value.trim();
-
-let pronunciationSection = '';
-if (includePron) {
-  if (ipaPronunciation) {
-  const ipaList = ipaPronunciation
-    .split(',')
-    .map(p => p.trim())
-    .filter(Boolean)
-    .map(p => `/${p}/`);
-
-  pronunciationSection = `\n\n===Pronunciation===\n{{IPA|myv|${ipaList.join('|')}}}`;
-} else {
-  pronunciationSection = `\n\n===Pronunciation===\n{{rfp|myv}}`;
-}
-}
-
-const includeInflection = document.getElementById('include_inflection').checked;
-const inflection = document.getElementById('inflection').value.trim();
-
-let inflectionSection = '';
-let partOfSpeech = document.getElementById('part_of_speech').value;
-if (includeInflection && inflection) {
-  let sectionTitle = (partOfSpeech === 'verb') ? '====Conjugation====' : '====Declension====';
-  inflectionSection = `\n\n${sectionTitle}\n{{${inflection}}}`;
-}
-
-let output = `==${language}==\n\n`;
-
-if (alternativeFormsSection) {
-  output += alternativeFormsSection;
-}
-
-output += `===Etymology===\n${etymology}`;
-
-if (pronunciationSection) {
-  output += pronunciationSection;
-}
-
-output += `\n\n===${posCapitalized}===\n{{head|myv|${pos}}}`;
-
-const meaningGroups = document.querySelectorAll('.meaning-group');
-const prefix = pos === 'verb' ? 'to ' : '';
-let meaningLines = [];
-
-meaningGroups.forEach(group => {
-  const meaningInput = group.querySelector('.meaning');
-  const labelInput = group.querySelector('.label');
-  const exampleInput = group.querySelector('.example');
-  const translationInput = group.querySelector('.translation');
-  const synonymInput = group.querySelector('.synonyms');
-
-  const meaningText = meaningInput.value.trim();
-  if (!meaningText) return;
-
-  const meanings = meaningText.split(',').map(m => m.trim()).filter(Boolean);
-  const formattedMeanings = meanings.map(m => `[[${m}]]`);
-
-  const labelText = labelInput.value.trim();
-  if (labelText) {
-    const labels = labelText.split(',').map(l => l.trim()).filter(Boolean);
-    const labelFormatted = `{{lb|myv|${labels.join('|')}}}`;
-    formattedMeanings.forEach((meaning, index) => {
-      formattedMeanings[index] = `${labelFormatted} ${meaning}`;
+    document.getElementById('add-cognate-btn').addEventListener('click', () => {
+      const template = document.getElementById('cognate-template');
+      const clone = template.content.cloneNode(true);
+      document.getElementById('cognates-wrapper').appendChild(clone);
     });
-  }
 
-  meaningLines.push(`# ${prefix}${formattedMeanings.join(', ')}`);
+    document.getElementById('add-meaning-btn').addEventListener('click', () => {
+      const template = document.getElementById('meaning-template');
+      const clone = template.content.cloneNode(true);
+      document.getElementById('meanings-wrapper').appendChild(clone);
+    });
 
-  const example = exampleInput.value.trim();
-  const translation = translationInput.value.trim();
-  if (example) {
-  const word = meanings[0];
-  const bolded = example.includes(word)
-    ? example.replace(word, `${word}`)
-    : `${example}`;
-  const uxi = translation
-    ? `{{uxi|myv|${bolded}|${translation}}}`
-    : `{{uxi|myv|${bolded}}}`;
-  meaningLines.push(`#: ${uxi}`);
-}
+    document.querySelectorAll('.ipa-symbol-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        const ipaInput = document.getElementById('ipa_pronunciation');
+        const symbol = this.textContent.trim();
+        ipaInput.value += symbol;
+        ipaInput.focus();
+      });
+    });
 
-  const synonyms = synonymInput.value.trim();
-  if (synonyms) {
-    const synList = synonyms.split(',').map(s => s.trim()).filter(Boolean);
-    if (synList.length > 0) {
-      meaningLines.push(`#: {{syn|myv|${synList.join('|')}}}`);
+    document.getElementById('inh2_is_borrowed').addEventListener('change', function () {
+      const inh2Label = document.getElementById('inh2_label');
+      const inh1Label = document.getElementById('inh1_label');
+      const isChecked = this.checked;
+
+      inh2Label.textContent = isChecked ? 'Borrowed:' : 'Inherited 2:';
+      inh1Label.textContent = isChecked ? 'Inherited:' : 'Inherited 1:';
+    });
+
+    function copyArticle() {
+      const outputText = document.getElementById('output').textContent;
+      if (!outputText) {
+        alert('No content to copy. Please generate an article first.');
+        return;
+      }
+
+      navigator.clipboard.writeText(outputText)
+        .then(() => {
+          alert('Article copied to clipboard!');
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+          alert('Failed to copy article. Please try again.');
+        });
     }
-  }
-});
 
-if (meaningLines.length > 0) {
-  output += '\n\n' + meaningLines.join('\n');
-}
-
-if (includeInflection && !inflectionSection) {
-  let sectionTitle = (partOfSpeech === 'verb') ? '====Conjugation====' : '====Declension====';
-  output += `\n\n${sectionTitle}\n{{rfinfl|myv}}`;
-}
-
-if (inflectionSection) {
-  output += inflectionSection;
-}
-
-const derivedTermsRaw = document.getElementById('derived_terms').value.trim();
-if (derivedTermsRaw) {
-  const terms = derivedTermsRaw.split(',').map(t => t.trim()).filter(Boolean);
-  if (terms.length > 0) {
-    const derivedList = terms.map(t => `|${t}\n`).join('');
-    output += `\n\n====Derived terms====\n{{col|myv|\n${derivedList}}}`;
-  }
-}
-
-const presetReferences = [
-  'rfref|myv',
-];
-
-const manualReferencesRaw = document.getElementById('manual_references').value.trim();
-  const manualRefLines = manualReferencesRaw ? manualReferencesRaw.split('\n').map(line => line.trim()).filter(Boolean) : [];
-
-  const referencesRaw = document.getElementById('references').value.trim();
-  const refLines = referencesRaw ? referencesRaw.split('\n').map(line => line.trim()).filter(Boolean) : [];
-
-  const allReferences = manualRefLines.length > 0 ? manualRefLines : (refLines.length > 0 ? refLines : presetReferences);
-
-  if (allReferences.length > 0) {
-    output += `\n\n===References===`;
-    allReferences.forEach(ref => {
-      if (manualRefLines.includes(ref)) {
-        output += `\n* ${ref}`;
-      } else {
-        output += `\n* {{R:${ref}}}`;
+    function clearForm() {
+      if (confirm('Are you sure you want to clear all form fields?')) {
+        document.querySelectorAll('input, textarea, select').forEach(element => {
+          if (element.id !== 'language') {
+            element.value = '';
+          }
+        });
+        document.getElementById('output').textContent = '';
       }
-    });
-  }
-
-document.getElementById('output').textContent = output;
-}
-
-document.getElementById('add-cognate-btn').addEventListener('click', () => {
-  const template = document.getElementById('cognate-template');
-  const clone = template.content.cloneNode(true);
-  document.getElementById('cognates-wrapper').appendChild(clone);
-});
-
-document.getElementById('add-meaning-btn').addEventListener('click', () => {
-  const template = document.getElementById('meaning-template');
-  const clone = template.content.cloneNode(true);
-  document.getElementById('meanings-wrapper').appendChild(clone);
-});
-
-document.querySelectorAll('.ipa-symbol-btn').forEach(button => {
-  button.addEventListener('click', function() {
-    const ipaInput = document.getElementById('ipa_pronunciation');
-    const symbol = this.textContent.trim();
-    ipaInput.value += symbol;
-    ipaInput.focus();
-  });
-});
-
-document.getElementById('inh2_is_borrowed').addEventListener('change', function () {
-  const inh2Label = document.getElementById('inh2_label');
-  const inh1Label = document.getElementById('inh1_label');
-  const isChecked = this.checked;
-
-  inh2Label.textContent = isChecked ? 'Borrowed:' : 'Inherited 2:';
-  inh1Label.textContent = isChecked ? 'Inherited:' : 'Inherited 1:';
-});
-
-function copyArticle() {
-  const outputText = document.getElementById('output').textContent;
-  if (!outputText) {
-    alert('No content to copy. Please generate an article first.');
-    return;
-  }
-  
-  navigator.clipboard.writeText(outputText)
-    .then(() => {
-      alert('Article copied to clipboard!');
-    })
-    .catch(err => {
-      console.error('Failed to copy: ', err);
-      alert('Failed to copy article. Please try again.');
-    });
-}
-
-function clearForm() {
-  if (confirm('Are you sure you want to clear all form fields?')) {
-    document.querySelectorAll('input, textarea, select').forEach(element => {
-      if (element.id !== 'language') {
-        element.value = '';
-      }
-    });
-    document.getElementById('output').textContent = '';
-  }
-}
+    }
   </script>
 </body>
+
 </html>
