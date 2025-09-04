@@ -183,30 +183,6 @@
             min-height: 60px;
         }
 
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 10px;
-        }
-
-        .pagination button {
-            background-color: #f8f9fa;
-            color: #007bff;
-            border: 1px solid #dee2e6;
-        }
-
-        .pagination button.active {
-            background-color: #007bff;
-            color: white;
-        }
-
         @media (max-width: 600px) {
             body {
                 margin: 30px;
@@ -335,387 +311,279 @@
             <option value="Sari Makkonen">Sari Makkonen</option>
             <option value="Tarja Penttinen">Tarja Penttinen</option>
         </select>
-        <select id="itemsPerPage">
-            <option value="10">10 per sivu</option>
-            <option value="25">25 per sivu</option>
-            <option value="50">50 per sivu</option>
-            <option value="100">100 per sivu</option>
-        </select>
         <button onclick="window.loadTicketsTriggeredByUser = true; loadTickets();">Lataa</button>
 
-        <div id="ticketContainer">
-            <div class="loading" id="loadingIndicator" style="display: none;">Ladataan...</div>
-        </div>
-        
-        <div id="pagination" class="pagination"></div>
+        <div id="ticketContainer"></div>
 
         <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-            import { getDatabase, ref, push, get, update, remove, query, orderByChild, limitToLast, startAt, endAt } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
-            import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import { getDatabase, ref, push, get, update, remove } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-            const firebaseConfig = {
-                apiKey: "AIzaSyDPvu0I02K_gfbxjAbgZVuyNqoP2s_Onf8",
-                authDomain: "tickets-512c1.firebaseapp.com",
-                databaseURL: "https://tickets-512c1-default-rtdb.firebaseio.com",
-                projectId: "tickets-512c1",
-                storageBucket: "tickets-512c1.firebasestorage.app",
-                messagingSenderId: "92507230513",
-                appId: "1:92507230513:web:38d6e8a6c3beaafdf2e010"
-            };
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPvu0I02K_gfbxjAbgZVuyNqoP2s_Onf8",
+    authDomain: "tickets-512c1.firebaseapp.com",
+    databaseURL: "https://tickets-512c1-default-rtdb.firebaseio.com",
+    projectId: "tickets-512c1",
+    storageBucket: "tickets-512c1.firebasestorage.app",
+    messagingSenderId: "92507230513",
+    appId: "1:92507230513:web:38d6e8a6c3beaafdf2e010"
+  };
 
-            const app = initializeApp(firebaseConfig);
-            const db = getDatabase(app);
-            const auth = getAuth(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth(app);
 
-            let currentPage = 1;
-            let itemsPerPage = 10;
-            let allTickets = [];
-            let filteredTickets = [];
+window.login = () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      document.getElementById('loginDiv').style.display = 'none';
+      document.getElementById('appDiv').style.display = 'block';
+    })
+    .catch(error => {
+      alert("Kirjautuminen epäonnistui: " + error.message);
+    });
+};
 
-            window.login = () => {
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                signInWithEmailAndPassword(auth, email, password)
-                    .then(() => {
-                        document.getElementById('loginDiv').style.display = 'none';
-                        document.getElementById('appDiv').style.display = 'block';
-                    })
-                    .catch(error => {
-                        alert("Kirjautuminen epäonnistui: " + error.message);
-                    });
-            };
+onAuthStateChanged(auth, user => {
+  if (user) {
+    document.getElementById('loginDiv').style.display = 'none';
+    document.getElementById('appDiv').style.display = 'block';
 
-            onAuthStateChanged(auth, user => {
-                if (user) {
-                    document.getElementById('loginDiv').style.display = 'none';
-                    document.getElementById('appDiv').style.display = 'block';
+    if (!window.loadTicketsCalled) {
+      loadTickets();
+      window.loadTicketsCalled = true;
+    }
+  } else {
+    document.getElementById('loginDiv').style.display = 'block';
+    document.getElementById('appDiv').style.display = 'none';
+    window.loadTicketsCalled = false;
+  }
+});
 
-                    if (!window.loadTicketsCalled) {
-                        loadTickets();
-                        window.loadTicketsCalled = true;
-                    }
-                } else {
-                    document.getElementById('loginDiv').style.display = 'block';
-                    document.getElementById('appDiv').style.display = 'none';
-                    window.loadTicketsCalled = false;
-                }
-            });
+  function getURLParameter(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
 
-            function getURLParameter(name) {
-                return new URLSearchParams(window.location.search).get(name);
-            }
+  window.createTicket = async function() {
+    const invoiceNumber = document.getElementById('invoiceNumber').value.trim();
+    const supervisorSelect = document.getElementById('supervisor');
+    const supervisor = supervisorSelect.options[supervisorSelect.selectedIndex].value;
+    const questionText = document.getElementById('questionText').value.trim();
 
-            window.createTicket = async function() {
-                const invoiceNumber = document.getElementById('invoiceNumber').value.trim();
-                const supervisorSelect = document.getElementById('supervisor');
-                const supervisor = supervisorSelect.options[supervisorSelect.selectedIndex].value;
-                const questionText = document.getElementById('questionText').value.trim();
+    if (!invoiceNumber || supervisor === "" || !questionText) {
+      alert("Täytä kaikki kentät.");
+      return;
+    }
 
-                if (!invoiceNumber || supervisor === "" || !questionText) {
-                    alert("Täytä kaikki kentät.");
-                    return;
-                }
+    await push(ref(db, 'tickets'), {
+      invoiceNumber,
+      supervisor,
+      status: "ODOTTAA TARKASTUSTA",
+      questions: [
+        { text: questionText, time: Date.now() }
+      ],
+      createdAt: Date.now()
+    });
 
-                await push(ref(db, 'tickets'), {
-                    invoiceNumber,
-                    supervisor,
-                    status: "ODOTTAA TARKASTUSTA",
-                    questions: [
-                        { text: questionText, time: Date.now() }
-                    ],
-                    createdAt: Date.now()
-                });
+    alert("Pyyntö luotu.");
+    document.getElementById('invoiceNumber').value = '';
+    document.getElementById('supervisor').selectedIndex = 0;
+    document.getElementById('questionText').value = '';
+    loadTickets();
+  };
 
-                alert("Pyyntö luotu.");
-                document.getElementById('invoiceNumber').value = '';
-                document.getElementById('supervisor').selectedIndex = 0;
-                document.getElementById('questionText').value = '';
-                loadTickets();
-            };
+    window.loadTickets = async function() {
+      const supSelect = document.getElementById('filterSupervisor');
+      const supName = supSelect.options[supSelect.selectedIndex].value;
 
-            window.loadTickets = async function() {
-                const supSelect = document.getElementById('filterSupervisor');
-                const supName = supSelect.options[supSelect.selectedIndex].value;
-                itemsPerPage = parseInt(document.getElementById('itemsPerPage').value);
-                currentPage = 1;
+      if (supName === "") {
+        if (window.loadTicketsTriggeredByUser) {
+          alert("Valitse vastuuhenkilö.");
+        }
+        return;
+      }
 
-                if (supName === "") {
-                    if (window.loadTicketsTriggeredByUser) {
-                        alert("Valitse vastuuhenkilö.");
-                    }
-                    return;
-                }
+      const url = new URL(window.location);
+      url.searchParams.set('supervisor', supName);
+      window.history.replaceState(null, '', url);
 
-                const url = new URL(window.location);
-                url.searchParams.set('supervisor', supName);
-                window.history.replaceState(null, '', url);
+      const container = document.getElementById('ticketContainer');
+      container.innerHTML = '';
 
-                document.getElementById('loadingIndicator').style.display = 'block';
-                const container = document.getElementById('ticketContainer');
-                container.innerHTML = '';
-                
-                try {
-                    const snapshot = await get(ref(db, 'tickets'));
-                    const tickets = snapshot.val();
+      const snapshot = await get(ref(db, 'tickets'));
+      const tickets = snapshot.val();
 
-                    if (!tickets) {
-                        container.innerHTML = '<p>Mitään ei löytynyt.</p>';
-                        document.getElementById('loadingIndicator').style.display = 'none';
-                        return;
-                    }
+      if (!tickets) {
+        container.innerHTML = '<p>Mitään ei löytynyt.</p>';
+        return;
+      }
 
-                    allTickets = Object.entries(tickets)
-                        .map(([id, data]) => ({ id, ...data }))
-                        .sort((a, b) => b.createdAt - a.createdAt);
+      let filteredTickets = Object.entries(tickets);
+      
+      if (supName !== 'all') {
+        filteredTickets = filteredTickets.filter(([id, ticket]) => {
+          return ticket.supervisor === supName;
+        });
+      }
 
-                    if (supName !== 'all') {
-                        filteredTickets = allTickets.filter(ticket => ticket.supervisor === supName);
-                    } else {
-                        filteredTickets = [...allTickets];
-                    }
+      if (filteredTickets.length === 0) {
+        container.innerHTML = '<p>Mitään ei löytynyt.</p>';
+        return;
+      }
 
-                    if (filteredTickets.length === 0) {
-                        container.innerHTML = '<p>Mitään ei löytynyt.</p>';
-                        document.getElementById('loadingIndicator').style.display = 'none';
-                        return;
-                    }
+  filteredTickets.forEach(([id, data]) => {
+    const div = document.createElement('div');
+    div.className = 'ticket';
 
-                    renderTicketsForCurrentPage();
-                    setupPagination();
-                    
-                } catch (error) {
-                    console.error("Error loading tickets:", error);
-                    container.innerHTML = '<p>Virhe tietojen lataamisessa.</p>';
-                } finally {
-                    document.getElementById('loadingIndicator').style.display = 'none';
-                }
-            };
+if (data.status === "SAA LASKUTTAA") {
+  div.classList.add('billable');
+} else if (data.status === "KESKEN" || (data.questions && data.questions.length > 1)) {
+  div.classList.add('answered');
+} else {
+  div.classList.add('no-response');
+  if (data.status !== "KESKEN") {
+    data.status = "ODOTTAA TARKASTUSTA";
+  }
+}
 
-            function renderTicketsForCurrentPage() {
-                const container = document.getElementById('ticketContainer');
-                container.innerHTML = '';
-                
-                const startIndex = (currentPage - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
-                const pageTickets = filteredTickets.slice(startIndex, endIndex);
+    const questionsHtml = `
+  <div class="questions">
+    ${data.questions.map((q, index) => {
+      const date = new Date(q.time);
+      const formattedDate = date.toLocaleString('fi-FI', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      const deleteBtn = index > 0 
+        ? `<span style="cursor:pointer; margin-left:8px;" title="Poista vastaus" onclick="deleteAnswer('${id}', ${index})">🗑</span>`
+        : '';
+      return `<p><strong>${formattedDate}:</strong> ${q.text}${deleteBtn}</p>`;
+    }).join('')}
+  </div>
+`;
 
-                if (pageTickets.length === 0) {
-                    container.innerHTML = '<p>Mitään ei löytynyt.</p>';
-                    return;
-                }
+    div.innerHTML = `
+<h3>
+  <div class="supervisor">
+    Vastuuhenkilö: ${data.supervisor}
+  </div>
+  <div class="invoice-number">
+    Laskun tunnus: <a href="https://laskutus.iss.fi/invoice/${data.invoiceNumber}" target="_blank">${data.invoiceNumber}</a>
+  </div>
+</h3>
+    <p><strong>Pyynnön tila:</strong> <span class="status">${data.status}</span></p>
+    ${questionsHtml}
+    <textarea style="margin-bottom: 0px;" placeholder="Kirjoita vastaus..." id="followup-${id}"></textarea><br>
+    <div class="controls">
+      <div style="display: flex; align-items: center;">
+  <div>
+    <button onclick="addFollowUp('${id}')">✉&ensp;Tallenna vastaus</button>
+    <button onclick="updateStatus('${id}', 'KESKEN')">👁&ensp;Tarkastettavana</button>
+    <button onclick="updateStatus('${id}', 'SAA LASKUTTAA')">✔&ensp;Saa laskuttaa</button>
+  </div>
+  <button class="delete-button" onclick="deleteTicket('${id}')">🗑&ensp;Poista pyyntö</button>
+</div>
+    </div>
+  `;
+    container.appendChild(div);
+  });
+};
 
-                pageTickets.forEach(data => {
-                    const div = document.createElement('div');
-                    div.className = 'ticket';
+  window.addFollowUp = async function(id) {
+    const followUpText = document.getElementById(`followup-${id}`).value.trim();
+    if (!followUpText) return;
 
-                    if (data.status === "SAA LASKUTTAA") {
-                        div.classList.add('billable');
-                    } else if (data.status === "KESKEN" || (data.questions && data.questions.length > 1)) {
-                        div.classList.add('answered');
-                    } else {
-                        div.classList.add('no-response');
-                        if (data.status !== "KESKEN") {
-                            data.status = "ODOTTAA TARKASTUSTA";
-                        }
-                    }
+    const ticketRef = ref(db, `tickets/${id}`);
 
-                    const questionsHtml = `
-                        <div class="questions">
-                            ${data.questions.map((q, index) => {
-                                const date = new Date(q.time);
-                                const formattedDate = date.toLocaleString('fi-FI', {
-                                    year: 'numeric',
-                                    month: 'numeric',
-                                    day: 'numeric',
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                });
-                                const deleteBtn = index > 0 
-                                    ? `<span style="cursor:pointer; margin-left:8px;" title="Poista vastaus" onclick="deleteAnswer('${data.id}', ${index})">🗑</span>`
-                                    : '';
-                                return `<p><strong>${formattedDate}:</strong> ${q.text}${deleteBtn}</p>`;
-                            }).join('')}
-                        </div>
-                    `;
+    const snapshot = await get(ticketRef);
+    const ticket = snapshot.val();
 
-                    div.innerHTML = `
-                        <h3>
-                            <div class="supervisor">
-                                Vastuuhenkilö: ${data.supervisor}
-                            </div>
-                            <div class="invoice-number">
-                                Laskun tunnus: <a href="https://laskutus.iss.fi/invoice/${data.invoiceNumber}" target="_blank">${data.invoiceNumber}</a>
-                            </div>
-                        </h3>
-                        <p><strong>Pyynnön tila:</strong> <span class="status">${data.status}</span></p>
-                        ${questionsHtml}
-                        <textarea style="margin-bottom: 0px;" placeholder="Kirjoita vastaus..." id="followup-${data.id}"></textarea><br>
-                        <div class="controls">
-                            <div style="display: flex; align-items: center;">
-                                <div>
-                                    <button onclick="addFollowUp('${data.id}')">✉&ensp;Tallenna vastaus</button>
-                                    <button onclick="updateStatus('${data.id}', 'KESKEN')">👁&ensp;Tarkastettavana</button>
-                                    <button onclick="updateStatus('${data.id}', 'SAA LASKUTTAA')">✔&ensp;Saa laskuttaa</button>
-                                </div>
-                                <button class="delete-button" onclick="deleteTicket('${data.id}')">🗑&ensp;Poista pyyntö</button>
-                            </div>
-                        </div>
-                    `;
-                    container.appendChild(div);
-                });
-            }
+    if (!ticket) return;
 
-            function setupPagination() {
-                const paginationDiv = document.getElementById('pagination');
-                paginationDiv.innerHTML = '';
-                
-                const totalPages = Math.ceil(filteredTickets.length / itemsPerPage);
-                
-                if (totalPages <= 1) return;
-                
-                if (currentPage > 1) {
-                    const prevBtn = document.createElement('button');
-                    prevBtn.textContent = 'Edellinen';
-                    prevBtn.onclick = () => {
-                        currentPage--;
-                        renderTicketsForCurrentPage();
-                        setupPagination();
-                    };
-                    paginationDiv.appendChild(prevBtn);
-                }
-                
-                const maxVisiblePages = 5;
-                let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-                
-                if (endPage - startPage + 1 < maxVisiblePages) {
-                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
-                }
-                
-                for (let i = startPage; i <= endPage; i++) {
-                    const pageBtn = document.createElement('button');
-                    pageBtn.textContent = i;
-                    if (i === currentPage) {
-                        pageBtn.classList.add('active');
-                    }
-                    pageBtn.onclick = () => {
-                        currentPage = i;
-                        renderTicketsForCurrentPage();
-                        setupPagination();
-                    };
-                    paginationDiv.appendChild(pageBtn);
-                }
-                
-                if (currentPage < totalPages) {
-                    const nextBtn = document.createElement('button');
-                    nextBtn.textContent = 'Seuraava';
-                    nextBtn.onclick = () => {
-                        currentPage++;
-                        renderTicketsForCurrentPage();
-                        setupPagination();
-                    };
-                    paginationDiv.appendChild(nextBtn);
-                }
-            }
+    const updatedQuestions = ticket.questions ? [...ticket.questions] : [];
+    updatedQuestions.push({ text: followUpText, time: Date.now() });
 
-            window.addFollowUp = async function(id) {
-                const followUpText = document.getElementById(`followup-${id}`).value.trim();
-                if (!followUpText) return;
+    await update(ticketRef, {
+      questions: updatedQuestions,
+      status: "VASTATTU"
+    });
 
-                const ticketRef = ref(db, `tickets/${id}`);
+    alert("Vastaus lisätty.");
+    loadTickets();
+  };
 
-                const snapshot = await get(ticketRef);
-                const ticket = snapshot.val();
+window.onload = () => {
+  if (window.loadTicketsCalled) return;
+  window.loadTicketsCalled = true;
 
-                if (!ticket) return;
+  const supervisorFromURL = getURLParameter('supervisor');
+  if (supervisorFromURL) {
+    const select = document.getElementById('filterSupervisor');
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].value === supervisorFromURL) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+    loadTickets();
+  }
+};
 
-                const updatedQuestions = ticket.questions ? [...ticket.questions] : [];
-                updatedQuestions.push({ text: followUpText, time: Date.now() });
+  window.updateStatus = async function(id, newStatus) {
+    const ticketRef = ref(db, `tickets/${id}`);
+    await update(ticketRef, {
+      status: newStatus
+    });
+    alert("Pyynnön tila päivitetty.");
+    loadTickets();
+  };
 
-                await update(ticketRef, {
-                    questions: updatedQuestions,
-                    status: "VASTATTU"
-                });
+  window.deleteAnswer = async function(ticketId, answerIndex) {
+  if (!confirm("Haluatko varmasti poistaa tämän vastauksen?")) return;
 
-                alert("Vastaus lisätty.");
-                loadTickets();
-            };
+  const ticketRef = ref(db, `tickets/${ticketId}`);
+  const snapshot = await get(ticketRef);
+  const ticket = snapshot.val();
 
-            window.onload = () => {
-                if (window.loadTicketsCalled) return;
-                window.loadTicketsCalled = true;
+  if (!ticket || !ticket.questions || ticket.questions.length <= answerIndex) {
+    alert("Vastausta ei löytynyt.");
+    return;
+  }
 
-                const supervisorFromURL = getURLParameter('supervisor');
-                if (supervisorFromURL) {
-                    const select = document.getElementById('filterSupervisor');
-                    for (let i = 0; i < select.options.length; i++) {
-                        if (select.options[i].value === supervisorFromURL) {
-                            select.selectedIndex = i;
-                            break;
-                        }
-                    }
-                    loadTickets();
-                }
-                
-                document.getElementById('itemsPerPage').addEventListener('change', () => {
-                    if (window.loadTicketsCalled) {
-                        currentPage = 1;
-                        renderTicketsForCurrentPage();
-                        setupPagination();
-                    }
-                });
-            };
+  const updatedQuestions = ticket.questions.filter((_, i) => i !== answerIndex);
+  const newStatus = updatedQuestions.length === 1 ? "ODOTTAA TARKASTUSTA" : ticket.status;
 
-            window.updateStatus = async function(id, newStatus) {
-                const ticketRef = ref(db, `tickets/${id}`);
-                await update(ticketRef, {
-                    status: newStatus
-                });
-                alert("Pyynnön tila päivitetty.");
-                loadTickets();
-            };
+  await update(ticketRef, {
+    questions: updatedQuestions
+  });
 
-            window.deleteAnswer = async function(ticketId, answerIndex) {
-                if (!confirm("Haluatko varmasti poistaa tämän vastauksen?")) return;
+  alert("Vastaus poistettu.");
+  loadTickets();
+};
 
-                const ticketRef = ref(db, `tickets/${ticketId}`);
-                const snapshot = await get(ticketRef);
-                const ticket = snapshot.val();
+  window.deleteTicket = async function(id) {
+    if (!confirm("Haluatko varmasti poistaa tämän pyynnön?")) return;
 
-                if (!ticket || !ticket.questions || ticket.questions.length <= answerIndex) {
-                    alert("Vastausta ei löytynyt.");
-                    return;
-                }
+    await remove(ref(db, `tickets/${id}`));
+    alert("Pyyntö poistettu.");
+    loadTickets();
+  };
 
-                const updatedQuestions = ticket.questions.filter((_, i) => i !== answerIndex);
-                const newStatus = updatedQuestions.length === 1 ? "ODOTTAA TARKASTUSTA" : ticket.status;
+  const toggleLink = document.getElementById("toggleLink");
+const formContainer = document.getElementById("formContainer");
 
-                await update(ticketRef, {
-                    questions: updatedQuestions
-                });
-
-                alert("Vastaus poistettu.");
-                loadTickets();
-            };
-
-            window.deleteTicket = async function(id) {
-                if (!confirm("Haluatko varmasti poistaa tämän pyynnön?")) return;
-
-                await remove(ref(db, `tickets/${id}`));
-                alert("Pyyntö poistettu.");
-                loadTickets();
-            };
-
-            const toggleLink = document.getElementById("toggleLink");
-            const formContainer = document.getElementById("formContainer");
-
-            toggleLink.addEventListener("click", () => {
-                const isVisible = formContainer.style.display === "block";
-                formContainer.style.display = isVisible ? "none" : "block";
-                toggleLink.textContent = isVisible ? "[Näytä lomake]" : "[Piilota lomake]";
-            });
-        </script>
+toggleLink.addEventListener("click", () => {
+  const isVisible = formContainer.style.display === "block";
+  formContainer.style.display = isVisible ? "none" : "block";
+  toggleLink.textContent = isVisible ? "[Näytä]" : "[Piilota]";
+});
+</script>
 
     </div>
 
