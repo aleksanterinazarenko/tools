@@ -521,7 +521,11 @@ window.onload = () => {
         break;
       }
     }
-    loadTickets();
+    if (supervisorFromURL === "all") {
+      loadTickets();
+    } else {
+      loadTickets();
+    }
   }
 };
 

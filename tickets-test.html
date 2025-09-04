@@ -521,7 +521,11 @@ window.onload = () => {
         break;
       }
     }
-    loadTickets();
+    if (supervisorFromURL === "all") {
+      loadTickets();
+    } else {
+      loadTickets();
+    }
   }
 };
 
@@ -571,7 +575,7 @@ const formContainer = document.getElementById("formContainer");
 toggleLink.addEventListener("click", () => {
   const isVisible = formContainer.style.display === "block";
   formContainer.style.display = isVisible ? "none" : "block";
-  toggleLink.textContent = isVisible ? "[Näytä lomake]" : "[Piilota lomake]";
+  toggleLink.textContent = isVisible ? "[Näytä]" : "[Piilota]";
 });
 </script>
 
