@@ -1,312 +1,322 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Tikettijärjestelmä</title>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Tikettijärjestelmä</title>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
         html {
-        overflow-y: scroll;
-    }
-    
-  body {
-  font-family: "Roboto", sans-serif;
-  margin: 80px;
-  background-color: #f4f6f8;
-  color: #333;
-  font-size: 15px;
-  line-height: 1.5;
-}
+            overflow-y: scroll;
+        }
 
-h2 {
-  font-size: 24px;
-  margin-bottom: 16px;
-}
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 80px;
+            background-color: #f4f6f8;
+            color: #333;
+            font-size: 15px;
+            line-height: 1.5;
+        }
 
-h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: #1a1a1a;
-}
+        h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
 
-h3 div {
-  margin-bottom: 4px;
-}
+        h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
 
-h3 div:last-child {
-  margin-bottom: 0;
-}
+        h3 div {
+            margin-bottom: 4px;
+        }
 
-p {
-  font-size: 15px;
-}
+        h3 div:last-child {
+            margin-bottom: 0;
+        }
 
-#password {
-  margin-bottom: 15px;
-}
+        p {
+            font-size: 15px;
+        }
 
-input, textarea, select {
-  width: 100%;
-  padding: 10px;
-  margin: 6px 0 10px;
-  resize: vertical;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-size: 15px;
-  font-family: inherit;
-}
+        #password {
+            margin-bottom: 15px;
+        }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-  outline: none;
-}
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 10px;
+            resize: vertical;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+            font-family: inherit;
+        }
 
-button {
-  padding: 8px 12px;
-  font-family: "Roboto", sans-serif;
-  font-size: 15px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-}
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
 
-button:hover {
-  background-color: #0056b3;
-}
+        button {
+            padding: 8px 12px;
+            font-family: "Roboto", sans-serif;
+            font-size: 15px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
 
-button.delete-button {
-  background-color: #dc3545;
-  margin-left: auto;
-}
+        button:hover {
+            background-color: #0056b3;
+        }
 
-button.delete-button:hover {
-    background-color: #c82333;
-}
+        button.delete-button {
+            background-color: #dc3545;
+            margin-left: auto;
+        }
 
-.submit-btn {
-  padding: 8px 12px;
-  margin-bottom: 16px;
-}
+        button.delete-button:hover {
+            background-color: #c82333;
+        }
 
-.ticket {
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  border-left: 6px solid #007bff;
-  transition: background-color 0.2s ease, border-left-color 0.2s ease;
-  font-size: 15px;
-}
+        .submit-btn {
+            padding: 8px 12px;
+            margin-bottom: 16px;
+        }
 
-.ticket h3 {
-  margin: 0 0 10px;
-  font-size: 15px;
-  color: #333;
-}
+        .ticket {
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            border-left: 6px solid #007bff;
+            transition: background-color 0.2s ease, border-left-color 0.2s ease;
+            font-size: 15px;
+        }
 
-.ticket a {
-  color: #007bff;
-  text-decoration: none;
-}
+        .ticket h3 {
+            margin: 0 0 10px;
+            font-size: 15px;
+            color: #333;
+        }
 
-.ticket p { 
-  margin-bottom: 16px;
-}
+        .ticket a {
+            color: #007bff;
+            text-decoration: none;
+        }
 
-.ticket a:hover {
-  text-decoration: underline;
-}
+        .ticket p {
+            margin-bottom: 16px;
+        }
 
-#ticketContainer {
-  margin-top: 24px;
-}
+        .ticket a:hover {
+            text-decoration: underline;
+        }
 
-#filterSupervisor {
-  margin-bottom: 16px;
-}
+        #ticketContainer {
+            margin-top: 24px;
+        }
 
-.questions p {
-  margin: 4px 0;
-  font-size: 15px;
-}
+        #filterSupervisor {
+            margin-bottom: 16px;
+        }
 
-.status {
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background-color: #e9ecef;
-  display: inline-block;
-  font-size: 13px;
-}
+        .questions p {
+            margin: 4px 0;
+            font-size: 15px;
+        }
 
-.controls {
-  margin-top: 10px;
-}
+        .status {
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            display: inline-block;
+            font-size: 13px;
+        }
 
-.controls button {
-  margin-right: 8px;
-}
+        .controls {
+            margin-top: 10px;
+        }
 
-.no-response {
-  border-left-color: #dc3545 !important;
-  background-color: #fff0f0;
-}
+        .controls button {
+            margin-right: 8px;
+        }
 
-.answered {
-  border-left-color: #fd7e14 !important;
-  background-color: #fff7e5;
-}
+        .no-response {
+            border-left-color: #dc3545 !important;
+            background-color: #fff0f0;
+        }
 
-.billable {
-  border-left-color: #28a745 !important;
-  background-color: #e5ffe5;
-}
+        .answered {
+            border-left-color: #fd7e14 !important;
+            background-color: #fff7e5;
+        }
 
-textarea {
-  min-height: 60px;
-}
+        .billable {
+            border-left-color: #28a745 !important;
+            background-color: #e5ffe5;
+        }
 
-@media (max-width: 600px) {
-  body {
-    margin: 30px;
-    font-size: 14px;
-  }
-  
-  h2 {
-    font-size: 20px;
-  }
+        textarea {
+            min-height: 60px;
+        }
 
-  h3 {
-    font-size: 16px;
-  }
+        @media (max-width: 600px) {
+            body {
+                margin: 30px;
+                font-size: 14px;
+            }
 
-  input, textarea, select, button {
-    font-size: 16px;
-  }
+            h2 {
+                font-size: 20px;
+            }
 
-  input, textarea, select {
-    padding: 10px;
-  }
+            h3 {
+                font-size: 16px;
+            }
 
-  button {
-    padding: 10px 18px;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
+            input,
+            textarea,
+            select,
+            button {
+                font-size: 16px;
+            }
 
-  .submit-btn {
-  padding: 10px 18px;
-  margin-bottom: 0;
-}
+            input,
+            textarea,
+            select {
+                padding: 10px;
+            }
 
-.controls > div {
-    flex-direction: column !important;
-    align-items: stretch;
-  }
+            button {
+                padding: 10px 18px;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 14px;
+            }
 
-  .controls button {
-    width: 100% !important;
-    margin: 6px 0 !important;
-  }
+            .submit-btn {
+                padding: 10px 18px;
+                margin-bottom: 0;
+            }
 
-  .controls {
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-  }
+            .controls>div {
+                flex-direction: column !important;
+                align-items: stretch;
+            }
 
-  .ticket {
-    padding: 12px;
-  }
+            .controls button {
+                width: 100% !important;
+                margin: 6px 0 !important;
+            }
 
-  .ticket a {
-    word-break: break-all;
-  }
+            .controls {
+                margin-top: 0;
+                display: flex;
+                flex-direction: column;
+            }
 
-  textarea {
-    min-height: 100px;
-  }
+            .ticket {
+                padding: 12px;
+            }
 
-  #formContainer {
-  margin-bottom: 24px;
-}
-}
-</style>
+            .ticket a {
+                word-break: break-all;
+            }
+
+            textarea {
+                min-height: 100px;
+            }
+
+            #formContainer {
+                margin-bottom: 24px;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
 
-<div id="loginDiv" style="display:none;">
-  <input id="email" type="email" placeholder="Sähköposti" />
-  <input id="password" type="password" placeholder="Salasana" />
-  <button onclick="login()">Kirjaudu sisään</button>
-</div>
+    <div id="loginDiv" style="display:none;">
+        <input id="email" type="email" placeholder="Sähköposti" />
+        <input id="password" type="password" placeholder="Salasana" />
+        <button onclick="login()">Kirjaudu sisään</button>
+    </div>
 
-<div id="appDiv" style="display:none;">
+    <div id="appDiv" style="display:none;">
 
-<h2>Tikettijärjestelmä</h2>
+        <h2>Tikettijärjestelmä</h2>
 
-<div style="margin-bottom: 12px;">
-  <h3>Uusi tarkastuspyyntö</h3> <span id="toggleLink" style="color:#007bff; cursor:pointer;">[Näytä lomake]</span>
-</div>
+        <div style="margin-bottom: 12px;">
+            <h3>Uusi tarkastuspyyntö</h3> <span id="toggleLink" style="color:#007bff; cursor:pointer;">[Näytä
+                lomake]</span>
+        </div>
 
-<div id="formContainer" style="display: none;">
-  <select id="supervisor">
-    <option value="">Valitse vastuuhenkilö</option>
-    <option value="Jari Ruokonen">Jari Ruokonen</option>
-    <option value="Juuso Aimonen">Juuso Aimonen</option>
-    <option value="Harri Kauppinen">Harri Kauppinen</option>
-    <option value="Harri Pyöriä">Harri Pyöriä</option>
-    <option value="Mika Kekkonen">Mika Kekkonen</option>
-    <option value="Nico Westermark">Nico Westermark</option>
-    <option value="Paula Salo">Paula Salo</option>
-    <option value="Samuli Järvinen">Samuli Järvinen</option>
-    <option value="Sari Makkonen">Sari Makkonen</option>
-    <option value="Tarja Penttinen">Tarja Penttinen</option>
-  </select><br>
-  <input type="text" id="invoiceNumber" placeholder="Laskun tunnus"><br>
-  <textarea id="questionText" placeholder="Pyynnön teksti..."></textarea><br>
-  <button class="submit-btn" onclick="createTicket()">Luo uusi tarkastuspyyntö</button>
-</div>
+        <div id="formContainer" style="display: none;">
+            <select id="supervisor">
+                <option value="">Valitse vastuuhenkilö</option>
+                <option value="Jari Ruokonen">Jari Ruokonen</option>
+                <option value="Juuso Aimonen">Juuso Aimonen</option>
+                <option value="Harri Kauppinen">Harri Kauppinen</option>
+                <option value="Harri Pyöriä">Harri Pyöriä</option>
+                <option value="Mika Kekkonen">Mika Kekkonen</option>
+                <option value="Nico Westermark">Nico Westermark</option>
+                <option value="Paula Salo">Paula Salo</option>
+                <option value="Samuli Järvinen">Samuli Järvinen</option>
+                <option value="Sari Makkonen">Sari Makkonen</option>
+                <option value="Tarja Penttinen">Tarja Penttinen</option>
+            </select><br>
+            <input type="text" id="invoiceNumber" placeholder="Laskun tunnus"><br>
+            <textarea id="questionText" placeholder="Pyynnön teksti..."></textarea><br>
+            <button class="submit-btn" onclick="createTicket()">Luo uusi tarkastuspyyntö</button>
+        </div>
 
-<hr>
+        <hr>
 
-<h3>Tarkastuspyynnöt</h3>
-<select id="filterSupervisor">
-  <option value="">Valitse vastuuhenkilö</option>
-  <option value="all">Kaikki tarkastuspyynnöt</option>
-  <option value="Jari Ruokonen">Jari Ruokonen</option>
-  <option value="Juuso Aimonen">Juuso Aimonen</option>
-  <option value="Harri Kauppinen">Harri Kauppinen</option>
-  <option value="Harri Pyöriä">Harri Pyöriä</option>
-  <option value="Mika Kekkonen">Mika Kekkonen</option>
-  <option value="Nico Westermark">Nico Westermark</option>
-  <option value="Paula Salo">Paula Salo</option>
-  <option value="Samuli Järvinen">Samuli Järvinen</option>
-  <option value="Sari Makkonen">Sari Makkonen</option>
-  <option value="Tarja Penttinen">Tarja Penttinen</option>
-</select>
-<button onclick="window.loadTicketsTriggeredByUser = true; loadTickets();">Lataa</button>
+        <h3>Tarkastuspyynnöt</h3>
+        <select id="filterSupervisor">
+            <option value="">Valitse vastuuhenkilö</option>
+            <option value="all">Kaikki tarkastuspyynnöt</option>
+            <option value="Jari Ruokonen">Jari Ruokonen</option>
+            <option value="Juuso Aimonen">Juuso Aimonen</option>
+            <option value="Harri Kauppinen">Harri Kauppinen</option>
+            <option value="Harri Pyöriä">Harri Pyöriä</option>
+            <option value="Mika Kekkonen">Mika Kekkonen</option>
+            <option value="Nico Westermark">Nico Westermark</option>
+            <option value="Paula Salo">Paula Salo</option>
+            <option value="Samuli Järvinen">Samuli Järvinen</option>
+            <option value="Sari Makkonen">Sari Makkonen</option>
+            <option value="Tarja Penttinen">Tarja Penttinen</option>
+        </select>
+        <button onclick="window.loadTicketsTriggeredByUser = true; loadTickets();">Lataa</button>
 
-<div id="ticketContainer"></div>
+        <div id="ticketContainer"></div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getDatabase, ref, push, get, update, remove } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
@@ -396,13 +406,9 @@ window.loadTickets = async function() {
     return;
   }
 
-  let basePath = window.location.pathname;
-const fileName = "tickets.html";
-const idx = basePath.indexOf(fileName);
-if (idx !== -1) {
-  basePath = basePath.substring(0, idx + fileName.length);
-}
-history.replaceState(null, '', `tickets.html?supervisor=${supName}`);
+  const url = new URL(window.location);
+  url.searchParams.set('supervisor', supName);
+  window.history.replaceState(null, '', url);
 
   const container = document.getElementById('ticketContainer');
   container.innerHTML = '';
@@ -521,11 +527,7 @@ window.onload = () => {
         break;
       }
     }
-    if (supervisorFromURL === "all") {
-      loadTickets();
-    } else {
-      loadTickets();
-    }
+    loadTickets();
   }
 };
 
@@ -579,7 +581,8 @@ toggleLink.addEventListener("click", () => {
 });
 </script>
 
-</div>
+    </div>
 
 </body>
+
 </html>
