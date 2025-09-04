@@ -405,7 +405,6 @@ onAuthStateChanged(auth, user => {
         return;
       }
 
-      // Update URL with the selected filter
       const url = new URL(window.location);
       url.searchParams.set('supervisor', supName);
       window.history.replaceState(null, '', url);
