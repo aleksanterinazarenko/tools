@@ -421,7 +421,7 @@ window.loadTickets = async function() {
     return;
   }
 
-  const filteredTickets = Object.entries(tickets);
+  let filteredTickets = Object.entries(tickets);
   
   if (supName !== 'all') {
     filteredTickets = filteredTickets.filter(([id, ticket]) => {
