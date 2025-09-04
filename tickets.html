@@ -395,44 +395,44 @@ onAuthStateChanged(auth, user => {
     loadTickets();
   };
 
-window.loadTickets = async function() {
-  const supSelect = document.getElementById('filterSupervisor');
-  const supName = supSelect.options[supSelect.selectedIndex].value;
+    window.loadTickets = async function() {
+      const supSelect = document.getElementById('filterSupervisor');
+      const supName = supSelect.options[supSelect.selectedIndex].value;
 
-  if (supName === "") {
-    if (window.loadTicketsTriggeredByUser) {
-      alert("Valitse vastuuhenkilö.");
-    }
-    return;
-  }
+      if (supName === "") {
+        if (window.loadTicketsTriggeredByUser) {
+          alert("Valitse vastuuhenkilö.");
+        }
+        return;
+      }
 
-  const url = new URL(window.location);
-  url.searchParams.set('supervisor', supName);
-  window.history.replaceState(null, '', url);
+      const url = new URL(window.location);
+      url.searchParams.set('supervisor', supName);
+      window.history.replaceState(null, '', url);
 
-  const container = document.getElementById('ticketContainer');
-  container.innerHTML = '';
+      const container = document.getElementById('ticketContainer');
+      container.innerHTML = '';
 
-  const snapshot = await get(ref(db, 'tickets'));
-  const tickets = snapshot.val();
+      const snapshot = await get(ref(db, 'tickets'));
+      const tickets = snapshot.val();
 
-  if (!tickets) {
-    container.innerHTML = '<p>Mitään ei löytynyt.</p>';
-    return;
-  }
+      if (!tickets) {
+        container.innerHTML = '<p>Mitään ei löytynyt.</p>';
+        return;
+      }
 
-  let filteredTickets = Object.entries(tickets);
-  
-  if (supName !== 'all') {
-    filteredTickets = filteredTickets.filter(([id, ticket]) => {
-      return ticket.supervisor === supName;
-    });
-  }
+      let filteredTickets = Object.entries(tickets);
+      
+      if (supName !== 'all') {
+        filteredTickets = filteredTickets.filter(([id, ticket]) => {
+          return ticket.supervisor === supName;
+        });
+      }
 
-  if (filteredTickets.length === 0) {
-    container.innerHTML = '<p>Mitään ei löytynyt.</p>';
-    return;
-  }
+      if (filteredTickets.length === 0) {
+        container.innerHTML = '<p>Mitään ei löytynyt.</p>';
+        return;
+      }
 
   filteredTickets.forEach(([id, data]) => {
     const div = document.createElement('div');
