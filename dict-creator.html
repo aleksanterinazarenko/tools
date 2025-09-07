@@ -161,11 +161,6 @@
             min-width: 320px;
         }
 
-        p {
-            margin-top: 0;
-            margin-bottom: 0.5em;
-        }
-
         .output {
             padding: 15px;
             border: 1px solid #ccc;
@@ -174,6 +169,11 @@
             white-space: pre-wrap;
             min-height: 100px;
             background-color: #f9f9f9;
+        }
+
+        .output p {
+            margin-top: 0;
+            margin-bottom: 0.2em;
         }
 
         .preview {
@@ -573,7 +573,9 @@
                     return;
                 }
 
-                const formattedEntries = entries.map(formatEntryForDisplay).join('<p>');
+                const formattedEntries = entries.map(entry =>
+                    `<p>${formatEntryForDisplay(entry)}</p>`
+                ).join('');
                 outputElement.innerHTML = formattedEntries;
             }
 
