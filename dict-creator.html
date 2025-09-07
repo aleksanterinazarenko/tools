@@ -407,20 +407,27 @@
                 const finnishExample = exampleFinnishInput.value.trim();
                 const polishTranslation = examplePolishInput.value.trim();
 
-                if (finnishExample && polishTranslation) {
-                    examples.push({
-                        finnish: finnishExample,
-                        polish: polishTranslation
-                    });
-
+                if (polishTranslation) {
+                    if (!finnishExample && examples.length > 0) {
+                        examples.push({
+                            finnish: '',
+                            polish: polishTranslation
+                        });
+                    } else if (finnishExample) {
+                        examples.push({
+                            finnish: finnishExample,
+                            polish: polishTranslation
+                        });
+                    }
                     updateExamplesList();
                     updatePreview();
-
-                    exampleFinnishInput.value = '';
-                    examplePolishInput.value = '';
-                    exampleFinnishInput.focus();
                 }
+
+                exampleFinnishInput.value = '';
+                examplePolishInput.value = '';
+                exampleFinnishInput.focus();
             });
+
 
             exampleFinnishInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
@@ -438,7 +445,7 @@
                 const finnishWord = finnishWordInput.value.trim();
 
                 if (!finnishWord) {
-                    alert('Please enter a Finnish word');
+                    alert('Please enter a word');
                     return;
                 }
 
@@ -494,7 +501,7 @@
                     if (def.pos) {
                         defText += `${def.pos} `;
                     }
-                    defText += `<span class="italic">${escapeHtml(def.text)}</span>`;
+                    defText += `<span class="italic">${def.text}</span>`;
                     if (def.gender) {
                         defText += ` ${def.gender}`;
                     }
@@ -622,8 +629,14 @@
 
                 if (entry.examples.length > 0) {
                     const exs = entry.examples.map(ex => {
-                        return escapeHtml(ex.finnish) + " <span class=\"italic\">" + escapeHtml(ex
-                            .polish) + "</span>";
+                        if (ex.finnish) {
+                            return escapeHtml(ex.finnish) + " <span class=\"italic\">" + escapeHtml(ex
+                                .polish) + "</span>";
+                        } else if (examples.length > 1) {
+                            return "<span class=\"italic\">" + escapeHtml(ex.polish) + "</span>";
+                        } else {
+                            return "<span class=\"italic\">" + escapeHtml(ex.polish) + "</span>";
+                        }
                     });
                     result += exs.join('; ');
                 }
