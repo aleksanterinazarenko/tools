@@ -568,7 +568,7 @@
                     return;
                 }
 
-                const formattedEntries = entries.map(formatEntryForDisplay).join('<br>');
+                const formattedEntries = entries.map(formatEntryForDisplay).join('<p>');
                 outputElement.innerHTML = formattedEntries;
             }
 
