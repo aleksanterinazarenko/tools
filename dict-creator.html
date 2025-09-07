@@ -80,7 +80,8 @@
             color: #333;
         }
 
-        input[type="text"] {
+        input[type="text"],
+        select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -235,6 +236,12 @@
             flex: 1;
             min-width: 150px;
         }
+
+        .shortcut-hint {
+            font-size: 10pt;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -251,7 +258,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="definition-label">Label:</label>
-                    <input type="text" id="definition-label" class="label-input" placeholder="e.g., ark, kuv">
+                    <input type="text" id="definition-label" class="label-input" placeholder="e.g., kiel.">
                 </div>
                 <div class="form-group">
                     <label for="part-of-speech">Part of Speech:</label>
@@ -263,7 +270,12 @@
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender:</label>
-                    <input type="text" id="gender" class="gender-input" placeholder="m, f, n">
+                    <select id="gender" class="gender-input">
+                        <option value="">-- Select --</option>
+                        <option value="m">m</option>
+                        <option value="f">f</option>
+                        <option value="n">n</option>
+                    </select>
                 </div>
             </div>
             <div class="buttons-row">
@@ -296,6 +308,7 @@
 
         <div class="buttons-row">
             <button id="save-entry">Save Entry</button>
+            <span class="shortcut-hint">(Ctrl+S or ⌘S)</span>
             <button id="reset-form" class="btn-secondary">Clear Form</button>
         </div>
     </div>
@@ -339,6 +352,13 @@
             let entries = [];
             let definitionCounter = 1;
 
+            document.addEventListener('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveEntryBtn.click();
+                }
+            });
+
             addDefinitionCommaBtn.addEventListener('click', function () {
                 addDefinition(',');
             });
@@ -355,7 +375,7 @@
                 const definitionText = definitionTextInput.value.trim();
                 const partOfSpeech = partOfSpeechInput.value.trim();
                 const label = definitionLabelInput.value.trim();
-                const gender = genderInput.value.trim();
+                const gender = genderInput.value;
 
                 if (definitionText) {
                     definitions.push({
@@ -407,27 +427,20 @@
                 const finnishExample = exampleFinnishInput.value.trim();
                 const polishTranslation = examplePolishInput.value.trim();
 
-                if (polishTranslation) {
-                    if (!finnishExample && examples.length > 0) {
-                        examples.push({
-                            finnish: '',
-                            polish: polishTranslation
-                        });
-                    } else if (finnishExample) {
-                        examples.push({
-                            finnish: finnishExample,
-                            polish: polishTranslation
-                        });
-                    }
+                if (finnishExample && polishTranslation) {
+                    examples.push({
+                        finnish: finnishExample,
+                        polish: polishTranslation
+                    });
+
                     updateExamplesList();
                     updatePreview();
+
+                    exampleFinnishInput.value = '';
+                    examplePolishInput.value = '';
+                    exampleFinnishInput.focus();
                 }
-
-                exampleFinnishInput.value = '';
-                examplePolishInput.value = '';
-                exampleFinnishInput.focus();
             });
-
 
             exampleFinnishInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
@@ -491,28 +504,33 @@
                     const div = document.createElement('div');
                     div.className = 'item';
 
+                    const escapedLabel = escapeHtml(def.label || '');
+                    const escapedPos = escapeHtml(def.pos || '');
+                    const escapedText = escapeHtml(def.text || '');
+                    const escapedGender = escapeHtml(def.gender || '');
+
                     let defText = '';
                     if (def.numbered) {
                         defText += `<span class="definition-number">${def.number}.</span> `;
                     }
                     if (def.label) {
-                        defText += `(${def.label}) `;
+                        defText += `(${escapedLabel}) `;
                     }
                     if (def.pos) {
-                        defText += `${def.pos} `;
+                        defText += `${escapedPos} `;
                     }
-                    defText += `<span class="italic">${def.text}</span>`;
+                    defText += `<span class="italic">${escapedText}</span>`;
                     if (def.gender) {
-                        defText += ` ${def.gender}`;
+                        defText += ` ${escapedGender}`;
                     }
                     if (def.separator) {
-                        defText += ` <span>(${def.separator})</span>`;
+                        defText += ` <span>(${escapeHtml(def.separator)})</span>`;
                     }
 
                     div.innerHTML = `
-                        <span>${defText}</span>
-                        <button class="btn-secondary btn-sm" data-index="${index}">Remove</button>
-                    `;
+            <span>${defText}</span>
+            <button class="btn-secondary btn-sm" data-index="${index}">Remove</button>
+        `;
                     definitionsList.appendChild(div);
                 });
 
@@ -541,10 +559,14 @@
                 examples.forEach((example, index) => {
                     const div = document.createElement('div');
                     div.className = 'item';
+
+                    const escapedFinnish = escapeHtml(example.finnish);
+                    const escapedPolish = escapeHtml(example.polish);
+
                     div.innerHTML = `
-                        <span>${example.finnish} <span class="italic">${example.polish}</span></span>
-                        <button class="btn-secondary btn-sm" data-index="${index}">Remove</button>
-                    `;
+            <span>${escapedFinnish} <span class="italic">${escapedPolish}</span></span>
+            <button class="btn-secondary btn-sm" data-index="${index}">Remove</button>
+        `;
                     examplesList.appendChild(div);
                 });
 
@@ -587,6 +609,7 @@
             }
 
             function escapeHtml(text) {
+                if (!text) return '';
                 const div = document.createElement('div');
                 div.textContent = text;
                 return div.innerHTML;
@@ -629,14 +652,8 @@
 
                 if (entry.examples.length > 0) {
                     const exs = entry.examples.map(ex => {
-                        if (ex.finnish) {
-                            return escapeHtml(ex.finnish) + " <span class=\"italic\">" + escapeHtml(ex
-                                .polish) + "</span>";
-                        } else if (examples.length > 1) {
-                            return "<span class=\"italic\">" + escapeHtml(ex.polish) + "</span>";
-                        } else {
-                            return "<span class=\"italic\">" + escapeHtml(ex.polish) + "</span>";
-                        }
+                        return escapeHtml(ex.finnish) + " <span class=\"italic\">" + escapeHtml(ex
+                            .polish) + "</span>";
                     });
                     result += exs.join('; ');
                 }
