@@ -494,7 +494,7 @@
                     if (def.pos) {
                         defText += `${def.pos} `;
                     }
-                    defText += `<span class="italic">${def.text}</span>`;
+                    defText += `<span class="italic">${escapeHtml(def.text)}</span>`;
                     if (def.gender) {
                         defText += ` ${def.gender}`;
                     }
