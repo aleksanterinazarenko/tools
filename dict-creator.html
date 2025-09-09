@@ -18,7 +18,7 @@
             color: #000;
             font-size: 12pt;
             line-height: 1.4;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .header {
@@ -87,7 +87,7 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 12pt;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         button {
@@ -98,7 +98,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 12pt;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             transition: background-color 0.2s ease;
         }
 
@@ -155,11 +155,12 @@
         .gender-input {
             max-width: 90px;
             flex: 0 0 70px;
+            padding: 9px;
         }
 
         #definition-text {
             flex: 1;
-            min-width: 320px;
+            min-width: 350px;
         }
 
         .output {
@@ -201,7 +202,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 10px;
+            padding-left: 20px;
             border-bottom: 1px solid #eee;
         }
 
@@ -246,6 +248,39 @@
         .no-italic {
             font-style: normal;
         }
+
+        .input-with-button {
+            position: relative;
+        }
+
+        .symbol-button {
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            font-size: 14px;
+            padding: 5px 10px;
+            cursor: pointer;
+            width: auto;
+            min-width: auto;
+        }
+
+        .symbol-button:hover {
+            background-color: #eee;
+            color: #2c3e50;
+        }
+
+        input.with-button {
+            padding-right: 35px;
+        }
+
+        .example-input {
+            flex: 1;
+            min-width: 120px;
+        }
     </style>
 </head>
 
@@ -254,18 +289,21 @@
         <h2 class="card-title">Create New Entry</h2>
         <div class="form-group">
             <label for="finnish-word">Language 1 Word:</label>
-            <input type="text" id="finnish-word" placeholder="Enter Language 1 word" />
+            <div class="input-with-button">
+                <input type="text" id="finnish-word" class="with-button" placeholder="Enter Language 1 word" />
+                <button class="symbol-button" id="pipe-button" title="Insert pipe symbol">|</button>
+            </div>
         </div>
         <div class="form-group">
             <label>Definitions:</label>
             <div class="form-row">
                 <div class="form-group">
                     <label for="definition-label">Label:</label>
-                    <input type="text" id="definition-label" class="label-input" placeholder="e.g., kiel." />
+                    <input type="text" id="definition-label" class="label-input" placeholder="Label" />
                 </div>
                 <div class="form-group">
                     <label for="part-of-speech">Part of Speech:</label>
-                    <input type="text" id="part-of-speech" class="pos-input" placeholder="a, s, etc." />
+                    <input type="text" id="part-of-speech" class="pos-input" placeholder="POS" />
                 </div>
                 <div class="form-group">
                     <label for="definition-text">Language 2 Translation:</label>
@@ -294,15 +332,19 @@
         <div class="form-group">
             <label>Examples:</label>
             <div class="form-row">
-                <div class="form-group">
+                <div class="form-group example-input">
                     <label for="example-finnish">Language 1 Example:</label>
-                    <input type="text" id="example-finnish" placeholder="Language 1 phrase" />
+                    <div class="input-with-button">
+                        <input type="text" id="example-finnish" class="with-button" placeholder="Language 1 phrase" />
+                        <button class="symbol-button" id="tilde-button" title="Insert tilde symbol">~</button>
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group example-input">
                     <label for="example-polish">Language 2 Translation:</label>
                     <input type="text" id="example-polish" placeholder="Language 2 translation" />
                 </div>
                 <button id="add-example" class="btn-sm">Add Example</button>
+                <button id="add-example-comma" class="btn-sm">Add Example with ,</button>
             </div>
             <div id="examples-list" class="items-list">
                 <div class="empty-message">No examples added yet</div>
@@ -338,6 +380,7 @@
             const addDefinitionSemicolonBtn = document.getElementById('add-definition-semicolon');
             const addNumberedDefinitionBtn = document.getElementById('add-numbered-definition');
             const addExampleBtn = document.getElementById('add-example');
+            const addExampleCommaBtn = document.getElementById('add-example-comma');
             const saveEntryBtn = document.getElementById('save-entry');
             const resetFormBtn = document.getElementById('reset-form');
             const clearAllBtn = document.getElementById('clear-all');
@@ -345,22 +388,54 @@
             const examplesList = document.getElementById('examples-list');
             const outputElement = document.getElementById('output');
             const previewElement = document.getElementById('preview');
+            const pipeButton = document.getElementById('pipe-button');
+            const tildeButton = document.getElementById('tilde-button');
+
             let definitions = [];
             let examples = [];
             let entries = [];
             let definitionCounter = 1;
+
             document.addEventListener('keydown', function (e) {
                 if ((e.ctrlKey || e.metaKey) && e.key === 's') {
                     e.preventDefault();
                     saveEntryBtn.click();
                 }
             });
+
+            pipeButton.addEventListener('click', function () {
+                insertAtCursor(finnishWordInput, '|');
+                finnishWordInput.focus();
+            });
+
+            tildeButton.addEventListener('click', function () {
+                insertAtCursor(exampleFinnishInput, '~');
+                exampleFinnishInput.focus();
+            });
+
+            function insertAtCursor(input, text) {
+                const start = input.selectionStart;
+                const end = input.selectionEnd;
+
+                input.value = input.value.substring(0, start) +
+                    text +
+                    input.value.substring(end);
+
+                input.selectionStart = input.selectionEnd = start + text.length;
+
+                input.dispatchEvent(new Event('input', {
+                    bubbles: true
+                }));
+            }
+
             addDefinitionCommaBtn.addEventListener('click', function () {
                 addDefinition(',');
             });
+
             addDefinitionSemicolonBtn.addEventListener('click', function () {
                 addDefinition(';');
             });
+
             addNumberedDefinitionBtn.addEventListener('click', function () {
                 addDefinition('numbered');
             });
@@ -389,36 +464,55 @@
                     definitionTextInput.focus();
                 }
             }
+
             definitionTextInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     addDefinitionCommaBtn.click();
                 }
             });
+
             definitionLabelInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     partOfSpeechInput.focus();
                 }
             });
+
             partOfSpeechInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     definitionTextInput.focus();
                 }
             });
+
             genderInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     addDefinitionCommaBtn.click();
                 }
             });
+
             addExampleBtn.addEventListener('click', function () {
+                addExample(';');
+            });
+
+            addExampleCommaBtn.addEventListener('click', function () {
+                addExample(',');
+            });
+
+            function addExample(separator) {
                 const finnishExample = exampleFinnishInput.value.trim();
                 const polishTranslation = examplePolishInput.value.trim();
                 if (!polishTranslation) return;
                 if (!finnishExample && examples.length > 0) {
-                    examples[examples.length - 1].polishParts.push(polishTranslation);
+                    examples[examples.length - 1].polishParts.push({
+                        text: polishTranslation,
+                        separator: separator
+                    });
                 } else if (finnishExample) {
                     examples.push({
                         finnish: finnishExample,
-                        polishParts: [polishTranslation]
+                        polishParts: [{
+                            text: polishTranslation,
+                            separator: separator
+                        }]
                     });
                 } else {
                     return;
@@ -428,17 +522,20 @@
                 exampleFinnishInput.value = '';
                 examplePolishInput.value = '';
                 exampleFinnishInput.focus();
-            });
+            }
+
             exampleFinnishInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     examplePolishInput.focus();
                 }
             });
+
             examplePolishInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     addExampleBtn.click();
                 }
             });
+
             saveEntryBtn.addEventListener('click', function () {
                 const finnishWord = finnishWordInput.value.trim();
                 if (!finnishWord) {
@@ -459,7 +556,9 @@
                 resetForm();
                 finnishWordInput.focus();
             });
+
             resetFormBtn.addEventListener('click', resetForm);
+
             clearAllBtn.addEventListener('click', function () {
                 if (entries.length === 0) return;
                 if (confirm('Are you sure you want to clear all entries?')) {
@@ -532,10 +631,17 @@
                     const div = document.createElement('div');
                     div.className = 'item';
                     const escapedFinnish = escapeHtml(example.finnish || '');
-                    const parts = example.polishParts.map(p => escapeHtml(p));
+                    const parts = example.polishParts.map(p => {
+                        const escapedText = escapeHtml(p.text || '');
+                        return {
+                            text: escapedText,
+                            separator: p.separator
+                        };
+                    });
                     const formattedTranslations = parts.map((p, idx) => {
-                        return (idx > 0 ? '<span class="no-italic">;</span> ' : '') +
-                            `<span class="italic">${p}</span>`;
+                        return (idx > 0 ? `<span class="no-italic">${p.separator}</span> ` :
+                                '') +
+                            `<span class="italic">${p.text}</span>`;
                     }).join('');
                     div.innerHTML = `
             <span>${escapedFinnish} ${formattedTranslations}</span>
@@ -618,10 +724,16 @@
                 }
                 if (entry.examples.length > 0) {
                     const exs = entry.examples.map(ex => {
-                        const parts = ex.polishParts.map(p => p.trim()).filter(p => p);
+                        const parts = ex.polishParts.map(p => {
+                            return {
+                                text: p.text,
+                                separator: p.separator
+                            };
+                        });
                         const formattedTranslations = parts.map((p, idx) => {
-                            return (idx > 0 ? '<span class="no-italic">;</span> ' : '') +
-                                `<span class="italic">${escapeHtml(p)}</span>`;
+                            return (idx > 0 ? `<span class="no-italic">${p.separator}</span> ` :
+                                    '') +
+                                `<span class="italic">${p.text}</span>`;
                         }).join('');
                         return escapeHtml(ex.finnish) + " " + formattedTranslations;
                     });
