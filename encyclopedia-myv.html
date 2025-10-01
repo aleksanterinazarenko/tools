@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ärźań Sodamokudo - The Free Encyclopedia in Erzya language</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #202122;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: #36c;
+            font-weight: normal;
+        }
+
+        .logo-icon {
+            color: #36c;
+            font-size: 28px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #36c;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+
+        nav a:hover {
+            background-color: #eaf3ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #fff;
+            border: 1px solid #a2a9b1;
+            border-radius: 3px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #a2a9b1;
+            border-radius: 3px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #a2a9b1;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #a2a9b1;
+            border-top: none;
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-suggestion {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .search-suggestion:hover {
+            background-color: #f5f5f5;
+        }
+
+        .search-suggestion:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .article-title h2 {
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+        .article-content {
+            margin-bottom: 20px;
+        }
+
+        .article-content p {
+            margin-bottom: 15px;
+        }
+
+        .edit-button {
+            background-color: #36c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .edit-button:hover {
+            background-color: #2a4b8d;
+        }
+
+        .editor {
+            display: none;
+        }
+
+        .editor textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #a2a9b1;
+            border-radius: 3px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        .editor-buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .save-button {
+            background-color: #00af89;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .cancel-button {
+            background-color: #72777d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background-color: #d33;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .recent-articles h3 {
+            margin-bottom: 15px;
+            color: #54595d;
+            font-size: 18px;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+        }
+
+        .recent-articles ul {
+            list-style: none;
+        }
+
+        .recent-articles li {
+            margin-bottom: 8px;
+        }
+
+        .recent-articles a {
+            color: #36c;
+            text-decoration: none;
+        }
+
+        .recent-articles a:hover {
+            text-decoration: underline;
+        }
+
+        .create-article {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #a2a9b1;
+        }
+
+        .create-article h3 {
+            margin-bottom: 10px;
+            color: #54595d;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        .create-article input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #a2a9b1;
+            border-radius: 3px;
+        }
+
+        .create-button {
+            background-color: #00af89;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #a2a9b1;
+            color: #54595d;
+            font-size: 14px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #00af89;
+            color: white;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">📚</div>
+            <h1>Ärźań Sodamokudo</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" id="home-link">Pŕavt lopaś</a></li>
+                <li><a href="#" id="random-link">Apak učoń śormadovks</a></li>
+                <li><a href="#" id="about-link">Mindenek</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Väšnek sodamokudostońt...">
+                <div class="search-suggestions" id="search-suggestions"></div>
+            </div>
+            <div class="article-title">
+                <h2 id="article-title">Paročisë sovado Ärźań Sodamokudonteń!</h2>
+                <button class="edit-button" id="edit-button">Vitema</button>
+            </div>
+            <div class="article-content" id="article-content">
+                <p>Ärźań Sodamokundoś te aorev, Realtime Database läzdamoso noldaź tävs sodamokundo (lijaks
+                    enciklopedija). Äŕvanteń täjevi eli vitevi śormadovksonzo. Väse vitematne taštavit seske.</p>
+                <p>Ušodomga, väšnek ta-kodamo śormadovks eli täjt od.</p>
+            </div>
+            <div class="editor" id="editor">
+                <textarea id="editor-textarea"></textarea>
+                <div class="editor-buttons">
+                    <button class="save-button" id="save-button">Vitematneń taštamo</button>
+                    <button class="delete-button" id="delete-button">Śormadovksoń nardamo</button>
+                    <button class="cancel-button" id="cancel-button">Väĺavtt</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="recent-articles">
+                <h3>Od śormadovkst</h3>
+                <ul id="recent-articles-list">
+                    <li><a href="#" data-article="paročisë-sovado-ärźań-sodamokudonteń!">Paročisë sovado Ärźań
+                            Sodamokudonteń!</a></li>
+                </ul>
+            </div>
+            <div class="create-article">
+                <h3>Täjt od śormadovks</h3>
+                <input type="text" id="new-article-title" placeholder="Śormadovksońt lämezë">
+                <button class="create-button" id="create-button">Täjik śormadovksońt</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Ärźań Sodamokundo - The Free Encyclopedia in Erzya language</p>
+    </footer>
+
+    <div class="notification" id="notification">Śormadovksoś taštaź!</div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCM4I58uE2IWjQdaQT2Ao4YD2pEcfyRAw",
+            authDomain: "encyclopedia-myv.firebaseapp.com",
+            databaseURL: "https://encyclopedia-myv-default-rtdb.firebaseio.com",
+            projectId: "encyclopedia-myv",
+            storageBucket: "encyclopedia-myv.firebasestorage.app",
+            messagingSenderId: "512567729981",
+            appId: "1:512567729981:web:16b3f19886e7e9d575af54"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const searchInput = document.getElementById('search-input');
+        const searchSuggestions = document.getElementById('search-suggestions');
+        const articleTitle = document.getElementById('article-title');
+        const articleContent = document.getElementById('article-content');
+        const editButton = document.getElementById('edit-button');
+        const editor = document.getElementById('editor');
+        const editorTextarea = document.getElementById('editor-textarea');
+        const saveButton = document.getElementById('save-button');
+        const deleteButton = document.getElementById('delete-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const recentArticlesList = document.getElementById('recent-articles-list');
+        const newArticleTitle = document.getElementById('new-article-title');
+        const createButton = document.getElementById('create-button');
+        const notification = document.getElementById('notification');
+        const homeLink = document.getElementById('home-link');
+        const randomLink = document.getElementById('random-link');
+
+        let currentArticle = 'paročisë-sovado-ärźań-sodamokudonteń!';
+        let allArticles = [];
+
+        function initializeWelcomeArticle() {
+            const welcomeRef = database.ref('articles/paročisë-sovado-ärźań-sodamokudonteń!');
+
+            welcomeRef.once('value')
+                .then((snapshot) => {
+                    if (!snapshot.exists()) {
+                        const welcomeContent = {
+                            title: 'Paročisë sovado Ärźań Sodamokudonteń!',
+                            content: `<p>Ärźań Sodamokundoś te aorev, Realtime Database läzdamoso noldaź tävs sodamokundo (lijaks enciklopedija). Äŕvanteń täjevi eli vitevi śormadovksonzo. Väse vitematne taštavit seske.</p>
+<p>Ušodomga, väšnek ta-kodamo śormadovks eli täjt od.</p>`,
+                            lastEdited: new Date().toISOString()
+                        };
+                        welcomeRef.set(welcomeContent);
+                    }
+                });
+        }
+
+        function loadAllArticles() {
+            const articlesRef = database.ref('articles');
+            articlesRef.once('value')
+                .then((snapshot) => {
+                    const articles = snapshot.val();
+                    if (articles) {
+                        allArticles = Object.entries(articles).map(([id, article]) => ({
+                            id,
+                            title: article.title
+                        }));
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading articles for search:', error);
+                });
+        }
+
+        function showSearchSuggestions(searchTerm) {
+            if (!searchTerm) {
+                searchSuggestions.style.display = 'none';
+                return;
+            }
+
+            const suggestions = allArticles.filter(article =>
+                article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                article.id.toLowerCase().includes(searchTerm.toLowerCase())
+            ).slice(0, 5);
+
+            if (suggestions.length === 0) {
+                searchSuggestions.style.display = 'none';
+                return;
+            }
+
+            searchSuggestions.innerHTML = '';
+            suggestions.forEach(article => {
+                const suggestion = document.createElement('div');
+                suggestion.className = 'search-suggestion';
+                suggestion.textContent = article.title;
+                suggestion.addEventListener('click', () => {
+                    loadArticle(article.id);
+                    searchInput.value = '';
+                    searchSuggestions.style.display = 'none';
+                });
+                searchSuggestions.appendChild(suggestion);
+            });
+
+            searchSuggestions.style.display = 'block';
+        }
+
+        initializeWelcomeArticle();
+        loadAllArticles();
+
+        function formatArticleTitle(articleId) {
+            if (articleId === 'paročisë-sovado-ärźań-sodamokudonteń!') {
+                return 'Paročisë sovado Ärźań Sodamokudonteń!';
+            }
+            const words = articleId.split('-');
+            if (words.length === 0) return articleId;
+            
+            const firstWord = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+            const remainingWords = words.slice(1);
+            
+            return [firstWord, ...remainingWords].join(' ');
+        }
+
+        function updateURL(articleId) {
+            const newURL = `${window.location.origin}${window.location.pathname}?article=${articleId}`;
+            window.history.pushState({
+                articleId
+            }, '', newURL);
+        }
+
+        window.addEventListener('popstate', function (event) {
+            if (event.state && event.state.articleId) {
+                loadArticle(event.state.articleId);
+            } else {
+                loadArticle('paročisë-sovado-ärźań-sodamokudonteń!');
+            }
+        });
+
+        function loadArticleFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleParam = urlParams.get('article');
+            if (articleParam) {
+                loadArticle(articleParam);
+            } else {
+                loadArticle('paročisë-sovado-ärźań-sodamokudonteń!');
+            }
+        }
+
+        loadArticleFromURL();
+        loadRecentArticles();
+
+        searchInput.addEventListener('input', function (e) {
+            showSearchSuggestions(e.target.value);
+        });
+
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    loadArticle(searchTerm.toLowerCase().replace(/\s+/g, '-'));
+                    searchSuggestions.style.display = 'none';
+                }
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                searchSuggestions.style.display = 'none';
+            }
+        });
+
+        editButton.addEventListener('click', function () {
+            showEditor();
+        });
+
+        saveButton.addEventListener('click', function () {
+            saveArticle();
+        });
+
+        deleteButton.addEventListener('click', function () {
+            deleteArticle();
+        });
+
+        cancelButton.addEventListener('click', function () {
+            hideEditor();
+        });
+
+        createButton.addEventListener('click', function () {
+            createNewArticle();
+        });
+
+        homeLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            loadArticle('paročisë-sovado-ärźań-sodamokudonteń!');
+        });
+
+        randomLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            loadRandomArticle();
+        });
+
+        function loadArticle(articleId) {
+            const articleRef = database.ref('articles/' + articleId);
+
+            articleRef.once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const articleData = snapshot.val();
+                        displayArticle(articleId, articleData);
+                        currentArticle = articleId;
+                        addToRecentArticles(articleId, articleData.title);
+                        updateURL(articleId);
+                    } else {
+                        displayCreateOption(articleId);
+                        updateURL(articleId);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading article:', error);
+                    showNotification('Targamoń iĺvedevks', 'error');
+                });
+        }
+
+        function displayArticle(articleId, articleData) {
+            articleTitle.textContent = articleData.title;
+            articleContent.innerHTML = articleData.content;
+            editorTextarea.value = articleData.content;
+            searchInput.value = '';
+            hideEditor();
+        }
+
+        function displayCreateOption(articleId) {
+            const formattedTitle = formatArticleTitle(articleId);
+
+            articleTitle.textContent = formattedTitle;
+            articleContent.innerHTML = `
+                <p>Śormadovksoś źars araś.</p>
+                <p>Lepštik Vitema-plaštineńt sonzë täjemga.</p>
+            `;
+            editorTextarea.value = '';
+            currentArticle = articleId;
+        }
+
+        function showEditor() {
+            articleContent.style.display = 'none';
+            editor.style.display = 'block';
+            editButton.style.display = 'none';
+        }
+
+        function hideEditor() {
+            articleContent.style.display = 'block';
+            editor.style.display = 'none';
+            editButton.style.display = 'block';
+        }
+
+        function saveArticle() {
+            const content = editorTextarea.value.trim();
+            if (!content) {
+                showNotification('Śormadovksońt a ulema čavo', 'error');
+                return;
+            }
+
+            const articleRef = database.ref('articles/' + currentArticle);
+            const title = formatArticleTitle(currentArticle);
+
+            articleRef.set({
+                    title: title,
+                    content: content,
+                    lastEdited: new Date().toISOString()
+                })
+                .then(() => {
+                    displayArticle(currentArticle, {
+                        title,
+                        content
+                    });
+                    showNotification('Śormadovksoś taštaź!');
+                    addToRecentArticles(currentArticle, title);
+                    loadAllArticles();
+                })
+                .catch((error) => {
+                    console.error('Error saving article:', error);
+                    showNotification('Śormadovksońt taštamozo äź lise', 'error');
+                });
+        }
+
+        function deleteArticle() {
+            if (currentArticle === 'paročisë-sovado-ärźań-sodamokudonteń!') {
+                showNotification('Pŕavt lopaś a nardavi', 'error');
+                return;
+            }
+
+            if (!confirm('Kämestë nardasïnek? Tede mäjle śormadovksoś a väĺavtovi.')) {
+                return;
+            }
+
+            const articleRef = database.ref('articles/' + currentArticle);
+
+            articleRef.remove()
+                .then(() => {
+                    showNotification('Śormadovksoś nardaź stakačivteme!');
+                    loadArticle('paročisë-sovado-ärźań-sodamokudonteń!');
+                    loadAllArticles();
+                })
+                .catch((error) => {
+                    console.error('Error deleting article:', error);
+                    showNotification('Śormadovksońt nardamozo äź lise', 'error');
+                });
+        }
+
+        function createNewArticle() {
+            const title = newArticleTitle.value.trim();
+            if (!title) {
+                showNotification('Śormadïk śormadovksońt lämenzë', 'error');
+                return;
+            }
+
+            const articleId = title.toLowerCase().replace(/\s+/g, '-');
+            newArticleTitle.value = '';
+
+            const articleRef = database.ref('articles/' + articleId);
+
+            articleRef.once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        loadArticle(articleId);
+                    } else {
+                        loadArticle(articleId);
+                        updateURL(articleId);
+                        showEditor();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error creating article:', error);
+                    showNotification('Od śormadovksoń täjemań iĺvedevks', 'error');
+                });
+        }
+
+        function loadRandomArticle() {
+            const articlesRef = database.ref('articles');
+
+            articlesRef.once('value')
+                .then((snapshot) => {
+                    const articles = snapshot.val();
+                    if (articles) {
+                        const articleIds = Object.keys(articles);
+                        const randomIndex = Math.floor(Math.random() * articleIds.length);
+                        const randomArticleId = articleIds[randomIndex];
+                        loadArticle(randomArticleId);
+                        updateURL(randomArticleId);
+                    } else {
+                        showNotification('Śormadovkst araśt', 'error');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading random article:', error);
+                    showNotification('Apak učoń śormadovksoń targamoń iĺvedevks', 'error');
+                });
+        }
+
+        function loadRecentArticles() {
+            const articlesRef = database.ref('articles');
+
+            articlesRef.orderByChild('lastEdited').limitToLast(5).once('value')
+                .then((snapshot) => {
+                    const articles = snapshot.val();
+                    if (articles) {
+                        recentArticlesList.innerHTML = '';
+                        const articleIds = Object.keys(articles);
+
+                        articleIds.reverse().forEach(articleId => {
+                            const article = articles[articleId];
+                            const listItem = document.createElement('li');
+                            const link = document.createElement('a');
+                            link.href = '#';
+                            link.textContent = article.title;
+                            link.setAttribute('data-article', articleId);
+                            link.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                loadArticle(articleId);
+                            });
+                            listItem.appendChild(link);
+                            recentArticlesList.appendChild(listItem);
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading recent articles:', error);
+                });
+        }
+
+        function addToRecentArticles(articleId, title) {
+            loadRecentArticles();
+        }
+
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.style.backgroundColor = type === 'error' ? '#d33' : '#00af89';
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        const articlesRef = database.ref('articles');
+        articlesRef.on('child_changed', (snapshot) => {
+            const articleId = snapshot.key;
+            const articleData = snapshot.val();
+
+            if (articleId === currentArticle) {
+                displayArticle(articleId, articleData);
+                showNotification('Taštaź!');
+            }
+
+            loadRecentArticles();
+            loadAllArticles();
+        });
+
+        articlesRef.on('child_removed', (snapshot) => {
+            const articleId = snapshot.key;
+
+            if (articleId === currentArticle) {
+                loadArticle('paročisë-sovado-ärźań-sodamokudonteń!');
+            }
+
+            loadRecentArticles();
+            loadAllArticles();
+        });
+
+        articlesRef.on('child_added', (snapshot) => {
+            loadAllArticles();
+        });
+    </script>
+</body>
+
+</html>
