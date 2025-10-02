@@ -8,23 +8,30 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Work Sans", sans-serif;
+        }
+
+        html {
+            overflow-y: scroll;
         }
 
         body {
             background-color: #f8f9fa;
             color: #202122;
             line-height: 1.6;
+            font-size: 16px;
         }
 
         header {
             background-color: #fff;
             border-bottom: 1px solid #a2a9b1;
-            padding: 12px 20px;
+            padding: 14px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -41,9 +48,9 @@
         }
 
         .logo h1 {
-            font-size: 24px;
+            font-size: 22px;
             color: #36c;
-            font-weight: normal;
+            font-weight: 600;
         }
 
         .logo-icon {
@@ -54,16 +61,17 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 16px;
         }
 
         nav a {
             text-decoration: none;
             color: #36c;
             font-weight: 500;
-            padding: 5px 10px;
+            padding: 6px 10px;
             border-radius: 3px;
             transition: background-color 0.2s;
+            font-size: 16px;
         }
 
         nav a:hover {
@@ -83,16 +91,16 @@
             background-color: #fff;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            padding: 20px;
+            padding: 28px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar {
-            width: 300px;
+            width: 320px;
             background-color: #fff;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            padding: 15px;
+            padding: 24px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
@@ -103,7 +111,7 @@
 
         .search-box input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
             font-size: 16px;
@@ -124,9 +132,10 @@
         }
 
         .search-suggestion {
-            padding: 10px;
+            padding: 12px;
             cursor: pointer;
             border-bottom: 1px solid #eaeaea;
+            font-size: 16px;
         }
 
         .search-suggestion:hover {
@@ -139,39 +148,64 @@
 
         .article-title {
             border-bottom: 1px solid #a2a9b1;
-            padding-bottom: 10px;
+            padding-bottom: 20px;
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            position: relative;
         }
 
         .article-title h2 {
             font-size: 28px;
-            font-weight: normal;
+            font-weight: 600;
+            flex: 1;
+            min-width: 200px;
+            line-height: 1.3;
+            margin-right: 120px;
         }
 
         .article-content {
             margin-bottom: 20px;
+            font-size: 17px;
         }
 
         .article-content p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            line-height: 1.7;
         }
 
-        .edit-button {
+        .edit-button, .cancel-button {
             background-color: #36c;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
             transition: background-color 0.2s;
+            white-space: nowrap;
+            font-weight: 500;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100px;
+            text-align: center;
+        }
+
+        .cancel-button {
+            background-color: #72777d;
+            display: none;
         }
 
         .edit-button:hover {
             background-color: #2a4b8d;
+        }
+
+        .cancel-button:hover {
+            background-color: #5a6168;
         }
 
         .editor {
@@ -180,54 +214,55 @@
 
         .editor textarea {
             width: 100%;
-            height: 300px;
-            padding: 10px;
+            height: 350px;
+            padding: 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            font-size: 16px;
+            font-size: 17px;
             resize: vertical;
+            line-height: 1.6;
         }
 
         .editor-buttons {
-            margin-top: 10px;
+            margin-top: 12px;
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .save-button {
             background-color: #00af89;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 3px;
             cursor: pointer;
-        }
-
-        .cancel-button {
-            background-color: #72777d;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 3px;
-            cursor: pointer;
+            flex: 1;
+            min-width: 140px;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         .delete-button {
             background-color: #d33;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 3px;
             cursor: pointer;
+            flex: 1;
+            min-width: 140px;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         .recent-articles h3 {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             color: #54595d;
-            font-size: 18px;
-            font-weight: normal;
+            font-size: 20px;
+            font-weight: 600;
             border-bottom: 1px solid #a2a9b1;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
         }
 
         .recent-articles ul {
@@ -235,12 +270,14 @@
         }
 
         .recent-articles li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .recent-articles a {
             color: #36c;
             text-decoration: none;
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         .recent-articles a:hover {
@@ -249,33 +286,36 @@
 
         .create-article {
             margin-top: 20px;
-            padding-top: 15px;
+            padding-top: 16px;
             border-top: 1px solid #a2a9b1;
         }
 
         .create-article h3 {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: #54595d;
-            font-size: 18px;
-            font-weight: normal;
+            font-size: 20px;
+            font-weight: 600;
         }
 
         .create-article input {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
+            font-size: 16px;
         }
 
         .create-button {
             background-color: #00af89;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 3px;
             cursor: pointer;
             width: 100%;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         footer {
@@ -284,29 +324,127 @@
             margin-top: 30px;
             border-top: 1px solid #a2a9b1;
             color: #54595d;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 15px 20px;
+            padding: 16px 22px;
             background-color: #00af89;
             color: white;
             border-radius: 3px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             display: none;
             z-index: 1000;
+            max-width: calc(100vw - 40px);
+            font-size: 16px;
         }
 
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 14px;
+                padding: 14px;
+            }
+
+            .logo h1 {
+                font-size: 20px;
+            }
+
+            nav ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 15px;
+                padding: 5px 8px;
+            }
+
             .container {
                 flex-direction: column;
+                padding: 16px;
+                gap: 16px;
             }
 
             .sidebar {
                 width: 100%;
+                order: -1;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .article-title h2 {
+                font-size: 24px;
+                margin-right: 100px;
+            }
+
+            .edit-button, .cancel-button {
+                width: 90px;
+                font-size: 15px;
+                padding: 8px 14px;
+            }
+
+            .editor textarea {
+                height: 300px;
+            }
+
+            .editor-buttons {
+                flex-direction: column;
+            }
+
+            .save-button,
+            .delete-button {
+                min-width: 100%;
+            }
+
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 18px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .article-title h2 {
+                font-size: 22px;
+                margin-right: 90px;
+            }
+
+            .article-content,
+            .editor textarea {
+                font-size: 16px;
+            }
+
+            .edit-button, .cancel-button {
+                width: 85px;
+                font-size: 14px;
+                padding: 7px 12px;
+            }
+
+            .save-button,
+            .delete-button,
+            .create-button {
+                padding: 8px 14px;
+                font-size: 15px;
+            }
+
+            .search-box input {
+                font-size: 16px;
+                padding: 10px;
             }
         }
     </style>
@@ -322,7 +460,6 @@
             <ul>
                 <li><a href="#" id="home-link">Pŕavt lopaś</a></li>
                 <li><a href="#" id="random-link">Apak učoń śormadovks</a></li>
-                <li><a href="#" id="about-link">Mindenek</a></li>
             </ul>
         </nav>
     </header>
@@ -336,6 +473,7 @@
             <div class="article-title">
                 <h2 id="article-title">Paročisë sovado Ärźań Sodamokudonteń!</h2>
                 <button class="edit-button" id="edit-button">Vitema</button>
+                <button class="cancel-button" id="cancel-button">Väĺavtt</button>
             </div>
             <div class="article-content" id="article-content">
                 <p>Ärźań Sodamokudoś te aorev, Realtime Database läzdamoso noldaź tävs sodamokudo (lijaks
@@ -347,7 +485,6 @@
                 <div class="editor-buttons">
                     <button class="save-button" id="save-button">Vitematneń taštamo</button>
                     <button class="delete-button" id="delete-button">Śormadovksoń nardamo</button>
-                    <button class="cancel-button" id="cancel-button">Väĺavtt</button>
                 </div>
             </div>
         </div>
@@ -448,10 +585,22 @@
                 return;
             }
 
-            const suggestions = allArticles.filter(article =>
-                article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                article.id.toLowerCase().includes(searchTerm.toLowerCase())
-            ).slice(0, 5);
+            const lowerSearchTerm = searchTerm.toLowerCase();
+            const startsWithTerm = [];
+            const containsTerm = [];
+
+            allArticles.forEach(article => {
+                const lowerTitle = article.title.toLowerCase();
+                const lowerId = article.id.toLowerCase();
+
+                if (lowerTitle.startsWith(lowerSearchTerm) || lowerId.startsWith(lowerSearchTerm)) {
+                    startsWithTerm.push(article);
+                } else if (lowerTitle.includes(lowerSearchTerm) || lowerId.includes(lowerSearchTerm)) {
+                    containsTerm.push(article);
+                }
+            });
+
+            const suggestions = [...startsWithTerm, ...containsTerm].slice(0, 5);
 
             if (suggestions.length === 0) {
                 searchSuggestions.style.display = 'none';
@@ -483,10 +632,10 @@
             }
             const words = articleId.split('-');
             if (words.length === 0) return articleId;
-            
+
             const firstWord = words[0].charAt(0).toUpperCase() + words[0].slice(1);
             const remainingWords = words.slice(1);
-            
+
             return [firstWord, ...remainingWords].join(' ');
         }
 
@@ -614,12 +763,14 @@
             articleContent.style.display = 'none';
             editor.style.display = 'block';
             editButton.style.display = 'none';
+            cancelButton.style.display = 'block';
         }
 
         function hideEditor() {
             articleContent.style.display = 'block';
             editor.style.display = 'none';
             editButton.style.display = 'block';
+            cancelButton.style.display = 'none';
         }
 
         function saveArticle() {
