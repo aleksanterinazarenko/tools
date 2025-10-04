@@ -254,13 +254,34 @@
             font-weight: 500;
         }
 
-        .recent-articles h3 {
+        .recent-articles-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 16px;
+        }
+
+        .recent-articles h3 {
             color: #54595d;
             font-size: 20px;
             font-weight: 600;
             border-bottom: 1px solid #a2a9b1;
             padding-bottom: 8px;
+            flex: 1;
+        }
+
+        .toggle-recent {
+            background: none;
+            border: none;
+            color: #36c;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        .recent-articles-content {
+            display: block;
         }
 
         .recent-articles ul {
@@ -543,6 +564,24 @@
                 left: 10px;
                 max-width: none;
             }
+
+            .recent-articles-content {
+                display: none;
+            }
+
+            .recent-articles-header {
+                cursor: pointer;
+            }
+
+            .recent-articles.expanded .recent-articles-content {
+                display: block;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .toggle-recent {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -621,13 +660,18 @@
         </div>
 
         <div class="sidebar">
-            <div class="recent-articles">
-                <h3>Od sjormadovkst</h3>
-                <ul id="recent-articles-list">
-                    <li><a href="#" data-article="main">Paročisë sovado Ärzjanj
-                            Sodamokudonten!</a></li>
-                </ul>
-                <button class="see-all-button" id="see-all-button">Nevtt väse lopatnen</button>
+            <div class="recent-articles" id="recent-articles">
+                <div class="recent-articles-header">
+                    <h3>Od sjormadovkst</h3>
+                    <button class="toggle-recent" id="toggle-recent">▼</button>
+                </div>
+                <div class="recent-articles-content" id="recent-articles-content">
+                    <ul id="recent-articles-list">
+                        <li><a href="#" data-article="main">Paročisë sovado Ärzjanj
+                                Sodamokudonten!</a></li>
+                    </ul>
+                    <button class="see-all-button" id="see-all-button">Nevtt väse lopatnen</button>
+                </div>
             </div>
             <div class="create-article">
                 <h3>Täjt od sjormadovks</h3>
@@ -695,6 +739,9 @@
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
         const paginationInfo = document.getElementById('pagination-info');
+        const toggleRecent = document.getElementById('toggle-recent');
+        const recentArticles = document.getElementById('recent-articles');
+        const recentArticlesContent = document.getElementById('recent-articles-content');
 
         let currentArticle = 'main';
         let allArticles = [];
@@ -707,6 +754,11 @@
             content: `<p>Ärzjanj Sodamokudosj te aorev, Realtime Database läzdamoso noldazj tävs sodamokudo (lijaks enciklopedija). Ärvanten täjevi eli vitevi sonzë sjormadovksonzo. Väse vitematne taštavit seske.</p>
 <p>Ušodomga, väšnek ta-kodamo sjormadovks eli täjt od.</p>`
         };
+
+        toggleRecent.addEventListener('click', function() {
+            recentArticles.classList.toggle('expanded');
+            toggleRecent.textContent = recentArticles.classList.contains('expanded') ? '▲' : '▼';
+        });
 
         function loadAllArticles() {
             const articlesRef = database.ref('articles');
