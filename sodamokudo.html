@@ -484,7 +484,7 @@
             font-size: 16px;
         }
 
-        @media (min-width: 769px) {
+        @media (min-width: 768px) {
             .container {
                 display: grid;
                 grid-template-columns: 1fr 320px;
@@ -514,7 +514,8 @@
                 padding: 14px;
             }
 
-            .logo h1 {
+            .logo h1,
+            .article-title h2 {
                 font-size: 24px;
             }
 
@@ -530,15 +531,14 @@
             }
 
             .container {
-                padding: 16px;
+                padding: 16px 16px 0;
+                margin-bottom: 0;
+                display: block;
             }
 
             .main-content {
                 padding: 24px;
-            }
-
-            .article-title h2 {
-                font-size: 24px;
+                margin-bottom: 16px;
             }
 
             .edit-button,
@@ -559,6 +559,13 @@
             .save-button,
             .delete-button {
                 min-width: 100%;
+            }
+
+            .save-button,
+            .delete-button,
+            .create-button {
+                padding: 8px 14px;
+                font-size: 15px;
             }
 
             .all-articles-content {
@@ -588,43 +595,19 @@
             .recent-articles.expanded .recent-articles-content {
                 display: block;
             }
-        }
-
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 24px;
-            }
-
-            nav a {
-                font-size: 16px;
-            }
-
-            .article-title h2 {
-                font-size: 24px;
-            }
 
             .article-content,
-            .editor textarea {
+            .editor textarea,
+            .search-box input {
                 font-size: 16px;
-            }
-
-            .edit-button,
-            .cancel-button {
-                width: 85px;
-                font-size: 14px;
-                padding: 7px 12px;
-            }
-
-            .save-button,
-            .delete-button,
-            .create-button {
-                padding: 8px 14px;
-                font-size: 15px;
             }
 
             .search-box input {
-                font-size: 16px;
                 padding: 10px;
+            }
+
+            footer {
+                margin-top: 20px;
             }
         }
     </style>
