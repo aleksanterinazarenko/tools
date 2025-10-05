@@ -241,7 +241,18 @@
     </div>
 
     <script>
-        const userId = 'user_' + Math.random().toString(36).substr(2, 9);
+        // Get or create a persistent user identifier
+        function getUserId() {
+            let userId = localStorage.getItem('newsChannelUserId');
+            if (!userId) {
+                // Generate a new ID and store it
+                userId = 'user_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('newsChannelUserId', userId);
+            }
+            return userId;
+        }
+
+        const userId = getUserId();
         
         const firebaseConfig = {
             apiKey: "AIzaSyCtCCV3eJ-z_OrZSUAjOtvNkYfnjXM1Xqk",
