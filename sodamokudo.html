@@ -651,7 +651,7 @@
         <div class="sidebar">
             <div class="recent-articles" id="recent-articles">
                 <div class="recent-articles-header">
-                    <h3>Od sjormadovkst</h3>
+                    <h3>Od sjormadovkstnë</h3>
                     <button class="toggle-recent" id="toggle-recent">▼</button>
                 </div>
                 <div class="recent-articles-content" id="recent-articles-content">
@@ -742,10 +742,10 @@
             title: 'Paročisë sovado Ärzjanj Sodamokudonten!',
             content: `<p>Ärzjanj Sodamokudosj te aorev, Realtime Database:n läzdamoso noldazj tävs sodamokudo (lijaks: enciklopedija).</p>
             <p>Ärvanten täjevi eli vitevi sonzë sjormadovksonzo. Väse vitematne taštavit seske.</p>
-<p>Ušodomga, väšnek ta-kodamo sjormadovks eli täjt od.</p>`
+<p>Ušodomga, väšnek ta-kodamo sjormadovks eli täjt od.</p>`,
+            createdAt: '2024-01-01T00:00:00.000Z'
         };
 
-        // Function to scroll to the top of the page
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -821,7 +821,7 @@
                     loadArticle(article.id);
                     searchInput.value = '';
                     searchSuggestions.style.display = 'none';
-                    scrollToTop(); // Scroll to top when selecting a search suggestion
+                    scrollToTop();
                 });
                 searchSuggestions.appendChild(suggestion);
             });
@@ -854,10 +854,10 @@
         window.addEventListener('popstate', function (event) {
             if (event.state && event.state.articleId) {
                 loadArticle(event.state.articleId);
-                scrollToTop(); // Scroll to top when navigating with browser back/forward buttons
+                scrollToTop();
             } else {
                 loadArticle(WELCOME_ARTICLE.id);
-                scrollToTop(); // Scroll to top when navigating with browser back/forward buttons
+                scrollToTop();
             }
         });
 
@@ -884,7 +884,7 @@
                 if (searchTerm) {
                     loadArticle(searchTerm.toLowerCase().replace(/\s+/g, '-'));
                     searchSuggestions.style.display = 'none';
-                    scrollToTop(); // Scroll to top when searching
+                    scrollToTop();
                 }
             }
         });
@@ -919,14 +919,14 @@
             e.preventDefault();
             loadArticle(WELCOME_ARTICLE.id);
             collapseRecentArticlesOnMobile();
-            scrollToTop(); // Scroll to top when clicking home link
+            scrollToTop();
         });
 
         randomLink.addEventListener('click', function (e) {
             e.preventDefault();
             loadRandomArticle();
             collapseRecentArticlesOnMobile();
-            scrollToTop(); // Scroll to top when clicking random link
+            scrollToTop();
         });
 
         seeAllButton.addEventListener('click', function () {
@@ -982,7 +982,7 @@
                         loadArticle(article.id);
                         hideAllArticlesModal();
                         collapseRecentArticlesOnMobile();
-                        scrollToTop(); // Scroll to top when selecting an article from the all articles modal
+                        scrollToTop();
                     });
                     allArticlesList.appendChild(link);
                 });
@@ -994,7 +994,7 @@
         }
 
         function updateEditButtonVisibility() {
-            if (currentArticle === WELCOME_ARTICLE.id) {
+            if (currentArticle === WELCOME_ARTICLE.id || editor.style.display === 'block') {
                 editButton.style.display = 'none';
             } else {
                 editButton.style.display = 'block';
@@ -1009,7 +1009,7 @@
                 currentArticle = WELCOME_ARTICLE.id;
                 updateURL(WELCOME_ARTICLE.id);
                 updateEditButtonVisibility();
-                scrollToTop(); // Scroll to top when loading the welcome article
+                scrollToTop();
                 return;
             }
 
@@ -1028,7 +1028,7 @@
                         updateURL(articleId);
                     }
                     updateEditButtonVisibility();
-                    scrollToTop(); // Scroll to top when loading any article
+                    scrollToTop();
                 })
                 .catch((error) => {
                     console.error('Error loading article:', error);
@@ -1086,10 +1086,19 @@
             const articleRef = database.ref('articles/' + currentArticle);
             const title = formatArticleTitle(currentArticle);
 
-            articleRef.set({
-                    title: title,
-                    content: content,
-                    lastEdited: new Date().toISOString()
+            articleRef.once('value')
+                .then((snapshot) => {
+                    const updates = {
+                        title: title,
+                        content: content,
+                        lastEdited: new Date().toISOString()
+                    };
+
+                    if (!snapshot.exists()) {
+                        updates.createdAt = new Date().toISOString();
+                    }
+
+                    return articleRef.set(updates);
                 })
                 .then(() => {
                     displayArticle(currentArticle, {
@@ -1183,7 +1192,7 @@
         function loadRecentArticles() {
             const articlesRef = database.ref('articles');
 
-            articlesRef.orderByChild('lastEdited').limitToLast(5).once('value')
+            articlesRef.orderByChild('createdAt').limitToLast(5).once('value')
                 .then((snapshot) => {
                     const articles = snapshot.val();
                     if (articles) {
@@ -1194,9 +1203,9 @@
                             .map(([articleId, articleData]) => ({
                                 id: articleId,
                                 title: articleData.title,
-                                lastEdited: articleData.lastEdited || '1970-01-01T00:00:00.000Z'
+                                createdAt: articleData.createdAt || articleData.lastEdited || '1970-01-01T00:00:00.000Z'
                             }))
-                            .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
+                            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
                         articlesArray.forEach(article => {
                             const listItem = document.createElement('li');
@@ -1208,7 +1217,7 @@
                                 e.preventDefault();
                                 loadArticle(article.id);
                                 collapseRecentArticlesOnMobile();
-                                scrollToTop(); // Scroll to top when clicking a recent article
+                                scrollToTop();
                             });
                             listItem.appendChild(link);
                             recentArticlesList.appendChild(listItem);
