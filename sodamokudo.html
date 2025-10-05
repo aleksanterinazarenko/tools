@@ -8,13 +8,13 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "ABeeZee", sans-serif;
+            font-family: "Libre Franklin", sans-serif;
         }
 
         html {
@@ -82,21 +82,20 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            display: flex;
-            gap: 20px;
+            display: block;
         }
 
         .main-content {
-            flex: 1;
             background-color: #fff;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
             padding: 28px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .sidebar {
-            width: 320px;
+            width: 100%;
             background-color: #fff;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
@@ -168,13 +167,16 @@
         }
 
         .article-content {
-            margin-bottom: 20px;
             font-size: 17px;
         }
 
         .article-content p {
             margin-bottom: 18px;
             line-height: 1.7;
+        }
+
+        .article-content p:last-child {
+            margin-bottom: 0;
         }
 
         .edit-button,
@@ -199,7 +201,7 @@
             background-color: #72777d;
             display: none;
         }
-        
+
         .editor {
             display: none;
         }
@@ -482,6 +484,29 @@
             font-size: 16px;
         }
 
+        @media (min-width: 769px) {
+            .container {
+                display: grid;
+                grid-template-columns: 1fr 320px;
+                gap: 20px;
+                align-items: start;
+            }
+
+            .main-content {
+                margin-bottom: 0;
+            }
+
+            .sidebar {
+                width: 320px;
+                position: sticky;
+                top: 80px;
+            }
+
+            .toggle-recent {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -505,14 +530,7 @@
             }
 
             .container {
-                flex-direction: column;
                 padding: 16px;
-                gap: 16px;
-            }
-
-            .sidebar {
-                width: 100%;
-                order: -1;
             }
 
             .main-content {
@@ -569,12 +587,6 @@
 
             .recent-articles.expanded .recent-articles-content {
                 display: block;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .toggle-recent {
-                display: none;
             }
         }
 
@@ -678,7 +690,7 @@
     <div class="all-articles-modal" id="all-articles-modal">
         <div class="all-articles-content">
             <div class="all-articles-header">
-                <h3>Vese sjormadovkst</h3>
+                <h3>Vese sjormadovkstnë</h3>
                 <button class="close-button" id="close-all-articles">&times;</button>
             </div>
             <div class="all-articles-list" id="all-articles-list"></div>
@@ -745,7 +757,7 @@
         const WELCOME_ARTICLE = {
             id: 'main',
             title: 'Paročisë sovado Ärzjanj Sodamokudonten!',
-            content: `<p>Ärzjanj Sodamokudosj te aorev, Realtime Database läzdamoso noldazj tävs sodamokudo (lijaks enciklopedija). Ärvanten täjevi eli vitevi sonzë sjormadovksonzo. Väse vitematne taštavit seske.</p>
+            content: `<p>Ärzjanj Sodamokudosj te aorev, Realtime Database:n läzdamoso noldazj tävs sodamokudo (lijaks: enciklopedija). Ärvanten täjevi eli vitevi sonzë sjormadovksonzo. Väse vitematne taštavit seske.</p>
 <p>Ušodomga, väšnek ta-kodamo sjormadovks eli täjt od.</p>`
         };
 
@@ -756,7 +768,7 @@
             }
         }
 
-        toggleRecent.addEventListener('click', function() {
+        toggleRecent.addEventListener('click', function () {
             recentArticles.classList.toggle('expanded');
             toggleRecent.textContent = recentArticles.classList.contains('expanded') ? '▲' : '▼';
         });
@@ -992,7 +1004,7 @@
 
         function loadArticle(articleId) {
             collapseRecentArticlesOnMobile();
-            
+
             if (articleId === WELCOME_ARTICLE.id) {
                 displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
                 currentArticle = WELCOME_ARTICLE.id;
@@ -1049,7 +1061,7 @@
                 showNotification('Prjavt lopasj a vitevi', 'error');
                 return;
             }
-            
+
             articleContent.style.display = 'none';
             editor.style.display = 'block';
             editButton.style.display = 'none';
