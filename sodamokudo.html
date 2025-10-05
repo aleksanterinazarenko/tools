@@ -8,11 +8,13 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "ABeeZee", sans-serif;
         }
 
         html {
@@ -162,7 +164,7 @@
             flex: 1;
             min-width: 200px;
             line-height: 1.3;
-            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
         }
 
         .article-content {
@@ -747,6 +749,13 @@
 <p>Ušodomga, väšnek ta-kodamo sjormadovks eli täjt od.</p>`
         };
 
+        function collapseRecentArticlesOnMobile() {
+            if (window.innerWidth <= 768) {
+                recentArticles.classList.remove('expanded');
+                toggleRecent.textContent = '▼';
+            }
+        }
+
         toggleRecent.addEventListener('click', function() {
             recentArticles.classList.toggle('expanded');
             toggleRecent.textContent = recentArticles.classList.contains('expanded') ? '▲' : '▼';
@@ -901,11 +910,13 @@
         homeLink.addEventListener('click', function (e) {
             e.preventDefault();
             loadArticle(WELCOME_ARTICLE.id);
+            collapseRecentArticlesOnMobile();
         });
 
         randomLink.addEventListener('click', function (e) {
             e.preventDefault();
             loadRandomArticle();
+            collapseRecentArticlesOnMobile();
         });
 
         seeAllButton.addEventListener('click', function () {
@@ -960,6 +971,7 @@
                         e.preventDefault();
                         loadArticle(article.id);
                         hideAllArticlesModal();
+                        collapseRecentArticlesOnMobile();
                     });
                     allArticlesList.appendChild(link);
                 });
@@ -970,11 +982,22 @@
             nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
         }
 
+        function updateEditButtonVisibility() {
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                editButton.style.display = 'none';
+            } else {
+                editButton.style.display = 'block';
+            }
+        }
+
         function loadArticle(articleId) {
+            collapseRecentArticlesOnMobile();
+            
             if (articleId === WELCOME_ARTICLE.id) {
                 displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
                 currentArticle = WELCOME_ARTICLE.id;
                 updateURL(WELCOME_ARTICLE.id);
+                updateEditButtonVisibility();
                 return;
             }
 
@@ -992,6 +1015,7 @@
                         displayCreateOption(articleId);
                         updateURL(articleId);
                     }
+                    updateEditButtonVisibility();
                 })
                 .catch((error) => {
                     console.error('Error loading article:', error);
@@ -1004,12 +1028,6 @@
             articleContent.innerHTML = articleData.content;
             editorTextarea.value = articleData.content;
             searchInput.value = '';
-
-            if (articleId === WELCOME_ARTICLE.id) {
-                editButton.style.display = 'none';
-            } else {
-                editButton.style.display = 'block';
-            }
 
             hideEditor();
         }
@@ -1024,10 +1042,14 @@
             `;
             editorTextarea.value = '';
             currentArticle = articleId;
-            editButton.style.display = 'block';
         }
 
         function showEditor() {
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                showNotification('Prjavt lopasj a vitevi', 'error');
+                return;
+            }
+            
             articleContent.style.display = 'none';
             editor.style.display = 'block';
             editButton.style.display = 'none';
@@ -1037,10 +1059,8 @@
         function hideEditor() {
             articleContent.style.display = 'block';
             editor.style.display = 'none';
-            if (currentArticle !== WELCOME_ARTICLE.id) {
-                editButton.style.display = 'block';
-            }
             cancelButton.style.display = 'none';
+            updateEditButtonVisibility();
         }
 
         function saveArticle() {
@@ -1174,6 +1194,7 @@
                             link.addEventListener('click', function (e) {
                                 e.preventDefault();
                                 loadArticle(article.id);
+                                collapseRecentArticlesOnMobile();
                             });
                             listItem.appendChild(link);
                             recentArticlesList.appendChild(listItem);

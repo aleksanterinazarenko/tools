@@ -85,7 +85,7 @@
 
         .news-text {
             font-size: 15px;
-            line-height: 1.4;
+            line-height: 1.5;
             margin-bottom: 8px;
         }
 
@@ -254,6 +254,31 @@
         const newsText = document.getElementById('newsText');
         const newsList = document.getElementById('newsList');
 
+        const erzyanMonths = [
+            "jakšamkovonj",
+            "davolkovonj",
+            "ejźurkovonj",
+            "čadïkovonj",
+            "panžikovonj",
+            "aštemkovonj",
+            "mädkovonj",
+            "umarjkovonj",
+            "taštamkovonj",
+            "ožokovonj",
+            "sunderkovonj",
+            "acamkovonj"
+        ];
+
+        function formatErzyaDate(date) {
+            const year = date.getFullYear();
+            const month = erzyanMonths[date.getMonth()];
+            const day = date.getDate();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${year}-ce ijen ${month} ${day}-ce čistë ${hours}.${minutes}`;
+        }
+
         addBtn.addEventListener('click', function () {
             newsModal.style.display = 'block';
             newsText.focus();
@@ -269,7 +294,7 @@
             if (text) {
                 const newsItem = {
                     text: `📢 ${text}`,
-                    timestamp: new Date().toLocaleString(),
+                    timestamp: Date.now(),
                     id: Date.now()
                 };
 
@@ -303,12 +328,15 @@
 
             let newsHTML = '';
             Object.entries(newsData).forEach(([id, item]) => {
+                const date = new Date(item.timestamp || Date.now());
+                const formattedDate = formatErzyaDate(date);
+                
                 newsHTML += `
                     <div class="news-item">
                         <div class="news-text">${item.text}</div>
                         <div class="news-meta">
-                            <span>${item.timestamp}</span>
-                            <span class="delete-btn" onclick="deleteNews('${id}')">Delete</span>
+                            <span>${formattedDate}</span>
+                            <span class="delete-btn" onclick="deleteNews('${id}')">Nardïk kuljanjt</span>
                         </div>
                     </div>
                 `;
@@ -317,7 +345,7 @@
         });
 
         function deleteNews(id) {
-            if (confirm('Delete this news?')) {
+            if (confirm('Kemestë nardasïnek?')) {
                 database.ref('news').child(id).remove();
             }
         }
