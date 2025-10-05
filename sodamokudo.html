@@ -1170,17 +1170,17 @@
                     const articles = snapshot.val();
                     if (articles) {
                         recentArticlesList.innerHTML = '';
-                        const articleIds = Object.keys(articles);
 
-                        const sortedArticles = articleIds
-                            .filter(articleId => articleId !== WELCOME_ARTICLE.id)
-                            .map(articleId => ({
+                        const articlesArray = Object.entries(articles)
+                            .filter(([articleId]) => articleId !== WELCOME_ARTICLE.id)
+                            .map(([articleId, articleData]) => ({
                                 id: articleId,
-                                title: articles[articleId].title
+                                title: articleData.title,
+                                lastEdited: articleData.lastEdited || '1970-01-01T00:00:00.000Z'
                             }))
-                            .sort((a, b) => a.title.localeCompare(b.title));
+                            .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
 
-                        sortedArticles.forEach(article => {
+                        articlesArray.forEach(article => {
                             const listItem = document.createElement('li');
                             const link = document.createElement('a');
                             link.href = '#';
