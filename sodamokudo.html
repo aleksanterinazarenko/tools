@@ -774,7 +774,8 @@
                     if (articles) {
                         allArticles = Object.entries(articles).map(([id, article]) => ({
                             id,
-                            title: article.title
+                            title: article.title,
+                            createdAt: article.createdAt || '1970-01-01T00:00:00.000Z'
                         })).sort((a, b) => a.title.localeCompare(b.title));
                     } else {
                         allArticles = [];
@@ -872,6 +873,53 @@
             }
         }
 
+        function loadRecentArticles() {
+            const articlesRef = database.ref('articles');
+
+            articlesRef.orderByChild('createdAt').limitToLast(5).once('value')
+                .then((snapshot) => {
+                    const articles = snapshot.val();
+                    recentArticlesList.innerHTML = '';
+
+                    if (articles) {
+                        const articlesArray = Object.entries(articles)
+                            .filter(([articleId]) => articleId !== WELCOME_ARTICLE.id)
+                            .map(([articleId, articleData]) => ({
+                                id: articleId,
+                                title: articleData.title,
+                                createdAt: articleData.createdAt || '1970-01-01T00:00:00.000Z'
+                            }))
+                            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                        articlesArray.forEach(article => {
+                            const listItem = document.createElement('li');
+                            const link = document.createElement('a');
+                            link.href = '#';
+                            link.textContent = article.title;
+                            link.setAttribute('data-article', article.id);
+                            link.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                loadArticle(article.id);
+                                collapseRecentArticlesOnMobile();
+                                scrollToTop();
+                            });
+                            listItem.appendChild(link);
+                            recentArticlesList.appendChild(listItem);
+                        });
+
+                        if (articlesArray.length === 0) {
+                            recentArticlesList.innerHTML = '<li>Od śormadovkst araśt</li>';
+                        }
+                    } else {
+                        recentArticlesList.innerHTML = '<li>Od śormadovkst araśt</li>';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading recent articles:', error);
+                    recentArticlesList.innerHTML = '<li>Targamoń ilvedevks</li>';
+                });
+        }
+
         loadArticleFromURL();
         loadRecentArticles();
 
@@ -905,9 +953,6 @@
         });
 
         deleteButton.addEventListener('click', function () {
-            /*
-            deleteArticle();
-            */
             alert('Funkcijaś źars lotkavtoź');
         });
 
@@ -1027,7 +1072,6 @@
                         const articleData = snapshot.val();
                         displayArticle(articleId, articleData);
                         currentArticle = articleId;
-                        addToRecentArticles(articleId, articleData.title);
                         updateURL(articleId);
                     } else {
                         displayCreateOption(articleId);
@@ -1102,6 +1146,9 @@
 
                     if (!snapshot.exists()) {
                         updates.createdAt = new Date().toISOString();
+                    } else {
+                        const existingData = snapshot.val();
+                        updates.createdAt = existingData.createdAt;
                     }
 
                     return articleRef.set(updates);
@@ -1112,7 +1159,7 @@
                         content
                     });
                     showNotification('Śormadovksoś taštaź!');
-                    addToRecentArticles(currentArticle, title);
+                    loadRecentArticles();
                     loadAllArticles();
                 })
                 .catch((error) => {
@@ -1197,50 +1244,6 @@
                 });
         }
 
-        function loadRecentArticles() {
-            const articlesRef = database.ref('articles');
-
-            articlesRef.orderByChild('createdAt').limitToLast(5).once('value')
-                .then((snapshot) => {
-                    const articles = snapshot.val();
-                    if (articles) {
-                        recentArticlesList.innerHTML = '';
-
-                        const articlesArray = Object.entries(articles)
-                            .filter(([articleId]) => articleId !== WELCOME_ARTICLE.id)
-                            .map(([articleId, articleData]) => ({
-                                id: articleId,
-                                title: articleData.title,
-                                createdAt: articleData.createdAt || '1970-01-01T00:00:00.000Z'
-                            }))
-                            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-                        articlesArray.forEach(article => {
-                            const listItem = document.createElement('li');
-                            const link = document.createElement('a');
-                            link.href = '#';
-                            link.textContent = article.title;
-                            link.setAttribute('data-article', article.id);
-                            link.addEventListener('click', function (e) {
-                                e.preventDefault();
-                                loadArticle(article.id);
-                                collapseRecentArticlesOnMobile();
-                                scrollToTop();
-                            });
-                            listItem.appendChild(link);
-                            recentArticlesList.appendChild(listItem);
-                        });
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error loading recent articles:', error);
-                });
-        }
-
-        function addToRecentArticles(articleId, title) {
-            loadRecentArticles();
-        }
-
         function showNotification(message, type = 'success') {
             notification.textContent = message;
             notification.style.backgroundColor = type === 'error' ? '#d33' : '#00af89';
@@ -1276,6 +1279,7 @@
         });
 
         articlesRef.on('child_added', (snapshot) => {
+            loadRecentArticles();
             loadAllArticles();
         });
     </script>
