@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polish → Cyrillic</title>
+<style>
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f3f4f6;
+    margin: 0;
+    padding: 16px;
+}
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+textarea, .output {
+    width: 100%;
+    min-height: 160px;
+    padding: 14px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 18px;
+    background: #fff;
+}
+.output {
+    margin-top: 16px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (min-width:700px){
+    textarea,.output{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Polish → Cyrillic</h2>
+<textarea id="input"></textarea>
+<div class="output" id="output"></div>
+</div>
+
+<script>
+let rules = [
+    ["cię","цѩ"],
+    ["się","сѩ"],
+    ["zię","зѩ"],
+    ["nię","нѩ"],
+    ["cią","цѭ"],
+    ["sią","сѭ"],
+    ["zią","зѭ"],
+    ["nią","нѭ"],
+
+    ["lę","лѩ"],
+    ["lą","лѭ"],
+    ["li","лі"],
+    ["la","ля"],
+    ["le","лє"],
+    ["lo","льо"],
+    ["lu","лю"],
+
+    ["rz","рь"],
+    ["rzę","рѩ"],
+    ["rzą","рѭ"],
+    ["rza","ря"],
+    ["rze","рє"],
+    ["rzo","рьо"],
+    ["rzu","рю"],
+
+    ["szcz","щ"],
+    ["dż","дж"],
+    ["cz","ч"],
+    ["sz","ш"],
+    ["ch","х"],
+    ["dz","дз"],
+
+    ["ją","ѭ"],
+    ["ią","ѭ"],
+    ["ję","ѩ"],
+    ["ię","ѩ"],
+    ["ą","ѫ"],
+    ["ę","ѩ"],
+    ["ja","я"],
+    ["ia","я"],
+    ["je","є"],
+    ["ie","є"],
+    ["jo","йо"],
+    ["io","ьо"],
+    ["ju","ю"],
+    ["iu","ю"],
+    ["ió","ьꙋ"]
+]
+
+rules.sort((a,b)=>b[0].length-a[0].length)
+
+const letters = {
+    "a":"а","b":"б","c":"ц","ć":"ць","d":"д","e":"е","f":"ф",
+    "g":"г","h":"ғ","i":"і","j":"й","k":"к","l":"ль","ł":"л",
+    "m":"м","n":"н","ń":"нь", "o":"о","ó":"ꙋ","p":"п","r":"р","s":"с",
+    "ś":"сь","t":"т","u":"у","w":"в","y":"ы","z":"з","ź":"зь","ż":"ж",
+    "A":"А","B":"Б","C":"Ц","Ć":"Ць","D":"Д","E":"Е","F":"Ф",
+    "G":"Г","H":"Ғ","I":"І","J":"Й","K":"К","L":"Ль","Ł":"Л",
+    "M":"М","N":"Н","Ń":"Нь","O":"О","Ó":"Ꙋ","P":"П","R":"Р","S":"С",
+    "Ś":"Сь","T":"Т","U":"У","W":"В","Y":"Ы","Z":"З","Ź":"Зь","Ż":"Ж"
+}
+
+function capFirst(src, repl) {
+    return src[0] === src[0].toUpperCase()
+        ? repl[0].toUpperCase() + repl.slice(1)
+        : repl
+}
+
+function transliterate(t) {
+    rules.forEach(r => {
+        t = t.replace(new RegExp(r[0], "gi"), m => capFirst(m, r[1]))
+    })
+    
+    const softVowelPattern = /([дсцзн])([ьї]?)([яёєюѩѭ])/gi;
+    
+    t = t.replace(softVowelPattern, (match, cons, softSign, vowel) => {
+        return cons + (softSign || '') + vowel;
+    });
+    
+    return t.replace(/./g, c => letters[c] || c);
+}
+
+document.getElementById("input").addEventListener("input", e => {
+    document.getElementById("output").textContent = transliterate(e.target.value)
+})
+</script>
+
+</body>
+</html>
