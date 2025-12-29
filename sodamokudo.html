@@ -8,13 +8,32 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+        @font-face {
+            font-family: 'CMU Sans';
+            src: url('cmunrm.ttf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'CMU Sans';
+            src: url('cmunci.ttf') format('opentype');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: 'CMU Sans';
+            src: url('cmunbx.ttf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Sora", sans-serif;
+            font-family: "CMU Sans", sans-serif;
         }
 
         html {
@@ -80,7 +99,7 @@
             border-radius: 3px;
             background-color: #F6FAFF;
             transition: background-color 0.2s;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
         }
 
@@ -123,7 +142,7 @@
             padding: 8px 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .search-suggestions {
@@ -144,7 +163,7 @@
             padding: 8px 12px;
             cursor: pointer;
             border-bottom: 1px solid #eaeaea;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .search-suggestion:hover {
@@ -176,7 +195,7 @@
         }
 
         .article-content {
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .article-content p {
@@ -196,7 +215,7 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
             transition: background-color 0.2s;
             white-space: nowrap;
@@ -222,7 +241,7 @@
             padding: 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            font-size: 16px;
+            font-size: 17px;
             resize: vertical;
             line-height: 1.75;
         }
@@ -243,7 +262,7 @@
             cursor: pointer;
             flex: 1;
             min-width: 140px;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
             transition: background-color 0.2s;
         }
@@ -262,7 +281,7 @@
             cursor: pointer;
             flex: 1;
             min-width: 140px;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
             transition: background-color 0.2s;
         }
@@ -312,7 +331,7 @@
         .recent-articles a {
             color: #36c;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 17px;
             line-height: 1.5;
         }
 
@@ -330,7 +349,7 @@
             border-radius: 3px;
             cursor: pointer;
             text-align: center;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
             transition: background-color 0.2s;
         }
@@ -402,7 +421,7 @@
 
         .all-articles-list a {
             color: #36c;
-            font-size: 16px;
+            font-size: 17px;
             text-decoration: none;
             padding: 8px 12px;
             display: block;
@@ -427,7 +446,7 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
         }
 
@@ -462,7 +481,7 @@
             margin-bottom: 16px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .create-button {
@@ -474,7 +493,7 @@
             border-radius: 3px;
             cursor: pointer;
             width: 100%;
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
             transition: background-color 0.2s;
         }
@@ -490,7 +509,7 @@
             margin-top: 30px;
             border-top: 1px solid #a2a9b1;
             color: #54595d;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .notification {
@@ -505,7 +524,7 @@
             display: none;
             z-index: 1000;
             max-width: calc(100vw - 40px);
-            font-size: 16px;
+            font-size: 17px;
             font-style: italic;
         }
 
@@ -551,7 +570,7 @@
             }
 
             nav a {
-                font-size: 16px;
+                font-size: 17px;
                 padding: 8px 12px;
             }
 
@@ -569,7 +588,7 @@
             .edit-button,
             .cancel-button {
                 width: 90px;
-                font-size: 16px;
+                font-size: 17px;
                 padding: 8px 12px;
             }
 
@@ -590,7 +609,7 @@
             .delete-button,
             .create-button {
                 padding: 8px 12px;
-                font-size: 16px;
+                font-size: 17px;
             }
 
             .all-articles-content {
@@ -618,7 +637,7 @@
             .article-content,
             .editor textarea,
             .search-box input {
-                font-size: 16px;
+                font-size: 17px;
             }
 
             .search-box input {
@@ -627,7 +646,7 @@
 
             footer {
                 margin-top: 20px;
-                font-size: 16px;
+                font-size: 17px;
             }
         }
     </style>
