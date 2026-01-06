@@ -1149,12 +1149,36 @@
                 return;
             }
 
+            loadArticleForEditor();
+
             articleContent.style.display = 'none';
             editor.style.display = 'block';
             editButton.style.display = 'none';
             cancelButton.style.display = 'block';
 
             scrollToTop();
+        }
+
+        function loadArticleForEditor() {
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                editorTextarea.value = WELCOME_ARTICLE.content;
+                return;
+            }
+
+            const articleRef = database.ref('articles/' + currentArticle);
+            articleRef.once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const articleData = snapshot.val();
+                        editorTextarea.value = articleData.content;
+                    } else {
+                        editorTextarea.value = '';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading article for editor:', error);
+                    editorTextarea.value = '';
+                });
         }
 
         function hideEditor() {
