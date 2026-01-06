@@ -1153,6 +1153,8 @@
             editor.style.display = 'block';
             editButton.style.display = 'none';
             cancelButton.style.display = 'block';
+
+            scrollToTop();
         }
 
         function hideEditor() {
@@ -1244,12 +1246,14 @@
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         loadArticle(articleId);
+                        scrollToTop();
                     } else {
                         currentArticle = articleId;
                         updateURL(articleId);
                         displayCreateOption(articleId);
                         updateEditButtonVisibility();
                         showEditor();
+                        scrollToTop();
                     }
                 })
                 .catch((error) => {
