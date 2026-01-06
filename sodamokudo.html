@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ärźań Sodamokudo - The Free Encyclopedia in Erzya language</title>
+    <title>Ärźaň Sodamokudo - The Free Encyclopedia in Erzya language</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
@@ -656,12 +656,12 @@
     <header>
         <div class="logo">
             <div class="logo-icon">📚</div>
-            <h1>Ärźań Sodamokudo</h1>
+            <h1>Ärźaň Sodamokudo</h1>
         </div>
         <nav>
             <ul>
-                <li><a href="#" id="home-link">Pŕavt lopaś</a></li>
-                <li><a href="#" id="random-link">Apak učoń śormadovks</a></li>
+                <li><a href="#" id="home-link">Přavt lopaś</a></li>
+                <li><a href="#" id="random-link">Apak učoň śormadovks</a></li>
             </ul>
         </nav>
     </header>
@@ -669,7 +669,7 @@
     <div class="container">
         <div class="main-content">
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Väšnek sodamokudostońt...">
+                <input type="text" id="search-input" placeholder="Väšnek sodamokudostoňt...">
                 <div class="search-suggestions" id="search-suggestions"></div>
             </div>
             <div class="article-title">
@@ -682,7 +682,7 @@
                 <textarea id="editor-textarea"></textarea>
                 <div class="editor-buttons">
                     <button class="save-button" id="save-button">Vitematnen taštamo</button>
-                    <button class="delete-button" id="delete-button">Śormadovksoń nardamo</button>
+                    <button class="delete-button" id="delete-button">Śormadovksoň nardamo</button>
                 </div>
             </div>
         </div>
@@ -695,7 +695,7 @@
                 </div>
                 <div class="recent-articles-content" id="recent-articles-content">
                     <ul id="recent-articles-list">
-                        <li><a href="#" data-article="main">Paročisë sovado Ärźań
+                        <li><a href="#" data-article="main">Paročisë sovado Ärźaň
                                 Sodamokudonten!</a></li>
                     </ul>
                     <button class="see-all-button" id="see-all-button">Nevtt väse lopatnen</button>
@@ -703,7 +703,7 @@
             </div>
             <div class="create-article">
                 <h3>Täit od śormadovks</h3>
-                <input type="text" id="new-article-title" placeholder="Śormadovksońt lämezë">
+                <input type="text" id="new-article-title" placeholder="Śormadovksoňt lämezë">
                 <button class="create-button" id="create-button">Moľt śormadovksonten</button>
             </div>
         </div>
@@ -725,7 +725,7 @@
     </div>
 
     <footer>
-        <p>Ärźań Sodamokudo - The Free Encyclopedia in Erzya language</p>
+        <p>Ärźaň Sodamokudo - The Free Encyclopedia in Erzya language</p>
     </footer>
 
     <div class="notification" id="notification"></div>
@@ -778,8 +778,8 @@
 
         const WELCOME_ARTICLE = {
             id: 'main',
-            title: 'Paročisë sovado Ärźań Sodamokudonten!',
-            content: `<p>Ärźań Sodamokudoś te aorev, kingak äistë a aštića ärźań sodamokudo (lijaks: <i>enciklopedija</i>).</p><p>Ärvanten täjevi eli vitevi sonzë śormadovksonzo. Väse vitematne taštavit seske. Ušodomgat, väšnek śormadovks vere ulića väšnema pakśańt välde eli täit od.</p><p>Uli melet läzdams täventen? Śormadt: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
+            title: 'Paročisë sovado Ärźaň Sodamokudonten!',
+            content: `<p>Ärźaň Sodamokudoś te aorev, kingak äistë a aštića ärźaň sodamokudo (lijaks: <i>enciklopedija</i>).</p><p>Ärvanten täjevi eli vitevi sonzë śormadovksonzo. Väse vitematne taštavit seske. Ušodomgat, väšnek śormadovks vere ulića väšnema pakśaňt välde eli täit od.</p><p>Uli melet läzdams täventen? Śormadt: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
             createdAt: '2024-01-01T00:00:00.000Z'
         };
 
@@ -952,7 +952,7 @@
                 })
                 .catch((error) => {
                     console.error('Error loading recent articles:', error);
-                    recentArticlesList.innerHTML = '<li>Targamoń ilvedevks</li>';
+                    recentArticlesList.innerHTML = '<li>Targamoň ilvedevks</li>';
                 });
         }
 
@@ -1118,7 +1118,7 @@
                 })
                 .catch((error) => {
                     console.error('Error loading article:', error);
-                    showNotification('Targamoń ilvedevks', 'error');
+                    showNotification('Targamoň ilvedevks', 'error');
                 });
         }
 
@@ -1137,7 +1137,7 @@
             articleTitle.textContent = formattedTitle;
             articleContent.innerHTML = `
                 <p>Śormadovksoś źars araś.</p>
-                <p>Lepštik Vitema-plaštineńt sonzë täjemga.</p>
+                <p>Lepštik Vitema-plaštineňt sonzë täjemga.</p>
             `;
             editorTextarea.value = '';
             currentArticle = articleId;
@@ -1145,7 +1145,7 @@
 
         function showEditor() {
             if (currentArticle === WELCOME_ARTICLE.id) {
-                showNotification('Pŕavt lopaś a vitevi', 'error');
+                showNotification('Přavt lopaś a vitevi', 'error');
                 return;
             }
 
@@ -1200,13 +1200,13 @@
                 })
                 .catch((error) => {
                     console.error('Error saving article:', error);
-                    showNotification('Śormadovksońt taštamozo äź lise', 'error');
+                    showNotification('Śormadovksoňt taštamozo äź lise', 'error');
                 });
         }
 
         function deleteArticle() {
             if (currentArticle === WELCOME_ARTICLE.id) {
-                showNotification('Pŕavt lopaś a nardavi', 'error');
+                showNotification('Přavt lopaś a nardavi', 'error');
                 return;
             }
 
@@ -1224,14 +1224,14 @@
                 })
                 .catch((error) => {
                     console.error('Error deleting article:', error);
-                    showNotification('Śormadovksońt nardamozo äź lise', 'error');
+                    showNotification('Śormadovksoňt nardamozo äź lise', 'error');
                 });
         }
 
         function createNewArticle() {
             const title = newArticleTitle.value.trim();
             if (!title) {
-                showNotification('Śormadïk śormadovksońt lämenzë', 'error');
+                showNotification('Śormadïk śormadovksoňt lämenzë', 'error');
                 return;
             }
 
@@ -1254,7 +1254,7 @@
                 })
                 .catch((error) => {
                     console.error('Error creating article:', error);
-                    showNotification('Od śormadovksoń täjemań ilvedevks', 'error');
+                    showNotification('Od śormadovksoň täjemaň ilvedevks', 'error');
                 });
         }
 
@@ -1276,7 +1276,7 @@
                 })
                 .catch((error) => {
                     console.error('Error loading random article:', error);
-                    showNotification('Apak učoń śormadovksoń targamoń ilvedevks', 'error');
+                    showNotification('Apak učoň śormadovksoň targamoň ilvedevks', 'error');
                 });
         }
 
