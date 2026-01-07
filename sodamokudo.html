@@ -930,7 +930,7 @@
                         articlesArray.forEach(article => {
                             const listItem = document.createElement('li');
                             const link = document.createElement('a');
-                            link.href = '#';
+                            link.href = `?article=${article.id}`;
                             link.textContent = article.title;
                             link.setAttribute('data-article', article.id);
                             link.addEventListener('click', function (e) {
