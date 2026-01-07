@@ -660,8 +660,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" id="home-link">Přavt lopaś</a></li>
-                <li><a href="#" id="random-link">Apak učoň śormadovks</a></li>
+                <a href="?article=main" id="home-link">Přavt lopaś</a>
+                <a href="?random=1" id="random-link">Apak učoň śormadovks</a>
             </ul>
         </nav>
     </header>
@@ -1001,19 +1001,15 @@
         });
 
         homeLink.addEventListener('click', function (e) {
+            if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
             e.preventDefault();
-            if (currentArticle !== WELCOME_ARTICLE.id) {
-                loadArticle(WELCOME_ARTICLE.id);
-                collapseRecentArticlesOnMobile();
-                scrollToTop();
-            }
+            loadArticle(WELCOME_ARTICLE.id);
         });
 
         randomLink.addEventListener('click', function (e) {
+            if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
             e.preventDefault();
             loadRandomArticle();
-            collapseRecentArticlesOnMobile();
-            scrollToTop();
         });
 
         seeAllButton.addEventListener('click', function () {
