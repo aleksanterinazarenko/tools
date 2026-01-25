@@ -241,9 +241,10 @@
             padding: 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            font-size: 17px;
+            font-size: 16px;
             resize: vertical;
             line-height: 1.75;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .editor-buttons {
@@ -304,16 +305,6 @@
             border-bottom: 1px solid #a2a9b1;
             padding-bottom: 8px;
             flex: 1;
-        }
-
-        .toggle-recent {
-            background: none;
-            border: none;
-            color: #36c;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 5px;
-            margin-left: 10px;
         }
 
         .recent-articles-content {
@@ -545,10 +536,6 @@
                 position: sticky;
                 top: 80px;
             }
-
-            .toggle-recent {
-                display: none;
-            }
         }
 
         @media (max-width: 768px) {
@@ -556,17 +543,27 @@
                 flex-direction: column;
                 gap: 14px;
                 padding: 20px;
+                position: relative;
+                top: auto;
+                box-shadow: none;
+                border-bottom: 1px solid #a2a9b1;
             }
 
-            .logo h1,
-            .article-title h2 {
-                font-size: 24px;
+            .logo {
+                position: relative;
+            }
+
+            nav {
+                position: relative;
+                width: 100%;
             }
 
             nav ul {
                 gap: 10px;
                 flex-wrap: wrap;
                 justify-content: center;
+                overflow-x: auto;
+                padding-bottom: 5px;
             }
 
             nav a {
@@ -622,18 +619,6 @@
                 column-count: 2;
             }
 
-            .recent-articles-content {
-                display: none;
-            }
-
-            .recent-articles-header {
-                cursor: pointer;
-            }
-
-            .recent-articles.expanded .recent-articles-content {
-                display: block;
-            }
-
             .article-content,
             .editor textarea,
             .search-box input {
@@ -665,7 +650,6 @@
             </ul>
         </nav>
     </header>
-
     <div class="container">
         <div class="main-content">
             <div class="search-box">
@@ -686,12 +670,10 @@
                 </div>
             </div>
         </div>
-
         <div class="sidebar">
             <div class="recent-articles" id="recent-articles">
                 <div class="recent-articles-header">
                     <h3>Од сёрмадовкстнэ</h3>
-                    <button class="toggle-recent" id="toggle-recent">▼</button>
                 </div>
                 <div class="recent-articles-content" id="recent-articles-content">
                     <ul id="recent-articles-list">
@@ -707,7 +689,6 @@
             </div>
         </div>
     </div>
-
     <div class="all-articles-modal" id="all-articles-modal">
         <div class="all-articles-content">
             <div class="all-articles-header">
@@ -722,13 +703,10 @@
             </div>
         </div>
     </div>
-
     <footer>
         <p>Ӓрзянь Содамокудо - The Free Encyclopedia in Erzya language</p>
     </footer>
-
     <div class="notification" id="notification"></div>
-
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCCM4I58uE2IWjQdaQT2Ao4YD2pEcfyRAw",
@@ -739,10 +717,8 @@
             messagingSenderId: "512567729981",
             appId: "1:512567729981:web:16b3f19886e7e9d575af54"
         };
-
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-
         const searchInput = document.getElementById('search-input');
         const searchSuggestions = document.getElementById('search-suggestions');
         const articleTitle = document.getElementById('article-title');
@@ -766,16 +742,13 @@
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
         const paginationInfo = document.getElementById('pagination-info');
-        const toggleRecent = document.getElementById('toggle-recent');
         const recentArticles = document.getElementById('recent-articles');
         const recentArticlesContent = document.getElementById('recent-articles-content');
         const switchToLatinLink = document.getElementById('switch-to-latin');
-
         let currentArticle = 'main';
         let allArticles = [];
         let currentPage = 1;
         const articlesPerPage = 21;
-
         const WELCOME_ARTICLE = {
             id: 'main',
             title: 'Паро мельсэ совадо Ӓрзянь Содамокудонтень!',
@@ -789,18 +762,6 @@
                 behavior: 'smooth'
             });
         }
-
-        function collapseRecentArticlesOnMobile() {
-            if (window.innerWidth <= 768) {
-                recentArticles.classList.remove('expanded');
-                toggleRecent.textContent = '▼';
-            }
-        }
-
-        toggleRecent.addEventListener('click', function () {
-            recentArticles.classList.toggle('expanded');
-            toggleRecent.textContent = recentArticles.classList.contains('expanded') ? '▲' : '▼';
-        });
 
         function loadAllArticles() {
             const articlesRef = database.ref('articles');
@@ -827,29 +788,23 @@
                 searchSuggestions.style.display = 'none';
                 return;
             }
-
             const lowerSearchTerm = searchTerm.toLowerCase();
             const startsWithTerm = [];
             const containsTerm = [];
-
             allArticles.forEach(article => {
                 const lowerTitle = article.title.toLowerCase();
                 const lowerId = article.id.toLowerCase();
-
                 if (lowerTitle.startsWith(lowerSearchTerm) || lowerId.startsWith(lowerSearchTerm)) {
                     startsWithTerm.push(article);
                 } else if (lowerTitle.includes(lowerSearchTerm) || lowerId.includes(lowerSearchTerm)) {
                     containsTerm.push(article);
                 }
             });
-
             const suggestions = [...startsWithTerm, ...containsTerm].slice(0, 5);
-
             if (suggestions.length === 0) {
                 searchSuggestions.style.display = 'none';
                 return;
             }
-
             searchSuggestions.innerHTML = '';
             suggestions.forEach(article => {
                 const suggestion = document.createElement('div');
@@ -863,10 +818,8 @@
                 });
                 searchSuggestions.appendChild(suggestion);
             });
-
             searchSuggestions.style.display = 'block';
         }
-
         loadAllArticles();
 
         function formatArticleTitle(articleId) {
@@ -875,10 +828,8 @@
             }
             const words = articleId.split('-');
             if (words.length === 0) return articleId;
-
             const firstWord = words[0].charAt(0).toUpperCase() + words[0].slice(1);
             const remainingWords = words.slice(1);
-
             return [firstWord, ...remainingWords].join(' ');
         }
 
@@ -888,7 +839,6 @@
                 articleId
             }, '', newURL);
         }
-
         window.addEventListener('popstate', function (event) {
             if (event.state && event.state.articleId) {
                 loadArticle(event.state.articleId);
@@ -911,12 +861,10 @@
 
         function loadRecentArticles() {
             const articlesRef = database.ref('articles');
-
             articlesRef.orderByChild('createdAt').limitToLast(5).once('value')
                 .then((snapshot) => {
                     const articles = snapshot.val();
                     recentArticlesList.innerHTML = '';
-
                     if (articles) {
                         const articlesArray = Object.entries(articles)
                             .filter(([articleId]) => articleId !== WELCOME_ARTICLE.id)
@@ -926,7 +874,6 @@
                                 createdAt: articleData.createdAt || '1970-01-01T00:00:00.000Z'
                             }))
                             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
                         articlesArray.forEach(article => {
                             const listItem = document.createElement('li');
                             const link = document.createElement('a');
@@ -936,13 +883,11 @@
                             link.addEventListener('click', function (e) {
                                 e.preventDefault();
                                 loadArticle(article.id);
-                                collapseRecentArticlesOnMobile();
                                 scrollToTop();
                             });
                             listItem.appendChild(link);
                             recentArticlesList.appendChild(listItem);
                         });
-
                         if (articlesArray.length === 0) {
                             recentArticlesList.innerHTML = '<li>Од сёрмадовкст арасть</li>';
                         }
@@ -955,14 +900,11 @@
                     recentArticlesList.innerHTML = '<li>Таргамонь ильведевкс</li>';
                 });
         }
-
         loadArticleFromURL();
         loadRecentArticles();
-
         searchInput.addEventListener('input', function (e) {
             showSearchSuggestions(e.target.value);
         });
-
         searchInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 const searchTerm = searchInput.value.trim();
@@ -973,60 +915,48 @@
                 }
             }
         });
-
         document.addEventListener('click', function (e) {
             if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
                 searchSuggestions.style.display = 'none';
             }
         });
-
         editButton.addEventListener('click', function () {
             showEditor();
         });
-
         saveButton.addEventListener('click', function () {
             saveArticle();
         });
-
         deleteButton.addEventListener('click', function () {
             deleteArticle();
         });
-
         cancelButton.addEventListener('click', function () {
             hideEditor();
         });
-
         createButton.addEventListener('click', function () {
             createNewArticle();
         });
-
         homeLink.addEventListener('click', function (e) {
             if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
             e.preventDefault();
             loadArticle(WELCOME_ARTICLE.id);
         });
-
         randomLink.addEventListener('click', function (e) {
             if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
             e.preventDefault();
             loadRandomArticle();
         });
-
         seeAllButton.addEventListener('click', function () {
             showAllArticlesModal();
         });
-
         closeAllArticles.addEventListener('click', function () {
             hideAllArticlesModal();
         });
-
         prevPageButton.addEventListener('click', function () {
             if (currentPage > 1) {
                 currentPage--;
                 displayAllArticlesPage();
             }
         });
-
         nextPageButton.addEventListener('click', function () {
             const totalPages = Math.ceil(allArticles.length / articlesPerPage);
             if (currentPage < totalPages) {
@@ -1050,9 +980,7 @@
             const endIndex = startIndex + articlesPerPage;
             const pageArticles = allArticles.slice(startIndex, endIndex);
             const totalPages = Math.ceil(allArticles.length / articlesPerPage);
-
             allArticlesList.innerHTML = '';
-
             if (pageArticles.length === 0) {
                 allArticlesList.innerHTML = '<p>Сёрмадовкст арасть</p>';
             } else {
@@ -1064,13 +992,11 @@
                         e.preventDefault();
                         loadArticle(article.id);
                         hideAllArticlesModal();
-                        collapseRecentArticlesOnMobile();
                         scrollToTop();
                     });
                     allArticlesList.appendChild(link);
                 });
             }
-
             paginationInfo.textContent = `Lopa ${currentPage} ${totalPages > 0 ? ` / ${totalPages}` : ''}`;
             prevPageButton.disabled = currentPage === 1;
             nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
@@ -1085,8 +1011,6 @@
         }
 
         function loadArticle(articleId) {
-            collapseRecentArticlesOnMobile();
-
             if (articleId === WELCOME_ARTICLE.id) {
                 displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
                 currentArticle = WELCOME_ARTICLE.id;
@@ -1095,9 +1019,7 @@
                 scrollToTop();
                 return;
             }
-
             const articleRef = database.ref('articles/' + articleId);
-
             articleRef.once('value')
                 .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -1123,13 +1045,11 @@
             articleContent.innerHTML = articleData.content;
             editorTextarea.value = articleData.content;
             searchInput.value = '';
-
             hideEditor();
         }
 
         function displayCreateOption(articleId) {
             const formattedTitle = formatArticleTitle(articleId);
-
             articleTitle.textContent = formattedTitle;
             articleContent.innerHTML = `
                 <p>Сёрмадовксось зярс арась.</p>
@@ -1144,14 +1064,11 @@
                 showNotification('Прявт лопась а витеви', 'error');
                 return;
             }
-
             loadArticleForEditor();
-
             articleContent.style.display = 'none';
             editor.style.display = 'block';
             editButton.style.display = 'none';
             cancelButton.style.display = 'block';
-
             scrollToTop();
         }
 
@@ -1160,7 +1077,6 @@
                 editorTextarea.value = WELCOME_ARTICLE.content;
                 return;
             }
-
             const articleRef = database.ref('articles/' + currentArticle);
             articleRef.once('value')
                 .then((snapshot) => {
@@ -1190,10 +1106,8 @@
                 showNotification('Сёрмадовксось чаво', 'error');
                 return;
             }
-
             const articleRef = database.ref('articles/' + currentArticle);
             const title = formatArticleTitle(currentArticle);
-
             articleRef.once('value')
                 .then((snapshot) => {
                     const updates = {
@@ -1201,14 +1115,12 @@
                         content: content,
                         lastEdited: new Date().toISOString()
                     };
-
                     if (!snapshot.exists()) {
                         updates.createdAt = new Date().toISOString();
                     } else {
                         const existingData = snapshot.val();
                         updates.createdAt = existingData.createdAt;
                     }
-
                     return articleRef.set(updates);
                 })
                 .then(() => {
@@ -1231,13 +1143,10 @@
                 showNotification('Прявт лопась а нардави', 'error');
                 return;
             }
-
             if (!confirm('Кӓместэ нардасынек лопанть? Теде мӓйле сон а вӓлявтови.')) {
                 return;
             }
-
             const articleRef = database.ref('articles/' + currentArticle);
-
             articleRef.remove()
                 .then(() => {
                     showNotification('Сёрмадовксось нардазь!');
@@ -1256,12 +1165,9 @@
                 showNotification('Сёрмадык сёрмадовксонть лӓмензэ', 'error');
                 return;
             }
-
             const articleId = title.toLowerCase().replace(/\s+/g, '-');
             newArticleTitle.value = '';
-
             const articleRef = database.ref('articles/' + articleId);
-
             articleRef.once('value')
                 .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -1284,7 +1190,6 @@
 
         function loadRandomArticle() {
             const articlesRef = database.ref('articles');
-
             articlesRef.once('value')
                 .then((snapshot) => {
                     const articles = snapshot.val();
@@ -1308,52 +1213,40 @@
             notification.textContent = message;
             notification.style.backgroundColor = type === 'error' ? '#F6FAFF' : '#F6FAFF';
             notification.style.display = 'block';
-
             setTimeout(() => {
                 notification.style.display = 'none';
             }, 3000);
         }
-
         const articlesRef = database.ref('articles');
         articlesRef.on('child_changed', (snapshot) => {
             const articleId = snapshot.key;
             const articleData = snapshot.val();
-
             if (articleId === currentArticle && articleId !== WELCOME_ARTICLE.id) {
                 displayArticle(articleId, articleData);
             }
-
             loadRecentArticles();
             loadAllArticles();
         });
-
         articlesRef.on('child_removed', (snapshot) => {
             const articleId = snapshot.key;
-
             if (articleId === currentArticle) {
                 loadArticle(WELCOME_ARTICLE.id);
             }
-
             loadRecentArticles();
             loadAllArticles();
         });
-
         articlesRef.on('child_added', (snapshot) => {
             loadRecentArticles();
             loadAllArticles();
         });
-
         switchToLatinLink.addEventListener('click', function (e) {
             e.preventDefault();
-
             const urlParams = new URLSearchParams(window.location.search);
             const currentArticle = urlParams.get('article');
-
             let newUrl = 'sodamokudo-lat.html';
             if (currentArticle) {
                 newUrl += `?article=${encodeURIComponent(currentArticle)}`;
             }
-
             window.location.href = newUrl;
         });
     </script>

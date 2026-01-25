@@ -241,9 +241,10 @@
             padding: 12px;
             border: 1px solid #a2a9b1;
             border-radius: 3px;
-            font-size: 17px;
+            font-size: 16px;
             resize: vertical;
             line-height: 1.75;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .editor-buttons {
@@ -304,16 +305,6 @@
             border-bottom: 1px solid #a2a9b1;
             padding-bottom: 8px;
             flex: 1;
-        }
-
-        .toggle-recent {
-            background: none;
-            border: none;
-            color: #36c;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 5px;
-            margin-left: 10px;
         }
 
         .recent-articles-content {
@@ -545,10 +536,6 @@
                 position: sticky;
                 top: 80px;
             }
-
-            .toggle-recent {
-                display: none;
-            }
         }
 
         @media (max-width: 768px) {
@@ -556,17 +543,27 @@
                 flex-direction: column;
                 gap: 14px;
                 padding: 20px;
+                position: relative;
+                top: auto;
+                box-shadow: none;
+                border-bottom: 1px solid #a2a9b1;
             }
 
-            .logo h1,
-            .article-title h2 {
-                font-size: 24px;
+            .logo {
+                position: relative;
+            }
+
+            nav {
+                position: relative;
+                width: 100%;
             }
 
             nav ul {
                 gap: 10px;
                 flex-wrap: wrap;
                 justify-content: center;
+                overflow-x: auto;
+                padding-bottom: 5px;
             }
 
             nav a {
@@ -620,18 +617,6 @@
 
             .all-articles-list {
                 column-count: 2;
-            }
-
-            .recent-articles-content {
-                display: none;
-            }
-
-            .recent-articles-header {
-                cursor: pointer;
-            }
-
-            .recent-articles.expanded .recent-articles-content {
-                display: block;
             }
 
             .article-content,
@@ -691,7 +676,6 @@
             <div class="recent-articles" id="recent-articles">
                 <div class="recent-articles-header">
                     <h3>Од сёрмадовкстнэ</h3>
-                    <button class="toggle-recent" id="toggle-recent">▼</button>
                 </div>
                 <div class="recent-articles-content" id="recent-articles-content">
                     <ul id="recent-articles-list">
@@ -766,9 +750,6 @@
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
         const paginationInfo = document.getElementById('pagination-info');
-        const toggleRecent = document.getElementById('toggle-recent');
-        const recentArticles = document.getElementById('recent-articles');
-        const recentArticlesContent = document.getElementById('recent-articles-content');
         const switchToCyrillicLink = document.getElementById('switch-to-cyrillic');
 
         let currentArticle = 'main';
@@ -789,18 +770,6 @@
                 behavior: 'smooth'
             });
         }
-
-        function collapseRecentArticlesOnMobile() {
-            if (window.innerWidth <= 768) {
-                recentArticles.classList.remove('expanded');
-                toggleRecent.textContent = '▼';
-            }
-        }
-
-        toggleRecent.addEventListener('click', function () {
-            recentArticles.classList.toggle('expanded');
-            toggleRecent.textContent = recentArticles.classList.contains('expanded') ? '▲' : '▼';
-        });
 
         function loadAllArticles() {
             const articlesRef = database.ref('articles');
@@ -975,7 +944,6 @@
                             link.addEventListener('click', function (e) {
                                 e.preventDefault();
                                 loadArticle(article.id);
-                                collapseRecentArticlesOnMobile();
                                 scrollToTop();
                             });
                             listItem.appendChild(link);
@@ -1103,7 +1071,6 @@
                         e.preventDefault();
                         loadArticle(article.id);
                         hideAllArticlesModal();
-                        collapseRecentArticlesOnMobile();
                         scrollToTop();
                     });
                     allArticlesList.appendChild(link);
@@ -1124,8 +1091,6 @@
         }
 
         function loadArticle(articleId) {
-            collapseRecentArticlesOnMobile();
-
             if (articleId === WELCOME_ARTICLE.id) {
                 displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
                 currentArticle = WELCOME_ARTICLE.id;
