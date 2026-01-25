@@ -661,7 +661,7 @@
         <nav>
             <ul>
                 <a href="?random=1" id="random-link">Апак учонь сёрмадовкс</a>
-                <a href="sodamokudo-lat.html">Латинань</a>
+                <a href="#" id="switch-to-latin">Латинань</a>
             </ul>
         </nav>
     </header>
@@ -769,6 +769,7 @@
         const toggleRecent = document.getElementById('toggle-recent');
         const recentArticles = document.getElementById('recent-articles');
         const recentArticlesContent = document.getElementById('recent-articles-content');
+        const switchToLatinLink = document.getElementById('switch-to-latin');
 
         let currentArticle = 'main';
         let allArticles = [];
@@ -1340,6 +1341,20 @@
         articlesRef.on('child_added', (snapshot) => {
             loadRecentArticles();
             loadAllArticles();
+        });
+
+        switchToLatinLink.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentArticle = urlParams.get('article');
+
+            let newUrl = 'sodamokudo-lat.html';
+            if (currentArticle) {
+                newUrl += `?article=${encodeURIComponent(currentArticle)}`;
+            }
+
+            window.location.href = newUrl;
         });
     </script>
 </body>
