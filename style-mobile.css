@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+@font-face {
+    font-family: 'CMU Sans Serif';
+    src: url('fonts/CMU Sans Serif.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CMU Sans Serif';
+    src: url('fonts/CMU Sans Serif Oblique.otf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CMU Sans Serif';
+    src: url('fonts/CMU Sans Serif Bold Extended.otf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'CMU Sans Serif', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    font-family: 'CMU Sans Serif', sans-serif;
+    background: #333;
+    color: white;
+    padding: 0.16px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: block;
+    margin-bottom: 0.16px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-list a.active {
+    text-decoration: underline;
+}
+
+.nav-select {
+    width: 100%;
+    padding: 10px;
+    font-family: 'CMU Sans Serif', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-select option {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+p a {
+    color: #21427a;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: auto;
+    text-align: center;
+    color: #21427a;
+}
+
+h1 a {
+    text-decoration: none;
+    color: #21427a;
+}
+
+h2 {
+    font-family: 'CMU Sans Serif', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: italic;
+    text-align: center;
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table td {
+    padding: 0.16px;
+    position: relative;
+}
+
+td {
+    vertical-align: top;
+}
+
+tr {
+    vertical-align: top;
+}
+
+footer {
+    font-family: 'CMU Sans Serif', sans-serif;
+    text-align: center;
+    padding: 16px;
+    background: #333;
+    color: white;
+    margin-top: 30px;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 0;
+    border-radius: 5px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: 'CMU Sans Serif', sans-serif;
+}
+
+.container-grammar h2 {
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+textarea {
+    font-family: 'CMU Sans Serif', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 0 0 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    min-height: 150px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#searchInput {
+    font-family: 'CMU Sans Serif', sans-serif;
+    font-size: 16px;
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 10px 10px 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#dictionaryList {
+    list-style-type: none;
+    padding: 0 20px;
+    margin: 0;
+}
+
+#dictionaryList li {
+    padding: 10px 10px;
+    line-height: 1.5;
+    border-bottom: none;
+    background-color: transparent;
+}
+
+.word {
+    font-family: 'CMU Sans Serif', sans-serif;
+    font-weight: regular;
+    font-size: 16px;
+    color: #333;
+}
+
+.definition {
+    font-family: 'CMU Sans Serif', sans-serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #333;
+}
+
+#languageSelector {
+    font-family: 'CMU Sans Serif', sans-serif;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+button#copyButton {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 5px 10px;
+    margin-top: 20px;
+    font-family: 'CMU Sans Serif', sans-serif;
+}
+
+.nav-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-select option {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+.suggestions-list {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    z-index: 10;
+    width: calc(100% - 40px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 0;
+    margin: -10px 0 0 20px;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.highlight {
+    background-color: #f0f0f0;
+}
+
+#wordDetails {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 20px;
+    display: none;
+}
+
+#wordDetails h2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+    color: #B22222;
+}
+
+#wordDetails p {
+    margin-bottom: 30px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.category {
+    font-style: italic;
+    font-weight: normal;
+    color: green;
+}
+
+.examples,
+.quotes {
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+}
+
+.example,
+.quote {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.quote {
+    display: grid;
+}
+
+.quote:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.example em,
+.quote em {
+    color: #B22222;
+}
+
+.source {
+    text-align: right;
+    font-style: italic;
+    color: grey
+}
+
+#wordDetails ul {
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    list-style-type: none;
+    counter-reset: definition-counter;
+}
+
+#wordDetails li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    position: relative;
+}
+
+.definition-number {
+    font-size: 16px;
+    margin-right: 5px;
+    color: #2c3e50;
+}
