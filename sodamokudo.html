@@ -1352,15 +1352,24 @@
                     const articles = snapshot.val();
                     let articleCount = 0;
                     let latestArticleDate = null;
+                    let latestArticleTitle = '';
 
                     if (articles) {
-                        articleCount = Object.keys(articles).filter(id => id !== WELCOME_ARTICLE.id).length;
+                        const filteredArticles = Object.entries(articles)
+                            .filter(([id]) => id !== WELCOME_ARTICLE.id);
 
-                        Object.entries(articles).forEach(([id, article]) => {
-                            if (id !== WELCOME_ARTICLE.id && article.createdAt) {
-                                const articleDate = new Date(article.createdAt);
-                                if (!latestArticleDate || articleDate > latestArticleDate) {
-                                    latestArticleDate = articleDate;
+                        articleCount = filteredArticles.length;
+
+                        filteredArticles.forEach(([id, article]) => {
+                            if (article.createdAt) {
+                                try {
+                                    const articleDate = new Date(article.createdAt);
+                                    if (!latestArticleDate || articleDate > latestArticleDate) {
+                                        latestArticleDate = articleDate;
+                                        latestArticleTitle = article.title || id;
+                                    }
+                                } catch (e) {
+                                    console.error('Шкась а таргави.', article.createdAt);
                                 }
                             }
                         });
@@ -1368,23 +1377,30 @@
 
                     const statsElement = document.getElementById('statistics-placeholder');
                     if (statsElement) {
-                        let statsHTML = `Те шкас тӓезь <strong>${articleCount}</strong> сёрмадовкст.`;
+                        let statsHTML = '';
 
-                        if (latestArticleDate && articleCount > 0) {
-                            const erzyaMonthNames = [
-                                "якшамоковонь", "даволковонь", "эйсюроковонь", "чадыковонь",
-                                "панжиковонь", "аштемаковонь", "мӓдьков", "умарьковонь",
-                                "таштомаковонь", "ожоковонь", "сундерьковонь", "ацамоковонь"
-                            ];
+                        if (articleCount === 0) {
+                            statsHTML = 'Сёрмадовкст зярс арасть.';
+                        } else {
+                            statsHTML = `Те шкас тӓезь <strong>${articleCount}</strong> сёрмадовкст.`;
 
-                            const day = latestArticleDate.getDate();
-                            const monthIndex = latestArticleDate.getMonth();
-                            const year = latestArticleDate.getFullYear();
-                            const monthName = erzyaMonthNames[monthIndex];
+                            if (latestArticleDate) {
+                                const erzyaMonthNames = [
+                                    "якшамоковонь", "даволковонь", "эйсюроковонь", "чадыковонь",
+                                    "панжиковонь", "аштемаковонь", "мӓдьковонь", "умарьковонь",
+                                    "таштомаковонь", "ожоковонь", "сундерьковонь", "ацамоковонь"
+                                ];
 
-                            const formattedDate = `${year}-це иень ${monthName} ${day}-це чистэ`;
+                                const day = latestArticleDate.getDate();
+                                const monthIndex = latestArticleDate.getMonth();
+                                const year = latestArticleDate.getFullYear();
 
-                            statsHTML += ` Мӓельцесь ${formattedDate}.`;
+                                if (monthIndex >= 0 && monthIndex < erzyaMonthNames.length) {
+                                    const monthName = erzyaMonthNames[monthIndex];
+                                    const formattedDate = `${year}-це иень ${monthName} ${day}-це чистэ`;
+                                    statsHTML += ` Мӓельцесь ${formattedDate}.`;
+                                }
+                            }
                         }
 
                         statsElement.innerHTML = statsHTML;
