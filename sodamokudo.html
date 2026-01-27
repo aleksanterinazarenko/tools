@@ -209,6 +209,10 @@
             margin-bottom: 0;
         }
 
+        img:has(+ *) {
+            margin-bottom: 10px;
+        }
+
         .edit-button,
         .cancel-button {
             background-color: #F6FAFF;
@@ -986,22 +990,27 @@
             const pageArticles = allArticles.slice(startIndex, endIndex);
             const totalPages = Math.ceil(allArticles.length / articlesPerPage);
             allArticlesList.innerHTML = '';
+
             if (pageArticles.length === 0) {
                 allArticlesList.innerHTML = '<p>Сёрмадовкст арасть</p>';
             } else {
                 pageArticles.forEach(article => {
                     const link = document.createElement('a');
-                    link.href = '#';
+                    link.href = `?article=${article.id}`;
                     link.textContent = article.title;
+
                     link.addEventListener('click', function (e) {
+                        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
                         e.preventDefault();
                         loadArticle(article.id);
                         hideAllArticlesModal();
                         scrollToTop();
                     });
+
                     allArticlesList.appendChild(link);
                 });
             }
+
             paginationInfo.textContent = `Лопа ${currentPage} ${totalPages > 0 ? ` / ${totalPages}` : ''}`;
             prevPageButton.disabled = currentPage === 1;
             nextPageButton.disabled = currentPage === totalPages || totalPages === 0;

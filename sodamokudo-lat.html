@@ -209,6 +209,10 @@
             margin-bottom: 0;
         }
 
+        img:has(+ *) {
+            margin-bottom: 10px;
+        }
+
         .edit-button,
         .cancel-button {
             background-color: #F6FAFF;
@@ -1062,7 +1066,6 @@
             const endIndex = startIndex + articlesPerPage;
             const pageArticles = allArticles.slice(startIndex, endIndex);
             const totalPages = Math.ceil(allArticles.length / articlesPerPage);
-
             allArticlesList.innerHTML = '';
 
             if (pageArticles.length === 0) {
@@ -1070,14 +1073,17 @@
             } else {
                 pageArticles.forEach(article => {
                     const link = document.createElement('a');
-                    link.href = '#';
+                    link.href = `?article=${article.id}`;
                     link.textContent = article.title;
+
                     link.addEventListener('click', function (e) {
+                        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
                         e.preventDefault();
                         loadArticle(article.id);
                         hideAllArticlesModal();
                         scrollToTop();
                     });
+
                     allArticlesList.appendChild(link);
                 });
             }
