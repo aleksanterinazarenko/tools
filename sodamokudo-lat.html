@@ -109,6 +109,36 @@
             background-color: #eaf3ff;
         }
 
+        nav button.nav-button {
+            background-color: #F6FAFF;
+            color: #36c;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            font-style: normal;
+            transition: background-color 0.2s;
+            font-family: "Ubuntu", sans-serif;
+            text-decoration: none;
+        }
+
+        nav button.nav-button:hover {
+            background-color: #eaf3ff;
+            text-decoration: underline;
+        }
+
+        nav a#home-link {
+            background-color: transparent;
+            padding: 0;
+            color: #36c;
+        }
+
+        nav a#home-link:hover {
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -654,8 +684,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="?random=1" id="random-link">Апак учонь сёрмадовкс</a></li>
-                <li><a href="#" id="switch-to-cyrillic">CYR</a></li>
+                <li><button class="nav-button" id="random-button">Апак учонь сёрмадовкс</button></li>
+                <li><button class="nav-button" id="switch-to-cyrillic">CYR</button></li>
             </ul>
         </nav>
     </header>
@@ -750,7 +780,7 @@
         const createButton = document.getElementById('create-button');
         const notification = document.getElementById('notification');
         const homeLink = document.getElementById('home-link');
-        const randomLink = document.getElementById('random-link');
+        const randomButton = document.getElementById('random-button');
         const seeAllButton = document.getElementById('see-all-button');
         const allArticlesModal = document.getElementById('all-articles-modal');
         const allArticlesList = document.getElementById('all-articles-list');
@@ -758,7 +788,7 @@
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
         const paginationInfo = document.getElementById('pagination-info');
-        const switchToCyrillicLink = document.getElementById('switch-to-cyrillic');
+        const switchToCyrillicButton = document.getElementById('switch-to-cyrillic');
 
         let currentArticle = 'main';
         let allArticles = [];
@@ -1021,8 +1051,7 @@
             loadArticle(WELCOME_ARTICLE.id);
         });
 
-        randomLink.addEventListener('click', function (e) {
-            if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
+        randomButton.addEventListener('click', function (e) {
             e.preventDefault();
             loadRandomArticle();
         });
@@ -1670,7 +1699,7 @@
             });
         });
 
-        switchToCyrillicLink.addEventListener('click', function (e) {
+        switchToCyrillicButton.addEventListener('click', function (e) {
             e.preventDefault();
 
             const urlParams = new URLSearchParams(window.location.search);

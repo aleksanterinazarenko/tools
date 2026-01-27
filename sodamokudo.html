@@ -109,6 +109,36 @@
             background-color: #eaf3ff;
         }
 
+        nav button.nav-button {
+            background-color: #F6FAFF;
+            color: #36c;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            font-style: normal;
+            transition: background-color 0.2s;
+            font-family: "Ubuntu", sans-serif;
+            text-decoration: none;
+        }
+
+        nav button.nav-button:hover {
+            background-color: #eaf3ff;
+            text-decoration: underline;
+        }
+
+        nav a#home-link {
+            background-color: transparent;
+            padding: 0;
+            color: #36c;
+        }
+
+        nav a#home-link:hover {
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -654,8 +684,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="?random=1" id="random-link">Апак учонь сёрмадовкс</a></li>
-                <li><a href="#" id="switch-to-latin">LAT</a></li>
+                <li><button class="nav-button" id="random-button">Апак учонь сёрмадовкс</button></li>
+                <li><button class="nav-button" id="switch-to-latin">LAT</button></li>
             </ul>
         </nav>
     </header>
@@ -743,7 +773,7 @@
         const createButton = document.getElementById('create-button');
         const notification = document.getElementById('notification');
         const homeLink = document.getElementById('home-link');
-        const randomLink = document.getElementById('random-link');
+        const randomButton = document.getElementById('random-button');
         const seeAllButton = document.getElementById('see-all-button');
         const allArticlesModal = document.getElementById('all-articles-modal');
         const allArticlesList = document.getElementById('all-articles-list');
@@ -753,7 +783,7 @@
         const paginationInfo = document.getElementById('pagination-info');
         const recentArticles = document.getElementById('recent-articles');
         const recentArticlesContent = document.getElementById('recent-articles-content');
-        const switchToLatinLink = document.getElementById('switch-to-latin');
+        const switchToLatinButton = document.getElementById('switch-to-latin');
         let currentArticle = 'main';
         let allArticles = [];
         let currentPage = 1;
@@ -949,8 +979,7 @@
             e.preventDefault();
             loadArticle(WELCOME_ARTICLE.id);
         });
-        randomLink.addEventListener('click', function (e) {
-            if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
+        randomButton.addEventListener('click', function (e) {
             e.preventDefault();
             loadRandomArticle();
         });
@@ -1273,7 +1302,7 @@
             loadRecentArticles();
             loadAllArticles();
         });
-        switchToLatinLink.addEventListener('click', function (e) {
+        switchToLatinButton.addEventListener('click', function (e) {
             e.preventDefault();
             const urlParams = new URLSearchParams(window.location.search);
             const currentArticle = urlParams.get('article');
