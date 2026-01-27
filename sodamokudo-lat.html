@@ -8,7 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
         @font-face {
             font-family: 'CMU Sans';
@@ -35,7 +35,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Ubuntu", sans-serif;
         }
 
         html {
@@ -49,6 +48,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         header {
@@ -81,9 +81,10 @@
         }
 
         .logo h1 {
-            font-size: 24px;
             color: #36c;
+            font-size: 24px;
             font-weight: 500;
+            font-family: "Montserrat", sans-serif;
         }
 
         .logo-icon {
@@ -609,9 +610,13 @@
             }
 
             .container {
-                padding: 16px 16px 0;
+                padding: 20px 0 0 0;
                 margin-bottom: 0;
                 display: block;
+            }
+
+            .sidebar {
+                margin-top: 20px;
             }
 
             .main-content {
