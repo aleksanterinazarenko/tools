@@ -46,6 +46,9 @@
             background-color: #f8f9fa;
             color: #202122;
             line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
@@ -139,10 +142,11 @@
         }
 
         .container {
-            max-width: 1200px;
+            width: min(1200px, 90%);
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             display: block;
+            flex: 1;
         }
 
         .main-content {
@@ -530,10 +534,10 @@
         footer {
             text-align: center;
             padding: 20px;
-            margin-top: 30px;
             border-top: 1px solid #a2a9b1;
             color: #54595d;
             font-size: 17px;
+            flex-shrink: 0;
         }
 
         .notification {
@@ -556,7 +560,7 @@
             .container {
                 display: grid;
                 grid-template-columns: 1fr 320px;
-                gap: 20px;
+                gap: 30px;
                 align-items: start;
             }
 
@@ -798,7 +802,7 @@
         const WELCOME_ARTICLE = {
             id: 'main',
             title: 'Паро мельсэ совадо Ӓрзянь Содамокудонтень!',
-            content: `<p>Ӓрзянь Содамокудось те аорев, киньгак ӓйстэ ай-аштиця ӓрзянь кельсэ содамокудо (лиякс: <i>энциклопедия</i>).</p><p>Ӓрьвантень тӓеви эли витеви сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p><div id="statistics-placeholder" style="margin-top: 10px;">Тарган статистикат...</div></p><p>Ули мелеть кодаяк лиякс лӓздамс тӓвентень? Сёрмадт те адрестэнть лангс: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
+            content: `<p>Ӓрзянь Содамокудось те олячив, аорев, киньгак ӓйстэ а аштиця ӓрзянь кельсэ, ӓрзянь кельденть арсезь тӓезь энциклопедия (содамокудо).</p><p>Ӓрьвантень тӓйневи эли витневи сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p><div id="statistics-placeholder" style="margin-top: 10px;">Тарган статистикат...</div></p><p>Ули мелеть кодаяк лиякс лӓздамс тӓвентень? Сёрмадт те адрестэнть лангс: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
             createdAt: '2024-01-01T00:00:00.000Z'
         };
 
@@ -1449,9 +1453,9 @@
             "Э": "Ë",
             "Ю": "U",
             "Я": "A",
-            "Ԙ": "Ä",
-            "Ӕ": "Ä",
-            "Ӓ": "Ä",
+            "Ԙ": "Æ",
+            "Ӕ": "Æ",
+            "Ӓ": "Æ",
             "Ѣ": "E",
             "Ҥ": "N",
             "І": "I",
@@ -1489,9 +1493,9 @@
             "э": "ë",
             "ю": "u",
             "я": "a",
-            "ԙ": "ä",
-            "ӕ": "ä",
-            "ӓ": "ä",
+            "ԙ": "æ",
+            "ӕ": "æ",
+            "ӓ": "æ",
             "ѣ": "e",
             "ҥ": "n",
             "і": "i",
@@ -1725,7 +1729,7 @@
                             const year = latestArticleDate.getFullYear();
                             const monthName = erzyaMonthNames[monthIndex];
 
-                            const formattedDate = `${year} иень ${monthName} ${day}-це чистэ`;
+                            const formattedDate = `${year}-це иень ${monthName} ${day}-це чистэ`;
 
                             statsHTML += ` Мӓельцесь ${formattedDate}.`;
                         }
