@@ -798,7 +798,7 @@
         const WELCOME_ARTICLE = {
             id: 'main',
             title: 'Паро мельсэ совадо Ӓрзянь Содамокудонтень!',
-            content: `<p>Ӓрзянь Содамокудось те аорев, киньгак ӓйстэ а аштиця ӓрзянь содамокудо (лиякс: <i>энциклопедия</i>).</p><p>Ӓрьвантень тӓеви эли витеви сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p>Ули мелеть лӓздамс тӓвентень? Сёрмадт: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
+            content: `<p>Ӓрзянь Содамокудось те аорев, киньгак ӓйстэ а аштиця ӓрзянь содамокудо (лиякс: <i>энциклопедия</i>).</p><p>Ӓрьвантень тӓеви эли витеви сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p><div id="statistics-placeholder" style="margin-top: 10px;">Тарган статистикат...</div></p><p>Ули мелеть кодаяк лиякс лӓздамс тӓвентень? Сёрмадт: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
             createdAt: '2024-01-01T00:00:00.000Z'
         };
 
@@ -1380,29 +1380,37 @@
         articlesRef.on('child_changed', (snapshot) => {
             const articleId = snapshot.key;
             const articleData = snapshot.val();
-
             if (articleId === currentArticle && articleId !== WELCOME_ARTICLE.id) {
                 displayArticle(articleId, articleData);
             }
-
             loadRecentArticles();
             loadAllArticles();
+
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                loadStatistics();
+            }
         });
 
         articlesRef.on('child_removed', (snapshot) => {
             const articleId = snapshot.key;
-
             if (articleId === currentArticle) {
                 loadArticle(WELCOME_ARTICLE.id);
             }
-
             loadRecentArticles();
             loadAllArticles();
+
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                loadStatistics();
+            }
         });
 
         articlesRef.on('child_added', (snapshot) => {
             loadRecentArticles();
             loadAllArticles();
+
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                loadStatistics();
+            }
         });
     </script>
 
@@ -1516,86 +1524,85 @@
         function transliterate(text) {
             const spaceBefore = text.startsWith(' ');
             const spaceAfter = text.endsWith(' ');
-            text = text.trim();
+            text = " " + text + " ";
 
-            for (const [key, value] of Object.entries(palatals)) {
-                const regexVowel = new RegExp(key + 'ь([аеёиоуыэюяАЕЁИОУЫЭЮЯ])', 'g');
-                text = text.replace(regexVowel, value + '$1');
+        for (const [key, value] of Object.entries(palatals)) {
+            const regexVowel = new RegExp(key + 'ь([аеёиоуыэюяАЕЁИОУЫЭЮЯ])', 'g');
+            text = text.replace(regexVowel, value + '$1');
 
-                text = text.replace(/([ИІ])([иіИІ])/g, 'J$2');
+            text = text.replace(/([ИІ])([иіИІ])/g, 'J$2');
 
-                text = text.replace(/([АЕЁИОУЫЭЮЯІаеёиоуыэюяі])в(?=[бгджзклмнпрстфхцчшщъБГДЖЗКЛМНПРСТФХЦЧШЩЪ])/g,
-                    '$1v');
-                text = text.replace(/([АЕЁИОУЫЭЮЯІаеёиоуыэюяі])в(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])/g, '$1v$2');
-                text = text.replace(/([дзлнрсцДЗЛНРСЦ])([тТ])([ьЬ])(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])/g, '$1ь$2$4');
-                text = text.replace(/([дзлнрсцДЗЛНРСЦ])([тТ])([ьЬ])([бгджзклмнпрстфхцчшщъБГДЖЗКЛМНПРСТФХЦЧШЩЪ])/g,
-                    '$1ь$2$4');
-                text = text.replace(/(?<![аоуяёюАОУЯЁЮ])([тТ])([ьЬ])(?=\s|[.,!?;:()\[\]{}"“”«»„“…\-]|$)/g, '$1');
+            text = text.replace(/([АЕЁИОУЫЭЮЯІаеёиоуыэюяі])в(?=[бгджзклмнпрстфхцчшщъБГДЖЗКЛМНПРСТФХЦЧШЩЪ])/g, '$1v');
+            text = text.replace(/([АЕЁИОУЫЭЮЯІаеёиоуыэюяі])в(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])/g, '$1v$2');
+            text = text.replace(/([дзлнрсцДЗЛНРСЦ])([тТ])([ьЬ])(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])/g, '$1ь$2$4');
+            text = text.replace(/([дзлнрсцДЗЛНРСЦ])([тТ])([ьЬ])([бгджзклмнпрстфхцчшщъБГДЖЗКЛМНПРСТФХЦЧШЩЪ])/g,
+                '$1ь$2$4');
+            text = text.replace(/(?<![аоуяёюАОУЯЁЮ])([тТ])([ьЬ])(?=\s|[.,!?;:()\[\]{}"“”«»„“…\-]|$)/g, '$1');
 
-                text = text.replace(/([дзлнртцДЗЛНРТЦ])ь(?=[дзлнрстхц]+[еёияіьѣ])/g, '$1');
-                text = text.replace(/([дзлнртцДЗЛНРТЦ])ь(?=[дзлнрстхц]+[эы])/g, '$1');
-                text = text.replace(/([дзлнртцДЗЛНРТЦ])ь(?=[еёиюяіь])/g, '$1j');
-                text = text.replace(/([дзлнртцДЗЛНРТЦ])ь([чЧ])/g, '$1$2');
+            text = text.replace(/([дзлнртцДЗЛНРТЦ])ь(?=[дзлнрстхц]+[еёияіьѣ])/g, '$1');
+            text = text.replace(/([дзлнртцДЗЛНРТЦ])ь(?=[дзлнрстхц]+[эы])/g, '$1');
+            text = text.replace(/([дзлнртцДЗЛНРТЦ])ь(?=[еёиюяіь])/g, '$1j');
+            text = text.replace(/([дзлнртцДЗЛНРТЦ])ь([чЧ])/g, '$1$2');
 
-                text = text.replace(/([лЛ])ь([кнтКНТ])([аоуыэАОУЫЭ])/g, '$1$2$3');
-                text = text.replace(/([Чч])([а])([р])ь([к])/g, '$1$2$3$4');
+            text = text.replace(/([лЛ])ь([кнтКНТ])([аоуыэАОУЫЭ])/g, '$1$2$3');
+            text = text.replace(/([Чч])([а])([р])ь([к])/g, '$1$2$3$4');
 
-                text = text.replace(/([ыэийеьіӕԙӓѣЫЭИЙЕЬІӔԘӒѢ])([длнртцДЛНРТЦ]+)([ьЬ])(?![аоуыэАОУЫЭ])/g, '$1$2');
+            text = text.replace(/([ыэийеьіӕԙӓѣЫЭИЙЕЬІӔԘӒѢ])([длнртцДЛНРТЦ]+)([ьЬ])(?![аоуыэАОУЫЭ])/g, '$1$2');
 
-                text = text.replace(/([\u0301])/g, '');
-                text = text.replace(/(ю[\u0302])/g, 'ё');
+            text = text.replace(/([\u0301])/g, '');
+            text = text.replace(/(ю[\u0302])/g, 'ё');
 
-                text = text.replace(/([е])([и])([я])([і])/g, '$1j$2j$3');
-                text = text.replace(/([аоуыэяёюиеъьіӕԙӓѣАОУЫЭЯЁЮИЕЪЬІӔԘӒѢ])([еёюя])/g, '$1j$2');
-                text = text.replace(/([аоуыэяёюиеъіӕԙӓѣАОУЫЭЯЁЮИЕЪІӔԘӒѢ])([иі])/g, '$1j$2');
-                text = text.replace(/([аоуэяёюеъӕԙӓѣАОУЭЯЁЮЕЪӔԘӒѢ])([й])/g, '$1i');
-                text = text.replace(/([АОУЫЭЯЁЮИЕЪЬІӔѢ])([ЕЁЮЯ])/g, '$1J$2');
-                text = text.replace(/([АОУЫЭЯЁЮИЕЪІӔѢ])([ИІ])/g, '$1J$2');
-                text = text.replace(/([АОУЭЯЁЮИЕЪӔѢ])([Й])/g, '$1I');
+            text = text.replace(/([е])([и])([я])([і])/g, '$1j$2j$3');
+            text = text.replace(/([аоуыэяёюиеъьіӕԙӓѣАОУЫЭЯЁЮИЕЪЬІӔԘӒѢ])([еёюя])/g, '$1j$2');
+            text = text.replace(/([аоуыэяёюиеъіӕԙӓѣАОУЫЭЯЁЮИЕЪІӔԘӒѢ])([иі])/g, '$1j$2');
+            text = text.replace(/([аоуэяёюеъӕԙӓѣАОУЭЯЁЮЕЪӔԘӒѢ])([й])/g, '$1i');
+            text = text.replace(/([АОУЫЭЯЁЮИЕЪЬІӔѢ])([ЕЁЮЯ])/g, '$1J$2');
+            text = text.replace(/([АОУЫЭЯЁЮИЕЪІӔѢ])([ИІ])/g, '$1J$2');
+            text = text.replace(/([АОУЭЯЁЮИЕЪӔѢ])([Й])/g, '$1I');
 
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([иі])([аоуыэяёюиеъьіӕ])/g, '$1j$3');
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([ИІ])([аоуыэяёюиеъьіӕ])/g, '$1J$3');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([иі])([аоуыэяёюиеъьіӕ])/g, '$1j$3');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([ИІ])([аоуыэяёюиеъьіӕ])/g, '$1J$3');
 
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([ёюя])/g, '$1j$2');
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([ЁЮЯ])/g, '$1J$2');
-                text = text.replace(/-([ёюя])/g, '-j$1');
-                text = text.replace(/-([ЁЮЯ])/g, '-J$1');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([ёюя])/g, '$1j$2');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])([ЁЮЯ])/g, '$1J$2');
+            text = text.replace(/-([ёюя])/g, '-j$1');
+            text = text.replace(/-([ЁЮЯ])/g, '-J$1');
 
-                text = text.replace(/([аеёиоуыэюяьАЕЁИОУЫЭЮЯЬ])э/g, '$1e')
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])э/g, '$1e');
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])Э/g, '$1E');
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])і/g, '$1i');
-                text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])І/g, '$1I');
+            text = text.replace(/([аеёиоуыэюяьАЕЁИОУЫЭЮЯЬ])э/g, '$1e')
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])э/g, '$1e');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])Э/g, '$1E');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])і/g, '$1i');
+            text = text.replace(/(^|\s|[.,!?;:()\[\]{}<>"“”«»„“…\-])І/g, '$1I');
 
-                text = text.replace(/([бвгжкмпфхчшБВГЖКМПФХЧШ])([яԙ])/g, '$1ä');
-                text = text.replace(/([бвгжкмпфхчшБВГЖКМПФХЧШ])ё/g, '$1ö');
-                text = text.replace(/([дзлнрстцДЗЛНРСТЦ])е/g, '$1e');
-                text = text.replace(/([дзлнрстцДЗЛНРСТЦ])и/g, '$1i');
+            text = text.replace(/([бвгжкмпфхчшБВГЖКМПФХЧШ])([яԙ])/g, '$1ä');
+            text = text.replace(/([бвгжкмпфхчшБВГЖКМПФХЧШ])ё/g, '$1ö');
+            text = text.replace(/([дзлнрстцДЗЛНРСТЦ])е/g, '$1e');
+            text = text.replace(/([дзлнрстцДЗЛНРСТЦ])и/g, '$1i');
 
-                text = text.replace(/([чшЧШ])ы/g, '$1i');
+            text = text.replace(/([чшЧШ])ы/g, '$1i');
 
-                text = text.replace(/([БВГЖКМПФХЧШЩбвгжкмпфхчшщ])ь/g, '$1');
-                text = text.replace(/ъ/g, '');
-                text = text.replace(/(\s|^)і/g, '$1j');
+            text = text.replace(/([БВГЖКМПФХЧШЩбвгжкмпфхчшщ])ь/g, '$1');
+            text = text.replace(/ъ/g, '');
+            text = text.replace(/(\s|^)і/g, '$1j');
 
-                text = text.replace(/И/g, 'I');
-                text = text.replace(/Е/g, 'E');
-                text = text.replace(/([ИЕЁЮЯ])([^А-Я])/g, function (match, p1, p2) {
-                    return p1.toLowerCase() + p2;
-                });
+            text = text.replace(/И/g, 'I');
+            text = text.replace(/Е/g, 'E');
+            text = text.replace(/([ИЕЁЮЯ])([^А-Я])/g, function (match, p1, p2) {
+                return p1.toLowerCase() + p2;
+            });
 
-                text = text.replace(/«/g, '„').replace(/»/g, '“');
+            text = text.replace(/«/g, '„').replace(/»/g, '“');
 
-                const regexNoVowel = new RegExp(key + '[Ьь]', 'g');
-                text = text.replace(regexNoVowel, value);
+            const regexNoVowel = new RegExp(key + '[Ьь]', 'g');
+            text = text.replace(regexNoVowel, value);
 
-                text = text.replace(new RegExp(key + `([${front}])`, 'g'), value + '$1');
-            }
+            text = text.replace(new RegExp(key + `([${front}])`, 'g'), value + '$1');
+        }
 
-            for (const [key, value] of Object.entries(palatals)) {
-                const regexVowel = new RegExp(key + 'і([аиоуыэАИОУЫЭ])', 'g');
-                text = text.replace(regexVowel, value + '$1');
-            }
+        for (const [key, value] of Object.entries(palatals)) {
+            const regexVowel = new RegExp(key + 'і([аиоуыэАИОУЫЭ])', 'g');
+            text = text.replace(regexVowel, value + '$1');
+        }
 
             text = text.trim().split('').map(char => letters[char] || char).join('');
             return (spaceBefore ? ' ' : '') + text + (spaceAfter ? ' ' : '');
@@ -1635,38 +1642,6 @@
 
         function transliteratePage() {
             transliterateNode(document.body);
-        }
-
-        function transliterateNode(node) {
-            if (node.nodeType === Node.TEXT_NODE) {
-                const original = node.nodeValue;
-                const transliterated = transliterate(original);
-                if (transliterated !== original) {
-                    node.nodeValue = transliterated;
-                }
-            } else if (node.nodeType === Node.ELEMENT_NODE) {
-                if (node.hasAttribute('placeholder')) {
-                    const original = node.getAttribute('placeholder');
-                    const transliterated = transliterate(original);
-                    if (transliterated !== original) {
-                        node.setAttribute('placeholder', transliterated);
-                    }
-                }
-
-                if (node.tagName === 'OPTION') {
-                    const original = node.textContent;
-                    const transliterated = transliterate(original);
-                    if (transliterated !== original) {
-                        node.textContent = transliterated;
-                    }
-                }
-
-                if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') {
-                    return;
-                }
-
-                Array.from(node.childNodes).forEach(transliterateNode);
-            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -1712,6 +1687,60 @@
 
             window.location.href = newUrl;
         });
+
+        function loadStatistics() {
+            const articlesRef = database.ref('articles');
+            articlesRef.once('value')
+                .then((snapshot) => {
+                    const articles = snapshot.val();
+                    let articleCount = 0;
+                    let latestArticleDate = null;
+
+                    if (articles) {
+                        articleCount = Object.keys(articles).filter(id => id !== WELCOME_ARTICLE.id).length;
+
+                        Object.entries(articles).forEach(([id, article]) => {
+                            if (id !== WELCOME_ARTICLE.id && article.createdAt) {
+                                const articleDate = new Date(article.createdAt);
+                                if (!latestArticleDate || articleDate > latestArticleDate) {
+                                    latestArticleDate = articleDate;
+                                }
+                            }
+                        });
+                    }
+
+                    const statsElement = document.getElementById('statistics-placeholder');
+                    if (statsElement) {
+                        let statsHTML = `Те шкас тӓезть <strong>${articleCount}</strong> сёрмадовкст.`;
+
+                        if (latestArticleDate && articleCount > 0) {
+                            const erzyaMonthNames = [
+                                "якшамоковонь", "даволковонь", "эйсюроковонь", "чадыковонь",
+                                "панжиковонь", "аштемаковонь", "мӓдьков", "умарьковонь",
+                                "таштомаковонь", "ожоковонь", "сундерьковонь", "ацамоковонь"
+                            ];
+
+                            const day = latestArticleDate.getDate();
+                            const monthIndex = latestArticleDate.getMonth();
+                            const year = latestArticleDate.getFullYear();
+                            const monthName = erzyaMonthNames[monthIndex];
+
+                            const formattedDate = `${year} иень ${monthName} ${day}-це чистэ`;
+
+                            statsHTML += ` Мӓельцесь ${formattedDate}.`;
+                        }
+
+                        statsElement.innerHTML = statsHTML;
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading statistics:', error);
+                    const statsElement = document.getElementById('statistics-placeholder');
+                    if (statsElement) {
+                        statsElement.innerHTML = 'Статистикатне а саевить.';
+                    }
+                });
+        }
     </script>
 </body>
 

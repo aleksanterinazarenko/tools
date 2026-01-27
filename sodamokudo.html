@@ -784,14 +784,16 @@
         const recentArticles = document.getElementById('recent-articles');
         const recentArticlesContent = document.getElementById('recent-articles-content');
         const switchToLatinButton = document.getElementById('switch-to-latin');
+
         let currentArticle = 'main';
         let allArticles = [];
         let currentPage = 1;
         const articlesPerPage = 21;
+
         const WELCOME_ARTICLE = {
             id: 'main',
             title: 'Паро мельсэ совадо Ӓрзянь Содамокудонтень!',
-            content: `<p>Ӓрзянь Содамокудось те аорев, киньгак ӓйстэ а аштиця ӓрзянь содамокудо (лиякс: <i>энциклопедия</i>).</p><p>Ӓрьвантень тӓеви эли витеви сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p>Ули мелеть лӓздамс тӓвентень? Сёрмадт: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
+            content: `<p>Ӓрзянь Содамокудось те аорев, киньгак ӓйстэ а аштиця ӓрзянь содамокудо (лиякс: <i>энциклопедия</i>).</p><p>Ӓрьвантень тӓеви эли витеви сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p><div id="statistics-placeholder" style="margin-top: 10px;">Тарган статистикат...</div></p><p>Ули мелеть кодаяк лиякс лӓздамс тӓвентень? Сёрмадт: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
             createdAt: '2024-01-01T00:00:00.000Z'
         };
 
@@ -1089,6 +1091,12 @@
             editorTextarea.value = articleData.content;
             searchInput.value = '';
             hideEditor();
+
+            if (articleId === WELCOME_ARTICLE.id) {
+                setTimeout(() => {
+                    loadStatistics();
+                }, 100);
+            }
         }
 
         function displayCreateOption(articleId) {
@@ -1289,7 +1297,12 @@
             }
             loadRecentArticles();
             loadAllArticles();
+
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                loadStatistics();
+            }
         });
+
         articlesRef.on('child_removed', (snapshot) => {
             const articleId = snapshot.key;
             if (articleId === currentArticle) {
@@ -1297,11 +1310,21 @@
             }
             loadRecentArticles();
             loadAllArticles();
+
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                loadStatistics();
+            }
         });
+
         articlesRef.on('child_added', (snapshot) => {
             loadRecentArticles();
             loadAllArticles();
+
+            if (currentArticle === WELCOME_ARTICLE.id) {
+                loadStatistics();
+            }
         });
+
         switchToLatinButton.addEventListener('click', function (e) {
             e.preventDefault();
             const urlParams = new URLSearchParams(window.location.search);
@@ -1312,6 +1335,60 @@
             }
             window.location.href = newUrl;
         });
+
+        function loadStatistics() {
+            const articlesRef = database.ref('articles');
+            articlesRef.once('value')
+                .then((snapshot) => {
+                    const articles = snapshot.val();
+                    let articleCount = 0;
+                    let latestArticleDate = null;
+
+                    if (articles) {
+                        articleCount = Object.keys(articles).filter(id => id !== WELCOME_ARTICLE.id).length;
+
+                        Object.entries(articles).forEach(([id, article]) => {
+                            if (id !== WELCOME_ARTICLE.id && article.createdAt) {
+                                const articleDate = new Date(article.createdAt);
+                                if (!latestArticleDate || articleDate > latestArticleDate) {
+                                    latestArticleDate = articleDate;
+                                }
+                            }
+                        });
+                    }
+
+                    const statsElement = document.getElementById('statistics-placeholder');
+                    if (statsElement) {
+                        let statsHTML = `Те шкас тӓезть <strong>${articleCount}</strong> сёрмадовкст.`;
+
+                        if (latestArticleDate && articleCount > 0) {
+                            const erzyaMonthNames = [
+                                "якшамоковонь", "даволковонь", "эйсюроковонь", "чадыковонь",
+                                "панжиковонь", "аштемаковонь", "мӓдьков", "умарьковонь",
+                                "таштомаковонь", "ожоковонь", "сундерьковонь", "ацамоковонь"
+                            ];
+
+                            const day = latestArticleDate.getDate();
+                            const monthIndex = latestArticleDate.getMonth();
+                            const year = latestArticleDate.getFullYear();
+                            const monthName = erzyaMonthNames[monthIndex];
+
+                            const formattedDate = `${year} иень ${monthName} ${day}-це чистэ`;
+
+                            statsHTML += ` Мӓельцесь ${formattedDate}.`;
+                        }
+
+                        statsElement.innerHTML = statsHTML;
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading statistics:', error);
+                    const statsElement = document.getElementById('statistics-placeholder');
+                    if (statsElement) {
+                        statsElement.innerHTML = 'Статистикатне а саевить.';
+                    }
+                });
+        }
     </script>
 </body>
 
