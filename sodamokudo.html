@@ -103,6 +103,7 @@
             transition: background-color 0.2s;
             font-size: 16px;
             font-style: normal;
+            min-height: 36px;
         }
 
         nav a:hover {
@@ -563,19 +564,16 @@
             }
 
             nav ul {
-                display: flex;
-                align-items: center;
-            }
-
-            nav li {
-                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow-x: auto;
+                padding-bottom: 5px;
             }
 
             nav a {
-                display: flex;
-                align-items: center;
+                font-size: 16px;
                 padding: 8px 12px;
-                line-height: 1;
             }
 
             .container {
