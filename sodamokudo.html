@@ -1030,6 +1030,12 @@
             allArticlesModal.style.display = 'none';
         }
 
+        allArticlesModal.addEventListener('click', function (e) {
+            if (e.target === allArticlesModal) {
+                hideAllArticlesModal();
+            }
+        });
+
         function displayAllArticlesPage() {
             const startIndex = (currentPage - 1) * articlesPerPage;
             const endIndex = startIndex + articlesPerPage;
@@ -1423,6 +1429,4 @@
     </script>
 </body>
 
-
 </html>
-
