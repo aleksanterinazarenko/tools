@@ -8,25 +8,25 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@0,400..700;1,400..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
         @font-face {
-            font-family: 'ArialCustom';
-            src: url('ARIAL.ttf') format('truetype');
+            font-family: 'CMU Serif';
+            src: url('cmunrm.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
-            font-family: 'ArialCustom';
-            src: url('ARIALI.ttf') format('truetype');
+            font-family: 'CMU Serif';
+            src: url('cmunci.ttf') format('truetype');
             font-weight: normal;
             font-style: italic;
         }
 
         @font-face {
-            font-family: 'ArialCustom';
-            src: url('ARIALBI.ttf') format('truetype');
+            font-family: 'CMU Serif';
+            src: url('cmunbx.ttf') format('truetype');
             font-weight: bold;
             font-style: normal;
         }
@@ -48,7 +48,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            font-family: "ArialCustom", sans-serif;
+            font-family: "Ubuntu", sans-serif;
         }
 
         header {
@@ -583,10 +583,6 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                font-family: "ArialCustom", sans-serif;
-            }
-
             header {
                 flex-direction: column;
                 gap: 14px;
@@ -671,6 +667,8 @@
                 margin: 20px auto;
                 padding: 20px;
                 max-width: 95%;
+                max-height: calc(100vh - 20px);
+                overflow-y: auto;
             }
 
             .all-articles-list {
