@@ -11,21 +11,21 @@
         @import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@0,400..700;1,400..700&display=swap');
 
         @font-face {
-            font-family: 'Arial';
+            font-family: 'ARIAL';
             src: url('ARIAL.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
-            font-family: 'Arial';
+            font-family: 'ARIAL';
             src: url('ARIALI.ttf') format('truetype');
             font-weight: normal;
             font-style: italic;
         }
 
         @font-face {
-            font-family: 'Arial';
+            font-family: 'ARIAL';
             src: url('ARIALBI.ttf') format('truetype');
             font-weight: bold;
             font-style: normal;
@@ -48,7 +48,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            font-family: "Arial", sans-serif;
+            font-family: "ARIAL", sans-serif;
             font-optical-sizing: auto;
         }
 
@@ -584,6 +584,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                font-family: "ARIAL", sans-serif;
+            }
+
             header {
                 flex-direction: column;
                 gap: 14px;
@@ -612,7 +616,7 @@
             }
 
             nav a {
-                font-size: 16px;
+                font-size: 17px;
                 padding: 8px 12px;
             }
 
@@ -639,7 +643,7 @@
             .edit-button,
             .cancel-button {
                 width: 90px;
-                font-size: 16px;
+                font-size: 17px;
                 padding: 8px 12px;
             }
 
@@ -661,7 +665,7 @@
             .delete-button,
             .create-button {
                 padding: 8px 12px;
-                font-size: 16px;
+                font-size: 17px;
             }
 
             .all-articles-content {
@@ -677,7 +681,7 @@
             .article-content,
             .editor textarea,
             .search-box input {
-                font-size: 16px;
+                font-size: 17px;
             }
 
             .search-box input {
@@ -686,7 +690,7 @@
 
             footer {
                 margin-top: 20px;
-                font-size: 16px;
+                font-size: 17px;
             }
         }
     </style>
