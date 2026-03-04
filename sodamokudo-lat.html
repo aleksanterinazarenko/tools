@@ -8,7 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@0,400..700;1,400..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Scada:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         @font-face {
             font-family: 'CMU Serif';
@@ -48,7 +48,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            font-family: "Finlandica", sans-serif;
+            font-family: "Scada", sans-serif;
             font-optical-sizing: auto;
         }
 
@@ -664,6 +664,10 @@
                 font-size: 18px;
             }
 
+            .delete-button {
+                display: none;
+            }
+
             .all-articles-content {
                 margin: 20px auto;
                 padding: 20px;
@@ -689,6 +693,10 @@
             footer {
                 margin-top: 20px;
                 font-size: 18px;
+            }
+
+            .hidden {
+                display: none;
             }
         }
     </style>
@@ -811,6 +819,8 @@
         let currentArticle = 'main';
         let allArticles = [];
         let currentPage = 1;
+        let lastLoadedArticle = null;
+        let isLoading = false;
         const articlesPerPage = 21;
 
         const WELCOME_ARTICLE = {
@@ -889,7 +899,7 @@
                 suggestion.className = 'search-suggestion';
                 suggestion.textContent = transliterate(article.title);
                 suggestion.addEventListener('click', () => {
-                    loadArticle(article.id);
+                    loadArticle(article.id, false);
                     searchInput.value = '';
                     searchSuggestions.style.display = 'none';
                     scrollToTop();
@@ -946,20 +956,31 @@
             return [firstWord, ...remainingWords].join(' ');
         }
 
-        function updateURL(articleId) {
+        function updateURL(articleId, replace = false) {
             const newURL = `${window.location.origin}${window.location.pathname}?article=${articleId}`;
-            window.history.pushState({
-                articleId
-            }, '', newURL);
+
+            if (replace) {
+                window.history.replaceState({
+                    articleId
+                }, '', newURL);
+            } else {
+                window.history.pushState({
+                    articleId
+                }, '', newURL);
+            }
         }
 
         window.addEventListener('popstate', function (event) {
             if (event.state && event.state.articleId) {
-                loadArticle(event.state.articleId);
-                scrollToTop();
+                loadArticle(event.state.articleId, true);
             } else {
-                loadArticle(WELCOME_ARTICLE.id);
-                scrollToTop();
+                const urlParams = new URLSearchParams(window.location.search);
+                const articleParam = urlParams.get('article');
+                if (articleParam) {
+                    loadArticle(articleParam, true);
+                } else {
+                    loadArticle(WELCOME_ARTICLE.id, true);
+                }
             }
         });
 
@@ -999,7 +1020,7 @@
                             link.setAttribute('data-article', article.id);
                             link.addEventListener('click', function (e) {
                                 e.preventDefault();
-                                loadArticle(article.id);
+                                loadArticle(article.id, false);
                                 scrollToTop();
                             });
                             listItem.appendChild(link);
@@ -1131,7 +1152,7 @@
                     link.addEventListener('click', function (e) {
                         if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
                         e.preventDefault();
-                        loadArticle(article.id);
+                        loadArticle(article.id, false);
                         hideAllArticlesModal();
                         scrollToTop();
                     });
@@ -1153,11 +1174,11 @@
             }
         }
 
-        function loadArticle(articleId) {
+        function loadArticle(articleId, replaceHistory = false) {
             if (articleId === WELCOME_ARTICLE.id) {
                 displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
                 currentArticle = WELCOME_ARTICLE.id;
-                updateURL(WELCOME_ARTICLE.id);
+                updateURL(WELCOME_ARTICLE.id, replaceHistory);
                 updateEditButtonVisibility();
                 scrollToTop();
                 return;
@@ -1171,10 +1192,10 @@
                         const articleData = snapshot.val();
                         displayArticle(articleId, articleData);
                         currentArticle = articleId;
-                        updateURL(articleId);
+                        updateURL(articleId, replaceHistory);
                     } else {
                         displayCreateOption(articleId);
-                        updateURL(articleId);
+                        updateURL(articleId, replaceHistory);
                     }
                     updateEditButtonVisibility();
                     scrollToTop();
@@ -1283,9 +1304,11 @@
                         title,
                         content
                     });
+                    updateURL(currentArticle, true);
                     showNotification('Сёрмадовксось таштазь!');
                     loadRecentArticles();
                     loadAllArticles();
+                    loadStatistics();
                 })
                 .catch((error) => {
                     console.error('Error saving article:', error);
@@ -1310,6 +1333,7 @@
                     showNotification('Сёрмадовксось нардазь!');
                     loadArticle(WELCOME_ARTICLE.id);
                     loadAllArticles();
+                    loadStatistics();
                 })
                 .catch((error) => {
                     console.error('Error deleting article:', error);
@@ -1332,7 +1356,7 @@
             articleRef.once('value')
                 .then((snapshot) => {
                     if (snapshot.exists()) {
-                        loadArticle(articleId);
+                        loadArticle(articleId, false);
                         scrollToTop();
                     } else {
                         currentArticle = articleId;
@@ -1381,7 +1405,7 @@
 
                     const nextArticleId = randomQueue.shift();
 
-                    loadArticle(nextArticleId);
+                    loadArticle(nextArticleId, false);
                     updateURL(nextArticleId);
                 })
                 .catch((error) => {
@@ -1671,6 +1695,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             transliteratePage();
+            loadStatistics();
 
             const observer = new MutationObserver(function (mutations) {
                 let shouldTransliterate = false;
