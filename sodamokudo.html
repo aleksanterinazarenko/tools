@@ -732,7 +732,7 @@
         <nav>
             <ul>
                 <li><button class="nav-button" id="random-button">🎲 Апак учонь сёрмадовкс</button></li>
-                <li><button class="nav-button" id="switch-to-latin">🔠 LAT</button></li>
+                <li><button class="nav-button" id="switch-to-latin">🔠 Латинань тешкстнэ</button></li>
             </ul>
         </nav>
     </header>
@@ -1129,18 +1129,17 @@
         }
 
         function loadArticle(articleId, replaceHistory = false) {
-if (articleId === WELCOME_ARTICLE.id) {
-    currentArticle = WELCOME_ARTICLE.id; // set first
-    displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
+            if (articleId === WELCOME_ARTICLE.id) {
+                currentArticle = WELCOME_ARTICLE.id;
+                displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
 
-    // force-hide last edited
-    lastEditedElement.style.display = "none";
+                lastEditedElement.style.display = "none";
 
-    updateURL(WELCOME_ARTICLE.id, replaceHistory);
-    updateEditButtonVisibility();
-    scrollToTop();
-    return;
-}
+                updateURL(WELCOME_ARTICLE.id, replaceHistory);
+                updateEditButtonVisibility();
+                scrollToTop();
+                return;
+            }
 
             const articleRef = database.ref('articles/' + articleId);
 
