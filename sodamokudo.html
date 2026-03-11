@@ -7,9 +7,8 @@
     <title>Ӓрзянь Содамокудо - The Free Encyclopedia in Erzya language</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Scada:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
         @font-face {
             font-family: 'CMU Serif';
             src: url('cmunrm.ttf') format('truetype');
@@ -48,7 +47,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            font-family: "Scada", sans-serif;
+            font-family: 'Linux Libertine', serif;
             font-optical-sizing: auto;
         }
 
@@ -710,28 +709,28 @@
         </div>
         <nav>
             <ul>
-                <li><button class="nav-button" id="random-button">Апак учонь сёрмадовкс</button></li>
-                <li><button class="nav-button" id="switch-to-latin">LAT</button></li>
+                <li><button class="nav-button" id="random-button">🎲 Апак учонь сёрмадовкс</button></li>
+                <li><button class="nav-button" id="switch-to-latin">🔠 LAT</button></li>
             </ul>
         </nav>
     </header>
     <div class="container">
         <div class="main-content">
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Вӓшнек содамокудостонть...">
+                <input type="text" id="search-input" placeholder="🔎 Вӓшнек содамокудостонть...">
                 <div class="search-suggestions" id="search-suggestions"></div>
             </div>
             <div class="article-title">
                 <h2 id="article-title"></h2>
-                <button class="edit-button main-page" id="edit-button">Витема</button>
-                <button class="cancel-button" id="cancel-button">Вӓлявтт</button>
+                <button class="edit-button main-page" id="edit-button">✏️ Витема</button>
+                <button class="cancel-button" id="cancel-button">↩️ Вӓлявтт</button>
             </div>
             <div class="article-content" id="article-content"></div>
             <div class="editor" id="editor">
                 <textarea id="editor-textarea"></textarea>
                 <div class="editor-buttons">
-                    <button class="delete-button" id="delete-button">Сёрмадовксонь нардамо</button>
-                    <button class="save-button" id="save-button">Витематнень таштамо</button>
+                    <button class="delete-button" id="delete-button">🗑️ Сёрмадовксонь нардамо</button>
+                    <button class="save-button" id="save-button">💾 Витематнень таштамо</button>
                 </div>
             </div>
         </div>
@@ -744,13 +743,13 @@
                     <ul id="recent-articles-list">
                         <li><a href="#" data-article="main">Паро мельсэ совадо Ӓрзянь Содамокудонтень!</a></li>
                     </ul>
-                    <button class="see-all-button" id="see-all-button">Невтть вӓсе лопатнень</button>
+                    <button class="see-all-button" id="see-all-button">📑 Невтть вӓсе лопатнень</button>
                 </div>
             </div>
             <div class="create-article">
                 <h3>Тӓйть од сёрмадовкс</h3>
                 <input type="text" id="new-article-title" placeholder="Сёрмадовксонть лӓмезэ">
-                <button class="create-button" id="create-button">Мольть сёрмадовксонтень</button>
+                <button class="create-button" id="create-button">➕ Мольть сёрмадовксонтень</button>
             </div>
         </div>
     </div>
@@ -762,9 +761,9 @@
             </div>
             <div class="all-articles-list" id="all-articles-list"></div>
             <div class="pagination">
-                <button id="prev-page" disabled>Мӓкев</button>
+                <button id="prev-page" disabled>⬅️ Мӓкев</button>
                 <span class="pagination-info" id="pagination-info"></span>
-                <button id="next-page">Икелев</button>
+                <button id="next-page">➡️ Икелев</button>
             </div>
         </div>
     </div>
@@ -819,7 +818,7 @@
         const WELCOME_ARTICLE = {
             id: 'main',
             title: 'Паро мельсэ совадо Ӓрзянь Содамокудонтень!',
-            content: `<p>Ӓрзянь Содамокудось те оля, киньгак ӓйстэ а аштиця ӓрзянь кельсэ тӓезь энциклопедия (содамокудо).</p><p>Ӓрьвантень тӓйневи эли витневи сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомгат, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p><div id="statistics-placeholder" style="margin-top: 10px;">Тарган статистикат...</div></p><p>Ули мелеть кодаяк лиякс лӓздамс тӓвентень? Сёрмадт те адрестэнть лангс: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
+            content: `<p>Ӓрзянь Содамокудось те оля, киньгак ӓйстэ а аштиця ӓрзянь кельсэ тӓезь энциклопедия (содамокудо).</p><p>Ӓрьвантень тӓеви эли витеви сонзэ сёрмадовксонзо. Вӓсе витематне таштавить сеске. Ушодомга, вӓшнек сёрмадовкс вере улиця вӓшнема паксянть вӓльде эли тӓйть од.</p><p><div id="statistics-placeholder" style="margin-top: 10px;">Тарган статистикат...</div></p><p>Ули мелеть кодаяк лиякс лӓздамс тӓвентень? Сёрмадт те адрестэнть лангс: <a href="mailto:aleksanterinazarenko@gmail.com">aleksanterinazarenko@gmail.com</a>.</p>`,
             createdAt: '2024-01-01T00:00:00.000Z'
         };
 
@@ -1139,9 +1138,7 @@
             hideEditor();
 
             if (articleId === WELCOME_ARTICLE.id) {
-                setTimeout(() => {
-                    loadStatistics();
-                }, 100);
+                loadStatistics();
             }
         }
 
