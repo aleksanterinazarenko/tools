@@ -1289,6 +1289,7 @@
             loadArticleForEditor();
 
             articleContent.style.display = 'none';
+            lastEditedElement.style.display = 'none';
             editor.style.display = 'block';
             editButton.style.display = 'none';
             cancelButton.style.display = 'block';
@@ -1323,6 +1324,15 @@
             editor.style.display = 'none';
             cancelButton.style.display = 'none';
             updateEditButtonVisibility();
+
+            if (currentArticle !== WELCOME_ARTICLE.id) {
+                const articleRef = database.ref('articles/' + currentArticle);
+                articleRef.once('value').then((snapshot) => {
+                    if (snapshot.exists() && snapshot.val().lastEdited) {
+                        lastEditedElement.style.display = 'block';
+                    }
+                });
+            }
         }
 
         function saveArticle() {
