@@ -7,8 +7,9 @@
     <title>Ӓрзянь Содамокудо - The Free Encyclopedia in Erzya language</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-    <link href="https://fonts.cdnfonts.com/css/arial" rel="stylesheet">
     <style>
+        @import url(https://fonts.bunny.net/css?family=podkova:400);
+
         @font-face {
             font-family: 'CMU Serif';
             src: url('cmunrm.ttf') format('truetype');
@@ -47,7 +48,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Podkova', serif;
             font-optical-sizing: auto;
         }
 
@@ -244,7 +245,7 @@
 
         .last-edited {
             margin-top: 20px;
-            font-size: 16px;
+            font-size: 15px;
             color: #54595d;
             display: none;
             border-top: 1px solid #a2a9b1;
@@ -260,7 +261,7 @@
         button.save-button,
         button.nav-button,
         button.delete-button {
-            font-family: 'Arial', sans-serif !important;
+            font-family: 'Podkova', serif !important;
         }
 
         .edit-button,
@@ -1128,14 +1129,18 @@
         }
 
         function loadArticle(articleId, replaceHistory = false) {
-            if (articleId === WELCOME_ARTICLE.id) {
-                displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
-                currentArticle = WELCOME_ARTICLE.id;
-                updateURL(WELCOME_ARTICLE.id, replaceHistory);
-                updateEditButtonVisibility();
-                scrollToTop();
-                return;
-            }
+if (articleId === WELCOME_ARTICLE.id) {
+    currentArticle = WELCOME_ARTICLE.id; // set first
+    displayArticle(WELCOME_ARTICLE.id, WELCOME_ARTICLE);
+
+    // force-hide last edited
+    lastEditedElement.style.display = "none";
+
+    updateURL(WELCOME_ARTICLE.id, replaceHistory);
+    updateEditButtonVisibility();
+    scrollToTop();
+    return;
+}
 
             const articleRef = database.ref('articles/' + articleId);
 
