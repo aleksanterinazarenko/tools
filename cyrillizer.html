@@ -10,18 +10,18 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             background: #f3f4f6;
             margin: 0;
-            padding: 16px;
+            padding: 16px
         }
 
         .container {
             max-width: 900px;
-            margin: 0 auto;
+            margin: 0 auto
         }
 
         h2 {
             text-align: center;
             margin-bottom: 16px;
-            font-weight: 600;
+            font-weight: 600
         }
 
         textarea,
@@ -34,14 +34,14 @@
             border: 1px solid #cbd5e1;
             font-size: 18px;
             background: #fff;
-            resize: none;
+            resize: none
         }
 
         .output {
             margin-top: 16px;
             white-space: pre-wrap;
             word-break: break-word;
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace
         }
 
         @media (max-width:699px) {
@@ -63,70 +63,12 @@
 </head>
 
 <body>
-
     <div class="container">
         <h2>Polish → Cyrillic</h2>
         <textarea id="input"></textarea>
         <div class="output" id="output"></div>
     </div>
-
     <script>
-        let rules = [
-            ["cię", "цѩ"],
-            ["się", "сѩ"],
-            ["zię", "зѩ"],
-            ["nię", "нѩ"],
-            ["cią", "цѭ"],
-            ["sią", "сѭ"],
-            ["zią", "зѭ"],
-            ["nią", "нѭ"],
-
-            ["lę", "лѩ"],
-            ["lą", "лѭ"],
-            ["li", "ли"],
-            ["la", "ля"],
-            ["le", "лє"],
-            ["lo", "льо"],
-            ["ló", "льꙋ"],
-            ["lu", "лю"],
-
-            ["rz", "рь"],
-            ["rzę", "рѩ"],
-            ["rzą", "рѭ"],
-            ["rza", "ря"],
-            ["rze", "рє"],
-            ["rzo", "рьо"],
-            ["rzó", "рьꙋ"],
-            ["rzu", "рю"],
-            ["rzy", "ри"],
-
-            ["szcz", "щ"],
-            ["dż", "дж"],
-            ["cz", "ч"],
-            ["sz", "ш"],
-            ["ch", "х"],
-            ["dz", "дз"],
-
-            ["ją", "ѭ"],
-            ["ią", "ѭ"],
-            ["ję", "ѩ"],
-            ["ię", "ѩ"],
-            ["ą", "ѫ"],
-            ["ę", "ѩ"],
-            ["ja", "я"],
-            ["ia", "я"],
-            ["je", "є"],
-            ["ji", "и"],
-            ["ie", "є"],
-            ["jo", "йо"],
-            ["io", "ьо"],
-            ["ju", "ю"],
-            ["iu", "ю"],
-            ["ió", "ьꙋ"]
-        ]
-
-        rules.sort((a, b) => b[0].length - a[0].length)
-
         const letters = {
             "a": "а",
             "b": "б",
@@ -158,6 +100,8 @@
             "z": "з",
             "ź": "зь",
             "ż": "ж",
+            "ą": "ѫ",
+            "ę": "ѧ",
             "A": "А",
             "B": "Б",
             "C": "Ц",
@@ -187,80 +131,120 @@
             "Y": "Ы",
             "Z": "З",
             "Ź": "Зь",
-            "Ż": "Ж"
+            "Ż": "Ж",
+            "Ą": "Ѫ",
+            "Ę": "Ѧ",
         }
 
         function capFirst(src, repl) {
-            return src[0] === src[0].toUpperCase() ?
-                repl[0].toUpperCase() + repl.slice(1) :
-                repl
+            return src[0] === src[0].toUpperCase() ? repl[0].toUpperCase() + repl.slice(1) : repl
         }
 
-        function transliterate(polishText) {
-            let result = polishText;
-            rules.forEach(rule => {
-                const [polish, cyrillic] = rule;
-                result = result.replace(new RegExp(polish, "gi"), match => capFirst(match, cyrillic));
-            });
-
-            result = addHardSigns(result, polishText);
-
-            result = result.replace(/./g, char => letters[char] || char);
-
-            return result;
-        }
-
-        function addHardSigns(currentResult, originalPolish) {
-            let finalResult = currentResult;
-
-            const hardConsonants = ['д', 'с', 'ц', 'з', 'н', 'Д', 'С', 'Ц', 'З', 'Н'];
-            const softVowels = ['я', 'ё', 'є', 'и', 'ю', 'ѩ', 'ѭ', 'Я', 'Ё', 'Є', 'И', 'Ю', 'Ѩ', 'Ѭ'];
-
-            for (let i = 0; i < originalPolish.length - 1; i++) {
-                const currentChar = originalPolish[i];
-                const nextChar = originalPolish[i + 1];
-                const polishConsonants = ['d', 's', 'c', 'z', 'n', 'D', 'S', 'C', 'Z', 'N'];
-
-                if (polishConsonants.includes(currentChar) && nextChar.toLowerCase() === 'j') {
-                    let processedSoFar = originalPolish.substring(0, i);
-                    processedSoFar = transliterateWithoutHardSigns(processedSoFar);
-
-                    const positionInResult = processedSoFar.length;
-
-                    const followingPolish = originalPolish.substring(i, Math.min(i + 3, originalPolish.length));
-                    const followingCyrillic = transliterateWithoutHardSigns(followingPolish);
-
-                    if (followingCyrillic.length >= 2 &&
-                        hardConsonants.includes(followingCyrillic[0]) &&
-                        softVowels.includes(followingCyrillic[1])) {
-
-                        if (positionInResult < finalResult.length) {
-                            finalResult = finalResult.substring(0, positionInResult + 1) +
-                                'ъ' +
-                                finalResult.substring(positionInResult + 1);
-                        }
-                    }
+        let rules = [
+            [/([dscznDSCZN])j([aeiouyąę])/g, (m, c, v) => {
+                const map = {
+                    a: "я",
+                    e: "є",
+                    i: "и",
+                    o: "йо",
+                    u: "ю",
+                    y: "ы",
+                    ą: "ѭ",
+                    ę: "ѩ"
                 }
-            }
+                const base = letters[c] || c
+                return base + "ъ" + (map[v] || v)
+            }],
 
-            return finalResult;
-        }
+            [/l([aeiouyąęó])/gi, (m, v) => {
+                const map = {
+                    a: "я",
+                    e: "є",
+                    i: "и",
+                    o: "ьо",
+                    u: "ю",
+                    y: "ы",
+                    ą: "ѭ",
+                    ę: "ѩ",
+                    ó: "ьꙋ"
+                }
+                return capFirst(m, "л" + (map[v.toLowerCase()] || v))
+            }],
 
-        function transliterateWithoutHardSigns(text) {
-            let result = text;
+            [/rz([aeiouyąęó])?/gi, (m, v) => {
+                const map = {
+                    a: "я",
+                    e: "є",
+                    i: "и",
+                    o: "ьо",
+                    u: "ю",
+                    y: "и",
+                    ą: "ѭ",
+                    ę: "ѩ",
+                    ó: "ьꙋ"
+                }
+                if (!v) return capFirst(m, "рь")
+                return capFirst(m, "р" + (map[v.toLowerCase()] || v))
+            }],
+
+            [/i([aeouąęó])/gi, (m, v) => {
+                const map = {
+                    a: "я",
+                    e: "є",
+                    o: "іо",
+                    u: "ю",
+                    ą: "ѭ",
+                    ę: "ѩ",
+                    ó: "іꙋ"
+                }
+                return capFirst(m, map[v.toLowerCase()] || v)
+            }],
+
+            [/j([aeouąęó])/gi, (m, v) => {
+                const map = {
+                    a: "я",
+                    e: "є",
+                    o: "ѥ",
+                    u: "ю",
+                    ą: "ѭ",
+                    ę: "ѩ",
+                    ó: "йꙋ"
+                }
+                return capFirst(m, map[v.toLowerCase()] || v)
+            }],
+
+            ["szcz", "щ"],
+            ["dż", "дж"],
+            ["cz", "ч"],
+            ["sz", "ш"],
+            ["ch", "х"],
+            ["dz", "дз"]
+        ]
+
+        rules.sort((a, b) => {
+            const A = a[0] instanceof RegExp ? 0 : a[0].length
+            const B = b[0] instanceof RegExp ? 0 : b[0].length
+            return B - A
+        })
+
+        function transliterate(text) {
+            let result = text
             rules.forEach(rule => {
-                const [polish, cyrillic] = rule;
-                result = result.replace(new RegExp(polish, "gi"), match => capFirst(match, cyrillic));
-            });
-            result = result.replace(/./g, char => letters[char] || char);
-            return result;
+                const [pattern, replacement] = rule
+                if (pattern instanceof RegExp) {
+                    result = result.replace(pattern, replacement)
+                } else {
+                    result = result.replace(new RegExp(pattern, "gi"), m => capFirst(m, replacement))
+                }
+            })
+            result = result.replace(/./g, ch => letters[ch] || ch)
+            return result
         }
 
         document.getElementById("input").addEventListener("input", e => {
-            document.getElementById("output").textContent = transliterate(e.target.value);
-        });
+            document.getElementById("output").textContent = transliterate(e.target.value)
+        })
     </script>
-
 </body>
 
 </html>
