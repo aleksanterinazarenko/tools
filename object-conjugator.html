@@ -64,22 +64,22 @@
 
 <label for="verbMenu" id="verbLabel">Verb Form</label>
 <select id="verbMenu">
-  <option value="see">see(s)</option>
-  <option value="see_neg">do(es)n't see</option>
-  <option value="saw">saw</option>
-  <option value="saw_neg">didn't see</option>
-  <option value="saw_long">saw (a long time ago)</option>
-  <option value="saw_long_neg">didn't see (a long time ago)</option>
-  <option value="will_see">will see</option>
-  <option value="will_see_neg">won't see</option>
-  <option value="would_see">would see</option>
-  <option value="would_see_neg">wouldn't see</option>
-  <option value="wanted_see">wanted to see</option>
-  <option value="wanted_see_neg">didn't want to see</option>
-  <option value="optativus">optativus (let XY)</option>
-  <option value="optativus_neg">optativus (negative)</option>
-  <option value="conditionatis">conditionatis (if XY)</option>
-  <option value="conditionatis_neg">conditionatis (negative)</option>
+  <option value="see">see(s) / hear(s)</option>
+  <option value="see_neg">do(es)n't see / hear</option>
+  <option value="saw">saw / heard</option>
+  <option value="saw_neg">didn't see / hear</option>
+  <option value="saw_long">saw / heard (a long time ago)</option>
+  <option value="saw_long_neg">didn't see / hear (a long time ago)</option>
+  <option value="will_see">will see / hear</option>
+  <option value="will_see_neg">won't see / hear</option>
+  <option value="would_see">would see / hear</option>
+  <option value="would_see_neg">wouldn't see / hear</option>
+  <option value="wanted_see">wanted to see / hear</option>
+  <option value="wanted_see_neg">didn't want to see / hear</option>
+  <option value="optativus">optativus (let see / hear)</option>
+  <option value="optativus_neg">optativus (may not see / hear)</option>
+  <option value="conditionatis">conditionatis (if saw / heard)</option>
+  <option value="conditionatis_neg">conditionatis (if didn't see / hear)</option>
 </select>
 
 <label for="objectMenu" id="objectLabel">Object Pronoun</label>
@@ -124,275 +124,275 @@ const translations = {
 
 const optionLabels = {
     langMenu: {
-    en:       { en: "english",        fi: "englanti",      ru: "английский" },
-    fi:  { en: "finnish", fi: "suomi",     ru: "финский" },
+    en: { en: "english", fi: "englanti", ru: "английский" },
+    fi: { en: "finnish", fi: "suomi", ru: "финский" },
     ru: { en: "russian", fi: "venäjä", ru: "русский" }
   },
   subjectMenu: {
-    I:       { en: "I",        fi: "minä",      ru: "я" },
-    you_sg:  { en: "you (sg.)", fi: "sinä",     ru: "ты" },
+    I: { en: "I", fi: "minä", ru: "я" },
+    you_sg: { en: "you (sg.)", fi: "sinä", ru: "ты" },
     he_she_it: { en: "he, she, it", fi: "hän, se", ru: "он, она, оно" },
-    we:      { en: "we",        fi: "me",        ru: "мы" },
-    you_pl:  { en: "you (pl.)", fi: "te",        ru: "вы" },
-    they:    { en: "they",      fi: "he, ne",    ru: "они" }
+    we: { en: "we", fi: "me", ru: "мы" },
+    you_pl: { en: "you (pl.)", fi: "te", ru: "вы" },
+    they: { en: "they", fi: "he, ne", ru: "они" }
   },
   verbMenu: {
-    see:               { en: "see(s)",              fi: "näkee",                   ru: "видит" },
-    see_neg:           { en: "doesn't see",         fi: "ei näe",                  ru: "не видит" },
-    saw:               { en: "saw",                 fi: "näki",                    ru: "видел" },
-    saw_neg:           { en: "didn't see",          fi: "ei nähnyt",               ru: "не видел" },
-    saw_long:          { en: "saw (long ago)",      fi: "näki (kauan sitten)",     ru: "видел (давно)" },
-    saw_long_neg:      { en: "didn't see (long ago)", fi: "ei nähnyt (kauan sitten)", ru: "не видел (давно)" },
-    will_see:          { en: "will see",            fi: "tulee näkemään",   ru: "увидит" },
-    will_see_neg:      { en: "won't see",           fi: "ei tule näkemään",        ru: "не увидит" },
-    would_see:         { en: "would see",           fi: "näkisi",                  ru: "увидел бы" },
-    would_see_neg:     { en: "wouldn't see",        fi: "ei näkisi",               ru: "не увидел бы" },
-    wanted_see:        { en: "wanted to see",       fi: "halusi nähdä",            ru: "хотел увидеть" },
-    wanted_see_neg:    { en: "didn't want to see",  fi: "ei halunnut nähdä",       ru: "не хотел увидеть" },
-    optativus:         { en: "optativus (let XY)",  fi: "optatiivi (nähköön)",  ru: "оптатив (пусть увидит)" },
-    optativus_neg:     { en: "optativus (negative)", fi: "optatiivi (älköön nähkö)", ru: "оптатив (пусть не увидит)" },
-    conditionatis:     { en: "conditionatis (if XY)", fi: "konditionaali (jos näkisi)", ru: "условное (если бы увидел)" },
-    conditionatis_neg: { en: "conditionatis (negative)", fi: "konditionaali (jos ei näkisi)", ru: "условное (если бы не увидел)" }
+    see: { en: "see(s) / hear(s)", fi: "näkee / kuulee", ru: "видит / слышит" },
+    see_neg: { en: "doesn't see / hear", fi: "ei näe / kuule", ru: "не видит / слышит" },
+    saw: { en: "saw / heard", fi: "näki / kuuli", ru: "видел / слышал" },
+    saw_neg: { en: "didn't see / hear", fi: "ei nähnyt / kuullut", ru: "не видел / слышал" },
+    saw_long: { en: "saw / heard (long ago)", fi: "näki / kuuli (kauan sitten)", ru: "видел / слышал (давно)" },
+    saw_long_neg: { en: "didn't see / hear (long ago)", fi: "ei nähnyt / kuullut (kauan sitten)", ru: "не видел / слышал (давно)" },
+    will_see: { en: "will see / hear", fi: "tulee näkemään / kuulemaan", ru: "увидит / услышит" },
+    will_see_neg: { en: "won't see / hear", fi: "ei tule näkemään / kuulemaan", ru: "не увидит / услышит" },
+    would_see: { en: "would see / hear", fi: "näkisi / kuulisi", ru: "увидел / услышал бы" },
+    would_see_neg: { en: "wouldn't see / hear", fi: "ei näkisi / kuulisi", ru: "не увидел / услышал бы" },
+    wanted_see: { en: "wanted to see / hear", fi: "halusi nähdä / kuulla", ru: "хотел увидеть / услышать" },
+    wanted_see_neg: { en: "didn't want to see / hear", fi: "ei halunnut nähdä / kuulla", ru: "не хотел увидеть / услышать" },
+    optativus: { en: "optativus (let see / hear)", fi: "optatiivi (nähköön / kuulkoon)", ru: "оптатив (пусть увидит / услышит)" },
+    optativus_neg: { en: "optativus (may not see / hear)", fi: "optatiivi (älköön nähkö / kuulko)", ru: "оптатив (пусть не увидит / услышит)" },
+    conditionatis: { en: "conditionatis (if saw / heard)", fi: "konditionaali (jos näkisi / kuulisi)", ru: "условное (если бы увидел / услышал)" },
+    conditionatis_neg: { en: "conditionatis (if didn't see / hear)", fi: "konditionaali (jos ei näkisi / kuulisi)", ru: "условное (если бы не увидел / услышал)" }
   },
   objectMenu: {
-    me:        { en: "me",         fi: "minut",         ru: "меня" },
-    you_sg:    { en: "you (sg.)",  fi: "sinut",         ru: "тебя" },
-    him_her_it:{ en: "him, her, it", fi: "hänet, sen", ru: "его, её, это" },
-    us:        { en: "us",         fi: "meidät",        ru: "нас" },
-    you_pl:    { en: "you (pl.)",  fi: "teidät",        ru: "вас" },
-    them:      { en: "them",       fi: "heidät, ne",    ru: "их" }
+    me: { en: "me", fi: "minut / minua", ru: "меня" },
+    you_sg: { en: "you (sg.)",  fi: "sinut / sinua", ru: "тебя" },
+    him_her_it: { en: "him, her, it", fi: "hänet, sen / häntä, sitä", ru: "его, её, это" },
+    us: { en: "us", fi: "meidät / meitä", ru: "нас" },
+    you_pl: { en: "you (pl.)", fi: "teidät / teitä", ru: "вас" },
+    them: { en: "them", fi: "heidät, ne / heitä, niitä", ru: "их" }
   }
 };
 
 const conjugations = {
   fi: {
     see: {
-      I: "näen",
-      you_sg: "näet",
-      he_she_it: "näkee",
-      we: "näemme",
-      you_pl: "näette",
-      they: "näkevät"
+      I: "näen / kuulen",
+      you_sg: "näet / kuulet",
+      he_she_it: "näkee / kuulee",
+      we: "näemme / kuulemme",
+      you_pl: "näette / kuulette",
+      they: "näkevät / kuulevat"
     },
     see_neg: {
-      I: "en näe",
-      you_sg: "et näe",
-      he_she_it: "ei näe",
-      we: "emme näe",
-      you_pl: "ette näe",
-      they: "eivät näe"
+      I: "en näe / kuule",
+      you_sg: "et näe / kuule",
+      he_she_it: "ei näe / kuule",
+      we: "emme näe / kuule",
+      you_pl: "ette näe / kuule",
+      they: "eivät näe / kuule"
     },
     saw: {
-      I: "näin",
-      you_sg: "nait",
-      he_she_it: "näki",
-      we: "näimme",
-      you_pl: "näitte",
-      they: "näkivät"
+      I: "näin / kuulin",
+      you_sg: "nait / kuulit",
+      he_she_it: "näki / kuuli",
+      we: "näimme / kuulimme",
+      you_pl: "näitte / kuulitte",
+      they: "näkivät / kuulivat"
     },
     saw_neg: {
-  I: "en nähnyt",
-  you_sg: "et nähnyt",
-  he_she_it: "ei nähnyt",
-  we: "emme nähneet",
-  you_pl: "ette nähneet",
-  they: "eivät nähneet"
-},
-will_see: {
-  I: "tulen näkemään",
-  you_sg: "tulet näkemään",
-  he_she_it: "tulee näkemään",
-  we: "tulemme näkemään",
-  you_pl: "tulette näkemään",
-  they: "tulevat näkemään"
-},
-will_see_neg: {
-  I: "en tule näkemään",
-  you_sg: "et tule näkemään",
-  he_she_it: "ei tule näkemään",
-  we: "emme tule näkemään",
-  you_pl: "ette tule näkemään",
-  they: "eivät tule näkemään"
-},
+      I: "en nähnyt / kuullut",
+      you_sg: "et nähnyt / kuullut",
+      he_she_it: "ei nähnyt / kuullut",
+      we: "emme nähneet / kuulleet",
+      you_pl: "ette nähneet / kuulleet",
+      they: "eivät nähneet / kuulleet"
+    },
+    will_see: {
+      I: "tulen näkemään / kuulemaan",
+      you_sg: "tulet näkemään / kuulemaan",
+      he_she_it: "tulee näkemään / kuulemaan",
+      we: "tulemme näkemään / kuulemaan",
+      you_pl: "tulette näkemään / kuulemaan",
+      they: "tulevat näkemään / kuulemaan"
+    },
+    will_see_neg: {
+      I: "en tule näkemään / kuulemaan",
+      you_sg: "et tule näkemään / kuulemaan",
+      he_she_it: "ei tule näkemään / kuulemaan",
+      we: "emme tule näkemään / kuulemaan",
+      you_pl: "ette tule näkemään / kuulemaan",
+      they: "eivät tule näkemään / kuulemaan"
+    },
     would_see: {
-      I: "näkisin",
-      you_sg: "näkisit",
-      he_she_it: "näkisi",
-      we: "näkisimme",
-      you_pl: "näkisitte",
-      they: "näkisivät"
+      I: "näkisin / kuulisin",
+      you_sg: "näkisit / kuulisit",
+      he_she_it: "näkisi / kuulisi",
+      we: "näkisimme / kuulisimme",
+      you_pl: "näkisitte / kuulisitte",
+      they: "näkisivät / kuulisivat"
     },
     would_see_neg: {
-  I: "en näkisi",
-  you_sg: "et näkisi",
-  he_she_it: "ei näkisi",
-  we: "emme näkisi",
-  you_pl: "ette näkisi",
-  they: "eivät näkisi"
-},
-wanted_see: {
-  I: "halusin nähdä",
-  you_sg: "halusit nähdä",
-  he_she_it: "halusi nähdä",
-  we: "halusimme nähdä",
-  you_pl: "halusitte nähdä",
-  they: "halusivat nähdä"
-},
-wanted_see_neg: {
-  I: "en halunnut nähdä",
-  you_sg: "et halunnut nähdä",
-  he_she_it: "ei halunnut nähdä",
-  we: "emme halunneet nähdä",
-  you_pl: "ette halunneet nähdä",
-  they: "eivät halunneet nähdä"
-},
-optativus: {
-  I: "nähköön",
-  you_sg: "nähköön",
-  he_she_it: "nähköön",
-  we: "nähköön",
-  you_pl: "nähköön",
-  they: "nähkööt"
-},
-optativus_neg: {
-  I: "älköön nähkö",
-  you_sg: "älköön nähkö",
-  he_she_it: "älköön nähkö",
-  we: "älköön nähkö",
-  you_pl: "älköön nähkö",
-  they: "älkööt nähkö"
-},
-conditionatis: {
-  I: "jos näkisin",
-  you_sg: "jos näkisit",
-  he_she_it: "jos näkisi",
-  we: "jos näkisimme",
-  you_pl: "jos näkisitte",
-  they: "jos näkisivät"
-},
-conditionatis_neg: {
-  I: "jos en näkisi",
-  you_sg: "jos et näkisi",
-  he_she_it: "jos ei näkisi",
-  we: "jos emme näkisi",
-  you_pl: "jos ette näkisi",
-  they: "jos eivät näkisi"
-}
+      I: "en näkisi / kuulisi",
+      you_sg: "et näkisi / kuulisi ",
+      he_she_it: "ei näkisi / kuulisi",
+      we: "emme näkisi / kuulisi",
+      you_pl: "ette näkisi / kuulisi",
+      they: "eivät näkisi / kuulisi"
+    },
+    wanted_see: {
+      I: "halusin nähdä / kuulla",
+      you_sg: "halusit nähdä / kuulla",
+      he_she_it: "halusi nähdä / kuulla",
+      we: "halusimme nähdä / kuulla",
+      you_pl: "halusitte nähdä / kuulla",
+      they: "halusivat nähdä / kuulla"
+    },
+    wanted_see_neg: {
+      I: "en halunnut nähdä / kuulla",
+      you_sg: "et halunnut nähdä / kuulla",
+      he_she_it: "ei halunnut nähdä / kuulla",
+      we: "emme halunneet nähdä / kuulla",
+      you_pl: "ette halunneet nähdä / kuulla",
+      they: "eivät halunneet nähdä / kuulla"
+    },
+    optativus: {
+      I: "nähköön / kuulkoon",
+      you_sg: "nähköön / kuulkoon",
+      he_she_it: "nähköön / kuulkoon",
+      we: "nähköön / kuulkoon",
+      you_pl: "nähköön / kuulkoon",
+      they: "nähkööt / kuulkoot"
+    },
+    optativus_neg: {
+      I: "älköön nähkö / kuulko",
+      you_sg: "älköön nähkö / kuulko",
+      he_she_it: "älköön nähkö / kuulko",
+      we: "älköön nähkö / kuulko",
+      you_pl: "älköön nähkö / kuulko",
+      they: "älkööt nähkö / kuulko"
+    },
+    conditionatis: {
+      I: "jos näkisin / kuulisin",
+      you_sg: "jos näkisit / kuulisit",
+      he_she_it: "jos näkisi / kuulisi",
+      we: "jos näkisimme / kuulisimme",
+      you_pl: "jos näkisitte / kuulisitte",
+      they: "jos näkisivät / kuulisivat"
+    },
+    conditionatis_neg: {
+      I: "jos en näkisi / kuulisi",
+      you_sg: "jos et näkisi / kuulisi",
+      he_she_it: "jos ei näkisi / kuulisi",
+      we: "jos emme näkisi / kuulisi",
+      you_pl: "jos ette näkisi / kuulisi",
+      they: "jos eivät näkisi / kuulisi"
+    }
   },
   ru: {
     see: {
-      I: "вижу",
-      you_sg: "видишь",
-      he_she_it: "видит",
-      we: "видим",
-      you_pl: "видите",
-      they: "видят"
+      I: "увижу / услышу",
+      you_sg: "увидишь / услышишь",
+      he_she_it: "увидит / услышит",
+      we: "увидим / услышим",
+      you_pl: "увидите / услышите",
+      they: "увидят / услышат"
     },
     see_neg: {
-  I: "не вижу",
-  you_sg: "не видишь",
-  he_she_it: "не видит",
-  we: "не видим",
-  you_pl: "не видите",
-  they: "не видят"
-},
+      I: "не увижу / услышу",
+      you_sg: "не увидишь / услышишь",
+      he_she_it: "не увидит / услышит",
+      we: "не увидим / услышим",
+      you_pl: "не увидите / услышите",
+      they: "не увидят / услышат"
+    },
     saw: {
-      I: "видел(а)",
-      you_sg: "видел(а)",
-      he_she_it: "видел(а)",
-      we: "видели",
-      you_pl: "видели",
-      they: "видели"
+      I: "увидел(а) / услышал(а)",
+      you_sg: "увидел(а) / услышал(а)",
+      he_she_it: "увидел(а) / услышал(а)",
+      we: "увидели / услышали",
+      you_pl: "увидели / услышали",
+      they: "увидели / услышали"
     },
     saw_neg: {
-  I: "не видел(а)",
-  you_sg: "не видел(а)",
-  he_she_it: "не видел(а)",
-  we: "не видели",
-  you_pl: "не видели",
-  they: "не видели"
-},
-  will_see: {
-  I: "увижу",
-  you_sg: "увидишь",
-  he_she_it: "увидит",
-  we: "увидим",
-  you_pl: "увидите",
-  they: "увидят"
-},
-will_see_neg: {
-  I: "не увижу",
-  you_sg: "не увидишь",
-  he_she_it: "не увидит",
-  we: "не увидим",
-  you_pl: "не увидите",
-  they: "не увидят"
-},
-would_see: {
-  I: "увидел(а) бы",
-  you_sg: "увидел(а) бы",
-  he_she_it: "увидел(а) бы",
-  we: "увидели бы",
-  you_pl: "увидели бы",
-  they: "увидели бы"
-},
-would_see_neg: {
-  I: "не увидел(а) бы",
-  you_sg: "не увидел(а) бы",
-  he_she_it: "не увидел(а) бы",
-  we: "не увидели бы",
-  you_pl: "не увидели бы",
-  they: "не увидели бы"
-},
-wanted_see: {
-  I: "хотел(а) увидеть",
-  you_sg: "хотел(а) увидеть",
-  he_she_it: "хотел(а) увидеть",
-  we: "хотели увидеть",
-  you_pl: "хотели увидеть",
-  they: "хотели увидеть"
-},
-wanted_see_neg: {
-  I: "не хотел(а) увидеть",
-  you_sg: "не хотел(а) увидеть",
-  he_she_it: "не хотел(а) увидеть",
-  we: "не хотели увидеть",
-  you_pl: "не хотели увидеть",
-  they: "не хотели увидеть"
-},
-optativus: {
-  I: "пусть увижу",
-  you_sg: "пусть увидишь",
-  he_she_it: "пусть увидит",
-  we: "пусть увидим",
-  you_pl: "пусть увидите",
-  they: "пусть увидят"
-},
-optativus_neg: {
-  I: "пусть не увижу",
-  you_sg: "пусть не увидишь",
-  he_she_it: "пусть не увидит",
-  we: "пусть не увидим",
-  you_pl: "пусть не увидите",
-  they: "пусть не увидят"
-},
-conditionatis: {
-  I: "если бы увидел(а)",
-  you_sg: "если бы увидел(а)",
-  he_she_it: "если бы увидел(а)",
-  we: "если бы увидели",
-  you_pl: "если бы увидели",
-  they: "если бы увидели"
-},
-conditionatis_neg: {
-  I: "если бы не увидел(а)",
-  you_sg: "если бы не увидел(а)",
-  he_she_it: "если бы не увидел(а)",
-  we: "если бы не увидели",
-  you_pl: "если бы не увидели",
-  they: "если бы не увидели"
-}
+      I: "не увидел(а) / услышал(а)",
+      you_sg: "не увидел(а) / услышал(а)",
+      he_she_it: "не увидел(а) / услышал(а)",
+      we: "не увидели / услышали",
+      you_pl: "не увидели / услышали",
+      they: "не увидели / услышали"
+    },
+    will_see: {
+      I: "увижу / услышу",
+      you_sg: "увидишь / услышишь",
+      he_she_it: "увидит / услышит",
+      we: "увидим / услышим",
+      you_pl: "увидите / услышите",
+      they: "увидят / услышат"
+    },
+    will_see_neg: {
+      I: "не увижу / услышу",
+      you_sg: "не увидишь / услышишь",
+      he_she_it: "не увидит / услышит",
+      we: "не увидим / услышим",
+      you_pl: "не увидите / услышите",
+      they: "не увидят / услышат"
+    },
+    would_see: {
+      I: "увидел(а) / услышал(а) бы",
+      you_sg: "увидел(а) / услышал(а) бы",
+      he_she_it: "увидел(а) / услышал(а) бы",
+      we: "увидели / услышали бы",
+      you_pl: "увидели / услышали бы",
+      they: "увидели / услышали бы"
+    },
+    would_see_neg: {
+      I: "не увидел(а) / услышал(а) бы",
+      you_sg: "не увидел(а) / услышал(а) бы",
+      he_she_it: "не увидел(а) / услышал(а) бы",
+      we: "не увидели / услышали бы",
+      you_pl: "не увидели / услышали бы",
+      they: "не увидели / услышали бы"
+    },
+    wanted_see: {
+      I: "хотел(а) увидеть / услышать",
+      you_sg: "хотел(а) увидеть / услышать",
+      he_she_it: "хотел(а) увидеть / услышать",
+      we: "хотели увидеть / услышать",
+      you_pl: "хотели увидеть / услышать",
+      they: "хотели увидеть / услышать"
+    },
+    wanted_see_neg: {
+      I: "не хотел(а) увидеть / услышать",
+      you_sg: "не хотел(а) увидеть / услышать",
+      he_she_it: "не хотел(а) увидеть / услышать",
+      we: "не хотели увидеть / услышать",
+      you_pl: "не хотели увидеть / услышать",
+      they: "не хотели увидеть / услышать"
+    },
+    optativus: {
+      I: "пусть увижу / услышу",
+      you_sg: "пусть увидишь / услышишь",
+      he_she_it: "пусть увидит / услышит",
+      we: "пусть увидим / услышим",
+      you_pl: "пусть увидите / услышите",
+      they: "пусть увидят / услышат"
+    },
+    optativus_neg: {
+      I: "пусть не увижу / услышу",
+      you_sg: "пусть не увидишь / услышишь",
+      he_she_it: "пусть не увидит / услышит",
+      we: "пусть не увидим / услышим",
+      you_pl: "пусть не увидите / услышите",
+      they: "пусть не увидят / услышат"
+    },
+    conditionatis: {
+      I: "если бы увидел(а) / услышал(а)",
+      you_sg: "если бы увидел(а) / услышал(а)",
+      he_she_it: "если бы увидел(а) / услышал(а)",
+      we: "если бы увидели / услышали",
+      you_pl: "если бы увидели / услышали",
+      they: "если бы увидели /  услышали"
+    },
+    conditionatis_neg: {
+      I: "если бы не увидел(а) / услышал(а)",
+      you_sg: "если бы не увидел(а) / услышал(а)",
+      he_she_it: "если бы не увидел(а) / услышал(а)",
+      we: "если бы не увидели / услышали",
+      you_pl: "если бы не увидели / услышали",
+      they: "если бы не увидели / услышали"
     }
+  }
 };
 
 function updateDropdownLabels(lang) {
