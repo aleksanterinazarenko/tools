@@ -7,37 +7,43 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-  body {
-    font-family: "Open Sans", sans-serif;
-    margin: 2rem;
-    background: #f9f9f9;
-  }
-  #title {
-    font-size: 1.9rem;
-  }
-  label {
-    font-family: "Open Sans", sans-serif;
-    display: block;
-    margin-top: 1rem;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  select {
-    font-family: "Open Sans", sans-serif;
-    padding: 0.3rem;
-    font-size: 1rem;
-    margin-top: 5px;
-    width: 100%;
-    max-width: 300px;
-  }
-  #result {
-    margin-top: 2rem;
-    padding: 1rem;
-    background: #e0f7fa;
-    border-radius: 6px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    min-height: 40px;
+    body {
+      font-family: "Open Sans", sans-serif;
+      margin: 3rem;
+      background: #f9f9f9;
+    }
+    #title {
+      font-size: 1.9rem;
+    }
+    label {
+      font-family: "Open Sans", sans-serif;
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    select {
+      font-family: "Open Sans", sans-serif;
+      padding: 0.3rem;
+      font-size: 1rem;
+      margin-top: 5px;
+      width: 100%;
+      max-width: 300px;
+    }
+    #result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #e0f7fa;
+      border-radius: 6px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      min-height: 40px;
+    }
+
+    @media (max-width: 768px) {
+    body {
+      margin: 2rem;
+    }
   }
 </style>
 </head>
@@ -151,8 +157,8 @@ const optionLabels = {
     wanted_see_neg: { en: "didn't want to see / hear", fi: "ei halunnut nähdä / kuulla", ru: "не хотел увидеть / услышать" },
     optativus: { en: "optativus (let see / hear)", fi: "optatiivi (nähköön / kuulkoon)", ru: "оптатив (пусть увидит / услышит)" },
     optativus_neg: { en: "optativus (may not see / hear)", fi: "optatiivi (älköön nähkö / kuulko)", ru: "оптатив (пусть не увидит / услышит)" },
-    conditionatis: { en: "conditionatis (if saw / heard)", fi: "konditionaali (jos näkisi / kuulisi)", ru: "условное (если бы увидел / услышал)" },
-    conditionatis_neg: { en: "conditionatis (if didn't see / hear)", fi: "konditionaali (jos ei näkisi / kuulisi)", ru: "условное (если бы не увидел / услышал)" }
+    conditionatis: { en: "conditionatis (if saw / heard)", fi: "konditionaali (jos näkisi / kuulisi)", ru: "условное наклонение (если бы увидел / услышал)" },
+    conditionatis_neg: { en: "conditionatis (if didn't see / hear)", fi: "konditionaali (jos ei näkisi / kuulisi)", ru: "условное наклонение (если бы не увидел / услышал)" }
   },
   objectMenu: {
     me: { en: "me", fi: "minut / minua", ru: "меня" },
@@ -247,36 +253,36 @@ const conjugations = {
       they: "eivät halunneet nähdä / kuulla"
     },
     optativus: {
-      I: "nähköön / kuulkoon",
-      you_sg: "nähköön / kuulkoon",
-      he_she_it: "nähköön / kuulkoon",
-      we: "nähköön / kuulkoon",
-      you_pl: "nähköön / kuulkoon",
-      they: "nähkööt / kuulkoot"
+      I: "optatiivi (näkeös / kuulleos)",
+      you_sg: "optatiivi (näkeös / kuulleos)",
+      he_she_it: "optatiivi (näkeös / kuulleos)",
+      we: "optatiivi (näkeös / kuulleos)",
+      you_pl: "optatiivi (näkeös / kuulleos)",
+      they: "optatiivi (näkeös / kuulleos)"
     },
     optativus_neg: {
-      I: "älköön nähkö / kuulko",
-      you_sg: "älköön nähkö / kuulko",
-      he_she_it: "älköön nähkö / kuulko",
-      we: "älköön nähkö / kuulko",
-      you_pl: "älköön nähkö / kuulko",
-      they: "älkööt nähkö / kuulko"
+      I: "optatiivi (näkeös / kuulleos)",
+      you_sg: "optatiivi (näkeös / kuulleos)",
+      he_she_it: "optatiivi (näkeös / kuulleos)",
+      we: "optatiivi (näkeös / kuulleos)",
+      you_pl: "optatiivi (näkeös / kuulleos)",
+      they: "optatiivi (näkeös / kuulleos)"
     },
     conditionatis: {
-      I: "jos näkisin / kuulisin",
-      you_sg: "jos näkisit / kuulisit",
-      he_she_it: "jos näkisi / kuulisi",
-      we: "jos näkisimme / kuulisimme",
-      you_pl: "jos näkisitte / kuulisitte",
-      they: "jos näkisivät / kuulisivat"
+      I: "konditionaali (jos näkisin / kuulisin)",
+      you_sg: "konditionaali (jos näkisit / kuulisit)",
+      he_she_it: "konditionaali (jos näkisi / kuulisi)",
+      we: "konditionaali (jos näkisimme / kuulisimme)",
+      you_pl: "konditionaali (jos näkisitte / kuulisitte)",
+      they: "konditionaali (jos näkisivät / kuulisivat)"
     },
     conditionatis_neg: {
-      I: "jos en näkisi / kuulisi",
-      you_sg: "jos et näkisi / kuulisi",
-      he_she_it: "jos ei näkisi / kuulisi",
-      we: "jos emme näkisi / kuulisi",
-      you_pl: "jos ette näkisi / kuulisi",
-      they: "jos eivät näkisi / kuulisi"
+      I: "konditionaali (jos en näkisi / kuulisi)",
+      you_sg: "konditionaali (jos et näkisi / kuulisi)",
+      he_she_it: "konditionaali (jos ei näkisi / kuulisi)",
+      we: "konditionaali (jos emme näkisi / kuulisi)",
+      you_pl: "konditionaali (jos ette näkisi / kuulisi)",
+      they: "konditionaali (jos eivät näkisi / kuulisi)"
     }
   },
   ru: {
@@ -361,36 +367,36 @@ const conjugations = {
       they: "не хотели увидеть / услышать"
     },
     optativus: {
-      I: "пусть увижу / услышу",
-      you_sg: "пусть увидишь / услышишь",
-      he_she_it: "пусть увидит / услышит",
-      we: "пусть увидим / услышим",
-      you_pl: "пусть увидите / услышите",
-      they: "пусть увидят / услышат"
+      I: "оптатив (пусть увижу / услышу)",
+      you_sg: "оптатив (пусть увидишь / услышишь)",
+      he_she_it: "оптатив (пусть увидит / услышит)",
+      we: "оптатив (пусть увидим / услышим)",
+      you_pl: "оптатив (пусть увидите / услышите)",
+      they: "оптатив (пусть увидят / услышат)"
     },
     optativus_neg: {
-      I: "пусть не увижу / услышу",
-      you_sg: "пусть не увидишь / услышишь",
-      he_she_it: "пусть не увидит / услышит",
-      we: "пусть не увидим / услышим",
-      you_pl: "пусть не увидите / услышите",
-      they: "пусть не увидят / услышат"
+      I: "оптатив (пусть не увижу / услышу)",
+      you_sg: "оптатив (пусть не увидишь / услышишь)",
+      he_she_it: "оптатив (пусть не увидит / услышит)",
+      we: "оптатив (пусть не увидим / услышим)",
+      you_pl: "оптатив (пусть не увидите / услышите)",
+      they: "оптатив (пусть не увидят / услышат)"
     },
     conditionatis: {
-      I: "если бы увидел(а) / услышал(а)",
-      you_sg: "если бы увидел(а) / услышал(а)",
-      he_she_it: "если бы увидел(а) / услышал(а)",
-      we: "если бы увидели / услышали",
-      you_pl: "если бы увидели / услышали",
-      they: "если бы увидели /  услышали"
+      I: "условное наклонение (если бы увидел(а) / услышал(а))",
+      you_sg: "условное наклонение (если бы увидел(а) / услышал(а))",
+      he_she_it: "условное наклонение (если бы увидел(а) / услышал(а))",
+      we: "условное наклонение (если бы увидели / услышали)",
+      you_pl: "условное наклонение (если бы увидели / услышали)",
+      they: "условное наклонение (если бы увидели /  услышали)"
     },
     conditionatis_neg: {
-      I: "если бы не увидел(а) / услышал(а)",
-      you_sg: "если бы не увидел(а) / услышал(а)",
-      he_she_it: "если бы не увидел(а) / услышал(а)",
-      we: "если бы не увидели / услышали",
-      you_pl: "если бы не увидели / услышали",
-      they: "если бы не увидели / услышали"
+      I: "условное наклонение (если бы не увидел(а) / услышал(а))",
+      you_sg: "условное наклонение (если бы не увидел(а) / услышал(а))",
+      he_she_it: "условное наклонение (если бы не увидел(а) / услышал(а))",
+      we: "условное наклонение (если бы не увидели / услышали)",
+      you_pl: "условное наклонение (если бы не увидели / услышали)",
+      they: "условное наклонение (если бы не увидели / услышали)"
     }
   }
 };
