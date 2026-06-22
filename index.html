@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erzya Dictionary · Эрзянь валкс</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            background: #f5f3ef;
+            font-family: "Literata", serif;
+            padding: 5rem 1.5rem;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            min-height: 400px;
+            transition: min-height 0.2s;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: 2.2rem;
+            letter-spacing: -0.01em;
+            border-bottom: 2px solid #d4c9b8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.2rem;
+            color: #2c1810;
+        }
+
+        h1 small {
+            font-size: 0.9rem;
+            color: #6b5b4e;
+            font-weight: 300;
+            margin-left: 0.8rem;
+        }
+
+        h1 a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        h1 a:hover {
+            text-decoration: none;
+        }
+
+        .search-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            flex: 1;
+            min-width: 180px;
+            position: relative;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 0.6rem 2.4rem 0.6rem 1rem;
+            border: 1px solid #d0c8bc;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #fcfaf7;
+            transition: 0.15s;
+        }
+
+        .search-wrapper input:focus {
+            outline: none;
+            border-color: #8a7a68;
+            box-shadow: 0 0 0 3px rgba(138, 122, 104, 0.15);
+            background: white;
+        }
+
+        .search-wrapper .clear-icon {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            line-height: 1;
+            color: #8a7a68;
+            cursor: pointer;
+            padding: 0 4px;
+            display: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            transition: 0.1s;
+            font-family: "Literata", serif;
+        }
+
+        .search-wrapper .clear-icon.visible {
+            display: flex;
+        }
+
+        .search-wrapper .clear-icon:hover {
+            background: #e8e0d6;
+            color: #2c1810;
+        }
+
+        .search-area button {
+            padding: 0.6rem 1.4rem;
+            border: 1px solid #8a7a68;
+            border-radius: 4px;
+            background: #f0ebe4;
+            color: #2c1810;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.1s;
+            white-space: nowrap;
+        }
+
+        .search-area button:hover {
+            background: #e2d9ce;
+        }
+
+        .stats {
+            margin: 0.4rem 0 0.8rem 0;
+            font-size: 0.85rem;
+            color: #6b5b4e;
+            font-style: italic;
+            border-bottom: 1px solid #e8e0d6;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .entries-container {
+            margin-top: 0.8rem;
+            min-height: 200px;
+        }
+
+        .entry-block {
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.4rem;
+            border-bottom: 1px solid #e8e0d6;
+        }
+
+        .entry-block:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .entry-head {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f140e;
+            margin-bottom: 0.4rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.3rem 0.5rem;
+        }
+
+        .entry-head .lang-tag {
+            display: inline-block;
+            background: #e8e0d6;
+            color: #5a4a3a;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.05rem 0.6rem;
+            border-radius: 3px;
+            text-transform: none;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.02em;
+            align-self: baseline;
+            transform: translateY(-0.25em);
+        }
+
+        .entry-head .lemma {
+            font-weight: 600;
+            color: #1f140e;
+        }
+
+        .entry-head .pos {
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: #6b5b4e;
+            font-style: italic;
+        }
+
+        .source-block {
+            margin: 0.7rem 0 0.7rem 1.2rem;
+            padding-left: 0.6rem;
+            border-left: 2px solid #d4c9b8;
+        }
+
+        .source-line {
+            font-size: 0.92rem;
+            color: #2c2c2c;
+            margin-bottom: 0.1rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.3rem 0.5rem;
+        }
+
+        .lang-code {
+            display: inline-block;
+            background: #e8e0d6;
+            color: #5a4a3a;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.05rem 0.6rem;
+            border-radius: 3px;
+            text-transform: none;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.02em;
+        }
+
+        .source-value .definition-item {
+            display: block;
+            margin: 0.2rem 0;
+            padding-left: 0.5rem;
+        }
+
+        .source-value .definition-number {
+            font-weight: 500;
+            color: #3d2e20;
+            margin-right: 0.3rem;
+        }
+
+        .examples-wrapper {
+            margin: 0.2rem 0 0.1rem 0.6rem;
+        }
+
+        .example-item {
+            margin: 0.1rem 0;
+            padding: 0.1rem 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .example-item .example-entry {
+            font-style: italic;
+            color: #1f140e;
+        }
+
+        .example-item .arrow {
+            color: #8a7a68;
+            font-weight: 300;
+            margin: 0 0.1rem;
+        }
+
+        .example-item .translation {
+            color: #5a4a3a;
+        }
+
+        .empty-state {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            text-align: center;
+            color: #8a7a68;
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        .highlight {
+            background-color: #FFF4AF;
+            border-radius: 2px;
+        }
+
+        .dict-link {
+            color: #2c1810;
+            text-decoration: none;
+            border-bottom: 1px dashed #8a7a68;
+            cursor: pointer;
+            transition: 0.1s;
+            font-style: italic;
+        }
+
+        .dict-link:hover {
+            background-color: #e8e0d6;
+            border-bottom-color: #2c1810;
+        }
+
+        .ref-link {
+            color: #2c1810;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0 1px;
+            transition: 0.1s;
+            font-size: 0.7rem;
+            vertical-align: super;
+            line-height: 1;
+        }
+
+        .ref-link:hover {
+            background-color: #e8e0d6;
+            border-radius: 2px;
+        }
+
+        .references-bottom {
+            margin-top: 0.8rem;
+            padding: 0.5rem 0.8rem;
+            background: #f5f3ef;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #5a4a3a;
+            border-top: 2px solid #d4c9b8;
+        }
+
+        .references-bottom .ref-item {
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .references-bottom .ref-number {
+            font-weight: 600;
+            color: #2c1810;
+            margin-right: 0.2rem;
+        }
+
+        .references-bottom .ref-source {
+            color: #5a4a3a;
+        }
+
+        .pagination {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0 0.5rem 0;
+            padding: 0.8rem 0;
+            border-top: 1px solid #e8e0d6;
+            flex-wrap: wrap;
+        }
+
+        .pagination.visible {
+            display: flex;
+        }
+
+        .pagination button {
+            padding: 0.4rem 1.2rem;
+            border: 1px solid #d0c8bc;
+            border-radius: 4px;
+            background: #fcfaf7;
+            color: #2c1810;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #e8e0d6;
+            border-color: #8a7a68;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-info {
+            font-size: 0.95rem;
+            color: #5a4a3a;
+            font-style: italic;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .container {
+                padding: 1.2rem 1rem;
+                min-height: 300px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .entry-head {
+                font-size: 1.2rem;
+            }
+
+            .source-block {
+                margin-left: 0.6rem;
+            }
+
+            .examples-wrapper {
+                margin-left: 0.3rem;
+            }
+
+            .example-item {
+                font-size: 0.85rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h1 small {
+                display: block;
+                margin-left: 0;
+                margin: 0.3rem 0;
+                font-size: 1rem;
+            }
+
+            .references-bottom {
+                font-size: 0.7rem;
+            }
+
+            .search-wrapper input {
+                padding: 0.6rem 2.2rem 0.6rem 1rem;
+            }
+
+            .search-wrapper .clear-icon {
+                right: 6px;
+                width: 22px;
+                height: 22px;
+                font-size: 1rem;
+            }
+
+            .pagination {
+                gap: 0.5rem;
+            }
+
+            .pagination button {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1><a href="/">Erzya Dictionary <small>Эрзянь
+                    келень валкс</small></a></h1>
+
+        <div class="search-area">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search lemma or translation…" autofocus>
+                <button id="clearIcon" class="clear-icon" aria-label="Clear search">✕</button>
+            </div>
+            <button id="searchButton">Search</button>
+        </div>
+
+        <div class="stats" id="statsDisplay">
+            <span>0 entries loaded</span>
+            <span id="pageInfo"></span>
+        </div>
+
+        <div id="cardGrid" class="entries-container">
+            <div class="empty-state">Enter a search term to see results</div>
+        </div>
+
+        <div class="pagination" id="pagination">
+            <button id="prevPage" disabled>◀ Previous</button>
+            <span class="page-info" id="pageInfoText">Page 1 of 1</span>
+            <button id="nextPage">Next ▶</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const grid = document.getElementById('cardGrid');
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const clearIcon = document.getElementById('clearIcon');
+            const statsDisplay = document.getElementById('statsDisplay');
+            const pageInfo = document.getElementById('pageInfo');
+            const pageInfoText = document.getElementById('pageInfoText');
+            const prevPageBtn = document.getElementById('prevPage');
+            const nextPageBtn = document.getElementById('nextPage');
+            const paginationContainer = document.getElementById('pagination');
+
+            const PAGE_SIZE = 20;
+            let allEntries = [];
+            let currentResults = [];
+            let currentPage = 1;
+            let totalPages = 1;
+
+            async function loadDictionary() {
+                try {
+                    const res = await fetch('erzya-dict.json');
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+                    if (!Array.isArray(data) || data.length === 0) throw new Error(
+                        'JSON is not an array or empty');
+
+                    allEntries = normalizeEntries(data);
+
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const q = urlParams.get('q');
+
+                    if (q) {
+                        searchInput.value = q;
+                        applyFiltersAndRender(true);
+                    } else {
+                        grid.innerHTML = '<div class="empty-state">Enter a search term to see results</div>';
+                        statsDisplay.innerHTML =
+                            `<span>${allEntries.length} entries loaded</span><span></span>`;
+                        updateClearIconVisibility();
+                        updatePagination(0, 1);
+                    }
+                } catch (err) {
+                    console.error('Load error:', err);
+                    grid.innerHTML =
+                        `<div class="empty-state">❌ failed to load erzya-dict.json: ${err.message}</div>`;
+                    statsDisplay.innerHTML = `<span>error</span><span></span>`;
+                }
+            }
+
+            function getDisplayName(key) {
+                if (key.includes(':')) {
+                    const parts = key.split(':');
+                    const firstPart = parts[0];
+                    if (firstPart.length >= 2 && firstPart.length <= 3 && /^[a-z]+$/.test(firstPart)) {
+                        return parts.slice(1).join(':');
+                    }
+                }
+                return key;
+            }
+
+            function getTokensOutsideParens(text, keepSeparators) {
+                if (!text) return [];
+                let masked = text.replace(/,\$/g, '__ESCAPED_COMMA__');
+                let processed = "";
+                let depth = 0;
+                for (let i = 0; i < masked.length; i++) {
+                    const char = masked[i];
+                    if (char === '(') depth++;
+                    else if (char === ')') depth = Math.max(0, depth - 1);
+
+                    if (depth > 0 && char === ',') processed += '__PAREN_COMMA__';
+                    else if (depth > 0 && char === ';') processed += '__PAREN_SEMI__';
+                    else processed += char;
+                }
+
+                const regex = keepSeparators ? /([,;])/ : /[,;]/;
+                return processed.split(regex).map(t => t.replace(/__ESCAPED_COMMA__/g, ',')
+                    .replace(/__PAREN_COMMA__/g, ',')
+                    .replace(/__PAREN_SEMI__/g, ';'));
+            }
+
+            function normalizeEntries(data) {
+                const map = new Map();
+
+                data.forEach(original => {
+                    const language = original.Language || '';
+                    const lemma = original.Lemmas || '';
+                    const pos = original.POS || '';
+                    const synonyms = original.Synonyms || '';
+                    const transcription = original.Transcription || '';
+                    const etymology = original.Etymology || '';
+
+                    if (!lemma) return;
+
+                    const key = `${language}|||${lemma}|||${pos}`;
+
+                    if (!map.has(key)) {
+                        const newEntry = {
+                            _key: key,
+                            _language: language,
+                            _lemma: lemma,
+                            _pos: pos,
+                            _synonyms: synonyms,
+                            _transcription: transcription,
+                            _etymology: etymology,
+                            _sources: {},
+                            _sourceMap: {},
+                            _originalToDisplay: {},
+                            _specialFields: {},
+                            _sourceOrder: []
+                        };
+                        processEntry(original, newEntry);
+                        map.set(key, newEntry);
+                    } else {
+                        const existing = map.get(key);
+
+                        if (synonyms) {
+                            if (!existing._synonyms) {
+                                existing._synonyms = synonyms;
+                            } else {
+                                const existingParts = existing._synonyms.split(/[,;]\s*/);
+                                if (!existingParts.includes(synonyms)) {
+                                    existing._synonyms += '; ' + synonyms;
+                                }
+                            }
+                        }
+
+                        if (transcription && !existing._transcription) {
+                            existing._transcription = transcription;
+                        }
+
+                        if (etymology && !existing._etymology) {
+                            existing._etymology = etymology;
+                        }
+
+                        processEntry(original, existing);
+                    }
+                });
+
+                const result = [];
+                for (let entry of map.values()) {
+                    const grouped = {};
+                    for (let srcKey in entry._sources) {
+                        const src = entry._sources[srcKey];
+                        const lang = src.langCode || 'other';
+                        if (!grouped[lang]) grouped[lang] = [];
+                        grouped[lang].push(src);
+                    }
+
+                    if (entry._transcription) {
+                        if (!grouped['trx']) grouped['trx'] = [];
+                        grouped['trx'].push({
+                            key: 'trx',
+                            displayKey: 'trx',
+                            langCode: 'trx',
+                            name: 'trx',
+                            value: entry._transcription,
+                            examples: [],
+                            isSpecial: true
+                        });
+                    }
+                    if (entry._synonyms) {
+                        if (!grouped['syn']) grouped['syn'] = [];
+                        grouped['syn'].push({
+                            key: 'syn',
+                            displayKey: 'syn',
+                            langCode: 'syn',
+                            name: 'syn',
+                            value: entry._synonyms,
+                            examples: [],
+                            isSpecial: true
+                        });
+                    }
+                    if (entry._etymology) {
+                        if (!grouped['ety']) grouped['ety'] = [];
+                        grouped['ety'].push({
+                            key: 'ety',
+                            displayKey: 'ety',
+                            langCode: 'ety',
+                            name: 'ety',
+                            value: entry._etymology,
+                            examples: [],
+                            isSpecial: true
+                        });
+                    }
+
+                    entry._groupedSources = grouped;
+
+                    const sourceMap = {};
+                    const seenDisplayNames = new Set();
+                    const originalToDisplay = {};
+                    let sourceId = 1;
+
+                    const orderedKeys = entry._sourceOrder && entry._sourceOrder.length > 0 ?
+                        entry._sourceOrder :
+                        Object.keys(entry._sources);
+
+                    const orderedDisplayNames = [];
+                    for (let srcKey of orderedKeys) {
+                        if (entry._sources[srcKey]) {
+                            const displayName = getDisplayName(srcKey);
+                            originalToDisplay[srcKey] = displayName;
+                            if (!seenDisplayNames.has(displayName)) {
+                                seenDisplayNames.add(displayName);
+                                orderedDisplayNames.push(displayName);
+                            }
+                        }
+                    }
+
+                    for (let srcKey in entry._sources) {
+                        if (!entry._sourceOrder || !entry._sourceOrder.includes(srcKey)) {
+                            const displayName = getDisplayName(srcKey);
+                            originalToDisplay[srcKey] = displayName;
+                            if (!seenDisplayNames.has(displayName)) {
+                                seenDisplayNames.add(displayName);
+                                orderedDisplayNames.push(displayName);
+                            }
+                        }
+                    }
+
+                    orderedDisplayNames.forEach(name => {
+                        sourceMap[name] = sourceId++;
+                    });
+
+                    entry._sourceMap = sourceMap;
+                    entry._originalToDisplay = originalToDisplay;
+
+                    result.push(entry);
+                }
+                return result;
+            }
+
+            function processEntry(original, entry) {
+                const skipFields = [
+                    'Language',
+                    'Lemmas',
+                    'POS',
+                    'Synonyms',
+                    'Transcription',
+                    'Etymology',
+                    'Examples'
+                ];
+
+                const exampleText = (original.Examples || '').trim();
+
+                const sourceKeysInOrder = [];
+
+                for (let key in original) {
+                    if (skipFields.includes(key)) continue;
+                    const val = original[key];
+                    if (val === '' || val === null || val === undefined) continue;
+                    if (typeof val !== 'string') continue;
+                    const cleanVal = val.trim();
+                    if (!cleanVal) continue;
+                    sourceKeysInOrder.push(key);
+                }
+
+                if (!entry._sourceOrder) {
+                    entry._sourceOrder = [];
+                }
+
+                for (let key of sourceKeysInOrder) {
+                    if (!entry._sourceOrder.includes(key)) {
+                        entry._sourceOrder.push(key);
+                    }
+                }
+
+                for (let key in original) {
+                    if (skipFields.includes(key)) continue;
+
+                    const val = original[key];
+                    if (val === '' || val === null || val === undefined) continue;
+
+                    if (typeof val !== 'string') continue;
+
+                    const cleanVal = val.trim();
+                    if (!cleanVal) continue;
+
+                    if (!entry._sources[key]) {
+                        let sourceName = key;
+                        let langCode = '';
+
+                        if (key.includes(':')) {
+                            const parts = key.split(':');
+                            const firstPart = parts[0];
+                            if (firstPart.length >= 2 && firstPart.length <= 3 && /^[a-z]+$/.test(firstPart)) {
+                                langCode = firstPart;
+                                sourceName = parts.slice(1).join(':');
+                            }
+                        }
+
+                        entry._sources[key] = {
+                            key: key,
+                            displayKey: getDisplayName(key),
+                            langCode: langCode,
+                            name: sourceName,
+                            value: '',
+                            examples: []
+                        };
+                    }
+
+                    const source = entry._sources[key];
+
+                    if (exampleText) {
+                        const exists = source.examples.some(
+                            ex => ex.text === exampleText && ex.translation === cleanVal
+                        );
+
+                        if (!exists) {
+                            source.examples.push({
+                                text: exampleText,
+                                translation: cleanVal,
+                                sourceKey: key
+                            });
+                        }
+                    } else {
+                        if (!source.value) {
+                            source.value = cleanVal;
+                        } else {
+                            const parts = getTokensOutsideParens(source.value, false).map(x => x.trim());
+
+                            if (!parts.includes(cleanVal)) {
+                                source.value += '; ' + cleanVal;
+                            }
+                        }
+                    }
+                }
+            }
+
+            function processTextForLinks(text, searchTerm) {
+                if (!text) return '';
+
+                let html = escapeHtml(text);
+
+                html = html.replace(/\*([^*]+)\*/g, function (match, word) {
+                    return `<a href="#" class="dict-link" data-search="${escapeHtml(word)}">${escapeHtml(word)}</a>`;
+                });
+
+                if (searchTerm) {
+                    const lowerTerm = searchTerm.toLowerCase();
+                    const div = document.createElement('div');
+                    div.innerHTML = html;
+
+                    const walker = document.createTreeWalker(
+                        div,
+                        NodeFilter.SHOW_TEXT,
+                        null,
+                        false
+                    );
+
+                    const nodesToReplace = [];
+                    let node;
+                    while (node = walker.nextNode()) {
+                        if (node.textContent.toLowerCase().includes(lowerTerm)) {
+                            nodesToReplace.push(node);
+                        }
+                    }
+
+                    nodesToReplace.forEach(textNode => {
+                        const text = textNode.textContent;
+                        const fragment = document.createDocumentFragment();
+                        let lastIndex = 0;
+                        const lowerText = text.toLowerCase();
+                        let index = lowerText.indexOf(lowerTerm);
+
+                        while (index !== -1) {
+                            if (index > lastIndex) {
+                                fragment.appendChild(
+                                    document.createTextNode(text.substring(lastIndex, index))
+                                );
+                            }
+                            const span = document.createElement('span');
+                            span.className = 'highlight';
+                            span.textContent = text.substring(index, index + searchTerm.length);
+                            fragment.appendChild(span);
+
+                            lastIndex = index + searchTerm.length;
+                            index = lowerText.indexOf(lowerTerm, lastIndex);
+                        }
+
+                        if (lastIndex < text.length) {
+                            fragment.appendChild(
+                                document.createTextNode(text.substring(lastIndex))
+                            );
+                        }
+
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    });
+
+                    html = div.innerHTML;
+                }
+
+                return html;
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+
+                let escaped = div.innerHTML;
+
+                escaped = escaped.replace(/&lt;i&gt;/gi, '<i>')
+                    .replace(/&lt;\/i&gt;/gi, '</i>')
+                    .replace(/&lt;b&gt;/gi, '<b>')
+                    .replace(/&lt;\/b&gt;/gi, '</b>');
+
+                return escaped;
+            }
+
+            function updateClearIconVisibility() {
+                const val = searchInput.value.trim();
+                if (val.length > 0) {
+                    clearIcon.classList.add('visible');
+                } else {
+                    clearIcon.classList.remove('visible');
+                }
+            }
+
+            function updatePagination(totalItems, currentPageNum) {
+                totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+                currentPage = Math.min(currentPageNum, totalPages);
+                currentPage = Math.max(1, currentPage);
+
+                prevPageBtn.disabled = currentPage <= 1;
+                nextPageBtn.disabled = currentPage >= totalPages;
+
+                if (totalItems > PAGE_SIZE) {
+                    paginationContainer.classList.add('visible');
+                } else {
+                    paginationContainer.classList.remove('visible');
+                }
+
+                if (totalItems === 0) {
+                    pageInfoText.textContent = 'No results';
+                    pageInfo.textContent = '';
+                } else {
+                    const start = (currentPage - 1) * PAGE_SIZE + 1;
+                    const end = Math.min(currentPage * PAGE_SIZE, totalItems);
+                    pageInfoText.textContent =
+                        `Page ${currentPage} of ${totalPages} (${start}-${end} of ${totalItems})`;
+                    pageInfo.textContent = `Showing ${start}-${end} of ${totalItems}`;
+                }
+            }
+
+            function applyFiltersAndRender(skipHistory = false) {
+                const searchTerm = searchInput.value.trim();
+                const lowerTerm = searchTerm.toLowerCase();
+                updateClearIconVisibility();
+
+                if (!skipHistory) {
+                    const newUrl = searchTerm ?
+                        '?q=' + encodeURIComponent(searchTerm) :
+                        window.location.pathname;
+                    window.history.pushState({
+                        q: searchTerm
+                    }, '', newUrl);
+                }
+
+                if (searchTerm === '') {
+                    currentResults = [];
+                    grid.innerHTML = '<div class="empty-state">Enter a search term to see results</div>';
+                    statsDisplay.innerHTML = `<span>${allEntries.length} entries loaded</span><span></span>`;
+                    updatePagination(0, 1);
+                    return;
+                }
+
+                let scored = allEntries.map(entry => {
+                    let score = 0;
+
+                    const isPrefixMatch = (text, term) => {
+                        const lower = text.toLowerCase();
+                        return lower.startsWith(term) || lower.includes(' ' + term) || lower.includes(
+                            '-' + term);
+                    };
+
+                    if (entry._lemma && entry._lemma.toLowerCase().includes(lowerTerm)) {
+                        if (entry._lemma.toLowerCase() === lowerTerm) {
+                            score = 100;
+                        } else if (isPrefixMatch(entry._lemma, lowerTerm)) {
+                            score = 75;
+                        } else {
+                            score = 50;
+                        }
+                    }
+
+                    if (entry._synonyms && entry._synonyms.toLowerCase().includes(lowerTerm)) {
+                        if (isPrefixMatch(entry._synonyms, lowerTerm)) {
+                            score = Math.max(score, 45);
+                        } else {
+                            score = Math.max(score, 20);
+                        }
+                    }
+
+                    if (entry._transcription && entry._transcription.toLowerCase().includes(lowerTerm)) {
+                        score = Math.max(score, 15);
+                    }
+                    if (entry._etymology && entry._etymology.toLowerCase().includes(lowerTerm)) {
+                        score = Math.max(score, 10);
+                    }
+
+                    for (let srcKey in entry._sources) {
+                        const source = entry._sources[srcKey];
+                        if (source.value && source.value.toLowerCase().includes(lowerTerm)) {
+                            if (source.value.toLowerCase() === lowerTerm) {
+                                score = Math.max(score, 60);
+                            } else if (isPrefixMatch(source.value, lowerTerm)) {
+                                score = Math.max(score, 40);
+                            } else {
+                                score = Math.max(score, 20);
+                            }
+                        }
+                        for (let example of source.examples) {
+                            if (example.text && example.text.toLowerCase().includes(lowerTerm)) {
+                                score = Math.max(score, 15);
+                            }
+                            if (example.translation && example.translation.toLowerCase().includes(
+                                    lowerTerm)) {
+                                if (example.translation.toLowerCase() === lowerTerm) {
+                                    score = Math.max(score, 35);
+                                } else if (isPrefixMatch(example.translation, lowerTerm)) {
+                                    score = Math.max(score, 25);
+                                } else {
+                                    score = Math.max(score, 15);
+                                }
+                            }
+                        }
+                    }
+
+                    return {
+                        entry,
+                        score
+                    };
+                });
+
+                let filtered = scored.filter(item => item.score > 0);
+                filtered.sort((a, b) => b.score - a.score);
+                currentResults = filtered.map(item => item.entry);
+
+                currentPage = 1;
+                renderPage();
+                statsDisplay.innerHTML =
+                    `<span>${currentResults.length} entries found · ${allEntries.length} total</span><span id="pageInfo">page ${currentPage} of ${totalPages}</span>`;
+            }
+
+            function renderPage() {
+                if (!currentResults || currentResults.length === 0) {
+                    grid.innerHTML = '<div class="empty-state">No entries match your search</div>';
+                    updatePagination(0, 1);
+                    return;
+                }
+
+                updatePagination(currentResults.length, currentPage);
+
+                const start = (currentPage - 1) * PAGE_SIZE;
+                const end = Math.min(start + PAGE_SIZE, currentResults.length);
+                const pageEntries = currentResults.slice(start, end);
+
+                renderEntries(pageEntries, searchInput.value.trim());
+                statsDisplay.innerHTML =
+                    `<span>${currentResults.length} entries found · ${allEntries.length} total</span><span id="pageInfo">page ${currentPage} of ${totalPages}</span>`;
+            }
+
+            function processAndKeepSeparators(text, searchTerm, refLinks = '') {
+                if (!text) return '';
+                let result = '';
+                const tokens = getTokensOutsideParens(text, true);
+
+                tokens.forEach(token => {
+                    if (token === ',' || token === ';') {
+                        result = result.trimEnd() + token + ' ';
+                    } else {
+                        const t = token.trim();
+                        if (t) {
+                            result += processTextForLinks(t, searchTerm) + refLinks;
+                        }
+                    }
+                });
+                return result.trimEnd();
+            }
+
+            function renderEntries(entries, searchTerm) {
+                if (!entries || entries.length === 0) {
+                    grid.innerHTML = '<div class="empty-state">No entries on this page</div>';
+                    return;
+                }
+
+                let html = '';
+                entries.forEach((entry) => {
+                    const refNumberMap = {};
+                    let nextRefNumber = 1;
+
+                    html += `<div class="entry-block">`;
+                    html += `<div class="entry-head">`;
+                    if (entry._language) {
+                        html += `<span class="lang-tag">${escapeHtml(entry._language)}</span>`;
+                    }
+                    let lemmaText = entry._lemma || '?';
+                    let highlightedLemma = processTextForLinks(lemmaText, searchTerm);
+                    html += `<span class="lemma">${highlightedLemma}</span>`;
+                    if (entry._pos) {
+                        html += `<span class="pos">${escapeHtml(entry._pos)}</span>`;
+                    }
+                    html += `</div>`;
+
+                    function getRefNumber(sourceKey) {
+                        const displayName = entry._originalToDisplay ? entry._originalToDisplay[sourceKey] :
+                            getDisplayName(sourceKey);
+                        if (!refNumberMap[displayName]) {
+                            refNumberMap[displayName] = nextRefNumber++;
+                        }
+                        return refNumberMap[displayName];
+                    }
+
+                    if (entry._groupedSources) {
+                        const langKeys = Object.keys(entry._groupedSources);
+
+                        langKeys.sort((a, b) => {
+                            const order = {
+                                'trx': 0,
+                                'syn': 2,
+                                'ety': 3
+                            };
+                            const aOrder = order[a] !== undefined ? order[a] : 1;
+                            const bOrder = order[b] !== undefined ? order[b] : 1;
+                            if (aOrder !== bOrder) return aOrder - bOrder;
+                            return a.localeCompare(b);
+                        });
+
+                        for (let lang of langKeys) {
+                            const sources = entry._groupedSources[lang];
+                            const langDisplay = lang !== 'other' ? lang : '';
+
+                            html += `<div class="source-block">`;
+                            html += `<div class="source-line">`;
+                            if (langDisplay) {
+                                html += `<span class="lang-code">${escapeHtml(langDisplay)}</span>`;
+                            }
+                            html += `</div>`;
+
+                            const exMap = new Map();
+                            sources.forEach(source => {
+                                source.examples.forEach(ex => {
+                                    const key = ex.text + '|||' + ex.translation;
+                                    if (!exMap.has(key)) {
+                                        exMap.set(key, {
+                                            text: ex.text,
+                                            translation: ex.translation,
+                                            sources: []
+                                        });
+                                    }
+                                    if (!exMap.get(key).sources.includes(ex.sourceKey ||
+                                            source.key)) {
+                                        exMap.get(key).sources.push(ex.sourceKey || source
+                                            .key);
+                                    }
+                                });
+                            });
+
+                            const hasValue = sources.some(s => s.value);
+                            const hasExamples = exMap.size > 0;
+                            const isDef = lang === 'def';
+                            const defaultSep = (hasExamples || isDef) ? ';' : ',';
+
+                            if (hasValue) {
+                                let defHtml = '';
+                                let defIndex = 1;
+
+                                if (['trx', 'syn', 'ety'].includes(lang)) {
+                                    const defMap = new Map();
+                                    sources.forEach(source => {
+                                        if (source.value) {
+                                            const definitions = source.value.split('#').map(part =>
+                                                part.trim()).filter(Boolean);
+                                            definitions.forEach(definition => {
+                                                const clean = definition.replace(/^[;,]\s*/,
+                                                    '').replace(/[;,]\s*$/, '').trim();
+                                                if (!clean) return;
+                                                if (!defMap.has(clean)) defMap.set(clean,
+                                                    []);
+                                                if (!defMap.get(clean).includes(source.key))
+                                                    defMap.get(clean).push(source.key);
+                                            });
+                                        }
+                                    });
+
+                                    if (defMap.size > 0) {
+                                        Array.from(defMap.entries()).forEach(([value, sourceKeys]) => {
+                                            const processed = processAndKeepSeparators(value,
+                                                searchTerm);
+                                            defHtml +=
+                                                `<span class="definition-item"><span class="definition-number">${defIndex}.</span>${processed}</span>`;
+                                            defIndex++;
+                                        });
+                                        html += `<div class="source-value">${defHtml}</div>`;
+                                    }
+                                } else {
+                                    let blocks = [];
+                                    sources.forEach(source => {
+                                        if (source.value) {
+                                            const parts = source.value.split('#').map(p => p
+                                                .replace(/^[;,]\s*/, '').replace(/[;,]\s*$/, '')
+                                                .trim()).filter(Boolean);
+                                            parts.forEach(part => {
+                                                const tokens = getTokensOutsideParens(part,
+                                                    true);
+                                                const parsedSynonyms = [];
+                                                let currentText = "";
+
+                                                for (let i = 0; i < tokens.length; i++) {
+                                                    const token = tokens[i];
+                                                    if (token === ',' || token === ';') {
+                                                        if (parsedSynonyms.length > 0 &&
+                                                            currentText.trim() === '') {
+                                                            parsedSynonyms[parsedSynonyms
+                                                                .length - 1].sep = token;
+                                                        }
+                                                    } else {
+                                                        currentText = token.trim();
+                                                        if (currentText) {
+                                                            const parensBefore = [];
+                                                            const parensAfter = [];
+                                                            let core = '';
+                                                            const innerTokens = [];
+                                                            const regex =
+                                                                /(\([^)]+\))|([^(]+)/g;
+                                                            let m;
+                                                            while ((m = regex.exec(
+                                                                    currentText)) !==
+                                                                null) {
+                                                                if (m[1]) innerTokens.push({
+                                                                    type: 'paren',
+                                                                    text: m[1]
+                                                                        .trim()
+                                                                });
+                                                                else if (m[2].trim())
+                                                                    innerTokens.push({
+                                                                        type: 'text',
+                                                                        text: m[2]
+                                                                            .trim()
+                                                                    });
+                                                            }
+                                                            let foundText = false;
+                                                            innerTokens.forEach(t => {
+                                                                if (t.type ===
+                                                                    'text') {
+                                                                    if (!
+                                                                        foundText) {
+                                                                        core = t
+                                                                            .text;
+                                                                        foundText =
+                                                                            true;
+                                                                    } else {
+                                                                        core +=
+                                                                            ' ' + t
+                                                                            .text;
+                                                                    }
+                                                                } else {
+                                                                    if (!foundText)
+                                                                        parensBefore
+                                                                        .push(t
+                                                                            .text);
+                                                                    else parensAfter
+                                                                        .push(t
+                                                                            .text);
+                                                                }
+                                                            });
+                                                            if (!foundText && innerTokens
+                                                                .length > 0) {
+                                                                core = currentText;
+                                                                parensBefore.length = 0;
+                                                                parensAfter.length = 0;
+                                                            }
+                                                            parsedSynonyms.push({
+                                                                core,
+                                                                parensBefore,
+                                                                parensAfter,
+                                                                original: currentText,
+                                                                sep: defaultSep
+                                                            });
+                                                            currentText = "";
+                                                        }
+                                                    }
+                                                }
+                                                blocks.push({
+                                                    sourceKey: source.key,
+                                                    synonyms: parsedSynonyms
+                                                });
+                                            });
+                                        }
+                                    });
+
+                                    const clusters = [];
+                                    blocks.forEach(block => {
+                                        const blockCores = block.synonyms.map(s => s.core
+                                            .toLowerCase());
+                                        const intersectingClusters = [];
+                                        const remainingClusters = [];
+
+                                        clusters.forEach(cluster => {
+                                            const clusterCores = new Set();
+                                            cluster.forEach(b => b.synonyms.forEach(s =>
+                                                clusterCores.add(s.core
+                                                    .toLowerCase())));
+                                            if (blockCores.some(c => clusterCores.has(c))) {
+                                                intersectingClusters.push(cluster);
+                                            } else {
+                                                remainingClusters.push(cluster);
+                                            }
+                                        });
+
+                                        if (intersectingClusters.length === 0) {
+                                            clusters.push([block]);
+                                        } else {
+                                            const mergedCluster = [block];
+                                            intersectingClusters.forEach(c => mergedCluster.push(...
+                                                c));
+                                            remainingClusters.push(mergedCluster);
+                                            clusters.length = 0;
+                                            clusters.push(...remainingClusters);
+                                        }
+                                    });
+
+                                    function renderRefs(sourceKeys) {
+                                        const refIds = Array.from(sourceKeys).map(srcKey => getRefNumber(
+                                            srcKey)).filter(x => x);
+                                        const uniqueRefs = [...new Set(refIds)].sort((a, b) => a - b);
+                                        if (uniqueRefs.length === 0) return '';
+                                        return uniqueRefs.map(id =>
+                                            `<a href="#ref-${id}" class="ref-link" data-ref="${id}">[${id}]</a>`
+                                        ).join('');
+                                    }
+
+                                    if (clusters.length > 0) {
+                                        clusters.forEach(cluster => {
+                                            const mergedSynonyms = [];
+                                            const coreToMerged = new Map();
+
+                                            cluster.forEach(block => {
+                                                block.synonyms.forEach(syn => {
+                                                    const coreLower = syn.core
+                                                        .toLowerCase();
+                                                    let merged = coreToMerged.get(
+                                                        coreLower);
+                                                    if (!merged) {
+                                                        merged = {
+                                                            core: syn.core,
+                                                            sources: new Set(),
+                                                            parensBefore: new Map(),
+                                                            parensAfter: new Map(),
+                                                            sep: syn.sep
+                                                        };
+                                                        coreToMerged.set(coreLower,
+                                                            merged);
+                                                        mergedSynonyms.push(merged);
+                                                    }
+                                                    merged.sources.add(block
+                                                        .sourceKey);
+
+                                                    syn.parensBefore.forEach(p => {
+                                                        if (!merged
+                                                            .parensBefore
+                                                            .has(p)) merged
+                                                            .parensBefore
+                                                            .set(p,
+                                                                new Set());
+                                                        merged.parensBefore
+                                                            .get(p).add(
+                                                                block
+                                                                .sourceKey);
+                                                    });
+                                                    syn.parensAfter.forEach(p => {
+                                                        if (!merged
+                                                            .parensAfter
+                                                            .has(p)) merged
+                                                            .parensAfter
+                                                            .set(p,
+                                                                new Set());
+                                                        merged.parensAfter
+                                                            .get(p).add(
+                                                                block
+                                                                .sourceKey);
+                                                    });
+                                                });
+                                            });
+
+                                            let processed = '';
+                                            mergedSynonyms.forEach((merged, idx) => {
+                                                let htmlParts = [];
+
+                                                merged.parensBefore.forEach((srcKeys,
+                                                    text) => {
+                                                    htmlParts.push(
+                                                        `${processTextForLinks(text, searchTerm)}`
+                                                    );
+                                                });
+
+                                                htmlParts.push(
+                                                    `${processTextForLinks(merged.core, searchTerm)}`
+                                                );
+
+                                                merged.parensAfter.forEach((srcKeys,
+                                                    text) => {
+                                                    htmlParts.push(
+                                                        `${processTextForLinks(text, searchTerm)}`
+                                                    );
+                                                });
+
+                                                const allSourceKeys = new Set();
+                                                merged.sources.forEach(k => allSourceKeys
+                                                    .add(k));
+                                                merged.parensBefore.forEach(set => set
+                                                    .forEach(k => allSourceKeys.add(k)));
+                                                merged.parensAfter.forEach(set => set
+                                                    .forEach(k => allSourceKeys.add(k)));
+
+                                                const itemHtml = htmlParts.join(' ') +
+                                                    renderRefs(
+                                                        allSourceKeys);
+
+                                                processed += itemHtml;
+                                                if (idx < mergedSynonyms.length - 1) {
+                                                    processed += merged.sep + ' ';
+                                                }
+                                            });
+
+                                            defHtml +=
+                                                `<span class="definition-item"><span class="definition-number">${defIndex}.</span>${processed}</span>`;
+                                            defIndex++;
+                                        });
+                                        html += `<div class="source-value">${defHtml}</div>`;
+                                    }
+                                }
+                            }
+
+                            if (exMap.size > 0 && !['trx', 'syn', 'ety'].includes(lang)) {
+                                html += `<div class="examples-wrapper">`;
+                                exMap.forEach((ex) => {
+                                    const refIds = ex.sources.map(key => getRefNumber(key)).filter(
+                                        Boolean);
+                                    const uniqueSortedRefs = [...new Set(refIds)].sort((a, b) => a -
+                                        b);
+
+                                    const refLinks = uniqueSortedRefs.map(refId => {
+                                        return `<a href="#ref-${refId}" class="ref-link" data-ref="${refId}">[${refId}]</a>`;
+                                    }).join('');
+
+                                    const processedText = processTextForLinks(ex.text, searchTerm);
+
+                                    const definitions = ex.translation
+                                        .split('#')
+                                        .map(t => t.trim())
+                                        .filter(Boolean)
+                                        .map(t => t.replace(/[;,]+$/, '').trim());
+
+                                    let processedTrans;
+
+                                    if (definitions.length <= 1) {
+                                        processedTrans = processAndKeepSeparators(definitions[0],
+                                            searchTerm, refLinks);
+                                    } else {
+                                        processedTrans = definitions
+                                            .map((def, i) => {
+                                                const rendered = processAndKeepSeparators(def,
+                                                    searchTerm, refLinks);
+                                                return `${i + 1}. ${rendered}`;
+                                            })
+                                            .join('; ');
+                                    }
+
+                                    html += `<div class="example-item">`;
+                                    html += `<span class="example-entry">${processedText}</span>`;
+                                    html += `<span class="arrow"> → </span>`;
+                                    html += `<span class="translation">${processedTrans}</span>`;
+                                    html += `</div>`;
+                                });
+                                html += `</div>`;
+                            }
+
+                            html += `</div>`;
+                        }
+                    }
+
+                    if (Object.keys(refNumberMap).length > 0) {
+                        const sortedRefs = Object.entries(refNumberMap)
+                            .sort((a, b) => a[1] - b[1]);
+
+                        html += `<div class="references-bottom">`;
+                        sortedRefs.forEach(([source, id]) => {
+                            html += `<span class="ref-item">`;
+                            html += `<span class="ref-number">[${id}]</span>`;
+                            html += `<span class="ref-source">${source}</span>`;
+                            html += `</span>`;
+                        });
+                        html += `</div>`;
+                    }
+
+                    html += `</div>`;
+                });
+
+                grid.innerHTML = html;
+
+                grid.querySelectorAll('.dict-link').forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const word = this.getAttribute('data-search') || this.textContent;
+                        searchInput.value = word;
+                        applyFiltersAndRender();
+
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+
+                grid.querySelectorAll('.ref-link').forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const refBottom = this.closest('.entry-block').querySelector(
+                            '.references-bottom');
+                        if (refBottom) {
+                            refBottom.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+                            refBottom.style.backgroundColor = '#e8e0d6';
+                            setTimeout(() => {
+                                refBottom.style.backgroundColor = '#f5f3ef';
+                            }, 1000);
+                        }
+                    });
+                });
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === '/' && document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                    searchInput.select();
+                }
+            });
+
+            function goToPage(page) {
+                if (page < 1 || page > totalPages || page === currentPage) return;
+                currentPage = page;
+                renderPage();
+                const container = document.querySelector('.container');
+                if (container) {
+                    container.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            function clearSearch() {
+                searchInput.value = '';
+                updateClearIconVisibility();
+                currentResults = [];
+                currentPage = 1;
+
+                window.history.pushState({
+                    q: ''
+                }, '', window.location.pathname);
+
+                grid.innerHTML = '<div class="empty-state">Enter a search term to see results</div>';
+                statsDisplay.innerHTML = `<span>${allEntries.length} entries loaded</span><span></span>`;
+                updatePagination(0, 1);
+            }
+
+            window.addEventListener('popstate', function (e) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const q = urlParams.get('q') || '';
+                searchInput.value = q;
+                applyFiltersAndRender(true);
+            });
+
+            searchButton.addEventListener('click', () => applyFiltersAndRender(false));
+
+            clearIcon.addEventListener('click', function (e) {
+                e.stopPropagation();
+                clearSearch();
+            });
+
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    applyFiltersAndRender(false);
+                }
+            });
+
+            searchInput.addEventListener('input', function () {
+                updateClearIconVisibility();
+            });
+
+            searchInput.addEventListener('blur', function () {
+                updateClearIconVisibility();
+            });
+
+            prevPageBtn.addEventListener('click', function () {
+                if (currentPage > 1) {
+                    goToPage(currentPage - 1);
+                }
+            });
+
+            nextPageBtn.addEventListener('click', function () {
+                if (currentPage < totalPages) {
+                    goToPage(currentPage + 1);
+                }
+            });
+
+            loadDictionary();
+        })();
+    </script>
+</body>
+
+</html>
